@@ -4,4 +4,113 @@ package br.ufes.inf.nemo.ontol.model
 
 class Model {
 	String name
+	contains ModelElement[] elements
+}
+
+class ModelElement {}
+
+class Import extends ModelElement {
+	String importedNamespace
+}
+
+// TODO Turn this class into abstract
+class EntityDeclaration extends ModelElement {
+	String name
+	refers Class[] fixedTypes
+	contains PropertyAssignment[] propAssigns opposite classContainer
+}
+
+class Individual extends EntityDeclaration {}
+
+class Set extends Individual {}
+
+// TODO Turn this class into abstract
+class Class extends EntityDeclaration {
+	refers Class[] superClasses
+	refers Class powertypeOf
+	refers Class basetype
+	refers Class[] subordinators
+	contains Property[] props opposite classContainer
+	CategorizationType catType = "none"
+}
+
+enum CategorizationType {
+	NONE as "none" = 0
+	CATEGORIZER as "categorizes" = 1
+	DISJOINT_CATEGORIZER as "disjointcategorizes" = 2
+	COMPLETE_CATEGORIZER as "completecategorizes" = 3
+	PARTITIONER as "partitions" = 4
+}
+
+class WClass extends Class {}
+
+// TODO Turn this class into abstract
+class OrderedClass extends Class {}
+
+class HOClass extends OrderedClass {
+	Integer order
+}
+
+class FOClass extends OrderedClass {}
+
+class GeneralizationSet extends ModelElement {
+	String name
+	boolean isDisjoint = "false"
+	boolean isComplete = "false"
+	refers Class general
+	refers Class categorizer
+	refers Class[] specifics
+}
+
+// TODO Differentiate between properties and references
+class Property extends ModelElement {
+	String name
+	Integer lowerBound = "1"
+	Integer upperBound = "1"
+	refers Class propertyType
+	refers Property[] subsetOf
+	refers Property oppositeTo
+	container Class classContainer opposite props
+}
+
+class PropertyAssignment extends ModelElement {
+	refers Property property
+	contains Value assignment
+	container EntityDeclaration classContainer opposite propAssigns
+}
+
+abstract class Value extends ModelElement {
+	op int getNumber(){ return 0 }
+}
+
+class ReferenceValue extends Value {
+	refers EntityDeclaration value
+	op int getNumber(){ return 1 }
+}
+
+class ListValue extends Value {
+	contains Value[] value
+	op int getNumber(){
+		if(value==null){ return 0 }
+		else { return value.size }
+	}
+}
+
+class StringValue extends Value {
+	String value
+	op int getNumber(){ return 1 }
+}
+
+class NumberValue extends Value {
+	double value
+	op int getNumber(){ return 1 }
+}
+
+class BooleanValue extends Value {
+	boolean value
+	op int getNumber(){ return 1 }
+}
+
+class NoneValue extends Value {
+	op int getNumber(){ return 0 }
 }

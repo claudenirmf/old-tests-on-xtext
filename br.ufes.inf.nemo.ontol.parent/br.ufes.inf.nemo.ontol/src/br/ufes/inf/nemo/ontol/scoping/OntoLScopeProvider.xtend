@@ -3,6 +3,17 @@
  */
 package br.ufes.inf.nemo.ontol.scoping
 
+import br.ufes.inf.nemo.ontol.model.Class
+import br.ufes.inf.nemo.ontol.model.EntityDeclaration
+import br.ufes.inf.nemo.ontol.model.ModelPackage
+import br.ufes.inf.nemo.ontol.model.Property
+import br.ufes.inf.nemo.ontol.model.PropertyAssignment
+import br.ufes.inf.nemo.ontol.util.OntoLUtils
+import com.google.inject.Inject
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EReference
+import org.eclipse.xtext.naming.QualifiedName
+import org.eclipse.xtext.scoping.Scopes
 
 /**
  * This class contains custom scoping description.
@@ -12,4 +23,37 @@ package br.ufes.inf.nemo.ontol.scoping
  */
 class OntoLScopeProvider extends AbstractOntoLScopeProvider {
 
+	@Inject extension OntoLUtils
+	
+	override getScope(EObject context, EReference reference){
+		if(context instanceof PropertyAssignment && reference==ModelPackage.eINSTANCE.propertyAssignment_Property){
+			// TODO Add options to scope
+			val entity = context.eContainer as EntityDeclaration
+			val properties = entity.allProperties
+			return Scopes.scopeFor(properties, [ p | 
+					if(properties.exists[it.name.equals(p.name) && it!=p])
+						return QualifiedName.create((p.eContainer as EntityDeclaration).name,p.name)
+					else
+						return QualifiedName.create(p.name)
+				], Scopes.scopeFor(entity.propAssigns))//IScope.NULLSCOPE)
+		}
+		else if(context instanceof Property && reference==ModelPackage.eINSTANCE.property_SubsetOf){
+			val c = context.eContainer as Class
+			val inheritedProps = c.allInheritedProperties
+			return Scopes.scopeFor(inheritedProps,[ p |
+					if(inheritedProps.exists[it.name.equals(p.name) && it!=p])
+						return QualifiedName.create((p.eContainer as EntityDeclaration).name,p.name)
+					else
+						return QualifiedName.create(p.name)
+				], Scopes.scopeFor(c.props))
+		}
+		else if(context instanceof Property && reference==ModelPackage.eINSTANCE.property_OppositeTo){
+			val c = context.eContainer as Class
+			val p = context as Property
+			return Scopes.scopeFor(p.propertyType.props.filter[it.propertyType==c],
+				[ QualifiedName.create(it.name) ], Scopes.scopeFor(c.props))
+		}
+		else return super.getScope(context, reference)
+	}
+	
 }

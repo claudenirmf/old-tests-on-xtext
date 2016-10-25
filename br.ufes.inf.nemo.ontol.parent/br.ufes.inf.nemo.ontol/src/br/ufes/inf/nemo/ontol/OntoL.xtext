@@ -5,5 +5,142 @@ import "http://www.nemo.inf.ufes.br/ontol/OntoL"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 Model:
-	'Model'	name=ID;
+	'module' name = QualifiedName '{'
+		elements+=ModelElement*
+	'}'
+;
 
+ModelElement:
+	( Import | EntityDeclaration | GeneralizationSet ) ';'
+;
+
+QualifiedName:
+	ID ('.' ID)*
+;
+
+QualifiedNameWithWildcard:
+	QualifiedName '.*'?
+;
+
+Import:
+	'import' importedNamespace = QualifiedNameWithWildcard 
+;
+
+EntityDeclaration:
+	Class | Individual | Set
+;
+
+Individual:
+	'individual' name=ID
+	(':' fixedTypes+=[Class|QualifiedName] (',' fixedTypes+=[Class|QualifiedName])*)?
+	('{' (propAssigns+=PropertyAssignment)* '}')?
+;
+
+Set:
+	'set' name=STRING
+	(':' fixedTypes+=[Class|QualifiedName] (',' fixedTypes+=[Class|QualifiedName])*)?
+	('{' (propAssigns+=PropertyAssignment)* '}')?
+;
+
+Class:
+	( WClass | HOClass | FOClass ) 
+	('{' 
+		(props+=Property | propAssigns+=PropertyAssignment)*
+	'}')?
+;
+
+WClass:
+	'class' name=ID
+	(':' fixedTypes+=[Class|QualifiedName] (',' fixedTypes+=[Class|QualifiedName])*)?
+	('specializes' superClasses+=[Class|QualifiedName] (',' superClasses+=[Class|QualifiedName])*)?
+	('subordinatedto' subordinators+=[Class|QualifiedName] (',' subordinators+=[Class|QualifiedName])*)?
+	( 
+		(catType=CategorizationType basetype=[Class|QualifiedName])
+		| ('ispowertypeof' powertypeOf=[Class|QualifiedName])
+	)?
+;
+
+FOClass:
+	'foclass' name=ID
+	(':' fixedTypes+=[Class|QualifiedName] (',' fixedTypes+=[Class|QualifiedName])*)?
+	('specializes' superClasses+=[Class|QualifiedName] (',' superClasses+=[Class|QualifiedName])*)?
+;
+
+HOClass:
+	'hoclass' name=ID 'order' order=INT
+	(':' fixedTypes+=[Class|QualifiedName] (',' fixedTypes+=[Class|QualifiedName])*)?
+	('specializes' superClasses+=[Class|QualifiedName] (',' superClasses+=[Class|QualifiedName])*)?
+	('subordinatedto' subordinators+=[Class|QualifiedName] (',' subordinators+=[Class|QualifiedName])*)?
+	(
+		(catType=CategorizationType basetype=[Class|QualifiedName])
+		| ('ispowertypeof' powertypeOf=[Class|QualifiedName])
+	)?
+;
+
+enum CategorizationType:
+	CATEGORIZER | COMPLETE_CATEGORIZER | DISJOINT_CATEGORIZER | PARTITIONER
+;
+
+Property:
+	name=ID ':' ('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
+	propertyType=[Class|QualifiedName]
+	('subsets' subsetOf+=[Property|QualifiedName] (',' subsetOf+=[Property|QualifiedName])*)?
+	('isoppositeto' oppositeTo=[Property|QualifiedName])?
+;
+
+ELEMENTBOUND returns ecore::EIntegerObject:
+	'*' | INT
+;
+
+PropertyAssignment returns PropertyAssignment:
+	property=[Property|QualifiedName] '=' assignment=Value
+;
+
+Value:
+	ReferenceValue | ListValue | StringValue | NumberValue | BooleanValue | NoneValue
+;
+
+ReferenceValue:
+	value=[EntityDeclaration|QualifiedName]
+;
+
+ListValue:
+	'(' value+=Value (','value+=Value)* ')'
+;
+
+StringValue:
+	value=STRING
+;
+
+NumberValue:
+	value=NUMBER
+;
+
+NUMBER returns ecore::EDouble:
+	 ('-')?INT('.'INT)?
+;
+
+BooleanValue:
+	value=BOOLEAN
+;
+
+BOOLEAN returns ecore::EBoolean:
+	'true'|'false'
+;
+
+NoneValue:
+	{NoneValue} 'none'
+;
+
+GeneralizationSet:
+	( 
+		'(' isDisjoint?='disjoint'')' 
+		| '(' isComplete?='complete' ')' 
+		| '(' isDisjoint?='disjoint' ',' isComplete?='complete' ')'
+		| '(' isComplete?='complete' ',' isDisjoint?='disjoint' ')'
+	)? 
+	'genset' name=ID
+	'general' general=[Class|QualifiedName]
+	('categorizer' categorizer=[Class|QualifiedName])?
+	'specifics' specifics+=[Class|QualifiedName] (',' specifics+=[Class|QualifiedName])*
+;

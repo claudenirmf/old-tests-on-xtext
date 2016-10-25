@@ -16,13 +16,15 @@ Require-Bundle: br.ufes.inf.nemo.ontol.model;visibility:=reexport,
  org.eclipse.emf.ecore.xcore,
  org.eclipse.emf.codegen.ecore.xtext;bundle-version="1.2.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: br.ufes.inf.nemo.ontol.parser.antlr.internal,
- br.ufes.inf.nemo.ontol.generator,
+Export-Package: br.ufes.inf.nemo.ontol,
  br.ufes.inf.nemo.ontol.formatting,
- br.ufes.inf.nemo.ontol,
+ br.ufes.inf.nemo.ontol.generator,
+ br.ufes.inf.nemo.ontol.lib,
  br.ufes.inf.nemo.ontol.parser.antlr,
+ br.ufes.inf.nemo.ontol.parser.antlr.internal,
  br.ufes.inf.nemo.ontol.scoping,
- br.ufes.inf.nemo.ontol.validation,
  br.ufes.inf.nemo.ontol.serializer,
- br.ufes.inf.nemo.ontol.services
+ br.ufes.inf.nemo.ontol.services,
+ br.ufes.inf.nemo.ontol.util,
+ br.ufes.inf.nemo.ontol.validation
 Import-Package: org.apache.log4j

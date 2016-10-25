@@ -17,10 +17,8 @@ class OntoLStandaloneSetup extends OntoLStandaloneSetupGenerated {
 	}
 	
 	override register(Injector injector) {
-		if (!EPackage.Registry.INSTANCE.containsKey("http://www.nemo.inf.ufes.br/ontol/OntoL")) {
+		if (!EPackage.Registry.INSTANCE.containsKey("http://www.nemo.inf.ufes.br/ontol/OntoL"))
             EPackage.Registry.INSTANCE.put("http://www.nemo.inf.ufes.br/ontol/OntoL",ModelPackage.eINSTANCE);
-        }
-		
 		super.register(injector)
 	}
 	

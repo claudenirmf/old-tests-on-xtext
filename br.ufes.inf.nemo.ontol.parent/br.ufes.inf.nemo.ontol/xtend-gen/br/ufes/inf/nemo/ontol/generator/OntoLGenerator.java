@@ -3,10 +3,26 @@
  */
 package br.ufes.inf.nemo.ontol.generator;
 
+import br.ufes.inf.nemo.ontol.model.Model;
+import com.google.inject.Inject;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
  * Generates code from your model files on save.
@@ -15,7 +31,89 @@ import org.eclipse.xtext.generator.IGeneratorContext;
  */
 @SuppressWarnings("all")
 public class OntoLGenerator extends AbstractGenerator {
+  @Inject
+  @Extension
+  private IQualifiedNameProvider _iQualifiedNameProvider;
+  
+  public void doGenerate(final Resource xtextResource, final Resource xmiResource) {
+    try {
+      EcoreUtil.resolveAll(xtextResource);
+      EList<EObject> _contents = xmiResource.getContents();
+      EList<EObject> _contents_1 = xtextResource.getContents();
+      EObject _get = _contents_1.get(0);
+      _contents.add(_get);
+      xmiResource.save(null);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   @Override
-  public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+  public void doGenerate(final Resource xtextResource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+    try {
+      final ResourceSetImpl rs = new ResourceSetImpl();
+      URI _uRI = xtextResource.getURI();
+      String[] _segments = _uRI.segments();
+      String _last = IterableExtensions.<String>last(((Iterable<String>)Conversions.doWrapArray(_segments)));
+      String _replace = _last.replace(".ontol", "");
+      String _plus = ("models\\" + _replace);
+      final String fileName = (_plus + ".xmi");
+      URI _createURI = URI.createURI(fileName);
+      final Resource xmiResource = rs.createResource(_createURI);
+      EcoreUtil.resolveAll(xtextResource);
+      EList<EObject> _contents = xmiResource.getContents();
+      EList<EObject> _contents_1 = xtextResource.getContents();
+      EObject _get = _contents_1.get(0);
+      _contents.add(_get);
+      final ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+      xmiResource.save(outStream, null);
+      byte[] _byteArray = outStream.toByteArray();
+      ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_byteArray);
+      fsa.generateFile(fileName, _byteArrayInputStream);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public CharSequence compile(final Model m) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<?xml version=\"1.0\"?>");
+    _builder.newLine();
+    _builder.append("<rdf:RDF xmlns=\"http://www.ontol.nemo.inf.ufes.br/#\"");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("xml:base=\"http://www.ontol.nemo.inf.ufes.br/\"");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("xmlns:mlt=\"http://www.nemo.inf.ufes.br/mlt#\"");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("xmlns:owl=\"http://www.w3.org/2002/07/owl#\"");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("xmlns:xsd=\"http://www.w3.org/2001/XMLSchema#\"");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("xmlns:ontol=\"http://www.nemo.inf.ufes.br/ontol-schema#\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<rdf:Description rdf:about=\"");
+    QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(m);
+    _builder.append(_fullyQualifiedName, "\t");
+    _builder.append("\"/>");
+    _builder.newLineIfNotEmpty();
+    _builder.append("    ");
+    _builder.newLine();
+    _builder.append("</rdf:RDF>");
+    _builder.newLine();
+    return _builder;
   }
 }

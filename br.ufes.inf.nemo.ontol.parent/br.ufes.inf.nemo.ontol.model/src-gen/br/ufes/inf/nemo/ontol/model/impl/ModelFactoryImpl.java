@@ -2,9 +2,32 @@
  */
 package br.ufes.inf.nemo.ontol.model.impl;
 
+import br.ufes.inf.nemo.ontol.model.BooleanValue;
+import br.ufes.inf.nemo.ontol.model.CategorizationType;
+import br.ufes.inf.nemo.ontol.model.EntityDeclaration;
+import br.ufes.inf.nemo.ontol.model.FOClass;
+import br.ufes.inf.nemo.ontol.model.GeneralizationSet;
+import br.ufes.inf.nemo.ontol.model.HOClass;
+import br.ufes.inf.nemo.ontol.model.Import;
+import br.ufes.inf.nemo.ontol.model.Individual;
+import br.ufes.inf.nemo.ontol.model.ListValue;
+import br.ufes.inf.nemo.ontol.model.Model;
+import br.ufes.inf.nemo.ontol.model.ModelElement;
+import br.ufes.inf.nemo.ontol.model.ModelFactory;
+import br.ufes.inf.nemo.ontol.model.ModelPackage;
+import br.ufes.inf.nemo.ontol.model.NoneValue;
+import br.ufes.inf.nemo.ontol.model.NumberValue;
+import br.ufes.inf.nemo.ontol.model.OrderedClass;
+import br.ufes.inf.nemo.ontol.model.Property;
+import br.ufes.inf.nemo.ontol.model.PropertyAssignment;
+import br.ufes.inf.nemo.ontol.model.ReferenceValue;
+import br.ufes.inf.nemo.ontol.model.Set;
+import br.ufes.inf.nemo.ontol.model.StringValue;
+import br.ufes.inf.nemo.ontol.model.WClass;
 import br.ufes.inf.nemo.ontol.model.*;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -57,8 +80,57 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case ModelPackage.MODEL: return createModel();
+			case ModelPackage.MODEL_ELEMENT: return createModelElement();
+			case ModelPackage.IMPORT: return createImport();
+			case ModelPackage.ENTITY_DECLARATION: return createEntityDeclaration();
+			case ModelPackage.INDIVIDUAL: return createIndividual();
+			case ModelPackage.SET: return createSet();
+			case ModelPackage.CLASS: return createClass();
+			case ModelPackage.WCLASS: return createWClass();
+			case ModelPackage.ORDERED_CLASS: return createOrderedClass();
+			case ModelPackage.HO_CLASS: return createHOClass();
+			case ModelPackage.FO_CLASS: return createFOClass();
+			case ModelPackage.GENERALIZATION_SET: return createGeneralizationSet();
+			case ModelPackage.PROPERTY: return createProperty();
+			case ModelPackage.PROPERTY_ASSIGNMENT: return createPropertyAssignment();
+			case ModelPackage.REFERENCE_VALUE: return createReferenceValue();
+			case ModelPackage.LIST_VALUE: return createListValue();
+			case ModelPackage.STRING_VALUE: return createStringValue();
+			case ModelPackage.NUMBER_VALUE: return createNumberValue();
+			case ModelPackage.BOOLEAN_VALUE: return createBooleanValue();
+			case ModelPackage.NONE_VALUE: return createNoneValue();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+			case ModelPackage.CATEGORIZATION_TYPE:
+				return createCategorizationTypeFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+			case ModelPackage.CATEGORIZATION_TYPE:
+				return convertCategorizationTypeToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -70,6 +142,216 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public Model createModel() {
 		ModelImpl model = new ModelImpl();
 		return model;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ModelElement createModelElement() {
+		ModelElementImpl modelElement = new ModelElementImpl();
+		return modelElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Import createImport() {
+		ImportImpl import_ = new ImportImpl();
+		return import_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EntityDeclaration createEntityDeclaration() {
+		EntityDeclarationImpl entityDeclaration = new EntityDeclarationImpl();
+		return entityDeclaration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Individual createIndividual() {
+		IndividualImpl individual = new IndividualImpl();
+		return individual;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Set createSet() {
+		SetImpl set = new SetImpl();
+		return set;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public br.ufes.inf.nemo.ontol.model.Class createClass() {
+		ClassImpl class_ = new ClassImpl();
+		return class_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public WClass createWClass() {
+		WClassImpl wClass = new WClassImpl();
+		return wClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OrderedClass createOrderedClass() {
+		OrderedClassImpl orderedClass = new OrderedClassImpl();
+		return orderedClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public HOClass createHOClass() {
+		HOClassImpl hoClass = new HOClassImpl();
+		return hoClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FOClass createFOClass() {
+		FOClassImpl foClass = new FOClassImpl();
+		return foClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GeneralizationSet createGeneralizationSet() {
+		GeneralizationSetImpl generalizationSet = new GeneralizationSetImpl();
+		return generalizationSet;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Property createProperty() {
+		PropertyImpl property = new PropertyImpl();
+		return property;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PropertyAssignment createPropertyAssignment() {
+		PropertyAssignmentImpl propertyAssignment = new PropertyAssignmentImpl();
+		return propertyAssignment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ReferenceValue createReferenceValue() {
+		ReferenceValueImpl referenceValue = new ReferenceValueImpl();
+		return referenceValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ListValue createListValue() {
+		ListValueImpl listValue = new ListValueImpl();
+		return listValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StringValue createStringValue() {
+		StringValueImpl stringValue = new StringValueImpl();
+		return stringValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NumberValue createNumberValue() {
+		NumberValueImpl numberValue = new NumberValueImpl();
+		return numberValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BooleanValue createBooleanValue() {
+		BooleanValueImpl booleanValue = new BooleanValueImpl();
+		return booleanValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NoneValue createNoneValue() {
+		NoneValueImpl noneValue = new NoneValueImpl();
+		return noneValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CategorizationType createCategorizationTypeFromString(EDataType eDataType, String initialValue) {
+		CategorizationType result = CategorizationType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertCategorizationTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

@@ -3,9 +3,22 @@
  */
 package br.ufes.inf.nemo.ontol
 
+import org.eclipse.xtext.conversion.IValueConverterService
+import br.ufes.inf.nemo.ontol.util.OntoLValueConverter
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 class OntoLRuntimeModule extends AbstractOntoLRuntimeModule {
+
+//	override configureIScopeProviderDelegate(Binder binder) {
+//		binder.bind(IScopeProvider)
+//			.annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
+//			.to(OntoLImportedNamespaceAwareLocalScopeProvider)
+//	}
+	
+	override Class<? extends IValueConverterService> bindIValueConverterService() {
+		return OntoLValueConverter
+	}
+
 }

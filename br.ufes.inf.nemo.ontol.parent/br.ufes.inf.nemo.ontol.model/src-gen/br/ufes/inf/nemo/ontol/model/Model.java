@@ -2,6 +2,7 @@
  */
 package br.ufes.inf.nemo.ontol.model;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -14,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.Model#getName <em>Name</em>}</li>
+ *   <li>{@link br.ufes.inf.nemo.ontol.model.Model#getElements <em>Elements</em>}</li>
  * </ul>
  *
  * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getModel()
@@ -46,5 +48,21 @@ public interface Model extends EObject {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
+	 * The list contents are of type {@link br.ufes.inf.nemo.ontol.model.ModelElement}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Elements</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Elements</em>' containment reference list.
+	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getModel_Elements()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ModelElement> getElements();
 
 } // Model
