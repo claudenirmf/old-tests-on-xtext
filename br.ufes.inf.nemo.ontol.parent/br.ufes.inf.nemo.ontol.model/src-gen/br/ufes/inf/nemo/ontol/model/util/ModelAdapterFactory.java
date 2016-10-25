@@ -23,7 +23,6 @@ import br.ufes.inf.nemo.ontol.model.Set;
 import br.ufes.inf.nemo.ontol.model.StringValue;
 import br.ufes.inf.nemo.ontol.model.Value;
 import br.ufes.inf.nemo.ontol.model.WClass;
-import br.ufes.inf.nemo.ontol.model.*;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;

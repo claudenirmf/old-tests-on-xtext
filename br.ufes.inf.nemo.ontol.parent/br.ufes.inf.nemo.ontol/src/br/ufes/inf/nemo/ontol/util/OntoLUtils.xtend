@@ -58,6 +58,7 @@ class OntoLUtils {
 
 		if (e instanceof Class) {
 			val ch = e.classHierarchy
+			// TODO check every use of EObjectDescription
 			e.visibleEObjectDescriptions.forEach [
 				val c = if(it.getEClass instanceof Class) it.getEClass as Class else null
 				if (c!=null && c.powertypeOf != null && ch.contains(c.powertypeOf))

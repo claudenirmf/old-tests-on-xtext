@@ -24,7 +24,6 @@ import br.ufes.inf.nemo.ontol.model.ReferenceValue;
 import br.ufes.inf.nemo.ontol.model.Set;
 import br.ufes.inf.nemo.ontol.model.StringValue;
 import br.ufes.inf.nemo.ontol.model.WClass;
-import br.ufes.inf.nemo.ontol.model.*;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;

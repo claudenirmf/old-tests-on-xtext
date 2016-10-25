@@ -105,7 +105,6 @@ public interface ModelPackage extends EPackage {
 	 */
 	int MODEL_OPERATION_COUNT = 0;
 
-
 	/**
 	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.ModelElementImpl <em>Element</em>}' class.
 	 * <!-- begin-user-doc -->
