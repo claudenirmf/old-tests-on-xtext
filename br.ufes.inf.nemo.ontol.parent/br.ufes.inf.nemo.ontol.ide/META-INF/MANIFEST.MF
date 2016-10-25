@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: br.ufes.inf.nemo.ontol.ide
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: br.ufes.inf.nemo.ontol.ide; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: br.ufes.inf.nemo.ontol,
+ br.ufes.inf.nemo.ontol.model,
+ org.eclipse.xtext.ide,
+ org.eclipse.xtext.xbase.ide
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: br.ufes.inf.nemo.ontol.ide.contentassist.antlr,
+ br.ufes.inf.nemo.ontol.ide.contentassist.antlr.internal
+

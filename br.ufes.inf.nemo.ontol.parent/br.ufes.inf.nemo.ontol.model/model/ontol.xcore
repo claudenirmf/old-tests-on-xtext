@@ -1,0 +1,7 @@
+@Ecore(nsURI="http://www.nemo.inf.ufes.br/ontol/OntoL")
+@GenModel(modelDirectory="br.ufes.inf.nemo.ontol.model/src-gen")
+package br.ufes.inf.nemo.ontol.model
+
+class Model {
+	String name
+}

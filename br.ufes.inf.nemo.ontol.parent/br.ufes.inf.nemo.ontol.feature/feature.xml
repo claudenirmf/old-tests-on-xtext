@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="br.ufes.inf.nemo.ontol.feature"
+      label="OntoL Feature "
+      version="1.0.0.qualifier">
+
+   <plugin
+         id="br.ufes.inf.nemo.ontol"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="br.ufes.inf.nemo.ontol.ide"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="br.ufes.inf.nemo.ontol.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="br.ufes.inf.nemo.ontol.model"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

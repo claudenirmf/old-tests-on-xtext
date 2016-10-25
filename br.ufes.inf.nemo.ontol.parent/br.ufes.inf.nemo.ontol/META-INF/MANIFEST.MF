@@ -1,0 +1,28 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: br.ufes.inf.nemo.ontol
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: br.ufes.inf.nemo.ontol; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: br.ufes.inf.nemo.ontol.model;visibility:=reexport,
+ org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.xtext.xbase.lib,
+ org.antlr.runtime,
+ org.eclipse.xtext.util,
+ org.eclipse.xtend.lib,
+ org.eclipse.emf.ecore.xcore,
+ org.eclipse.emf.codegen.ecore.xtext;bundle-version="1.2.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: br.ufes.inf.nemo.ontol.parser.antlr.internal,
+ br.ufes.inf.nemo.ontol.generator,
+ br.ufes.inf.nemo.ontol.formatting,
+ br.ufes.inf.nemo.ontol,
+ br.ufes.inf.nemo.ontol.parser.antlr,
+ br.ufes.inf.nemo.ontol.scoping,
+ br.ufes.inf.nemo.ontol.validation,
+ br.ufes.inf.nemo.ontol.serializer,
+ br.ufes.inf.nemo.ontol.services
+Import-Package: org.apache.log4j
