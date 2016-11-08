@@ -17,12 +17,11 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link br.ufes.inf.nemo.ontol.model.Class#getPowertypeOf <em>Powertype Of</em>}</li>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.Class#getBasetype <em>Basetype</em>}</li>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.Class#getSubordinators <em>Subordinators</em>}</li>
- *   <li>{@link br.ufes.inf.nemo.ontol.model.Class#getProps <em>Props</em>}</li>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.Class#getCatType <em>Cat Type</em>}</li>
  * </ul>
  *
  * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getClass_()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface Class extends EntityDeclaration {
@@ -109,24 +108,6 @@ public interface Class extends EntityDeclaration {
 	 * @generated
 	 */
 	EList<Class> getSubordinators();
-
-	/**
-	 * Returns the value of the '<em><b>Props</b></em>' containment reference list.
-	 * The list contents are of type {@link br.ufes.inf.nemo.ontol.model.Property}.
-	 * It is bidirectional and its opposite is '{@link br.ufes.inf.nemo.ontol.model.Property#getClassContainer <em>Class Container</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Props</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Props</em>' containment reference list.
-	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getClass_Props()
-	 * @see br.ufes.inf.nemo.ontol.model.Property#getClassContainer
-	 * @model opposite="classContainer" containment="true"
-	 * @generated
-	 */
-	EList<Property> getProps();
 
 	/**
 	 * Returns the value of the '<em><b>Cat Type</b></em>' attribute.

@@ -2,28 +2,31 @@
  */
 package br.ufes.inf.nemo.ontol.model.util;
 
+import br.ufes.inf.nemo.ontol.model.*;
+import br.ufes.inf.nemo.ontol.model.Attribute;
+import br.ufes.inf.nemo.ontol.model.AttributeAssignment;
 import br.ufes.inf.nemo.ontol.model.BooleanValue;
+import br.ufes.inf.nemo.ontol.model.DataValue;
 import br.ufes.inf.nemo.ontol.model.EntityDeclaration;
 import br.ufes.inf.nemo.ontol.model.FOClass;
 import br.ufes.inf.nemo.ontol.model.GeneralizationSet;
 import br.ufes.inf.nemo.ontol.model.HOClass;
 import br.ufes.inf.nemo.ontol.model.Import;
 import br.ufes.inf.nemo.ontol.model.Individual;
-import br.ufes.inf.nemo.ontol.model.ListValue;
 import br.ufes.inf.nemo.ontol.model.Model;
 import br.ufes.inf.nemo.ontol.model.ModelElement;
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
 import br.ufes.inf.nemo.ontol.model.NoneValue;
 import br.ufes.inf.nemo.ontol.model.NumberValue;
 import br.ufes.inf.nemo.ontol.model.OrderedClass;
+import br.ufes.inf.nemo.ontol.model.OrderlessClass;
 import br.ufes.inf.nemo.ontol.model.Property;
 import br.ufes.inf.nemo.ontol.model.PropertyAssignment;
+import br.ufes.inf.nemo.ontol.model.Reference;
+import br.ufes.inf.nemo.ontol.model.ReferenceAssignment;
 import br.ufes.inf.nemo.ontol.model.ReferenceValue;
-import br.ufes.inf.nemo.ontol.model.Set;
 import br.ufes.inf.nemo.ontol.model.StringValue;
 import br.ufes.inf.nemo.ontol.model.Value;
-import br.ufes.inf.nemo.ontol.model.WClass;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 
@@ -108,16 +111,12 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createIndividualAdapter();
 			}
 			@Override
-			public Adapter caseSet(Set object) {
-				return createSetAdapter();
+			public Adapter caseOntoLClass(OntoLClass object) {
+				return createOntoLClassAdapter();
 			}
 			@Override
-			public Adapter caseClass(br.ufes.inf.nemo.ontol.model.Class object) {
-				return createClassAdapter();
-			}
-			@Override
-			public Adapter caseWClass(WClass object) {
-				return createWClassAdapter();
+			public Adapter caseOrderlessClass(OrderlessClass object) {
+				return createOrderlessClassAdapter();
 			}
 			@Override
 			public Adapter caseOrderedClass(OrderedClass object) {
@@ -140,8 +139,24 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createPropertyAdapter();
 			}
 			@Override
+			public Adapter caseAttribute(Attribute object) {
+				return createAttributeAdapter();
+			}
+			@Override
+			public Adapter caseReference(Reference object) {
+				return createReferenceAdapter();
+			}
+			@Override
 			public Adapter casePropertyAssignment(PropertyAssignment object) {
 				return createPropertyAssignmentAdapter();
+			}
+			@Override
+			public Adapter caseAttributeAssignment(AttributeAssignment object) {
+				return createAttributeAssignmentAdapter();
+			}
+			@Override
+			public Adapter caseReferenceAssignment(ReferenceAssignment object) {
+				return createReferenceAssignmentAdapter();
 			}
 			@Override
 			public Adapter caseValue(Value object) {
@@ -152,8 +167,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createReferenceValueAdapter();
 			}
 			@Override
-			public Adapter caseListValue(ListValue object) {
-				return createListValueAdapter();
+			public Adapter caseDataValue(DataValue object) {
+				return createDataValueAdapter();
 			}
 			@Override
 			public Adapter caseStringValue(StringValue object) {
@@ -262,44 +277,30 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link br.ufes.inf.nemo.ontol.model.Set <em>Set</em>}'.
+	 * Creates a new adapter for an object of class '{@link br.ufes.inf.nemo.ontol.model.OntoLClass <em>Onto LClass</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see br.ufes.inf.nemo.ontol.model.Set
+	 * @see br.ufes.inf.nemo.ontol.model.OntoLClass
 	 * @generated
 	 */
-	public Adapter createSetAdapter() {
+	public Adapter createOntoLClassAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link br.ufes.inf.nemo.ontol.model.Class <em>Class</em>}'.
+	 * Creates a new adapter for an object of class '{@link br.ufes.inf.nemo.ontol.model.OrderlessClass <em>Orderless Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see br.ufes.inf.nemo.ontol.model.Class
+	 * @see br.ufes.inf.nemo.ontol.model.OrderlessClass
 	 * @generated
 	 */
-	public Adapter createClassAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link br.ufes.inf.nemo.ontol.model.WClass <em>WClass</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see br.ufes.inf.nemo.ontol.model.WClass
-	 * @generated
-	 */
-	public Adapter createWClassAdapter() {
+	public Adapter createOrderlessClassAdapter() {
 		return null;
 	}
 
@@ -374,6 +375,34 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link br.ufes.inf.nemo.ontol.model.Attribute <em>Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see br.ufes.inf.nemo.ontol.model.Attribute
+	 * @generated
+	 */
+	public Adapter createAttributeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link br.ufes.inf.nemo.ontol.model.Reference <em>Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see br.ufes.inf.nemo.ontol.model.Reference
+	 * @generated
+	 */
+	public Adapter createReferenceAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link br.ufes.inf.nemo.ontol.model.PropertyAssignment <em>Property Assignment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -384,6 +413,34 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPropertyAssignmentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link br.ufes.inf.nemo.ontol.model.AttributeAssignment <em>Attribute Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see br.ufes.inf.nemo.ontol.model.AttributeAssignment
+	 * @generated
+	 */
+	public Adapter createAttributeAssignmentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link br.ufes.inf.nemo.ontol.model.ReferenceAssignment <em>Reference Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see br.ufes.inf.nemo.ontol.model.ReferenceAssignment
+	 * @generated
+	 */
+	public Adapter createReferenceAssignmentAdapter() {
 		return null;
 	}
 
@@ -416,16 +473,16 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link br.ufes.inf.nemo.ontol.model.ListValue <em>List Value</em>}'.
+	 * Creates a new adapter for an object of class '{@link br.ufes.inf.nemo.ontol.model.DataValue <em>Data Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see br.ufes.inf.nemo.ontol.model.ListValue
+	 * @see br.ufes.inf.nemo.ontol.model.DataValue
 	 * @generated
 	 */
-	public Adapter createListValueAdapter() {
+	public Adapter createDataValueAdapter() {
 		return null;
 	}
 

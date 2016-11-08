@@ -3,26 +3,13 @@
  */
 package br.ufes.inf.nemo.ontol.scoping;
 
-import br.ufes.inf.nemo.ontol.model.EntityDeclaration;
-import br.ufes.inf.nemo.ontol.model.ModelPackage;
-import br.ufes.inf.nemo.ontol.model.Property;
-import br.ufes.inf.nemo.ontol.model.PropertyAssignment;
 import br.ufes.inf.nemo.ontol.scoping.AbstractOntoLScopeProvider;
 import br.ufes.inf.nemo.ontol.util.OntoLUtils;
-import com.google.common.base.Function;
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
  * This class contains custom scoping description.
@@ -38,74 +25,26 @@ public class OntoLScopeProvider extends AbstractOntoLScopeProvider {
   
   @Override
   public IScope getScope(final EObject context, final EReference reference) {
-    if (((context instanceof PropertyAssignment) && Objects.equal(reference, ModelPackage.eINSTANCE.getPropertyAssignment_Property()))) {
-      EObject _eContainer = context.eContainer();
-      final EntityDeclaration entity = ((EntityDeclaration) _eContainer);
-      final LinkedHashSet<Property> properties = this._ontoLUtils.getAllProperties(entity);
-      final Function<Property, QualifiedName> _function = (Property p) -> {
-        final Function1<Property, Boolean> _function_1 = (Property it) -> {
-          return Boolean.valueOf((it.getName().equals(p.getName()) && (!Objects.equal(it, p))));
-        };
-        boolean _exists = IterableExtensions.<Property>exists(properties, _function_1);
-        if (_exists) {
-          EObject _eContainer_1 = p.eContainer();
-          String _name = ((EntityDeclaration) _eContainer_1).getName();
-          String _name_1 = p.getName();
-          return QualifiedName.create(_name, _name_1);
-        } else {
-          String _name_2 = p.getName();
-          return QualifiedName.create(_name_2);
-        }
-      };
-      EList<PropertyAssignment> _propAssigns = entity.getPropAssigns();
-      IScope _scopeFor = Scopes.scopeFor(_propAssigns);
-      return Scopes.<Property>scopeFor(properties, _function, _scopeFor);
-    } else {
-      if (((context instanceof Property) && Objects.equal(reference, ModelPackage.eINSTANCE.getProperty_SubsetOf()))) {
-        EObject _eContainer_1 = context.eContainer();
-        final br.ufes.inf.nemo.ontol.model.Class c = ((br.ufes.inf.nemo.ontol.model.Class) _eContainer_1);
-        final Set<Property> inheritedProps = this._ontoLUtils.getAllInheritedProperties(c);
-        final Function<Property, QualifiedName> _function_1 = (Property p) -> {
-          final Function1<Property, Boolean> _function_2 = (Property it) -> {
-            return Boolean.valueOf((it.getName().equals(p.getName()) && (!Objects.equal(it, p))));
-          };
-          boolean _exists = IterableExtensions.<Property>exists(inheritedProps, _function_2);
-          if (_exists) {
-            EObject _eContainer_2 = p.eContainer();
-            String _name = ((EntityDeclaration) _eContainer_2).getName();
-            String _name_1 = p.getName();
-            return QualifiedName.create(_name, _name_1);
-          } else {
-            String _name_2 = p.getName();
-            return QualifiedName.create(_name_2);
-          }
-        };
-        EList<Property> _props = c.getProps();
-        IScope _scopeFor_1 = Scopes.scopeFor(_props);
-        return Scopes.<Property>scopeFor(inheritedProps, _function_1, _scopeFor_1);
-      } else {
-        if (((context instanceof Property) && Objects.equal(reference, ModelPackage.eINSTANCE.getProperty_OppositeTo()))) {
-          EObject _eContainer_2 = context.eContainer();
-          final br.ufes.inf.nemo.ontol.model.Class c_1 = ((br.ufes.inf.nemo.ontol.model.Class) _eContainer_2);
-          final Property p = ((Property) context);
-          br.ufes.inf.nemo.ontol.model.Class _propertyType = p.getPropertyType();
-          EList<Property> _props_1 = _propertyType.getProps();
-          final Function1<Property, Boolean> _function_2 = (Property it) -> {
-            br.ufes.inf.nemo.ontol.model.Class _propertyType_1 = it.getPropertyType();
-            return Boolean.valueOf(Objects.equal(_propertyType_1, c_1));
-          };
-          Iterable<Property> _filter = IterableExtensions.<Property>filter(_props_1, _function_2);
-          final Function<Property, QualifiedName> _function_3 = (Property it) -> {
-            String _name = it.getName();
-            return QualifiedName.create(_name);
-          };
-          EList<Property> _props_2 = c_1.getProps();
-          IScope _scopeFor_2 = Scopes.scopeFor(_props_2);
-          return Scopes.<Property>scopeFor(_filter, _function_3, _scopeFor_2);
-        } else {
-          return super.getScope(context, reference);
-        }
-      }
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field propertyAssignment_Property is undefined for the type ModelPackage"
+      + "\nThe method or field propAssigns is undefined for the type EntityDeclaration"
+      + "\nThe method or field property_SubsetOf is undefined for the type ModelPackage"
+      + "\nThe method or field props is undefined for the type Class"
+      + "\nThe method or field name is undefined for the type Object"
+      + "\nThe method or field name is undefined for the type Object"
+      + "\nThe method or field eContainer is undefined for the type Object"
+      + "\nThe method or field name is undefined for the type Object"
+      + "\nThe method or field name is undefined for the type Object"
+      + "\nThe method or field property_OppositeTo is undefined for the type ModelPackage"
+      + "\nThe method or field propertyType is undefined for the type Property"
+      + "\nThe method or field propertyType is undefined for the type Object"
+      + "\nThe method or field props is undefined for the type Class"
+      + "\nThe method or field name is undefined for the type EObject"
+      + "\nBounds mismatch: The type argument <Object> is not a valid substitute for the bounded type parameter <T extends EObject> of the method scopeFor(Iterable<? extends T>, Function<T, QualifiedName>, IScope)"
+      + "\nequals cannot be resolved"
+      + "\n&& cannot be resolved"
+      + "\nprops cannot be resolved"
+      + "\nfilter cannot be resolved"
+      + "\n== cannot be resolved");
   }
 }

@@ -53,6 +53,6 @@ public interface ReferenceValue extends Value {
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return 1;'"
 	 * @generated
 	 */
-	int getNumber();
+	int getNAssignments();
 
 } // ReferenceValue

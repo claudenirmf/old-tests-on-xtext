@@ -5,6 +5,7 @@ package br.ufes.inf.nemo.ontol.model.impl;
 import br.ufes.inf.nemo.ontol.model.GeneralizationSet;
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
 
+import br.ufes.inf.nemo.ontol.model.OntoLClass;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -45,7 +46,7 @@ public class GeneralizationSetImpl extends ModelElementImpl implements Generaliz
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
+	protected static final String NAME_EDEFAULT = "anonymous";
 
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -105,7 +106,7 @@ public class GeneralizationSetImpl extends ModelElementImpl implements Generaliz
 	 * @generated
 	 * @ordered
 	 */
-	protected br.ufes.inf.nemo.ontol.model.Class general;
+	protected OntoLClass general;
 
 	/**
 	 * The cached value of the '{@link #getCategorizer() <em>Categorizer</em>}' reference.
@@ -115,7 +116,7 @@ public class GeneralizationSetImpl extends ModelElementImpl implements Generaliz
 	 * @generated
 	 * @ordered
 	 */
-	protected br.ufes.inf.nemo.ontol.model.Class categorizer;
+	protected OntoLClass categorizer;
 
 	/**
 	 * The cached value of the '{@link #getSpecifics() <em>Specifics</em>}' reference list.
@@ -125,7 +126,7 @@ public class GeneralizationSetImpl extends ModelElementImpl implements Generaliz
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<br.ufes.inf.nemo.ontol.model.Class> specifics;
+	protected EList<OntoLClass> specifics;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -214,10 +215,10 @@ public class GeneralizationSetImpl extends ModelElementImpl implements Generaliz
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public br.ufes.inf.nemo.ontol.model.Class getGeneral() {
+	public OntoLClass getGeneral() {
 		if (general != null && general.eIsProxy()) {
 			InternalEObject oldGeneral = (InternalEObject)general;
-			general = (br.ufes.inf.nemo.ontol.model.Class)eResolveProxy(oldGeneral);
+			general = (OntoLClass)eResolveProxy(oldGeneral);
 			if (general != oldGeneral) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.GENERALIZATION_SET__GENERAL, oldGeneral, general));
@@ -231,7 +232,7 @@ public class GeneralizationSetImpl extends ModelElementImpl implements Generaliz
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public br.ufes.inf.nemo.ontol.model.Class basicGetGeneral() {
+	public OntoLClass basicGetGeneral() {
 		return general;
 	}
 
@@ -240,8 +241,8 @@ public class GeneralizationSetImpl extends ModelElementImpl implements Generaliz
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setGeneral(br.ufes.inf.nemo.ontol.model.Class newGeneral) {
-		br.ufes.inf.nemo.ontol.model.Class oldGeneral = general;
+	public void setGeneral(OntoLClass newGeneral) {
+		OntoLClass oldGeneral = general;
 		general = newGeneral;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.GENERALIZATION_SET__GENERAL, oldGeneral, general));
@@ -252,10 +253,10 @@ public class GeneralizationSetImpl extends ModelElementImpl implements Generaliz
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public br.ufes.inf.nemo.ontol.model.Class getCategorizer() {
+	public OntoLClass getCategorizer() {
 		if (categorizer != null && categorizer.eIsProxy()) {
 			InternalEObject oldCategorizer = (InternalEObject)categorizer;
-			categorizer = (br.ufes.inf.nemo.ontol.model.Class)eResolveProxy(oldCategorizer);
+			categorizer = (OntoLClass)eResolveProxy(oldCategorizer);
 			if (categorizer != oldCategorizer) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.GENERALIZATION_SET__CATEGORIZER, oldCategorizer, categorizer));
@@ -269,7 +270,7 @@ public class GeneralizationSetImpl extends ModelElementImpl implements Generaliz
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public br.ufes.inf.nemo.ontol.model.Class basicGetCategorizer() {
+	public OntoLClass basicGetCategorizer() {
 		return categorizer;
 	}
 
@@ -278,8 +279,8 @@ public class GeneralizationSetImpl extends ModelElementImpl implements Generaliz
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCategorizer(br.ufes.inf.nemo.ontol.model.Class newCategorizer) {
-		br.ufes.inf.nemo.ontol.model.Class oldCategorizer = categorizer;
+	public void setCategorizer(OntoLClass newCategorizer) {
+		OntoLClass oldCategorizer = categorizer;
 		categorizer = newCategorizer;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.GENERALIZATION_SET__CATEGORIZER, oldCategorizer, categorizer));
@@ -290,9 +291,9 @@ public class GeneralizationSetImpl extends ModelElementImpl implements Generaliz
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<br.ufes.inf.nemo.ontol.model.Class> getSpecifics() {
+	public EList<OntoLClass> getSpecifics() {
 		if (specifics == null) {
-			specifics = new EObjectResolvingEList<br.ufes.inf.nemo.ontol.model.Class>(br.ufes.inf.nemo.ontol.model.Class.class, this, ModelPackage.GENERALIZATION_SET__SPECIFICS);
+			specifics = new EObjectResolvingEList<OntoLClass>(OntoLClass.class, this, ModelPackage.GENERALIZATION_SET__SPECIFICS);
 		}
 		return specifics;
 	}
@@ -342,14 +343,14 @@ public class GeneralizationSetImpl extends ModelElementImpl implements Generaliz
 				setIsComplete((Boolean)newValue);
 				return;
 			case ModelPackage.GENERALIZATION_SET__GENERAL:
-				setGeneral((br.ufes.inf.nemo.ontol.model.Class)newValue);
+				setGeneral((OntoLClass)newValue);
 				return;
 			case ModelPackage.GENERALIZATION_SET__CATEGORIZER:
-				setCategorizer((br.ufes.inf.nemo.ontol.model.Class)newValue);
+				setCategorizer((OntoLClass)newValue);
 				return;
 			case ModelPackage.GENERALIZATION_SET__SPECIFICS:
 				getSpecifics().clear();
-				getSpecifics().addAll((Collection<? extends br.ufes.inf.nemo.ontol.model.Class>)newValue);
+				getSpecifics().addAll((Collection<? extends OntoLClass>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -373,10 +374,10 @@ public class GeneralizationSetImpl extends ModelElementImpl implements Generaliz
 				setIsComplete(IS_COMPLETE_EDEFAULT);
 				return;
 			case ModelPackage.GENERALIZATION_SET__GENERAL:
-				setGeneral((br.ufes.inf.nemo.ontol.model.Class)null);
+				setGeneral((OntoLClass)null);
 				return;
 			case ModelPackage.GENERALIZATION_SET__CATEGORIZER:
-				setCategorizer((br.ufes.inf.nemo.ontol.model.Class)null);
+				setCategorizer((OntoLClass)null);
 				return;
 			case ModelPackage.GENERALIZATION_SET__SPECIFICS:
 				getSpecifics().clear();

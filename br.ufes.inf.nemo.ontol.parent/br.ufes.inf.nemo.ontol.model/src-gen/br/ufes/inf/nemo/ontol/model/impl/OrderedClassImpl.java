@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class OrderedClassImpl extends ClassImpl implements OrderedClass {
+public abstract class OrderedClassImpl extends OntoLClassImpl implements OrderedClass {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

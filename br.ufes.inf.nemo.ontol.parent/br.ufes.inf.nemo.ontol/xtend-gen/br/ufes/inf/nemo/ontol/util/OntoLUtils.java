@@ -6,21 +6,14 @@
 package br.ufes.inf.nemo.ontol.util;
 
 import br.ufes.inf.nemo.ontol.model.EntityDeclaration;
-import br.ufes.inf.nemo.ontol.model.Individual;
 import br.ufes.inf.nemo.ontol.model.Property;
 import br.ufes.inf.nemo.ontol.util.OntoLIndex;
-import com.google.common.base.Objects;
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class OntoLUtils {
@@ -77,34 +70,8 @@ public class OntoLUtils {
    * @author Claudenir Fonseca
    */
   public LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> getBasicFixedTypes(final EntityDeclaration e) {
-    final LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> basicFixedTypes = new LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class>();
-    EList<br.ufes.inf.nemo.ontol.model.Class> _fixedTypes = e.getFixedTypes();
-    basicFixedTypes.addAll(_fixedTypes);
-    if ((e instanceof br.ufes.inf.nemo.ontol.model.Class)) {
-      final LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> ch = this.classHierarchy(((br.ufes.inf.nemo.ontol.model.Class)e));
-      Iterable<IEObjectDescription> _visibleEObjectDescriptions = this._ontoLIndex.getVisibleEObjectDescriptions(e);
-      final Consumer<IEObjectDescription> _function = (IEObjectDescription it) -> {
-        br.ufes.inf.nemo.ontol.model.Class _xifexpression = null;
-        EClass _eClass = it.getEClass();
-        if ((_eClass instanceof br.ufes.inf.nemo.ontol.model.Class)) {
-          EClass _eClass_1 = it.getEClass();
-          _xifexpression = ((br.ufes.inf.nemo.ontol.model.Class) _eClass_1);
-        } else {
-          _xifexpression = null;
-        }
-        final br.ufes.inf.nemo.ontol.model.Class c = _xifexpression;
-        if ((((!Objects.equal(c, null)) && (!Objects.equal(c.getPowertypeOf(), null))) && ch.contains(c.getPowertypeOf()))) {
-          basicFixedTypes.add(((br.ufes.inf.nemo.ontol.model.Class) c));
-        }
-      };
-      _visibleEObjectDescriptions.forEach(_function);
-      return basicFixedTypes;
-    } else {
-      if ((e instanceof Individual)) {
-        return basicFixedTypes;
-      }
-    }
-    return null;
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field fixedTypes is undefined for the type EntityDeclaration");
   }
   
   /**
@@ -138,14 +105,8 @@ public class OntoLUtils {
    * @author Claudenir Fonseca
    */
   public LinkedHashSet<Property> getAllProperties(final EntityDeclaration e) {
-    final LinkedHashSet<Property> properties = new LinkedHashSet<Property>();
-    LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> _allFixedTypes = this.getAllFixedTypes(e);
-    final Consumer<br.ufes.inf.nemo.ontol.model.Class> _function = (br.ufes.inf.nemo.ontol.model.Class it) -> {
-      EList<Property> _props = it.getProps();
-      properties.addAll(_props);
-    };
-    _allFixedTypes.forEach(_function);
-    return properties;
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field props is undefined for the type Class");
   }
   
   /**
@@ -153,13 +114,8 @@ public class OntoLUtils {
    * 
    * @author Claudenir Fonseca
    */
-  public Set<Property> getAllInheritedProperties(final br.ufes.inf.nemo.ontol.model.Class c) {
-    LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> _classHierarchy = this.classHierarchy(c);
-    final Function1<br.ufes.inf.nemo.ontol.model.Class, EList<Property>> _function = (br.ufes.inf.nemo.ontol.model.Class it) -> {
-      return it.getProps();
-    };
-    Iterable<EList<Property>> _map = IterableExtensions.<br.ufes.inf.nemo.ontol.model.Class, EList<Property>>map(_classHierarchy, _function);
-    Iterable<Property> _flatten = Iterables.<Property>concat(_map);
-    return IterableExtensions.<Property>toSet(_flatten);
+  public Set<Object> getAllInheritedProperties(final br.ufes.inf.nemo.ontol.model.Class c) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field props is undefined");
   }
 }

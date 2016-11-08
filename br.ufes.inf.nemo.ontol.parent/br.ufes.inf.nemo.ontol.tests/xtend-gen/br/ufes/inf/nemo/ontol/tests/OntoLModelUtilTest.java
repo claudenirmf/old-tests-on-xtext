@@ -2,16 +2,13 @@ package br.ufes.inf.nemo.ontol.tests;
 
 import br.ufes.inf.nemo.ontol.model.Model;
 import br.ufes.inf.nemo.ontol.model.ModelElement;
-import br.ufes.inf.nemo.ontol.model.ModelPackage;
 import br.ufes.inf.nemo.ontol.tests.OntoLInjectorProvider;
 import br.ufes.inf.nemo.ontol.util.OntoLUtils;
-import br.ufes.inf.nemo.ontol.validation.LinguisticRules;
 import com.google.inject.Inject;
 import java.util.LinkedHashSet;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -81,23 +78,7 @@ public class OntoLModelUtilTest {
   
   @Test
   public void testClassHierarchyCycle() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("module batata{");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("class A specializes B;");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("class B specializes A;");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      final Model model = this._parseHelper.parse(_builder);
-      EClass _class_ = ModelPackage.eINSTANCE.getClass_();
-      this._validationTestHelper.assertError(model, _class_, LinguisticRules.CYCLIC_SPECIALIZATION);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field class_ is undefined for the type ModelPackage");
   }
 }

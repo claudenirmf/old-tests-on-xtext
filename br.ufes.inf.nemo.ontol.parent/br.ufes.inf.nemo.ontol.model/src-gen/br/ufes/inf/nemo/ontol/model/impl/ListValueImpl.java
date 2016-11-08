@@ -30,22 +30,21 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.ListValueImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.ListValueImpl#getValues <em>Values</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ListValueImpl extends ValueImpl implements ListValue {
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference list.
+	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getValues()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Value> value;
-
+	protected EList<Value> values;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -70,11 +69,11 @@ public class ListValueImpl extends ValueImpl implements ListValue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Value> getValue() {
-		if (value == null) {
-			value = new EObjectContainmentEList<Value>(Value.class, this, ModelPackage.LIST_VALUE__VALUE);
+	public EList<Value> getValues() {
+		if (values == null) {
+			values = new EObjectContainmentEList<Value>(Value.class, this, ModelPackage.LIST_VALUE__VALUES);
 		}
-		return value;
+		return values;
 	}
 
 	/**
@@ -82,16 +81,21 @@ public class ListValueImpl extends ValueImpl implements ListValue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getNumber() {
-		EList<Value> _value = this.getValue();
-		boolean _equals = Objects.equal(_value, null);
+	public int getNAssignments() {
+		EList<Value> _values = this.getValues();
+		boolean _equals = Objects.equal(_values, null);
 		if (_equals) {
 			return 0;
 		}
-		else {
-			EList<Value> _value_1 = this.getValue();
-			return _value_1.size();
+		EList<Value> _values_1 = this.getValues();
+		int count = _values_1.size();
+		EList<Value> _values_2 = this.getValues();
+		for (final Value v : _values_2) {
+			int _count = count;
+			int _nAssignments = v.getNAssignments();
+			count = (_count + _nAssignments);
 		}
+		return count;
 	}
 
 	/**
@@ -102,8 +106,8 @@ public class ListValueImpl extends ValueImpl implements ListValue {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ModelPackage.LIST_VALUE__VALUE:
-				return ((InternalEList<?>)getValue()).basicRemove(otherEnd, msgs);
+			case ModelPackage.LIST_VALUE__VALUES:
+				return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -116,8 +120,8 @@ public class ListValueImpl extends ValueImpl implements ListValue {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ModelPackage.LIST_VALUE__VALUE:
-				return getValue();
+			case ModelPackage.LIST_VALUE__VALUES:
+				return getValues();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -131,9 +135,9 @@ public class ListValueImpl extends ValueImpl implements ListValue {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.LIST_VALUE__VALUE:
-				getValue().clear();
-				getValue().addAll((Collection<? extends Value>)newValue);
+			case ModelPackage.LIST_VALUE__VALUES:
+				getValues().clear();
+				getValues().addAll((Collection<? extends Value>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -147,8 +151,8 @@ public class ListValueImpl extends ValueImpl implements ListValue {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.LIST_VALUE__VALUE:
-				getValue().clear();
+			case ModelPackage.LIST_VALUE__VALUES:
+				getValues().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -162,8 +166,8 @@ public class ListValueImpl extends ValueImpl implements ListValue {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ModelPackage.LIST_VALUE__VALUE:
-				return value != null && !value.isEmpty();
+			case ModelPackage.LIST_VALUE__VALUES:
+				return values != null && !values.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -177,7 +181,7 @@ public class ListValueImpl extends ValueImpl implements ListValue {
 	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
 		if (baseClass == Value.class) {
 			switch (baseOperationID) {
-				case ModelPackage.VALUE___GET_NUMBER: return ModelPackage.LIST_VALUE___GET_NUMBER;
+				case ModelPackage.VALUE___GET_NASSIGNMENTS: return ModelPackage.LIST_VALUE___GET_NASSIGNMENTS;
 				default: return super.eDerivedOperationID(baseOperationID, baseClass);
 			}
 		}
@@ -192,8 +196,8 @@ public class ListValueImpl extends ValueImpl implements ListValue {
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case ModelPackage.LIST_VALUE___GET_NUMBER:
-				return getNumber();
+			case ModelPackage.LIST_VALUE___GET_NASSIGNMENTS:
+				return getNAssignments();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

@@ -12,9 +12,7 @@ import br.ufes.inf.nemo.ontol.validation.AbstractOntoLValidator;
 import br.ufes.inf.nemo.ontol.validation.LinguisticRules;
 import br.ufes.inf.nemo.ontol.validation.MLTRules;
 import com.google.inject.Inject;
-import java.util.LinkedHashSet;
 import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
@@ -88,51 +86,12 @@ public class OntoLValidator extends AbstractOntoLValidator {
   
   @Check(CheckType.FAST)
   public void fastCheckOnClass(final br.ufes.inf.nemo.ontol.model.Class c) {
-    final LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> ch = this._ontoLUtils.classHierarchy(c);
-    boolean _isValidSpecialization = this._linguisticRules.isValidSpecialization(c);
-    boolean _not = (!_isValidSpecialization);
-    if (_not) {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Invalid specialization.");
-      EReference _class_SuperClasses = ModelPackage.eINSTANCE.getClass_SuperClasses();
-      this.error(_builder.toString(), _class_SuperClasses, 
-        LinguisticRules.INVALID_CLASS_SPECIALIZATION);
-    }
-    boolean _hasCyclicSpecialization = this._linguisticRules.hasCyclicSpecialization(c, ch);
-    if (_hasCyclicSpecialization) {
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("Invalid cyclic specialization.");
-      EReference _class_SuperClasses_1 = ModelPackage.eINSTANCE.getClass_SuperClasses();
-      this.error(_builder_1.toString(), _class_SuperClasses_1, 
-        LinguisticRules.CYCLIC_SPECIALIZATION);
-    }
-    boolean _hasValidBasetype = this._linguisticRules.hasValidBasetype(c);
-    boolean _not_1 = (!_hasValidBasetype);
-    if (_not_1) {
-      StringConcatenation _builder_2 = new StringConcatenation();
-      _builder_2.append("Invalid basetype.");
-      EReference _class_Basetype = ModelPackage.eINSTANCE.getClass_Basetype();
-      this.error(_builder_2.toString(), _class_Basetype, 
-        LinguisticRules.INVALID_BASETYPE);
-    }
-    boolean _hasValidPowertypeRelation = this._linguisticRules.hasValidPowertypeRelation(c);
-    boolean _not_2 = (!_hasValidPowertypeRelation);
-    if (_not_2) {
-      StringConcatenation _builder_3 = new StringConcatenation();
-      _builder_3.append("Invalid powertype relation.");
-      EReference _class_PowertypeOf = ModelPackage.eINSTANCE.getClass_PowertypeOf();
-      this.error(_builder_3.toString(), _class_PowertypeOf, 
-        LinguisticRules.INVALID_POWERTYPE_RELATION);
-    }
-    boolean _hasValidSubordinators = this._linguisticRules.hasValidSubordinators(c);
-    boolean _not_3 = (!_hasValidSubordinators);
-    if (_not_3) {
-      StringConcatenation _builder_4 = new StringConcatenation();
-      _builder_4.append("Invalid subordinator.");
-      EReference _class_Subordinators = ModelPackage.eINSTANCE.getClass_Subordinators();
-      this.error(_builder_4.toString(), _class_Subordinators, 
-        LinguisticRules.INVALID_SUBORDINATOR);
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field class_SuperClasses is undefined for the type ModelPackage"
+      + "\nThe method or field class_SuperClasses is undefined for the type ModelPackage"
+      + "\nThe method or field class_Basetype is undefined for the type ModelPackage"
+      + "\nThe method or field class_PowertypeOf is undefined for the type ModelPackage"
+      + "\nThe method or field class_Subordinators is undefined for the type ModelPackage");
   }
   
   @Check(CheckType.FAST)
@@ -165,67 +124,17 @@ public class OntoLValidator extends AbstractOntoLValidator {
   
   @Check(CheckType.NORMAL)
   public void normalChecksOnEntity(final EntityDeclaration e) {
-    final LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> iof = this._ontoLUtils.getAllFixedTypes(e);
-    boolean _isInstanceOfDisjointClasses = this._linguisticRules.isInstanceOfDisjointClasses(e, iof);
-    if (_isInstanceOfDisjointClasses) {
-      StringConcatenation _builder = new StringConcatenation();
-      String _name = e.getName();
-      _builder.append(_name, "");
-      _builder.append(" is instance of disjoint classes.");
-      EReference _entityDeclaration_FixedTypes = ModelPackage.eINSTANCE.getEntityDeclaration_FixedTypes();
-      this.error(_builder.toString(), _entityDeclaration_FixedTypes, 
-        LinguisticRules.INSTANCE_OF_DISJOINT_CLASSES);
-    }
-    boolean _missingInstantiationByCompleteness = this._linguisticRules.missingInstantiationByCompleteness(e, iof);
-    if (_missingInstantiationByCompleteness) {
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("Missing instantion of complete generalization set.");
-      EReference _entityDeclaration_FixedTypes_1 = ModelPackage.eINSTANCE.getEntityDeclaration_FixedTypes();
-      this.error(_builder_1.toString(), _entityDeclaration_FixedTypes_1, 
-        LinguisticRules.MISSING_INSTANTIATION_OF_COMPLETE_GENERALIZATION_SET);
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field entityDeclaration_FixedTypes is undefined for the type ModelPackage"
+      + "\nThe method or field entityDeclaration_FixedTypes is undefined for the type ModelPackage");
   }
   
   @Check(CheckType.NORMAL)
   public void normalChecksOnClass(final br.ufes.inf.nemo.ontol.model.Class c) {
-    final LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> ch = this._ontoLUtils.classHierarchy(c);
-    final LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> iof = this._ontoLUtils.getAllFixedTypes(c);
-    boolean _isMissingSpecializationThroughPowertype = this._mLTRules.isMissingSpecializationThroughPowertype(c, ch);
-    if (_isMissingSpecializationThroughPowertype) {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Missing specialization through powertype relation.");
-      EReference _class_SuperClasses = ModelPackage.eINSTANCE.getClass_SuperClasses();
-      this.error(_builder.toString(), _class_SuperClasses, 
-        MLTRules.MISSING_SPECIALIZATION_THROUGH_POWERTYPE);
-    }
-    boolean _obeysSubordination = this._linguisticRules.obeysSubordination(c, ch, iof);
-    boolean _not = (!_obeysSubordination);
-    if (_not) {
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("Missing specialization through subordination.");
-      EReference _class_SuperClasses_1 = ModelPackage.eINSTANCE.getClass_SuperClasses();
-      this.error(_builder_1.toString(), _class_SuperClasses_1, 
-        LinguisticRules.MISSING_SPECIALIZATION_THROUGH_SUBODINATION);
-    }
-    boolean _hasSimpleSubordinationCycle = this._linguisticRules.hasSimpleSubordinationCycle(c);
-    if (_hasSimpleSubordinationCycle) {
-      StringConcatenation _builder_2 = new StringConcatenation();
-      String _name = c.getName();
-      _builder_2.append(_name, "");
-      _builder_2.append(" is in a subordination cycle.");
-      EReference _class_Subordinators = ModelPackage.eINSTANCE.getClass_Subordinators();
-      this.error(_builder_2.toString(), _class_Subordinators, 
-        LinguisticRules.SIMPLE_SUBORDINATION_CYCLE);
-    }
-    boolean _isSpecializingDisjointClasses = this._linguisticRules.isSpecializingDisjointClasses(c, ch);
-    if (_isSpecializingDisjointClasses) {
-      StringConcatenation _builder_3 = new StringConcatenation();
-      String _name_1 = c.getName();
-      _builder_3.append(_name_1, "");
-      _builder_3.append(" is specializing disjoint classes.");
-      EReference _class_Subordinators_1 = ModelPackage.eINSTANCE.getClass_Subordinators();
-      this.error(_builder_3.toString(), _class_Subordinators_1, 
-        LinguisticRules.SPECILIZATION_OF_DISJOINT_CLASSES);
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field class_SuperClasses is undefined for the type ModelPackage"
+      + "\nThe method or field class_SuperClasses is undefined for the type ModelPackage"
+      + "\nThe method or field class_Subordinators is undefined for the type ModelPackage"
+      + "\nThe method or field class_Subordinators is undefined for the type ModelPackage");
   }
 }

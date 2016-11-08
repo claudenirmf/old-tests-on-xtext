@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  *
  * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getModelElement()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface ModelElement extends EObject {

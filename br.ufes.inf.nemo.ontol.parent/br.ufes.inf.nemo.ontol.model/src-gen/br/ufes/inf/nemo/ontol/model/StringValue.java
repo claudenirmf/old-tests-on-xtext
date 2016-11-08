@@ -46,13 +46,4 @@ public interface StringValue extends Value {
 	 */
 	void setValue(String value);
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation" unique="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return 1;'"
-	 * @generated
-	 */
-	int getNumber();
-
 } // StringValue

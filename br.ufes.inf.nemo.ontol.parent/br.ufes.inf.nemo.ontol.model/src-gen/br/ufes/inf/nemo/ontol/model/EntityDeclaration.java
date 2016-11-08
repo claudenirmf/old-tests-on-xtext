@@ -14,12 +14,13 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.EntityDeclaration#getName <em>Name</em>}</li>
- *   <li>{@link br.ufes.inf.nemo.ontol.model.EntityDeclaration#getFixedTypes <em>Fixed Types</em>}</li>
- *   <li>{@link br.ufes.inf.nemo.ontol.model.EntityDeclaration#getPropAssigns <em>Prop Assigns</em>}</li>
+ *   <li>{@link br.ufes.inf.nemo.ontol.model.EntityDeclaration#getInstantiatedClasses <em>Instantiated Classes</em>}</li>
+ *   <li>{@link br.ufes.inf.nemo.ontol.model.EntityDeclaration#getAttAssignments <em>Att Assignments</em>}</li>
+ *   <li>{@link br.ufes.inf.nemo.ontol.model.EntityDeclaration#getRefAssignments <em>Ref Assignments</em>}</li>
  * </ul>
  *
  * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getEntityDeclaration()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface EntityDeclaration extends ModelElement {
@@ -50,37 +51,51 @@ public interface EntityDeclaration extends ModelElement {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Fixed Types</b></em>' reference list.
-	 * The list contents are of type {@link br.ufes.inf.nemo.ontol.model.Class}.
+	 * Returns the value of the '<em><b>Instantiated Classes</b></em>' reference list.
+	 * The list contents are of type {@link br.ufes.inf.nemo.ontol.model.OntoLClass}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Fixed Types</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Instantiated Classes</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Fixed Types</em>' reference list.
-	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getEntityDeclaration_FixedTypes()
+	 * @return the value of the '<em>Instantiated Classes</em>' reference list.
+	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getEntityDeclaration_InstantiatedClasses()
 	 * @model
 	 * @generated
 	 */
-	EList<br.ufes.inf.nemo.ontol.model.Class> getFixedTypes();
+	EList<OntoLClass> getInstantiatedClasses();
 
 	/**
-	 * Returns the value of the '<em><b>Prop Assigns</b></em>' containment reference list.
-	 * The list contents are of type {@link br.ufes.inf.nemo.ontol.model.PropertyAssignment}.
-	 * It is bidirectional and its opposite is '{@link br.ufes.inf.nemo.ontol.model.PropertyAssignment#getClassContainer <em>Class Container</em>}'.
+	 * Returns the value of the '<em><b>Att Assignments</b></em>' containment reference list.
+	 * The list contents are of type {@link br.ufes.inf.nemo.ontol.model.AttributeAssignment}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Prop Assigns</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Att Assignments</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Prop Assigns</em>' containment reference list.
-	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getEntityDeclaration_PropAssigns()
-	 * @see br.ufes.inf.nemo.ontol.model.PropertyAssignment#getClassContainer
-	 * @model opposite="classContainer" containment="true"
+	 * @return the value of the '<em>Att Assignments</em>' containment reference list.
+	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getEntityDeclaration_AttAssignments()
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<PropertyAssignment> getPropAssigns();
+	EList<AttributeAssignment> getAttAssignments();
+
+	/**
+	 * Returns the value of the '<em><b>Ref Assignments</b></em>' containment reference list.
+	 * The list contents are of type {@link br.ufes.inf.nemo.ontol.model.ReferenceAssignment}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Ref Assignments</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Ref Assignments</em>' containment reference list.
+	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getEntityDeclaration_RefAssignments()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ReferenceAssignment> getRefAssignments();
 
 } // EntityDeclaration

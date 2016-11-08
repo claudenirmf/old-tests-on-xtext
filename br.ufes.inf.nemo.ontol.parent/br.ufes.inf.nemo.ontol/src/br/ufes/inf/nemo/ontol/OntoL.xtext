@@ -27,53 +27,53 @@ Import:
 ;
 
 EntityDeclaration:
-	Class | Individual | Set
+	OntoLClass | Individual
 ;
 
 Individual:
 	'individual' name=ID
-	(':' fixedTypes+=[Class|QualifiedName] (',' fixedTypes+=[Class|QualifiedName])*)?
-	('{' (propAssigns+=PropertyAssignment)* '}')?
+	(':' instantiatedClasses+=[OntoLClass|QualifiedName] (',' instantiatedClasses+=[OntoLClass|QualifiedName])*)?
+	('{' ( 
+		attAssignments+=AttributeAssignment
+		| refAssignments+=ReferenceAssignment
+	)* '}')?
 ;
 
-Set:
-	'set' name=STRING
-	(':' fixedTypes+=[Class|QualifiedName] (',' fixedTypes+=[Class|QualifiedName])*)?
-	('{' (propAssigns+=PropertyAssignment)* '}')?
+OntoLClass:
+	( OrderlessClass | HOClass | FOClass ) 
+	('{' ( 
+		attributes+=Attribute
+		| attAssignments+=AttributeAssignment
+		| references+=Reference
+		| refAssignments+=ReferenceAssignment
+	)* '}')?
 ;
 
-Class:
-	( WClass | HOClass | FOClass ) 
-	('{' 
-		(props+=Property | propAssigns+=PropertyAssignment)*
-	'}')?
-;
-
-WClass:
-	'class' name=ID
-	(':' fixedTypes+=[Class|QualifiedName] (',' fixedTypes+=[Class|QualifiedName])*)?
-	('specializes' superClasses+=[Class|QualifiedName] (',' superClasses+=[Class|QualifiedName])*)?
-	('subordinatedto' subordinators+=[Class|QualifiedName] (',' subordinators+=[Class|QualifiedName])*)?
+OrderlessClass:
+	'orderless' 'class' name=ID
+	(':' instantiatedClasses+=[OntoLClass|QualifiedName] (',' instantiatedClasses+=[OntoLClass|QualifiedName])*)?
+	('specializes' superClasses+=[OntoLClass|QualifiedName] (',' superClasses+=[OntoLClass|QualifiedName])*)?
+	('subordinatedto' subordinators+=[OntoLClass|QualifiedName] (',' subordinators+=[OntoLClass|QualifiedName])*)?
 	( 
-		(catType=CategorizationType basetype=[Class|QualifiedName])
-		| ('ispowertypeof' powertypeOf=[Class|QualifiedName])
+		(catType=CategorizationType basetype=[OntoLClass|QualifiedName])
+		| ('ispowertypeof' powertypeOf=[OntoLClass|QualifiedName])
 	)?
 ;
 
 FOClass:
-	'foclass' name=ID
-	(':' fixedTypes+=[Class|QualifiedName] (',' fixedTypes+=[Class|QualifiedName])*)?
-	('specializes' superClasses+=[Class|QualifiedName] (',' superClasses+=[Class|QualifiedName])*)?
+	('first-order')? 'class' name=ID
+	(':' instantiatedClasses+=[OntoLClass|QualifiedName] (',' instantiatedClasses+=[OntoLClass|QualifiedName])*)?
+	('specializes' superClasses+=[OntoLClass|QualifiedName] (',' superClasses+=[OntoLClass|QualifiedName])*)?
 ;
 
 HOClass:
-	'hoclass' name=ID 'order' order=INT
-	(':' fixedTypes+=[Class|QualifiedName] (',' fixedTypes+=[Class|QualifiedName])*)?
-	('specializes' superClasses+=[Class|QualifiedName] (',' superClasses+=[Class|QualifiedName])*)?
-	('subordinatedto' subordinators+=[Class|QualifiedName] (',' subordinators+=[Class|QualifiedName])*)?
+	'order' order=INT 'class' name=ID
+	(':' instantiatedClasses+=[OntoLClass|QualifiedName] (',' instantiatedClasses+=[OntoLClass|QualifiedName])*)?
+	('specializes' superClasses+=[OntoLClass|QualifiedName] (',' superClasses+=[OntoLClass|QualifiedName])*)?
+	('subordinatedto' subordinators+=[OntoLClass|QualifiedName] (',' subordinators+=[OntoLClass|QualifiedName])*)?
 	(
-		(catType=CategorizationType basetype=[Class|QualifiedName])
-		| ('ispowertypeof' powertypeOf=[Class|QualifiedName])
+		(catType=CategorizationType basetype=[OntoLClass|QualifiedName])
+		| ('ispowertypeof' powertypeOf=[OntoLClass|QualifiedName])
 	)?
 ;
 
@@ -83,9 +83,23 @@ enum CategorizationType:
 
 Property:
 	name=ID ':' ('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
-	propertyType=[Class|QualifiedName]
+	propertyType=[OntoLClass|QualifiedName]
 	('subsets' subsetOf+=[Property|QualifiedName] (',' subsetOf+=[Property|QualifiedName])*)?
 	('isoppositeto' oppositeTo=[Property|QualifiedName])?
+;
+
+Attribute:
+	'att' name=ID ':' ('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
+	propertyClass=[OntoLClass|QualifiedName]
+	('subsets' subsetOf+=[Attribute|QualifiedName] (',' subsetOf+=[Attribute|QualifiedName])*)?
+	('isoppositeto' oppositeTo=[Attribute|QualifiedName])?
+;
+
+Reference: 
+	'ref' name=ID ':' ('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
+	propertyClass=[OntoLClass|QualifiedName]
+	('subsets' subsetOf+=[Reference|QualifiedName] (',' subsetOf+=[Reference|QualifiedName])*)?
+	('isoppositeto' oppositeTo=[Reference|QualifiedName])?
 ;
 
 ELEMENTBOUND returns ecore::EIntegerObject:
@@ -96,6 +110,11 @@ PropertyAssignment returns PropertyAssignment:
 	property=[Property|QualifiedName] '=' assignment=Value
 ;
 
+AttributeAssignment: 
+;
+
+ReferenceAssignment: 
+;
 Value:
 	ReferenceValue | ListValue | StringValue | NumberValue | BooleanValue | NoneValue
 ;
@@ -132,6 +151,7 @@ NoneValue:
 	{NoneValue} 'none'
 ;
 
+// TODO Change syntax for disjoint and complete
 GeneralizationSet:
 	( 
 		'(' isDisjoint?='disjoint'')' 
@@ -139,8 +159,8 @@ GeneralizationSet:
 		| '(' isDisjoint?='disjoint' ',' isComplete?='complete' ')'
 		| '(' isComplete?='complete' ',' isDisjoint?='disjoint' ')'
 	)? 
-	'genset' name=ID
-	'general' general=[Class|QualifiedName]
-	('categorizer' categorizer=[Class|QualifiedName])?
-	'specifics' specifics+=[Class|QualifiedName] (',' specifics+=[Class|QualifiedName])*
+	'genset' (name=ID)?
+	'general' general=[OntoLClass|QualifiedName]
+	('categorizer' categorizer=[OntoLClass|QualifiedName])?
+	'specifics' specifics+=[OntoLClass|QualifiedName] (',' specifics+=[OntoLClass|QualifiedName])*
 ;

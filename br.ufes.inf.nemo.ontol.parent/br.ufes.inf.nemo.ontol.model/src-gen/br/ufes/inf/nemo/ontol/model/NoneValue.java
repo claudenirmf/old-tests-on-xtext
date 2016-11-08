@@ -18,9 +18,18 @@ public interface NoneValue extends Value {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" unique="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return null;'"
+	 * @generated
+	 */
+	Object getValue();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return 0;'"
 	 * @generated
 	 */
-	int getNumber();
+	int getNAssignments();
 
 } // NoneValue

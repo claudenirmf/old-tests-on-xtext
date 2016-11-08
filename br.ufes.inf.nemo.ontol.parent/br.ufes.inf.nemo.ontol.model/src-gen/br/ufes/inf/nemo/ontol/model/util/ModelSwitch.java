@@ -2,28 +2,31 @@
  */
 package br.ufes.inf.nemo.ontol.model.util;
 
+import br.ufes.inf.nemo.ontol.model.*;
+import br.ufes.inf.nemo.ontol.model.Attribute;
+import br.ufes.inf.nemo.ontol.model.AttributeAssignment;
 import br.ufes.inf.nemo.ontol.model.BooleanValue;
+import br.ufes.inf.nemo.ontol.model.DataValue;
 import br.ufes.inf.nemo.ontol.model.EntityDeclaration;
 import br.ufes.inf.nemo.ontol.model.FOClass;
 import br.ufes.inf.nemo.ontol.model.GeneralizationSet;
 import br.ufes.inf.nemo.ontol.model.HOClass;
 import br.ufes.inf.nemo.ontol.model.Import;
 import br.ufes.inf.nemo.ontol.model.Individual;
-import br.ufes.inf.nemo.ontol.model.ListValue;
 import br.ufes.inf.nemo.ontol.model.Model;
 import br.ufes.inf.nemo.ontol.model.ModelElement;
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
 import br.ufes.inf.nemo.ontol.model.NoneValue;
 import br.ufes.inf.nemo.ontol.model.NumberValue;
 import br.ufes.inf.nemo.ontol.model.OrderedClass;
+import br.ufes.inf.nemo.ontol.model.OrderlessClass;
 import br.ufes.inf.nemo.ontol.model.Property;
 import br.ufes.inf.nemo.ontol.model.PropertyAssignment;
+import br.ufes.inf.nemo.ontol.model.Reference;
+import br.ufes.inf.nemo.ontol.model.ReferenceAssignment;
 import br.ufes.inf.nemo.ontol.model.ReferenceValue;
-import br.ufes.inf.nemo.ontol.model.Set;
 import br.ufes.inf.nemo.ontol.model.StringValue;
 import br.ufes.inf.nemo.ontol.model.Value;
-import br.ufes.inf.nemo.ontol.model.WClass;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -120,36 +123,27 @@ public class ModelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.SET: {
-				Set set = (Set)theEObject;
-				T result = caseSet(set);
-				if (result == null) result = caseIndividual(set);
-				if (result == null) result = caseEntityDeclaration(set);
-				if (result == null) result = caseModelElement(set);
+			case ModelPackage.ONTO_LCLASS: {
+				OntoLClass ontoLClass = (OntoLClass)theEObject;
+				T result = caseOntoLClass(ontoLClass);
+				if (result == null) result = caseEntityDeclaration(ontoLClass);
+				if (result == null) result = caseModelElement(ontoLClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.CLASS: {
-				br.ufes.inf.nemo.ontol.model.Class class_ = (br.ufes.inf.nemo.ontol.model.Class)theEObject;
-				T result = caseClass(class_);
-				if (result == null) result = caseEntityDeclaration(class_);
-				if (result == null) result = caseModelElement(class_);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.WCLASS: {
-				WClass wClass = (WClass)theEObject;
-				T result = caseWClass(wClass);
-				if (result == null) result = caseClass(wClass);
-				if (result == null) result = caseEntityDeclaration(wClass);
-				if (result == null) result = caseModelElement(wClass);
+			case ModelPackage.ORDERLESS_CLASS: {
+				OrderlessClass orderlessClass = (OrderlessClass)theEObject;
+				T result = caseOrderlessClass(orderlessClass);
+				if (result == null) result = caseOntoLClass(orderlessClass);
+				if (result == null) result = caseEntityDeclaration(orderlessClass);
+				if (result == null) result = caseModelElement(orderlessClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ModelPackage.ORDERED_CLASS: {
 				OrderedClass orderedClass = (OrderedClass)theEObject;
 				T result = caseOrderedClass(orderedClass);
-				if (result == null) result = caseClass(orderedClass);
+				if (result == null) result = caseOntoLClass(orderedClass);
 				if (result == null) result = caseEntityDeclaration(orderedClass);
 				if (result == null) result = caseModelElement(orderedClass);
 				if (result == null) result = defaultCase(theEObject);
@@ -159,7 +153,7 @@ public class ModelSwitch<T> extends Switch<T> {
 				HOClass hoClass = (HOClass)theEObject;
 				T result = caseHOClass(hoClass);
 				if (result == null) result = caseOrderedClass(hoClass);
-				if (result == null) result = caseClass(hoClass);
+				if (result == null) result = caseOntoLClass(hoClass);
 				if (result == null) result = caseEntityDeclaration(hoClass);
 				if (result == null) result = caseModelElement(hoClass);
 				if (result == null) result = defaultCase(theEObject);
@@ -169,7 +163,7 @@ public class ModelSwitch<T> extends Switch<T> {
 				FOClass foClass = (FOClass)theEObject;
 				T result = caseFOClass(foClass);
 				if (result == null) result = caseOrderedClass(foClass);
-				if (result == null) result = caseClass(foClass);
+				if (result == null) result = caseOntoLClass(foClass);
 				if (result == null) result = caseEntityDeclaration(foClass);
 				if (result == null) result = caseModelElement(foClass);
 				if (result == null) result = defaultCase(theEObject);
@@ -189,10 +183,42 @@ public class ModelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ModelPackage.ATTRIBUTE: {
+				Attribute attribute = (Attribute)theEObject;
+				T result = caseAttribute(attribute);
+				if (result == null) result = caseProperty(attribute);
+				if (result == null) result = caseModelElement(attribute);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.REFERENCE: {
+				Reference reference = (Reference)theEObject;
+				T result = caseReference(reference);
+				if (result == null) result = caseProperty(reference);
+				if (result == null) result = caseModelElement(reference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ModelPackage.PROPERTY_ASSIGNMENT: {
 				PropertyAssignment propertyAssignment = (PropertyAssignment)theEObject;
 				T result = casePropertyAssignment(propertyAssignment);
 				if (result == null) result = caseModelElement(propertyAssignment);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.ATTRIBUTE_ASSIGNMENT: {
+				AttributeAssignment attributeAssignment = (AttributeAssignment)theEObject;
+				T result = caseAttributeAssignment(attributeAssignment);
+				if (result == null) result = casePropertyAssignment(attributeAssignment);
+				if (result == null) result = caseModelElement(attributeAssignment);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.REFERENCE_ASSIGNMENT: {
+				ReferenceAssignment referenceAssignment = (ReferenceAssignment)theEObject;
+				T result = caseReferenceAssignment(referenceAssignment);
+				if (result == null) result = casePropertyAssignment(referenceAssignment);
+				if (result == null) result = caseModelElement(referenceAssignment);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -211,11 +237,11 @@ public class ModelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.LIST_VALUE: {
-				ListValue listValue = (ListValue)theEObject;
-				T result = caseListValue(listValue);
-				if (result == null) result = caseValue(listValue);
-				if (result == null) result = caseModelElement(listValue);
+			case ModelPackage.DATA_VALUE: {
+				DataValue dataValue = (DataValue)theEObject;
+				T result = caseDataValue(dataValue);
+				if (result == null) result = caseValue(dataValue);
+				if (result == null) result = caseModelElement(dataValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -331,47 +357,32 @@ public class ModelSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Set</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Onto LClass</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Set</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Onto LClass</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSet(Set object) {
+	public T caseOntoLClass(OntoLClass object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Class</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Orderless Class</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Class</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Orderless Class</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseClass(br.ufes.inf.nemo.ontol.model.Class object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>WClass</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>WClass</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseWClass(WClass object) {
+	public T caseOrderlessClass(OrderlessClass object) {
 		return null;
 	}
 
@@ -451,6 +462,36 @@ public class ModelSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Attribute</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAttribute(Attribute object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReference(Reference object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Property Assignment</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -462,6 +503,36 @@ public class ModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePropertyAssignment(PropertyAssignment object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Attribute Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Attribute Assignment</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAttributeAssignment(AttributeAssignment object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Reference Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Reference Assignment</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReferenceAssignment(ReferenceAssignment object) {
 		return null;
 	}
 
@@ -496,17 +567,17 @@ public class ModelSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>List Value</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Data Value</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>List Value</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Data Value</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseListValue(ListValue object) {
+	public T caseDataValue(DataValue object) {
 		return null;
 	}
 

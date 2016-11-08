@@ -5,7 +5,6 @@ package br.ufes.inf.nemo.ontol.model.impl;
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
 import br.ufes.inf.nemo.ontol.model.NoneValue;
 import br.ufes.inf.nemo.ontol.model.Value;
-
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.emf.common.util.EList;
@@ -44,7 +43,16 @@ public class NoneValueImpl extends ValueImpl implements NoneValue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getNumber() {
+	public Object getValue() {
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getNAssignments() {
 		return 0;
 	}
 
@@ -57,7 +65,7 @@ public class NoneValueImpl extends ValueImpl implements NoneValue {
 	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
 		if (baseClass == Value.class) {
 			switch (baseOperationID) {
-				case ModelPackage.VALUE___GET_NUMBER: return ModelPackage.NONE_VALUE___GET_NUMBER;
+				case ModelPackage.VALUE___GET_NASSIGNMENTS: return ModelPackage.NONE_VALUE___GET_NASSIGNMENTS;
 				default: return super.eDerivedOperationID(baseOperationID, baseClass);
 			}
 		}
@@ -72,8 +80,10 @@ public class NoneValueImpl extends ValueImpl implements NoneValue {
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case ModelPackage.NONE_VALUE___GET_NUMBER:
-				return getNumber();
+			case ModelPackage.NONE_VALUE___GET_VALUE:
+				return getValue();
+			case ModelPackage.NONE_VALUE___GET_NASSIGNMENTS:
+				return getNAssignments();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

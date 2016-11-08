@@ -28,6 +28,7 @@ import org.eclipse.emf.common.util.EList;
 public interface GeneralizationSet extends ModelElement {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * The default value is <code>"anonymous"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
@@ -37,7 +38,7 @@ public interface GeneralizationSet extends ModelElement {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getGeneralizationSet_Name()
-	 * @model unique="false"
+	 * @model default="anonymous" unique="false"
 	 * @generated
 	 */
 	String getName();
@@ -115,12 +116,12 @@ public interface GeneralizationSet extends ModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>General</em>' reference.
-	 * @see #setGeneral(br.ufes.inf.nemo.ontol.model.Class)
+	 * @see #setGeneral(OntoLClass)
 	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getGeneralizationSet_General()
 	 * @model
 	 * @generated
 	 */
-	br.ufes.inf.nemo.ontol.model.Class getGeneral();
+	OntoLClass getGeneral();
 
 	/**
 	 * Sets the value of the '{@link br.ufes.inf.nemo.ontol.model.GeneralizationSet#getGeneral <em>General</em>}' reference.
@@ -130,7 +131,7 @@ public interface GeneralizationSet extends ModelElement {
 	 * @see #getGeneral()
 	 * @generated
 	 */
-	void setGeneral(br.ufes.inf.nemo.ontol.model.Class value);
+	void setGeneral(OntoLClass value);
 
 	/**
 	 * Returns the value of the '<em><b>Categorizer</b></em>' reference.
@@ -141,12 +142,12 @@ public interface GeneralizationSet extends ModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Categorizer</em>' reference.
-	 * @see #setCategorizer(br.ufes.inf.nemo.ontol.model.Class)
+	 * @see #setCategorizer(OntoLClass)
 	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getGeneralizationSet_Categorizer()
 	 * @model
 	 * @generated
 	 */
-	br.ufes.inf.nemo.ontol.model.Class getCategorizer();
+	OntoLClass getCategorizer();
 
 	/**
 	 * Sets the value of the '{@link br.ufes.inf.nemo.ontol.model.GeneralizationSet#getCategorizer <em>Categorizer</em>}' reference.
@@ -156,11 +157,11 @@ public interface GeneralizationSet extends ModelElement {
 	 * @see #getCategorizer()
 	 * @generated
 	 */
-	void setCategorizer(br.ufes.inf.nemo.ontol.model.Class value);
+	void setCategorizer(OntoLClass value);
 
 	/**
 	 * Returns the value of the '<em><b>Specifics</b></em>' reference list.
-	 * The list contents are of type {@link br.ufes.inf.nemo.ontol.model.Class}.
+	 * The list contents are of type {@link br.ufes.inf.nemo.ontol.model.OntoLClass}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Specifics</em>' reference list isn't clear,
@@ -172,6 +173,6 @@ public interface GeneralizationSet extends ModelElement {
 	 * @model
 	 * @generated
 	 */
-	EList<br.ufes.inf.nemo.ontol.model.Class> getSpecifics();
+	EList<OntoLClass> getSpecifics();
 
 } // GeneralizationSet

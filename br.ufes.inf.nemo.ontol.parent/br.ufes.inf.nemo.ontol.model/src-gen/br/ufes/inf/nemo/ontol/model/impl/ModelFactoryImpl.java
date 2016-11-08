@@ -2,29 +2,27 @@
  */
 package br.ufes.inf.nemo.ontol.model.impl;
 
+import br.ufes.inf.nemo.ontol.model.Attribute;
+import br.ufes.inf.nemo.ontol.model.AttributeAssignment;
 import br.ufes.inf.nemo.ontol.model.BooleanValue;
 import br.ufes.inf.nemo.ontol.model.CategorizationType;
-import br.ufes.inf.nemo.ontol.model.EntityDeclaration;
 import br.ufes.inf.nemo.ontol.model.FOClass;
 import br.ufes.inf.nemo.ontol.model.GeneralizationSet;
 import br.ufes.inf.nemo.ontol.model.HOClass;
 import br.ufes.inf.nemo.ontol.model.Import;
 import br.ufes.inf.nemo.ontol.model.Individual;
-import br.ufes.inf.nemo.ontol.model.ListValue;
 import br.ufes.inf.nemo.ontol.model.Model;
-import br.ufes.inf.nemo.ontol.model.ModelElement;
 import br.ufes.inf.nemo.ontol.model.ModelFactory;
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
 import br.ufes.inf.nemo.ontol.model.NoneValue;
 import br.ufes.inf.nemo.ontol.model.NumberValue;
-import br.ufes.inf.nemo.ontol.model.OrderedClass;
+import br.ufes.inf.nemo.ontol.model.OrderlessClass;
 import br.ufes.inf.nemo.ontol.model.Property;
 import br.ufes.inf.nemo.ontol.model.PropertyAssignment;
+import br.ufes.inf.nemo.ontol.model.Reference;
+import br.ufes.inf.nemo.ontol.model.ReferenceAssignment;
 import br.ufes.inf.nemo.ontol.model.ReferenceValue;
-import br.ufes.inf.nemo.ontol.model.Set;
 import br.ufes.inf.nemo.ontol.model.StringValue;
-import br.ufes.inf.nemo.ontol.model.WClass;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -79,21 +77,19 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case ModelPackage.MODEL: return createModel();
-			case ModelPackage.MODEL_ELEMENT: return createModelElement();
 			case ModelPackage.IMPORT: return createImport();
-			case ModelPackage.ENTITY_DECLARATION: return createEntityDeclaration();
 			case ModelPackage.INDIVIDUAL: return createIndividual();
-			case ModelPackage.SET: return createSet();
-			case ModelPackage.CLASS: return createClass();
-			case ModelPackage.WCLASS: return createWClass();
-			case ModelPackage.ORDERED_CLASS: return createOrderedClass();
+			case ModelPackage.ORDERLESS_CLASS: return createOrderlessClass();
 			case ModelPackage.HO_CLASS: return createHOClass();
 			case ModelPackage.FO_CLASS: return createFOClass();
 			case ModelPackage.GENERALIZATION_SET: return createGeneralizationSet();
 			case ModelPackage.PROPERTY: return createProperty();
+			case ModelPackage.ATTRIBUTE: return createAttribute();
+			case ModelPackage.REFERENCE: return createReference();
 			case ModelPackage.PROPERTY_ASSIGNMENT: return createPropertyAssignment();
+			case ModelPackage.ATTRIBUTE_ASSIGNMENT: return createAttributeAssignment();
+			case ModelPackage.REFERENCE_ASSIGNMENT: return createReferenceAssignment();
 			case ModelPackage.REFERENCE_VALUE: return createReferenceValue();
-			case ModelPackage.LIST_VALUE: return createListValue();
 			case ModelPackage.STRING_VALUE: return createStringValue();
 			case ModelPackage.NUMBER_VALUE: return createNumberValue();
 			case ModelPackage.BOOLEAN_VALUE: return createBooleanValue();
@@ -148,29 +144,9 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelElement createModelElement() {
-		ModelElementImpl modelElement = new ModelElementImpl();
-		return modelElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Import createImport() {
 		ImportImpl import_ = new ImportImpl();
 		return import_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EntityDeclaration createEntityDeclaration() {
-		EntityDeclarationImpl entityDeclaration = new EntityDeclarationImpl();
-		return entityDeclaration;
 	}
 
 	/**
@@ -188,39 +164,9 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Set createSet() {
-		SetImpl set = new SetImpl();
-		return set;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public br.ufes.inf.nemo.ontol.model.Class createClass() {
-		ClassImpl class_ = new ClassImpl();
-		return class_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public WClass createWClass() {
-		WClassImpl wClass = new WClassImpl();
-		return wClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public OrderedClass createOrderedClass() {
-		OrderedClassImpl orderedClass = new OrderedClassImpl();
-		return orderedClass;
+	public OrderlessClass createOrderlessClass() {
+		OrderlessClassImpl orderlessClass = new OrderlessClassImpl();
+		return orderlessClass;
 	}
 
 	/**
@@ -268,6 +214,26 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Attribute createAttribute() {
+		AttributeImpl attribute = new AttributeImpl();
+		return attribute;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Reference createReference() {
+		ReferenceImpl reference = new ReferenceImpl();
+		return reference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public PropertyAssignment createPropertyAssignment() {
 		PropertyAssignmentImpl propertyAssignment = new PropertyAssignmentImpl();
 		return propertyAssignment;
@@ -278,9 +244,9 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ReferenceValue createReferenceValue() {
-		ReferenceValueImpl referenceValue = new ReferenceValueImpl();
-		return referenceValue;
+	public AttributeAssignment createAttributeAssignment() {
+		AttributeAssignmentImpl attributeAssignment = new AttributeAssignmentImpl();
+		return attributeAssignment;
 	}
 
 	/**
@@ -288,9 +254,19 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ListValue createListValue() {
-		ListValueImpl listValue = new ListValueImpl();
-		return listValue;
+	public ReferenceAssignment createReferenceAssignment() {
+		ReferenceAssignmentImpl referenceAssignment = new ReferenceAssignmentImpl();
+		return referenceAssignment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ReferenceValue createReferenceValue() {
+		ReferenceValueImpl referenceValue = new ReferenceValueImpl();
+		return referenceValue;
 	}
 
 	/**

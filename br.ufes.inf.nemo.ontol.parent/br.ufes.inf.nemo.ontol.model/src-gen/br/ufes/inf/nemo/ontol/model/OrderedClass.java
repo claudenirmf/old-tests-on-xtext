@@ -10,8 +10,8 @@ package br.ufes.inf.nemo.ontol.model;
  *
  *
  * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getOrderedClass()
- * @model
+ * @model abstract="true"
  * @generated
  */
-public interface OrderedClass extends br.ufes.inf.nemo.ontol.model.Class {
+public interface OrderedClass extends OntoLClass {
 } // OrderedClass

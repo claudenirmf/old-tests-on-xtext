@@ -7,6 +7,7 @@ import br.ufes.inf.nemo.ontol.model.HOClass;
 import br.ufes.inf.nemo.ontol.model.Model;
 import br.ufes.inf.nemo.ontol.model.ModelElement;
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
+import br.ufes.inf.nemo.ontol.model.OntoLClass;
 import br.ufes.inf.nemo.ontol.model.OrderedClass;
 import br.ufes.inf.nemo.ontol.model.WClass;
 import br.ufes.inf.nemo.ontol.util.OntoLIndex;
@@ -103,7 +104,7 @@ public class LinguisticRules {
             return false;
           } else {
             if ((c instanceof HOClass)) {
-              EList<br.ufes.inf.nemo.ontol.model.Class> _superClasses_1 = ((HOClass)c).getSuperClasses();
+              EList<br.ufes.inf.nemo.ontol.model.Class> _superClasses_1 = c.getSuperClasses();
               final Function1<br.ufes.inf.nemo.ontol.model.Class, Boolean> _function_1 = (br.ufes.inf.nemo.ontol.model.Class it) -> {
                 boolean _xifexpression = false;
                 if (((it instanceof HOClass) && (!Objects.equal(((HOClass) it).getOrder(), ((HOClass)c).getOrder())))) {
@@ -205,7 +206,7 @@ public class LinguisticRules {
   
   public boolean hasValidSubordinators(final br.ufes.inf.nemo.ontol.model.Class c) {
     if ((c instanceof HOClass)) {
-      EList<br.ufes.inf.nemo.ontol.model.Class> _subordinators = ((HOClass)c).getSubordinators();
+      EList<br.ufes.inf.nemo.ontol.model.Class> _subordinators = c.getSubordinators();
       final Function1<br.ufes.inf.nemo.ontol.model.Class, Boolean> _function = (br.ufes.inf.nemo.ontol.model.Class it) -> {
         boolean _equals = Objects.equal(it, c);
         if (_equals) {
@@ -246,32 +247,10 @@ public class LinguisticRules {
   }
   
   public boolean hasValidMembers(final GeneralizationSet gs) {
-    EList<br.ufes.inf.nemo.ontol.model.Class> _specifics = gs.getSpecifics();
-    final Function1<br.ufes.inf.nemo.ontol.model.Class, Boolean> _function = (br.ufes.inf.nemo.ontol.model.Class it) -> {
-      EList<br.ufes.inf.nemo.ontol.model.Class> _superClasses = it.getSuperClasses();
-      br.ufes.inf.nemo.ontol.model.Class _general = gs.getGeneral();
-      boolean _contains = _superClasses.contains(_general);
-      return Boolean.valueOf((!_contains));
-    };
-    boolean _exists = IterableExtensions.<br.ufes.inf.nemo.ontol.model.Class>exists(_specifics, _function);
-    if (_exists) {
-      return false;
-    } else {
-      if (((!Objects.equal(gs.getCategorizer().getBasetype(), null)) && (!Objects.equal(gs.getCategorizer().getBasetype(), gs.getGeneral())))) {
-        return false;
-      } else {
-        if (((!Objects.equal(gs.getCategorizer().getBasetype(), null)) && IterableExtensions.<br.ufes.inf.nemo.ontol.model.Class>exists(gs.getSpecifics(), ((Function1<br.ufes.inf.nemo.ontol.model.Class, Boolean>) (br.ufes.inf.nemo.ontol.model.Class it) -> {
-          EList<br.ufes.inf.nemo.ontol.model.Class> _fixedTypes = it.getFixedTypes();
-          br.ufes.inf.nemo.ontol.model.Class _categorizer = gs.getCategorizer();
-          boolean _contains = _fixedTypes.contains(_categorizer);
-          return Boolean.valueOf((!_contains));
-        })))) {
-          return false;
-        } else {
-          return true;
-        }
-      }
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field fixedTypes is undefined"
+      + "\ncontains cannot be resolved"
+      + "\n! cannot be resolved");
   }
   
   public boolean obeysSubordination(final br.ufes.inf.nemo.ontol.model.Class c, final LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> ch, final LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> iof) {
@@ -355,11 +334,11 @@ public class LinguisticRules {
       if ((Objects.equal(gs, null) || (!gs.isIsDisjoint()))) {
         return Boolean.valueOf(false);
       } else {
-        EList<br.ufes.inf.nemo.ontol.model.Class> _specifics = null;
+        EList<OntoLClass> _specifics = null;
         if (gs!=null) {
           _specifics=gs.getSpecifics();
         }
-        Set<br.ufes.inf.nemo.ontol.model.Class> _set = IterableExtensions.<br.ufes.inf.nemo.ontol.model.Class>toSet(_specifics);
+        Set<OntoLClass> _set = IterableExtensions.<OntoLClass>toSet(_specifics);
         Sets.SetView<br.ufes.inf.nemo.ontol.model.Class> _intersection = Sets.<br.ufes.inf.nemo.ontol.model.Class>intersection(ch, _set);
         int _size = _intersection.size();
         boolean _lessThan = (_size < 2);
@@ -386,7 +365,7 @@ public class LinguisticRules {
         _xifexpression = null;
       }
       final GeneralizationSet gs = _xifexpression;
-      if (((Objects.equal(gs, null) || (!gs.isIsDisjoint())) || (Sets.<br.ufes.inf.nemo.ontol.model.Class>intersection(IterableExtensions.<br.ufes.inf.nemo.ontol.model.Class>toSet(gs.getSpecifics()), iof).size() < 2))) {
+      if (((Objects.equal(gs, null) || (!gs.isIsDisjoint())) || (Sets.<OntoLClass>intersection(IterableExtensions.<OntoLClass>toSet(gs.getSpecifics()), iof).size() < 2))) {
         return Boolean.valueOf(false);
       }
       return Boolean.valueOf(true);
@@ -407,7 +386,7 @@ public class LinguisticRules {
         _xifexpression = null;
       }
       final GeneralizationSet gs = _xifexpression;
-      if ((((Objects.equal(gs, null) || (!gs.isIsComplete())) || (!iof.contains(gs.getGeneral()))) || (!Collections.disjoint(IterableExtensions.<br.ufes.inf.nemo.ontol.model.Class>toSet(gs.getSpecifics()), iof)))) {
+      if ((((Objects.equal(gs, null) || (!gs.isIsComplete())) || (!iof.contains(gs.getGeneral()))) || (!Collections.disjoint(IterableExtensions.<OntoLClass>toSet(gs.getSpecifics()), iof)))) {
         return Boolean.valueOf(false);
       }
       return Boolean.valueOf(true);

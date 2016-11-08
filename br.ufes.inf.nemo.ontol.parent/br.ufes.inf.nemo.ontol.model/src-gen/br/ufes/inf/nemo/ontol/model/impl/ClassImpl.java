@@ -4,23 +4,16 @@ package br.ufes.inf.nemo.ontol.model.impl;
 
 import br.ufes.inf.nemo.ontol.model.CategorizationType;
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
-import br.ufes.inf.nemo.ontol.model.Property;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,13 +27,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.ClassImpl#getPowertypeOf <em>Powertype Of</em>}</li>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.ClassImpl#getBasetype <em>Basetype</em>}</li>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.ClassImpl#getSubordinators <em>Subordinators</em>}</li>
- *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.ClassImpl#getProps <em>Props</em>}</li>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.ClassImpl#getCatType <em>Cat Type</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ClassImpl extends EntityDeclarationImpl implements br.ufes.inf.nemo.ontol.model.Class {
+public abstract class ClassImpl extends EntityDeclarationImpl implements br.ufes.inf.nemo.ontol.model.Class {
 	/**
 	 * The cached value of the '{@link #getSuperClasses() <em>Super Classes</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -80,16 +72,6 @@ public class ClassImpl extends EntityDeclarationImpl implements br.ufes.inf.nemo
 	 * @ordered
 	 */
 	protected EList<br.ufes.inf.nemo.ontol.model.Class> subordinators;
-
-	/**
-	 * The cached value of the '{@link #getProps() <em>Props</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getProps()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Property> props;
 
 	/**
 	 * The default value of the '{@link #getCatType() <em>Cat Type</em>}' attribute.
@@ -235,18 +217,6 @@ public class ClassImpl extends EntityDeclarationImpl implements br.ufes.inf.nemo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Property> getProps() {
-		if (props == null) {
-			props = new EObjectContainmentWithInverseEList<Property>(Property.class, this, ModelPackage.CLASS__PROPS, ModelPackage.PROPERTY__CLASS_CONTAINER);
-		}
-		return props;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public CategorizationType getCatType() {
 		return catType;
 	}
@@ -268,35 +238,6 @@ public class ClassImpl extends EntityDeclarationImpl implements br.ufes.inf.nemo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ModelPackage.CLASS__PROPS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getProps()).basicAdd(otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ModelPackage.CLASS__PROPS:
-				return ((InternalEList<?>)getProps()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -310,8 +251,6 @@ public class ClassImpl extends EntityDeclarationImpl implements br.ufes.inf.nemo
 				return basicGetBasetype();
 			case ModelPackage.CLASS__SUBORDINATORS:
 				return getSubordinators();
-			case ModelPackage.CLASS__PROPS:
-				return getProps();
 			case ModelPackage.CLASS__CAT_TYPE:
 				return getCatType();
 		}
@@ -341,10 +280,6 @@ public class ClassImpl extends EntityDeclarationImpl implements br.ufes.inf.nemo
 				getSubordinators().clear();
 				getSubordinators().addAll((Collection<? extends br.ufes.inf.nemo.ontol.model.Class>)newValue);
 				return;
-			case ModelPackage.CLASS__PROPS:
-				getProps().clear();
-				getProps().addAll((Collection<? extends Property>)newValue);
-				return;
 			case ModelPackage.CLASS__CAT_TYPE:
 				setCatType((CategorizationType)newValue);
 				return;
@@ -372,9 +307,6 @@ public class ClassImpl extends EntityDeclarationImpl implements br.ufes.inf.nemo
 			case ModelPackage.CLASS__SUBORDINATORS:
 				getSubordinators().clear();
 				return;
-			case ModelPackage.CLASS__PROPS:
-				getProps().clear();
-				return;
 			case ModelPackage.CLASS__CAT_TYPE:
 				setCatType(CAT_TYPE_EDEFAULT);
 				return;
@@ -398,8 +330,6 @@ public class ClassImpl extends EntityDeclarationImpl implements br.ufes.inf.nemo
 				return basetype != null;
 			case ModelPackage.CLASS__SUBORDINATORS:
 				return subordinators != null && !subordinators.isEmpty();
-			case ModelPackage.CLASS__PROPS:
-				return props != null && !props.isEmpty();
 			case ModelPackage.CLASS__CAT_TYPE:
 				return catType != CAT_TYPE_EDEFAULT;
 		}

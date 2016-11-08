@@ -190,22 +190,31 @@ public interface ModelPackage extends EPackage {
 	int ENTITY_DECLARATION__NAME = MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Fixed Types</b></em>' reference list.
+	 * The feature id for the '<em><b>Instantiated Classes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTITY_DECLARATION__FIXED_TYPES = MODEL_ELEMENT_FEATURE_COUNT + 1;
+	int ENTITY_DECLARATION__INSTANTIATED_CLASSES = MODEL_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Prop Assigns</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Att Assignments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTITY_DECLARATION__PROP_ASSIGNS = MODEL_ELEMENT_FEATURE_COUNT + 2;
+	int ENTITY_DECLARATION__ATT_ASSIGNMENTS = MODEL_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Ref Assignments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY_DECLARATION__REF_ASSIGNMENTS = MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Entity Declaration</em>' class.
@@ -214,7 +223,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENTITY_DECLARATION_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 3;
+	int ENTITY_DECLARATION_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Entity Declaration</em>' class.
@@ -245,22 +254,31 @@ public interface ModelPackage extends EPackage {
 	int INDIVIDUAL__NAME = ENTITY_DECLARATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Fixed Types</b></em>' reference list.
+	 * The feature id for the '<em><b>Instantiated Classes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INDIVIDUAL__FIXED_TYPES = ENTITY_DECLARATION__FIXED_TYPES;
+	int INDIVIDUAL__INSTANTIATED_CLASSES = ENTITY_DECLARATION__INSTANTIATED_CLASSES;
 
 	/**
-	 * The feature id for the '<em><b>Prop Assigns</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Att Assignments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INDIVIDUAL__PROP_ASSIGNS = ENTITY_DECLARATION__PROP_ASSIGNS;
+	int INDIVIDUAL__ATT_ASSIGNMENTS = ENTITY_DECLARATION__ATT_ASSIGNMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Ref Assignments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INDIVIDUAL__REF_ASSIGNMENTS = ENTITY_DECLARATION__REF_ASSIGNMENTS;
 
 	/**
 	 * The number of structural features of the '<em>Individual</em>' class.
@@ -281,14 +299,14 @@ public interface ModelPackage extends EPackage {
 	int INDIVIDUAL_OPERATION_COUNT = ENTITY_DECLARATION_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.SetImpl <em>Set</em>}' class.
+	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.OntoLClassImpl <em>Onto LClass</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see br.ufes.inf.nemo.ontol.model.impl.SetImpl
-	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getSet()
+	 * @see br.ufes.inf.nemo.ontol.model.impl.OntoLClassImpl
+	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getOntoLClass()
 	 * @generated
 	 */
-	int SET = 5;
+	int ONTO_LCLASS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -297,80 +315,34 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SET__NAME = INDIVIDUAL__NAME;
+	int ONTO_LCLASS__NAME = ENTITY_DECLARATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Fixed Types</b></em>' reference list.
+	 * The feature id for the '<em><b>Instantiated Classes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SET__FIXED_TYPES = INDIVIDUAL__FIXED_TYPES;
+	int ONTO_LCLASS__INSTANTIATED_CLASSES = ENTITY_DECLARATION__INSTANTIATED_CLASSES;
 
 	/**
-	 * The feature id for the '<em><b>Prop Assigns</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Att Assignments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SET__PROP_ASSIGNS = INDIVIDUAL__PROP_ASSIGNS;
+	int ONTO_LCLASS__ATT_ASSIGNMENTS = ENTITY_DECLARATION__ATT_ASSIGNMENTS;
 
 	/**
-	 * The number of structural features of the '<em>Set</em>' class.
+	 * The feature id for the '<em><b>Ref Assignments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SET_FEATURE_COUNT = INDIVIDUAL_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Set</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SET_OPERATION_COUNT = INDIVIDUAL_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.ClassImpl <em>Class</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see br.ufes.inf.nemo.ontol.model.impl.ClassImpl
-	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getClass_()
-	 * @generated
-	 */
-	int CLASS = 6;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__NAME = ENTITY_DECLARATION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Fixed Types</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__FIXED_TYPES = ENTITY_DECLARATION__FIXED_TYPES;
-
-	/**
-	 * The feature id for the '<em><b>Prop Assigns</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS__PROP_ASSIGNS = ENTITY_DECLARATION__PROP_ASSIGNS;
+	int ONTO_LCLASS__REF_ASSIGNMENTS = ENTITY_DECLARATION__REF_ASSIGNMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Super Classes</b></em>' reference list.
@@ -379,7 +351,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__SUPER_CLASSES = ENTITY_DECLARATION_FEATURE_COUNT + 0;
+	int ONTO_LCLASS__SUPER_CLASSES = ENTITY_DECLARATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Powertype Of</b></em>' reference.
@@ -388,7 +360,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__POWERTYPE_OF = ENTITY_DECLARATION_FEATURE_COUNT + 1;
+	int ONTO_LCLASS__POWERTYPE_OF = ENTITY_DECLARATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Basetype</b></em>' reference.
@@ -397,7 +369,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__BASETYPE = ENTITY_DECLARATION_FEATURE_COUNT + 2;
+	int ONTO_LCLASS__BASETYPE = ENTITY_DECLARATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Subordinators</b></em>' reference list.
@@ -406,53 +378,62 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__SUBORDINATORS = ENTITY_DECLARATION_FEATURE_COUNT + 3;
+	int ONTO_LCLASS__SUBORDINATORS = ENTITY_DECLARATION_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Props</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__PROPS = ENTITY_DECLARATION_FEATURE_COUNT + 4;
+	int ONTO_LCLASS__ATTRIBUTES = ENTITY_DECLARATION_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Cat Type</b></em>' attribute.
+	 * The feature id for the '<em><b>References</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__CAT_TYPE = ENTITY_DECLARATION_FEATURE_COUNT + 5;
+	int ONTO_LCLASS__REFERENCES = ENTITY_DECLARATION_FEATURE_COUNT + 5;
 
 	/**
-	 * The number of structural features of the '<em>Class</em>' class.
+	 * The feature id for the '<em><b>Categorization Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_FEATURE_COUNT = ENTITY_DECLARATION_FEATURE_COUNT + 6;
+	int ONTO_LCLASS__CATEGORIZATION_TYPE = ENTITY_DECLARATION_FEATURE_COUNT + 6;
 
 	/**
-	 * The number of operations of the '<em>Class</em>' class.
+	 * The number of structural features of the '<em>Onto LClass</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_OPERATION_COUNT = ENTITY_DECLARATION_OPERATION_COUNT + 0;
+	int ONTO_LCLASS_FEATURE_COUNT = ENTITY_DECLARATION_FEATURE_COUNT + 7;
 
 	/**
-	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.WClassImpl <em>WClass</em>}' class.
+	 * The number of operations of the '<em>Onto LClass</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see br.ufes.inf.nemo.ontol.model.impl.WClassImpl
-	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getWClass()
+	 * @generated
+	 * @ordered
+	 */
+	int ONTO_LCLASS_OPERATION_COUNT = ENTITY_DECLARATION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.OrderlessClassImpl <em>Orderless Class</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see br.ufes.inf.nemo.ontol.model.impl.OrderlessClassImpl
+	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getOrderlessClass()
 	 * @generated
 	 */
-	int WCLASS = 7;
+	int ORDERLESS_CLASS = 6;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -461,25 +442,34 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WCLASS__NAME = CLASS__NAME;
+	int ORDERLESS_CLASS__NAME = ONTO_LCLASS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Fixed Types</b></em>' reference list.
+	 * The feature id for the '<em><b>Instantiated Classes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WCLASS__FIXED_TYPES = CLASS__FIXED_TYPES;
+	int ORDERLESS_CLASS__INSTANTIATED_CLASSES = ONTO_LCLASS__INSTANTIATED_CLASSES;
 
 	/**
-	 * The feature id for the '<em><b>Prop Assigns</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Att Assignments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WCLASS__PROP_ASSIGNS = CLASS__PROP_ASSIGNS;
+	int ORDERLESS_CLASS__ATT_ASSIGNMENTS = ONTO_LCLASS__ATT_ASSIGNMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Ref Assignments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDERLESS_CLASS__REF_ASSIGNMENTS = ONTO_LCLASS__REF_ASSIGNMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Super Classes</b></em>' reference list.
@@ -488,7 +478,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WCLASS__SUPER_CLASSES = CLASS__SUPER_CLASSES;
+	int ORDERLESS_CLASS__SUPER_CLASSES = ONTO_LCLASS__SUPER_CLASSES;
 
 	/**
 	 * The feature id for the '<em><b>Powertype Of</b></em>' reference.
@@ -497,7 +487,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WCLASS__POWERTYPE_OF = CLASS__POWERTYPE_OF;
+	int ORDERLESS_CLASS__POWERTYPE_OF = ONTO_LCLASS__POWERTYPE_OF;
 
 	/**
 	 * The feature id for the '<em><b>Basetype</b></em>' reference.
@@ -506,7 +496,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WCLASS__BASETYPE = CLASS__BASETYPE;
+	int ORDERLESS_CLASS__BASETYPE = ONTO_LCLASS__BASETYPE;
 
 	/**
 	 * The feature id for the '<em><b>Subordinators</b></em>' reference list.
@@ -515,43 +505,52 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WCLASS__SUBORDINATORS = CLASS__SUBORDINATORS;
+	int ORDERLESS_CLASS__SUBORDINATORS = ONTO_LCLASS__SUBORDINATORS;
 
 	/**
-	 * The feature id for the '<em><b>Props</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WCLASS__PROPS = CLASS__PROPS;
+	int ORDERLESS_CLASS__ATTRIBUTES = ONTO_LCLASS__ATTRIBUTES;
 
 	/**
-	 * The feature id for the '<em><b>Cat Type</b></em>' attribute.
+	 * The feature id for the '<em><b>References</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WCLASS__CAT_TYPE = CLASS__CAT_TYPE;
+	int ORDERLESS_CLASS__REFERENCES = ONTO_LCLASS__REFERENCES;
 
 	/**
-	 * The number of structural features of the '<em>WClass</em>' class.
+	 * The feature id for the '<em><b>Categorization Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WCLASS_FEATURE_COUNT = CLASS_FEATURE_COUNT + 0;
+	int ORDERLESS_CLASS__CATEGORIZATION_TYPE = ONTO_LCLASS__CATEGORIZATION_TYPE;
 
 	/**
-	 * The number of operations of the '<em>WClass</em>' class.
+	 * The number of structural features of the '<em>Orderless Class</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WCLASS_OPERATION_COUNT = CLASS_OPERATION_COUNT + 0;
+	int ORDERLESS_CLASS_FEATURE_COUNT = ONTO_LCLASS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Orderless Class</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDERLESS_CLASS_OPERATION_COUNT = ONTO_LCLASS_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.OrderedClassImpl <em>Ordered Class</em>}' class.
@@ -561,7 +560,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getOrderedClass()
 	 * @generated
 	 */
-	int ORDERED_CLASS = 8;
+	int ORDERED_CLASS = 7;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -570,25 +569,34 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_CLASS__NAME = CLASS__NAME;
+	int ORDERED_CLASS__NAME = ONTO_LCLASS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Fixed Types</b></em>' reference list.
+	 * The feature id for the '<em><b>Instantiated Classes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_CLASS__FIXED_TYPES = CLASS__FIXED_TYPES;
+	int ORDERED_CLASS__INSTANTIATED_CLASSES = ONTO_LCLASS__INSTANTIATED_CLASSES;
 
 	/**
-	 * The feature id for the '<em><b>Prop Assigns</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Att Assignments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_CLASS__PROP_ASSIGNS = CLASS__PROP_ASSIGNS;
+	int ORDERED_CLASS__ATT_ASSIGNMENTS = ONTO_LCLASS__ATT_ASSIGNMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Ref Assignments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDERED_CLASS__REF_ASSIGNMENTS = ONTO_LCLASS__REF_ASSIGNMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Super Classes</b></em>' reference list.
@@ -597,7 +605,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_CLASS__SUPER_CLASSES = CLASS__SUPER_CLASSES;
+	int ORDERED_CLASS__SUPER_CLASSES = ONTO_LCLASS__SUPER_CLASSES;
 
 	/**
 	 * The feature id for the '<em><b>Powertype Of</b></em>' reference.
@@ -606,7 +614,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_CLASS__POWERTYPE_OF = CLASS__POWERTYPE_OF;
+	int ORDERED_CLASS__POWERTYPE_OF = ONTO_LCLASS__POWERTYPE_OF;
 
 	/**
 	 * The feature id for the '<em><b>Basetype</b></em>' reference.
@@ -615,7 +623,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_CLASS__BASETYPE = CLASS__BASETYPE;
+	int ORDERED_CLASS__BASETYPE = ONTO_LCLASS__BASETYPE;
 
 	/**
 	 * The feature id for the '<em><b>Subordinators</b></em>' reference list.
@@ -624,25 +632,34 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_CLASS__SUBORDINATORS = CLASS__SUBORDINATORS;
+	int ORDERED_CLASS__SUBORDINATORS = ONTO_LCLASS__SUBORDINATORS;
 
 	/**
-	 * The feature id for the '<em><b>Props</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_CLASS__PROPS = CLASS__PROPS;
+	int ORDERED_CLASS__ATTRIBUTES = ONTO_LCLASS__ATTRIBUTES;
 
 	/**
-	 * The feature id for the '<em><b>Cat Type</b></em>' attribute.
+	 * The feature id for the '<em><b>References</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_CLASS__CAT_TYPE = CLASS__CAT_TYPE;
+	int ORDERED_CLASS__REFERENCES = ONTO_LCLASS__REFERENCES;
+
+	/**
+	 * The feature id for the '<em><b>Categorization Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDERED_CLASS__CATEGORIZATION_TYPE = ONTO_LCLASS__CATEGORIZATION_TYPE;
 
 	/**
 	 * The number of structural features of the '<em>Ordered Class</em>' class.
@@ -651,7 +668,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_CLASS_FEATURE_COUNT = CLASS_FEATURE_COUNT + 0;
+	int ORDERED_CLASS_FEATURE_COUNT = ONTO_LCLASS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Ordered Class</em>' class.
@@ -660,7 +677,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_CLASS_OPERATION_COUNT = CLASS_OPERATION_COUNT + 0;
+	int ORDERED_CLASS_OPERATION_COUNT = ONTO_LCLASS_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.HOClassImpl <em>HO Class</em>}' class.
@@ -670,7 +687,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getHOClass()
 	 * @generated
 	 */
-	int HO_CLASS = 9;
+	int HO_CLASS = 8;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -682,22 +699,31 @@ public interface ModelPackage extends EPackage {
 	int HO_CLASS__NAME = ORDERED_CLASS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Fixed Types</b></em>' reference list.
+	 * The feature id for the '<em><b>Instantiated Classes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int HO_CLASS__FIXED_TYPES = ORDERED_CLASS__FIXED_TYPES;
+	int HO_CLASS__INSTANTIATED_CLASSES = ORDERED_CLASS__INSTANTIATED_CLASSES;
 
 	/**
-	 * The feature id for the '<em><b>Prop Assigns</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Att Assignments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int HO_CLASS__PROP_ASSIGNS = ORDERED_CLASS__PROP_ASSIGNS;
+	int HO_CLASS__ATT_ASSIGNMENTS = ORDERED_CLASS__ATT_ASSIGNMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Ref Assignments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HO_CLASS__REF_ASSIGNMENTS = ORDERED_CLASS__REF_ASSIGNMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Super Classes</b></em>' reference list.
@@ -736,22 +762,31 @@ public interface ModelPackage extends EPackage {
 	int HO_CLASS__SUBORDINATORS = ORDERED_CLASS__SUBORDINATORS;
 
 	/**
-	 * The feature id for the '<em><b>Props</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int HO_CLASS__PROPS = ORDERED_CLASS__PROPS;
+	int HO_CLASS__ATTRIBUTES = ORDERED_CLASS__ATTRIBUTES;
 
 	/**
-	 * The feature id for the '<em><b>Cat Type</b></em>' attribute.
+	 * The feature id for the '<em><b>References</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int HO_CLASS__CAT_TYPE = ORDERED_CLASS__CAT_TYPE;
+	int HO_CLASS__REFERENCES = ORDERED_CLASS__REFERENCES;
+
+	/**
+	 * The feature id for the '<em><b>Categorization Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HO_CLASS__CATEGORIZATION_TYPE = ORDERED_CLASS__CATEGORIZATION_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Order</b></em>' attribute.
@@ -788,7 +823,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getFOClass()
 	 * @generated
 	 */
-	int FO_CLASS = 10;
+	int FO_CLASS = 9;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -800,22 +835,31 @@ public interface ModelPackage extends EPackage {
 	int FO_CLASS__NAME = ORDERED_CLASS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Fixed Types</b></em>' reference list.
+	 * The feature id for the '<em><b>Instantiated Classes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FO_CLASS__FIXED_TYPES = ORDERED_CLASS__FIXED_TYPES;
+	int FO_CLASS__INSTANTIATED_CLASSES = ORDERED_CLASS__INSTANTIATED_CLASSES;
 
 	/**
-	 * The feature id for the '<em><b>Prop Assigns</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Att Assignments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FO_CLASS__PROP_ASSIGNS = ORDERED_CLASS__PROP_ASSIGNS;
+	int FO_CLASS__ATT_ASSIGNMENTS = ORDERED_CLASS__ATT_ASSIGNMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Ref Assignments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FO_CLASS__REF_ASSIGNMENTS = ORDERED_CLASS__REF_ASSIGNMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Super Classes</b></em>' reference list.
@@ -854,22 +898,31 @@ public interface ModelPackage extends EPackage {
 	int FO_CLASS__SUBORDINATORS = ORDERED_CLASS__SUBORDINATORS;
 
 	/**
-	 * The feature id for the '<em><b>Props</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FO_CLASS__PROPS = ORDERED_CLASS__PROPS;
+	int FO_CLASS__ATTRIBUTES = ORDERED_CLASS__ATTRIBUTES;
 
 	/**
-	 * The feature id for the '<em><b>Cat Type</b></em>' attribute.
+	 * The feature id for the '<em><b>References</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FO_CLASS__CAT_TYPE = ORDERED_CLASS__CAT_TYPE;
+	int FO_CLASS__REFERENCES = ORDERED_CLASS__REFERENCES;
+
+	/**
+	 * The feature id for the '<em><b>Categorization Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FO_CLASS__CATEGORIZATION_TYPE = ORDERED_CLASS__CATEGORIZATION_TYPE;
 
 	/**
 	 * The number of structural features of the '<em>FO Class</em>' class.
@@ -897,7 +950,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getGeneralizationSet()
 	 * @generated
 	 */
-	int GENERALIZATION_SET = 11;
+	int GENERALIZATION_SET = 10;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -979,7 +1032,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getProperty()
 	 * @generated
 	 */
-	int PROPERTY = 12;
+	int PROPERTY = 11;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1009,40 +1062,13 @@ public interface ModelPackage extends EPackage {
 	int PROPERTY__UPPER_BOUND = MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Property Type</b></em>' reference.
+	 * The feature id for the '<em><b>Property Class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__PROPERTY_TYPE = MODEL_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Subset Of</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__SUBSET_OF = MODEL_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Opposite To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__OPPOSITE_TO = MODEL_ELEMENT_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Class Container</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__CLASS_CONTAINER = MODEL_ELEMENT_FEATURE_COUNT + 6;
+	int PROPERTY__PROPERTY_CLASS = MODEL_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Property</em>' class.
@@ -1051,7 +1077,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 7;
+	int PROPERTY_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Property</em>' class.
@@ -1063,6 +1089,170 @@ public interface ModelPackage extends EPackage {
 	int PROPERTY_OPERATION_COUNT = MODEL_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.AttributeImpl <em>Attribute</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see br.ufes.inf.nemo.ontol.model.impl.AttributeImpl
+	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getAttribute()
+	 * @generated
+	 */
+	int ATTRIBUTE = 12;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__NAME = PROPERTY__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Lower Bound</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__LOWER_BOUND = PROPERTY__LOWER_BOUND;
+
+	/**
+	 * The feature id for the '<em><b>Upper Bound</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__UPPER_BOUND = PROPERTY__UPPER_BOUND;
+
+	/**
+	 * The feature id for the '<em><b>Property Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__PROPERTY_CLASS = PROPERTY__PROPERTY_CLASS;
+
+	/**
+	 * The feature id for the '<em><b>Subset Of</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__SUBSET_OF = PROPERTY_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Opposite To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__OPPOSITE_TO = PROPERTY_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_FEATURE_COUNT = PROPERTY_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_OPERATION_COUNT = PROPERTY_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.ReferenceImpl <em>Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see br.ufes.inf.nemo.ontol.model.impl.ReferenceImpl
+	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getReference()
+	 * @generated
+	 */
+	int REFERENCE = 13;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__NAME = PROPERTY__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Lower Bound</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__LOWER_BOUND = PROPERTY__LOWER_BOUND;
+
+	/**
+	 * The feature id for the '<em><b>Upper Bound</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__UPPER_BOUND = PROPERTY__UPPER_BOUND;
+
+	/**
+	 * The feature id for the '<em><b>Property Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__PROPERTY_CLASS = PROPERTY__PROPERTY_CLASS;
+
+	/**
+	 * The feature id for the '<em><b>Subset Of</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__SUBSET_OF = PROPERTY_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Opposite To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__OPPOSITE_TO = PROPERTY_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_FEATURE_COUNT = PROPERTY_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_OPERATION_COUNT = PROPERTY_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.PropertyAssignmentImpl <em>Property Assignment</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1070,34 +1260,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getPropertyAssignment()
 	 * @generated
 	 */
-	int PROPERTY_ASSIGNMENT = 13;
-
-	/**
-	 * The feature id for the '<em><b>Property</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_ASSIGNMENT__PROPERTY = MODEL_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Assignment</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_ASSIGNMENT__ASSIGNMENT = MODEL_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Class Container</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_ASSIGNMENT__CLASS_CONTAINER = MODEL_ELEMENT_FEATURE_COUNT + 2;
+	int PROPERTY_ASSIGNMENT = 14;
 
 	/**
 	 * The number of structural features of the '<em>Property Assignment</em>' class.
@@ -1106,7 +1269,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_ASSIGNMENT_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 3;
+	int PROPERTY_ASSIGNMENT_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Property Assignment</em>' class.
@@ -1118,6 +1281,98 @@ public interface ModelPackage extends EPackage {
 	int PROPERTY_ASSIGNMENT_OPERATION_COUNT = MODEL_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.AttributeAssignmentImpl <em>Attribute Assignment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see br.ufes.inf.nemo.ontol.model.impl.AttributeAssignmentImpl
+	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getAttributeAssignment()
+	 * @generated
+	 */
+	int ATTRIBUTE_ASSIGNMENT = 15;
+
+	/**
+	 * The feature id for the '<em><b>Attribute</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_ASSIGNMENT__ATTRIBUTE = PROPERTY_ASSIGNMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Assignments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_ASSIGNMENT__ASSIGNMENTS = PROPERTY_ASSIGNMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Attribute Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_ASSIGNMENT_FEATURE_COUNT = PROPERTY_ASSIGNMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Attribute Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_ASSIGNMENT_OPERATION_COUNT = PROPERTY_ASSIGNMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.ReferenceAssignmentImpl <em>Reference Assignment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see br.ufes.inf.nemo.ontol.model.impl.ReferenceAssignmentImpl
+	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getReferenceAssignment()
+	 * @generated
+	 */
+	int REFERENCE_ASSIGNMENT = 16;
+
+	/**
+	 * The feature id for the '<em><b>Reference</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_ASSIGNMENT__REFERENCE = PROPERTY_ASSIGNMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Assignments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_ASSIGNMENT__ASSIGNMENTS = PROPERTY_ASSIGNMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Reference Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_ASSIGNMENT_FEATURE_COUNT = PROPERTY_ASSIGNMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Reference Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_ASSIGNMENT_OPERATION_COUNT = PROPERTY_ASSIGNMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.ValueImpl <em>Value</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1125,7 +1380,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getValue()
 	 * @generated
 	 */
-	int VALUE = 14;
+	int VALUE = 17;
 
 	/**
 	 * The number of structural features of the '<em>Value</em>' class.
@@ -1137,13 +1392,13 @@ public interface ModelPackage extends EPackage {
 	int VALUE_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Get Number</em>' operation.
+	 * The operation id for the '<em>Get NAssignments</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VALUE___GET_NUMBER = MODEL_ELEMENT_OPERATION_COUNT + 0;
+	int VALUE___GET_NASSIGNMENTS = MODEL_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Value</em>' class.
@@ -1162,7 +1417,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getReferenceValue()
 	 * @generated
 	 */
-	int REFERENCE_VALUE = 15;
+	int REFERENCE_VALUE = 18;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' reference.
@@ -1183,13 +1438,13 @@ public interface ModelPackage extends EPackage {
 	int REFERENCE_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Get Number</em>' operation.
+	 * The operation id for the '<em>Get NAssignments</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE_VALUE___GET_NUMBER = VALUE_OPERATION_COUNT + 0;
+	int REFERENCE_VALUE___GET_NASSIGNMENTS = VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Reference Value</em>' class.
@@ -1201,50 +1456,41 @@ public interface ModelPackage extends EPackage {
 	int REFERENCE_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.ListValueImpl <em>List Value</em>}' class.
+	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.DataValueImpl <em>Data Value</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see br.ufes.inf.nemo.ontol.model.impl.ListValueImpl
-	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getListValue()
+	 * @see br.ufes.inf.nemo.ontol.model.impl.DataValueImpl
+	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getDataValue()
 	 * @generated
 	 */
-	int LIST_VALUE = 16;
+	int DATA_VALUE = 19;
 
 	/**
-	 * The feature id for the '<em><b>Value</b></em>' containment reference list.
+	 * The number of structural features of the '<em>Data Value</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_VALUE__VALUE = VALUE_FEATURE_COUNT + 0;
+	int DATA_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>List Value</em>' class.
+	 * The operation id for the '<em>Get NAssignments</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
+	int DATA_VALUE___GET_NASSIGNMENTS = VALUE_OPERATION_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Get Number</em>' operation.
+	 * The number of operations of the '<em>Data Value</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_VALUE___GET_NUMBER = VALUE_OPERATION_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>List Value</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIST_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 1;
+	int DATA_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.StringValueImpl <em>String Value</em>}' class.
@@ -1254,7 +1500,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getStringValue()
 	 * @generated
 	 */
-	int STRING_VALUE = 17;
+	int STRING_VALUE = 20;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1275,13 +1521,13 @@ public interface ModelPackage extends EPackage {
 	int STRING_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Get Number</em>' operation.
+	 * The operation id for the '<em>Get NAssignments</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STRING_VALUE___GET_NUMBER = VALUE_OPERATION_COUNT + 0;
+	int STRING_VALUE___GET_NASSIGNMENTS = VALUE___GET_NASSIGNMENTS;
 
 	/**
 	 * The number of operations of the '<em>String Value</em>' class.
@@ -1290,7 +1536,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRING_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 1;
+	int STRING_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.NumberValueImpl <em>Number Value</em>}' class.
@@ -1300,7 +1546,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getNumberValue()
 	 * @generated
 	 */
-	int NUMBER_VALUE = 18;
+	int NUMBER_VALUE = 21;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1321,13 +1567,13 @@ public interface ModelPackage extends EPackage {
 	int NUMBER_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Get Number</em>' operation.
+	 * The operation id for the '<em>Get NAssignments</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NUMBER_VALUE___GET_NUMBER = VALUE_OPERATION_COUNT + 0;
+	int NUMBER_VALUE___GET_NASSIGNMENTS = VALUE___GET_NASSIGNMENTS;
 
 	/**
 	 * The number of operations of the '<em>Number Value</em>' class.
@@ -1336,7 +1582,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NUMBER_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 1;
+	int NUMBER_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.BooleanValueImpl <em>Boolean Value</em>}' class.
@@ -1346,7 +1592,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getBooleanValue()
 	 * @generated
 	 */
-	int BOOLEAN_VALUE = 19;
+	int BOOLEAN_VALUE = 22;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1367,13 +1613,13 @@ public interface ModelPackage extends EPackage {
 	int BOOLEAN_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Get Number</em>' operation.
+	 * The operation id for the '<em>Get NAssignments</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOOLEAN_VALUE___GET_NUMBER = VALUE_OPERATION_COUNT + 0;
+	int BOOLEAN_VALUE___GET_NASSIGNMENTS = VALUE___GET_NASSIGNMENTS;
 
 	/**
 	 * The number of operations of the '<em>Boolean Value</em>' class.
@@ -1382,7 +1628,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BOOLEAN_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 1;
+	int BOOLEAN_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.NoneValueImpl <em>None Value</em>}' class.
@@ -1392,7 +1638,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getNoneValue()
 	 * @generated
 	 */
-	int NONE_VALUE = 20;
+	int NONE_VALUE = 23;
 
 	/**
 	 * The number of structural features of the '<em>None Value</em>' class.
@@ -1404,13 +1650,22 @@ public interface ModelPackage extends EPackage {
 	int NONE_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Get Number</em>' operation.
+	 * The operation id for the '<em>Get Value</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NONE_VALUE___GET_NUMBER = VALUE_OPERATION_COUNT + 0;
+	int NONE_VALUE___GET_VALUE = VALUE_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Get NAssignments</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NONE_VALUE___GET_NASSIGNMENTS = VALUE_OPERATION_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>None Value</em>' class.
@@ -1419,7 +1674,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NONE_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 1;
+	int NONE_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.CategorizationType <em>Categorization Type</em>}' enum.
@@ -1429,7 +1684,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getCategorizationType()
 	 * @generated
 	 */
-	int CATEGORIZATION_TYPE = 21;
+	int CATEGORIZATION_TYPE = 24;
 
 
 	/**
@@ -1517,26 +1772,37 @@ public interface ModelPackage extends EPackage {
 	EAttribute getEntityDeclaration_Name();
 
 	/**
-	 * Returns the meta object for the reference list '{@link br.ufes.inf.nemo.ontol.model.EntityDeclaration#getFixedTypes <em>Fixed Types</em>}'.
+	 * Returns the meta object for the reference list '{@link br.ufes.inf.nemo.ontol.model.EntityDeclaration#getInstantiatedClasses <em>Instantiated Classes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Fixed Types</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.EntityDeclaration#getFixedTypes()
+	 * @return the meta object for the reference list '<em>Instantiated Classes</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.EntityDeclaration#getInstantiatedClasses()
 	 * @see #getEntityDeclaration()
 	 * @generated
 	 */
-	EReference getEntityDeclaration_FixedTypes();
+	EReference getEntityDeclaration_InstantiatedClasses();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link br.ufes.inf.nemo.ontol.model.EntityDeclaration#getPropAssigns <em>Prop Assigns</em>}'.
+	 * Returns the meta object for the containment reference list '{@link br.ufes.inf.nemo.ontol.model.EntityDeclaration#getAttAssignments <em>Att Assignments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Prop Assigns</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.EntityDeclaration#getPropAssigns()
+	 * @return the meta object for the containment reference list '<em>Att Assignments</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.EntityDeclaration#getAttAssignments()
 	 * @see #getEntityDeclaration()
 	 * @generated
 	 */
-	EReference getEntityDeclaration_PropAssigns();
+	EReference getEntityDeclaration_AttAssignments();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link br.ufes.inf.nemo.ontol.model.EntityDeclaration#getRefAssignments <em>Ref Assignments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Ref Assignments</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.EntityDeclaration#getRefAssignments()
+	 * @see #getEntityDeclaration()
+	 * @generated
+	 */
+	EReference getEntityDeclaration_RefAssignments();
 
 	/**
 	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.Individual <em>Individual</em>}'.
@@ -1549,100 +1815,101 @@ public interface ModelPackage extends EPackage {
 	EClass getIndividual();
 
 	/**
-	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.Set <em>Set</em>}'.
+	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.OntoLClass <em>Onto LClass</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Set</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.Set
+	 * @return the meta object for class '<em>Onto LClass</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.OntoLClass
 	 * @generated
 	 */
-	EClass getSet();
+	EClass getOntoLClass();
 
 	/**
-	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.Class <em>Class</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Class</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.Class
-	 * @generated
-	 */
-	EClass getClass_();
-
-	/**
-	 * Returns the meta object for the reference list '{@link br.ufes.inf.nemo.ontol.model.Class#getSuperClasses <em>Super Classes</em>}'.
+	 * Returns the meta object for the reference list '{@link br.ufes.inf.nemo.ontol.model.OntoLClass#getSuperClasses <em>Super Classes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Super Classes</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.Class#getSuperClasses()
-	 * @see #getClass_()
+	 * @see br.ufes.inf.nemo.ontol.model.OntoLClass#getSuperClasses()
+	 * @see #getOntoLClass()
 	 * @generated
 	 */
-	EReference getClass_SuperClasses();
+	EReference getOntoLClass_SuperClasses();
 
 	/**
-	 * Returns the meta object for the reference '{@link br.ufes.inf.nemo.ontol.model.Class#getPowertypeOf <em>Powertype Of</em>}'.
+	 * Returns the meta object for the reference '{@link br.ufes.inf.nemo.ontol.model.OntoLClass#getPowertypeOf <em>Powertype Of</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Powertype Of</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.Class#getPowertypeOf()
-	 * @see #getClass_()
+	 * @see br.ufes.inf.nemo.ontol.model.OntoLClass#getPowertypeOf()
+	 * @see #getOntoLClass()
 	 * @generated
 	 */
-	EReference getClass_PowertypeOf();
+	EReference getOntoLClass_PowertypeOf();
 
 	/**
-	 * Returns the meta object for the reference '{@link br.ufes.inf.nemo.ontol.model.Class#getBasetype <em>Basetype</em>}'.
+	 * Returns the meta object for the reference '{@link br.ufes.inf.nemo.ontol.model.OntoLClass#getBasetype <em>Basetype</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Basetype</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.Class#getBasetype()
-	 * @see #getClass_()
+	 * @see br.ufes.inf.nemo.ontol.model.OntoLClass#getBasetype()
+	 * @see #getOntoLClass()
 	 * @generated
 	 */
-	EReference getClass_Basetype();
+	EReference getOntoLClass_Basetype();
 
 	/**
-	 * Returns the meta object for the reference list '{@link br.ufes.inf.nemo.ontol.model.Class#getSubordinators <em>Subordinators</em>}'.
+	 * Returns the meta object for the reference list '{@link br.ufes.inf.nemo.ontol.model.OntoLClass#getSubordinators <em>Subordinators</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Subordinators</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.Class#getSubordinators()
-	 * @see #getClass_()
+	 * @see br.ufes.inf.nemo.ontol.model.OntoLClass#getSubordinators()
+	 * @see #getOntoLClass()
 	 * @generated
 	 */
-	EReference getClass_Subordinators();
+	EReference getOntoLClass_Subordinators();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link br.ufes.inf.nemo.ontol.model.Class#getProps <em>Props</em>}'.
+	 * Returns the meta object for the containment reference list '{@link br.ufes.inf.nemo.ontol.model.OntoLClass#getAttributes <em>Attributes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Props</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.Class#getProps()
-	 * @see #getClass_()
+	 * @return the meta object for the containment reference list '<em>Attributes</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.OntoLClass#getAttributes()
+	 * @see #getOntoLClass()
 	 * @generated
 	 */
-	EReference getClass_Props();
+	EReference getOntoLClass_Attributes();
 
 	/**
-	 * Returns the meta object for the attribute '{@link br.ufes.inf.nemo.ontol.model.Class#getCatType <em>Cat Type</em>}'.
+	 * Returns the meta object for the containment reference list '{@link br.ufes.inf.nemo.ontol.model.OntoLClass#getReferences <em>References</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Cat Type</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.Class#getCatType()
-	 * @see #getClass_()
+	 * @return the meta object for the containment reference list '<em>References</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.OntoLClass#getReferences()
+	 * @see #getOntoLClass()
 	 * @generated
 	 */
-	EAttribute getClass_CatType();
+	EReference getOntoLClass_References();
 
 	/**
-	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.WClass <em>WClass</em>}'.
+	 * Returns the meta object for the attribute '{@link br.ufes.inf.nemo.ontol.model.OntoLClass#getCategorizationType <em>Categorization Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>WClass</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.WClass
+	 * @return the meta object for the attribute '<em>Categorization Type</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.OntoLClass#getCategorizationType()
+	 * @see #getOntoLClass()
 	 * @generated
 	 */
-	EClass getWClass();
+	EAttribute getOntoLClass_CategorizationType();
+
+	/**
+	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.OrderlessClass <em>Orderless Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Orderless Class</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.OrderlessClass
+	 * @generated
+	 */
+	EClass getOrderlessClass();
 
 	/**
 	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.OrderedClass <em>Ordered Class</em>}'.
@@ -1805,48 +2072,79 @@ public interface ModelPackage extends EPackage {
 	EAttribute getProperty_UpperBound();
 
 	/**
-	 * Returns the meta object for the reference '{@link br.ufes.inf.nemo.ontol.model.Property#getPropertyType <em>Property Type</em>}'.
+	 * Returns the meta object for the reference '{@link br.ufes.inf.nemo.ontol.model.Property#getPropertyClass <em>Property Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Property Type</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.Property#getPropertyType()
+	 * @return the meta object for the reference '<em>Property Class</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.Property#getPropertyClass()
 	 * @see #getProperty()
 	 * @generated
 	 */
-	EReference getProperty_PropertyType();
+	EReference getProperty_PropertyClass();
 
 	/**
-	 * Returns the meta object for the reference list '{@link br.ufes.inf.nemo.ontol.model.Property#getSubsetOf <em>Subset Of</em>}'.
+	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.Attribute <em>Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Attribute</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.Attribute
+	 * @generated
+	 */
+	EClass getAttribute();
+
+	/**
+	 * Returns the meta object for the reference list '{@link br.ufes.inf.nemo.ontol.model.Attribute#getSubsetOf <em>Subset Of</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Subset Of</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.Property#getSubsetOf()
-	 * @see #getProperty()
+	 * @see br.ufes.inf.nemo.ontol.model.Attribute#getSubsetOf()
+	 * @see #getAttribute()
 	 * @generated
 	 */
-	EReference getProperty_SubsetOf();
+	EReference getAttribute_SubsetOf();
 
 	/**
-	 * Returns the meta object for the reference '{@link br.ufes.inf.nemo.ontol.model.Property#getOppositeTo <em>Opposite To</em>}'.
+	 * Returns the meta object for the reference '{@link br.ufes.inf.nemo.ontol.model.Attribute#getOppositeTo <em>Opposite To</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Opposite To</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.Property#getOppositeTo()
-	 * @see #getProperty()
+	 * @see br.ufes.inf.nemo.ontol.model.Attribute#getOppositeTo()
+	 * @see #getAttribute()
 	 * @generated
 	 */
-	EReference getProperty_OppositeTo();
+	EReference getAttribute_OppositeTo();
 
 	/**
-	 * Returns the meta object for the container reference '{@link br.ufes.inf.nemo.ontol.model.Property#getClassContainer <em>Class Container</em>}'.
+	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.Reference <em>Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Class Container</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.Property#getClassContainer()
-	 * @see #getProperty()
+	 * @return the meta object for class '<em>Reference</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.Reference
 	 * @generated
 	 */
-	EReference getProperty_ClassContainer();
+	EClass getReference();
+
+	/**
+	 * Returns the meta object for the reference list '{@link br.ufes.inf.nemo.ontol.model.Reference#getSubsetOf <em>Subset Of</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Subset Of</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.Reference#getSubsetOf()
+	 * @see #getReference()
+	 * @generated
+	 */
+	EReference getReference_SubsetOf();
+
+	/**
+	 * Returns the meta object for the reference '{@link br.ufes.inf.nemo.ontol.model.Reference#getOppositeTo <em>Opposite To</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Opposite To</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.Reference#getOppositeTo()
+	 * @see #getReference()
+	 * @generated
+	 */
+	EReference getReference_OppositeTo();
 
 	/**
 	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.PropertyAssignment <em>Property Assignment</em>}'.
@@ -1859,37 +2157,68 @@ public interface ModelPackage extends EPackage {
 	EClass getPropertyAssignment();
 
 	/**
-	 * Returns the meta object for the reference '{@link br.ufes.inf.nemo.ontol.model.PropertyAssignment#getProperty <em>Property</em>}'.
+	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.AttributeAssignment <em>Attribute Assignment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Property</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.PropertyAssignment#getProperty()
-	 * @see #getPropertyAssignment()
+	 * @return the meta object for class '<em>Attribute Assignment</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.AttributeAssignment
 	 * @generated
 	 */
-	EReference getPropertyAssignment_Property();
+	EClass getAttributeAssignment();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link br.ufes.inf.nemo.ontol.model.PropertyAssignment#getAssignment <em>Assignment</em>}'.
+	 * Returns the meta object for the reference '{@link br.ufes.inf.nemo.ontol.model.AttributeAssignment#getAttribute <em>Attribute</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Assignment</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.PropertyAssignment#getAssignment()
-	 * @see #getPropertyAssignment()
+	 * @return the meta object for the reference '<em>Attribute</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.AttributeAssignment#getAttribute()
+	 * @see #getAttributeAssignment()
 	 * @generated
 	 */
-	EReference getPropertyAssignment_Assignment();
+	EReference getAttributeAssignment_Attribute();
 
 	/**
-	 * Returns the meta object for the container reference '{@link br.ufes.inf.nemo.ontol.model.PropertyAssignment#getClassContainer <em>Class Container</em>}'.
+	 * Returns the meta object for the containment reference list '{@link br.ufes.inf.nemo.ontol.model.AttributeAssignment#getAssignments <em>Assignments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Class Container</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.PropertyAssignment#getClassContainer()
-	 * @see #getPropertyAssignment()
+	 * @return the meta object for the containment reference list '<em>Assignments</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.AttributeAssignment#getAssignments()
+	 * @see #getAttributeAssignment()
 	 * @generated
 	 */
-	EReference getPropertyAssignment_ClassContainer();
+	EReference getAttributeAssignment_Assignments();
+
+	/**
+	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.ReferenceAssignment <em>Reference Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Reference Assignment</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.ReferenceAssignment
+	 * @generated
+	 */
+	EClass getReferenceAssignment();
+
+	/**
+	 * Returns the meta object for the reference '{@link br.ufes.inf.nemo.ontol.model.ReferenceAssignment#getReference <em>Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Reference</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.ReferenceAssignment#getReference()
+	 * @see #getReferenceAssignment()
+	 * @generated
+	 */
+	EReference getReferenceAssignment_Reference();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link br.ufes.inf.nemo.ontol.model.ReferenceAssignment#getAssignments <em>Assignments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Assignments</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.ReferenceAssignment#getAssignments()
+	 * @see #getReferenceAssignment()
+	 * @generated
+	 */
+	EReference getReferenceAssignment_Assignments();
 
 	/**
 	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.Value <em>Value</em>}'.
@@ -1902,14 +2231,14 @@ public interface ModelPackage extends EPackage {
 	EClass getValue();
 
 	/**
-	 * Returns the meta object for the '{@link br.ufes.inf.nemo.ontol.model.Value#getNumber() <em>Get Number</em>}' operation.
+	 * Returns the meta object for the '{@link br.ufes.inf.nemo.ontol.model.Value#getNAssignments() <em>Get NAssignments</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Number</em>' operation.
-	 * @see br.ufes.inf.nemo.ontol.model.Value#getNumber()
+	 * @return the meta object for the '<em>Get NAssignments</em>' operation.
+	 * @see br.ufes.inf.nemo.ontol.model.Value#getNAssignments()
 	 * @generated
 	 */
-	EOperation getValue__GetNumber();
+	EOperation getValue__GetNAssignments();
 
 	/**
 	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.ReferenceValue <em>Reference Value</em>}'.
@@ -1933,45 +2262,34 @@ public interface ModelPackage extends EPackage {
 	EReference getReferenceValue_Value();
 
 	/**
-	 * Returns the meta object for the '{@link br.ufes.inf.nemo.ontol.model.ReferenceValue#getNumber() <em>Get Number</em>}' operation.
+	 * Returns the meta object for the '{@link br.ufes.inf.nemo.ontol.model.ReferenceValue#getNAssignments() <em>Get NAssignments</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Number</em>' operation.
-	 * @see br.ufes.inf.nemo.ontol.model.ReferenceValue#getNumber()
+	 * @return the meta object for the '<em>Get NAssignments</em>' operation.
+	 * @see br.ufes.inf.nemo.ontol.model.ReferenceValue#getNAssignments()
 	 * @generated
 	 */
-	EOperation getReferenceValue__GetNumber();
+	EOperation getReferenceValue__GetNAssignments();
 
 	/**
-	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.ListValue <em>List Value</em>}'.
+	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.DataValue <em>Data Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>List Value</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.ListValue
+	 * @return the meta object for class '<em>Data Value</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.DataValue
 	 * @generated
 	 */
-	EClass getListValue();
+	EClass getDataValue();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link br.ufes.inf.nemo.ontol.model.ListValue#getValue <em>Value</em>}'.
+	 * Returns the meta object for the '{@link br.ufes.inf.nemo.ontol.model.DataValue#getNAssignments() <em>Get NAssignments</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Value</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.ListValue#getValue()
-	 * @see #getListValue()
+	 * @return the meta object for the '<em>Get NAssignments</em>' operation.
+	 * @see br.ufes.inf.nemo.ontol.model.DataValue#getNAssignments()
 	 * @generated
 	 */
-	EReference getListValue_Value();
-
-	/**
-	 * Returns the meta object for the '{@link br.ufes.inf.nemo.ontol.model.ListValue#getNumber() <em>Get Number</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Number</em>' operation.
-	 * @see br.ufes.inf.nemo.ontol.model.ListValue#getNumber()
-	 * @generated
-	 */
-	EOperation getListValue__GetNumber();
+	EOperation getDataValue__GetNAssignments();
 
 	/**
 	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.StringValue <em>String Value</em>}'.
@@ -1995,16 +2313,6 @@ public interface ModelPackage extends EPackage {
 	EAttribute getStringValue_Value();
 
 	/**
-	 * Returns the meta object for the '{@link br.ufes.inf.nemo.ontol.model.StringValue#getNumber() <em>Get Number</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Number</em>' operation.
-	 * @see br.ufes.inf.nemo.ontol.model.StringValue#getNumber()
-	 * @generated
-	 */
-	EOperation getStringValue__GetNumber();
-
-	/**
 	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.NumberValue <em>Number Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2024,16 +2332,6 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getNumberValue_Value();
-
-	/**
-	 * Returns the meta object for the '{@link br.ufes.inf.nemo.ontol.model.NumberValue#getNumber() <em>Get Number</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Number</em>' operation.
-	 * @see br.ufes.inf.nemo.ontol.model.NumberValue#getNumber()
-	 * @generated
-	 */
-	EOperation getNumberValue__GetNumber();
 
 	/**
 	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.BooleanValue <em>Boolean Value</em>}'.
@@ -2057,16 +2355,6 @@ public interface ModelPackage extends EPackage {
 	EAttribute getBooleanValue_Value();
 
 	/**
-	 * Returns the meta object for the '{@link br.ufes.inf.nemo.ontol.model.BooleanValue#getNumber() <em>Get Number</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Number</em>' operation.
-	 * @see br.ufes.inf.nemo.ontol.model.BooleanValue#getNumber()
-	 * @generated
-	 */
-	EOperation getBooleanValue__GetNumber();
-
-	/**
 	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.NoneValue <em>None Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2077,14 +2365,24 @@ public interface ModelPackage extends EPackage {
 	EClass getNoneValue();
 
 	/**
-	 * Returns the meta object for the '{@link br.ufes.inf.nemo.ontol.model.NoneValue#getNumber() <em>Get Number</em>}' operation.
+	 * Returns the meta object for the '{@link br.ufes.inf.nemo.ontol.model.NoneValue#getValue() <em>Get Value</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Number</em>' operation.
-	 * @see br.ufes.inf.nemo.ontol.model.NoneValue#getNumber()
+	 * @return the meta object for the '<em>Get Value</em>' operation.
+	 * @see br.ufes.inf.nemo.ontol.model.NoneValue#getValue()
 	 * @generated
 	 */
-	EOperation getNoneValue__GetNumber();
+	EOperation getNoneValue__GetValue();
+
+	/**
+	 * Returns the meta object for the '{@link br.ufes.inf.nemo.ontol.model.NoneValue#getNAssignments() <em>Get NAssignments</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get NAssignments</em>' operation.
+	 * @see br.ufes.inf.nemo.ontol.model.NoneValue#getNAssignments()
+	 * @generated
+	 */
+	EOperation getNoneValue__GetNAssignments();
 
 	/**
 	 * Returns the meta object for enum '{@link br.ufes.inf.nemo.ontol.model.CategorizationType <em>Categorization Type</em>}'.
@@ -2192,20 +2490,28 @@ public interface ModelPackage extends EPackage {
 		EAttribute ENTITY_DECLARATION__NAME = eINSTANCE.getEntityDeclaration_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Fixed Types</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Instantiated Classes</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ENTITY_DECLARATION__FIXED_TYPES = eINSTANCE.getEntityDeclaration_FixedTypes();
+		EReference ENTITY_DECLARATION__INSTANTIATED_CLASSES = eINSTANCE.getEntityDeclaration_InstantiatedClasses();
 
 		/**
-		 * The meta object literal for the '<em><b>Prop Assigns</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Att Assignments</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ENTITY_DECLARATION__PROP_ASSIGNS = eINSTANCE.getEntityDeclaration_PropAssigns();
+		EReference ENTITY_DECLARATION__ATT_ASSIGNMENTS = eINSTANCE.getEntityDeclaration_AttAssignments();
+
+		/**
+		 * The meta object literal for the '<em><b>Ref Assignments</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENTITY_DECLARATION__REF_ASSIGNMENTS = eINSTANCE.getEntityDeclaration_RefAssignments();
 
 		/**
 		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.IndividualImpl <em>Individual</em>}' class.
@@ -2218,24 +2524,14 @@ public interface ModelPackage extends EPackage {
 		EClass INDIVIDUAL = eINSTANCE.getIndividual();
 
 		/**
-		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.SetImpl <em>Set</em>}' class.
+		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.OntoLClassImpl <em>Onto LClass</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see br.ufes.inf.nemo.ontol.model.impl.SetImpl
-		 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getSet()
+		 * @see br.ufes.inf.nemo.ontol.model.impl.OntoLClassImpl
+		 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getOntoLClass()
 		 * @generated
 		 */
-		EClass SET = eINSTANCE.getSet();
-
-		/**
-		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.ClassImpl <em>Class</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see br.ufes.inf.nemo.ontol.model.impl.ClassImpl
-		 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getClass_()
-		 * @generated
-		 */
-		EClass CLASS = eINSTANCE.getClass_();
+		EClass ONTO_LCLASS = eINSTANCE.getOntoLClass();
 
 		/**
 		 * The meta object literal for the '<em><b>Super Classes</b></em>' reference list feature.
@@ -2243,7 +2539,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASS__SUPER_CLASSES = eINSTANCE.getClass_SuperClasses();
+		EReference ONTO_LCLASS__SUPER_CLASSES = eINSTANCE.getOntoLClass_SuperClasses();
 
 		/**
 		 * The meta object literal for the '<em><b>Powertype Of</b></em>' reference feature.
@@ -2251,7 +2547,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASS__POWERTYPE_OF = eINSTANCE.getClass_PowertypeOf();
+		EReference ONTO_LCLASS__POWERTYPE_OF = eINSTANCE.getOntoLClass_PowertypeOf();
 
 		/**
 		 * The meta object literal for the '<em><b>Basetype</b></em>' reference feature.
@@ -2259,7 +2555,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASS__BASETYPE = eINSTANCE.getClass_Basetype();
+		EReference ONTO_LCLASS__BASETYPE = eINSTANCE.getOntoLClass_Basetype();
 
 		/**
 		 * The meta object literal for the '<em><b>Subordinators</b></em>' reference list feature.
@@ -2267,33 +2563,41 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASS__SUBORDINATORS = eINSTANCE.getClass_Subordinators();
+		EReference ONTO_LCLASS__SUBORDINATORS = eINSTANCE.getOntoLClass_Subordinators();
 
 		/**
-		 * The meta object literal for the '<em><b>Props</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASS__PROPS = eINSTANCE.getClass_Props();
+		EReference ONTO_LCLASS__ATTRIBUTES = eINSTANCE.getOntoLClass_Attributes();
 
 		/**
-		 * The meta object literal for the '<em><b>Cat Type</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>References</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CLASS__CAT_TYPE = eINSTANCE.getClass_CatType();
+		EReference ONTO_LCLASS__REFERENCES = eINSTANCE.getOntoLClass_References();
 
 		/**
-		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.WClassImpl <em>WClass</em>}' class.
+		 * The meta object literal for the '<em><b>Categorization Type</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see br.ufes.inf.nemo.ontol.model.impl.WClassImpl
-		 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getWClass()
 		 * @generated
 		 */
-		EClass WCLASS = eINSTANCE.getWClass();
+		EAttribute ONTO_LCLASS__CATEGORIZATION_TYPE = eINSTANCE.getOntoLClass_CategorizationType();
+
+		/**
+		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.OrderlessClassImpl <em>Orderless Class</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see br.ufes.inf.nemo.ontol.model.impl.OrderlessClassImpl
+		 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getOrderlessClass()
+		 * @generated
+		 */
+		EClass ORDERLESS_CLASS = eINSTANCE.getOrderlessClass();
 
 		/**
 		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.OrderedClassImpl <em>Ordered Class</em>}' class.
@@ -2426,12 +2730,22 @@ public interface ModelPackage extends EPackage {
 		EAttribute PROPERTY__UPPER_BOUND = eINSTANCE.getProperty_UpperBound();
 
 		/**
-		 * The meta object literal for the '<em><b>Property Type</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Property Class</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROPERTY__PROPERTY_TYPE = eINSTANCE.getProperty_PropertyType();
+		EReference PROPERTY__PROPERTY_CLASS = eINSTANCE.getProperty_PropertyClass();
+
+		/**
+		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.AttributeImpl <em>Attribute</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see br.ufes.inf.nemo.ontol.model.impl.AttributeImpl
+		 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getAttribute()
+		 * @generated
+		 */
+		EClass ATTRIBUTE = eINSTANCE.getAttribute();
 
 		/**
 		 * The meta object literal for the '<em><b>Subset Of</b></em>' reference list feature.
@@ -2439,7 +2753,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROPERTY__SUBSET_OF = eINSTANCE.getProperty_SubsetOf();
+		EReference ATTRIBUTE__SUBSET_OF = eINSTANCE.getAttribute_SubsetOf();
 
 		/**
 		 * The meta object literal for the '<em><b>Opposite To</b></em>' reference feature.
@@ -2447,15 +2761,33 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROPERTY__OPPOSITE_TO = eINSTANCE.getProperty_OppositeTo();
+		EReference ATTRIBUTE__OPPOSITE_TO = eINSTANCE.getAttribute_OppositeTo();
 
 		/**
-		 * The meta object literal for the '<em><b>Class Container</b></em>' container reference feature.
+		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.ReferenceImpl <em>Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see br.ufes.inf.nemo.ontol.model.impl.ReferenceImpl
+		 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getReference()
+		 * @generated
+		 */
+		EClass REFERENCE = eINSTANCE.getReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Subset Of</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROPERTY__CLASS_CONTAINER = eINSTANCE.getProperty_ClassContainer();
+		EReference REFERENCE__SUBSET_OF = eINSTANCE.getReference_SubsetOf();
+
+		/**
+		 * The meta object literal for the '<em><b>Opposite To</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REFERENCE__OPPOSITE_TO = eINSTANCE.getReference_OppositeTo();
 
 		/**
 		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.PropertyAssignmentImpl <em>Property Assignment</em>}' class.
@@ -2468,28 +2800,56 @@ public interface ModelPackage extends EPackage {
 		EClass PROPERTY_ASSIGNMENT = eINSTANCE.getPropertyAssignment();
 
 		/**
-		 * The meta object literal for the '<em><b>Property</b></em>' reference feature.
+		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.AttributeAssignmentImpl <em>Attribute Assignment</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @see br.ufes.inf.nemo.ontol.model.impl.AttributeAssignmentImpl
+		 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getAttributeAssignment()
 		 * @generated
 		 */
-		EReference PROPERTY_ASSIGNMENT__PROPERTY = eINSTANCE.getPropertyAssignment_Property();
+		EClass ATTRIBUTE_ASSIGNMENT = eINSTANCE.getAttributeAssignment();
 
 		/**
-		 * The meta object literal for the '<em><b>Assignment</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Attribute</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROPERTY_ASSIGNMENT__ASSIGNMENT = eINSTANCE.getPropertyAssignment_Assignment();
+		EReference ATTRIBUTE_ASSIGNMENT__ATTRIBUTE = eINSTANCE.getAttributeAssignment_Attribute();
 
 		/**
-		 * The meta object literal for the '<em><b>Class Container</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Assignments</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROPERTY_ASSIGNMENT__CLASS_CONTAINER = eINSTANCE.getPropertyAssignment_ClassContainer();
+		EReference ATTRIBUTE_ASSIGNMENT__ASSIGNMENTS = eINSTANCE.getAttributeAssignment_Assignments();
+
+		/**
+		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.ReferenceAssignmentImpl <em>Reference Assignment</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see br.ufes.inf.nemo.ontol.model.impl.ReferenceAssignmentImpl
+		 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getReferenceAssignment()
+		 * @generated
+		 */
+		EClass REFERENCE_ASSIGNMENT = eINSTANCE.getReferenceAssignment();
+
+		/**
+		 * The meta object literal for the '<em><b>Reference</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REFERENCE_ASSIGNMENT__REFERENCE = eINSTANCE.getReferenceAssignment_Reference();
+
+		/**
+		 * The meta object literal for the '<em><b>Assignments</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REFERENCE_ASSIGNMENT__ASSIGNMENTS = eINSTANCE.getReferenceAssignment_Assignments();
 
 		/**
 		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.ValueImpl <em>Value</em>}' class.
@@ -2502,12 +2862,12 @@ public interface ModelPackage extends EPackage {
 		EClass VALUE = eINSTANCE.getValue();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Number</b></em>' operation.
+		 * The meta object literal for the '<em><b>Get NAssignments</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation VALUE___GET_NUMBER = eINSTANCE.getValue__GetNumber();
+		EOperation VALUE___GET_NASSIGNMENTS = eINSTANCE.getValue__GetNAssignments();
 
 		/**
 		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.ReferenceValueImpl <em>Reference Value</em>}' class.
@@ -2528,38 +2888,30 @@ public interface ModelPackage extends EPackage {
 		EReference REFERENCE_VALUE__VALUE = eINSTANCE.getReferenceValue_Value();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Number</b></em>' operation.
+		 * The meta object literal for the '<em><b>Get NAssignments</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation REFERENCE_VALUE___GET_NUMBER = eINSTANCE.getReferenceValue__GetNumber();
+		EOperation REFERENCE_VALUE___GET_NASSIGNMENTS = eINSTANCE.getReferenceValue__GetNAssignments();
 
 		/**
-		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.ListValueImpl <em>List Value</em>}' class.
+		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.DataValueImpl <em>Data Value</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see br.ufes.inf.nemo.ontol.model.impl.ListValueImpl
-		 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getListValue()
+		 * @see br.ufes.inf.nemo.ontol.model.impl.DataValueImpl
+		 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getDataValue()
 		 * @generated
 		 */
-		EClass LIST_VALUE = eINSTANCE.getListValue();
+		EClass DATA_VALUE = eINSTANCE.getDataValue();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Get NAssignments</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LIST_VALUE__VALUE = eINSTANCE.getListValue_Value();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Number</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation LIST_VALUE___GET_NUMBER = eINSTANCE.getListValue__GetNumber();
+		EOperation DATA_VALUE___GET_NASSIGNMENTS = eINSTANCE.getDataValue__GetNAssignments();
 
 		/**
 		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.StringValueImpl <em>String Value</em>}' class.
@@ -2580,14 +2932,6 @@ public interface ModelPackage extends EPackage {
 		EAttribute STRING_VALUE__VALUE = eINSTANCE.getStringValue_Value();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Number</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation STRING_VALUE___GET_NUMBER = eINSTANCE.getStringValue__GetNumber();
-
-		/**
 		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.NumberValueImpl <em>Number Value</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2604,14 +2948,6 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute NUMBER_VALUE__VALUE = eINSTANCE.getNumberValue_Value();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Number</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation NUMBER_VALUE___GET_NUMBER = eINSTANCE.getNumberValue__GetNumber();
 
 		/**
 		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.BooleanValueImpl <em>Boolean Value</em>}' class.
@@ -2632,14 +2968,6 @@ public interface ModelPackage extends EPackage {
 		EAttribute BOOLEAN_VALUE__VALUE = eINSTANCE.getBooleanValue_Value();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Number</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation BOOLEAN_VALUE___GET_NUMBER = eINSTANCE.getBooleanValue__GetNumber();
-
-		/**
 		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.NoneValueImpl <em>None Value</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2650,12 +2978,20 @@ public interface ModelPackage extends EPackage {
 		EClass NONE_VALUE = eINSTANCE.getNoneValue();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Number</b></em>' operation.
+		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation NONE_VALUE___GET_NUMBER = eINSTANCE.getNoneValue__GetNumber();
+		EOperation NONE_VALUE___GET_VALUE = eINSTANCE.getNoneValue__GetValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Get NAssignments</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation NONE_VALUE___GET_NASSIGNMENTS = eINSTANCE.getNoneValue__GetNAssignments();
 
 		/**
 		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.CategorizationType <em>Categorization Type</em>}' enum.

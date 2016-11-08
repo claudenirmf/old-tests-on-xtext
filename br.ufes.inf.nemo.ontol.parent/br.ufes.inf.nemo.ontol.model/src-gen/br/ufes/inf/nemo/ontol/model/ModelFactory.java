@@ -31,15 +31,6 @@ public interface ModelFactory extends EFactory {
 	Model createModel();
 
 	/**
-	 * Returns a new object of class '<em>Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Element</em>'.
-	 * @generated
-	 */
-	ModelElement createModelElement();
-
-	/**
 	 * Returns a new object of class '<em>Import</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -47,15 +38,6 @@ public interface ModelFactory extends EFactory {
 	 * @generated
 	 */
 	Import createImport();
-
-	/**
-	 * Returns a new object of class '<em>Entity Declaration</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Entity Declaration</em>'.
-	 * @generated
-	 */
-	EntityDeclaration createEntityDeclaration();
 
 	/**
 	 * Returns a new object of class '<em>Individual</em>'.
@@ -67,40 +49,13 @@ public interface ModelFactory extends EFactory {
 	Individual createIndividual();
 
 	/**
-	 * Returns a new object of class '<em>Set</em>'.
+	 * Returns a new object of class '<em>Orderless Class</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Set</em>'.
+	 * @return a new object of class '<em>Orderless Class</em>'.
 	 * @generated
 	 */
-	Set createSet();
-
-	/**
-	 * Returns a new object of class '<em>Class</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Class</em>'.
-	 * @generated
-	 */
-	Class createClass();
-
-	/**
-	 * Returns a new object of class '<em>WClass</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>WClass</em>'.
-	 * @generated
-	 */
-	WClass createWClass();
-
-	/**
-	 * Returns a new object of class '<em>Ordered Class</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Ordered Class</em>'.
-	 * @generated
-	 */
-	OrderedClass createOrderedClass();
+	OrderlessClass createOrderlessClass();
 
 	/**
 	 * Returns a new object of class '<em>HO Class</em>'.
@@ -139,6 +94,24 @@ public interface ModelFactory extends EFactory {
 	Property createProperty();
 
 	/**
+	 * Returns a new object of class '<em>Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Attribute</em>'.
+	 * @generated
+	 */
+	Attribute createAttribute();
+
+	/**
+	 * Returns a new object of class '<em>Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Reference</em>'.
+	 * @generated
+	 */
+	Reference createReference();
+
+	/**
 	 * Returns a new object of class '<em>Property Assignment</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -148,6 +121,24 @@ public interface ModelFactory extends EFactory {
 	PropertyAssignment createPropertyAssignment();
 
 	/**
+	 * Returns a new object of class '<em>Attribute Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Attribute Assignment</em>'.
+	 * @generated
+	 */
+	AttributeAssignment createAttributeAssignment();
+
+	/**
+	 * Returns a new object of class '<em>Reference Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Reference Assignment</em>'.
+	 * @generated
+	 */
+	ReferenceAssignment createReferenceAssignment();
+
+	/**
 	 * Returns a new object of class '<em>Reference Value</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -155,15 +146,6 @@ public interface ModelFactory extends EFactory {
 	 * @generated
 	 */
 	ReferenceValue createReferenceValue();
-
-	/**
-	 * Returns a new object of class '<em>List Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>List Value</em>'.
-	 * @generated
-	 */
-	ListValue createListValue();
 
 	/**
 	 * Returns a new object of class '<em>String Value</em>'.

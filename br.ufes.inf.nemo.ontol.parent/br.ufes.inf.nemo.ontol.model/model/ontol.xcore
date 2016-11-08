@@ -2,39 +2,44 @@
 @GenModel(modelDirectory="br.ufes.inf.nemo.ontol.model/src-gen")
 package br.ufes.inf.nemo.ontol.model
 
-class Model {
+class Model
+{
 	String name
 	contains ModelElement[] elements
 }
 
-class ModelElement {}
+abstract class ModelElement {}
 
-class Import extends ModelElement {
+class Import extends ModelElement
+{
 	String importedNamespace
 }
 
-// TODO Turn this class into abstract
-class EntityDeclaration extends ModelElement {
+abstract class EntityDeclaration extends ModelElement 
+{
 	String name
-	refers Class[] fixedTypes
-	contains PropertyAssignment[] propAssigns opposite classContainer
+	refers OntoLClass[] instantiatedClasses
+//	contains PropertyAssignment[] propAssigns // opposite classContainer
+	contains AttributeAssignment[] attAssignments
+	contains ReferenceAssignment[] refAssignments
 }
 
 class Individual extends EntityDeclaration {}
 
-class Set extends Individual {}
-
-// TODO Turn this class into abstract
-class Class extends EntityDeclaration {
-	refers Class[] superClasses
-	refers Class powertypeOf
-	refers Class basetype
-	refers Class[] subordinators
-	contains Property[] props opposite classContainer
-	CategorizationType catType = "none"
+abstract class OntoLClass extends EntityDeclaration 
+{
+	refers OntoLClass[] superClasses
+	refers OntoLClass powertypeOf
+	refers OntoLClass basetype
+	refers OntoLClass[] subordinators
+//	contains Property[] props // opposite classContainer
+	contains Attribute[] attributes
+	contains Reference[] references
+	CategorizationType categorizationType = "none"
 }
 
-enum CategorizationType {
+enum CategorizationType 
+{
 	NONE as "none" = 0
 	CATEGORIZER as "categorizes" = 1
 	DISJOINT_CATEGORIZER as "disjointcategorizes" = 2
@@ -42,75 +47,100 @@ enum CategorizationType {
 	PARTITIONER as "partitions" = 4
 }
 
-class WClass extends Class {}
+class OrderlessClass extends OntoLClass {}
 
-// TODO Turn this class into abstract
-class OrderedClass extends Class {}
+abstract class OrderedClass extends OntoLClass {}
 
-class HOClass extends OrderedClass {
+class HOClass extends OrderedClass
+{
 	Integer order
 }
 
 class FOClass extends OrderedClass {}
 
-class GeneralizationSet extends ModelElement {
-	String name
+class GeneralizationSet extends ModelElement 
+{
+	String name = "anonymous"
 	boolean isDisjoint = "false"
 	boolean isComplete = "false"
-	refers Class general
-	refers Class categorizer
-	refers Class[] specifics
+	refers OntoLClass general
+	refers OntoLClass categorizer
+	refers OntoLClass[] specifics
 }
 
-// TODO Differentiate between properties and references
-class Property extends ModelElement {
+class Property extends ModelElement 
+{
 	String name
 	Integer lowerBound = "1"
 	Integer upperBound = "1"
-	refers Class propertyType
-	refers Property[] subsetOf
-	refers Property oppositeTo
-	container Class classContainer opposite props
+	refers OntoLClass propertyClass
+//	container OntoLClass classContainer opposite props
 }
 
-class PropertyAssignment extends ModelElement {
-	refers Property property
-	contains Value assignment
-	container EntityDeclaration classContainer opposite propAssigns
+class Attribute extends Property 
+{
+	refers Attribute[] subsetOf
+	refers Attribute oppositeTo
 }
 
-abstract class Value extends ModelElement {
-	op int getNumber(){ return 0 }
+class Reference extends Property 
+{
+	refers Attribute[] subsetOf
+	refers Attribute oppositeTo
 }
 
-class ReferenceValue extends Value {
+class PropertyAssignment extends ModelElement 
+{
+//	refers Property property
+//	contains Value assignment
+//	container EntityDeclaration classContainer opposite propAssigns
+}
+
+class AttributeAssignment extends PropertyAssignment
+{
+	refers Attribute attribute
+	contains DataValue[] assignments
+}
+
+class ReferenceAssignment extends PropertyAssignment
+{
+	refers Reference reference
+	contains ReferenceValue[] assignments
+}
+
+abstract class Value extends ModelElement 
+{
+	op int getNAssignments() { return 0; }
+}
+
+class ReferenceValue extends Value 
+{
 	refers EntityDeclaration value
-	op int getNumber(){ return 1 }
+	op int getNAssignments() { return 1 }
 }
 
-class ListValue extends Value {
-	contains Value[] value
-	op int getNumber(){
-		if(value==null){ return 0 }
-		else { return value.size }
-	}
+abstract class DataValue extends Value 
+{
+	op int getNAssignments() { return 1 }
 }
 
-class StringValue extends Value {
+class StringValue extends Value 
+{
 	String value
-	op int getNumber(){ return 1 }
 }
 
-class NumberValue extends Value {
+class NumberValue extends Value 
+{
 	double value
-	op int getNumber(){ return 1 }
 }
 
-class BooleanValue extends Value {
+class BooleanValue extends Value 
+{
 	boolean value
-	op int getNumber(){ return 1 }
 }
 
-class NoneValue extends Value {
-	op int getNumber(){ return 0 }
+class NoneValue extends Value 
+{
+	op Object getValue() { return null }
+	op int getNAssignments(){ return 0 }
 }

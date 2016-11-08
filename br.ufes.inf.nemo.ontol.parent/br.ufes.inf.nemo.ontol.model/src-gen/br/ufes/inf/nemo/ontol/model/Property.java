@@ -2,8 +2,6 @@
  */
 package br.ufes.inf.nemo.ontol.model;
 
-import org.eclipse.emf.common.util.EList;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Property</b></em>'.
@@ -16,10 +14,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link br.ufes.inf.nemo.ontol.model.Property#getName <em>Name</em>}</li>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.Property#getLowerBound <em>Lower Bound</em>}</li>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.Property#getUpperBound <em>Upper Bound</em>}</li>
- *   <li>{@link br.ufes.inf.nemo.ontol.model.Property#getPropertyType <em>Property Type</em>}</li>
- *   <li>{@link br.ufes.inf.nemo.ontol.model.Property#getSubsetOf <em>Subset Of</em>}</li>
- *   <li>{@link br.ufes.inf.nemo.ontol.model.Property#getOppositeTo <em>Opposite To</em>}</li>
- *   <li>{@link br.ufes.inf.nemo.ontol.model.Property#getClassContainer <em>Class Container</em>}</li>
+ *   <li>{@link br.ufes.inf.nemo.ontol.model.Property#getPropertyClass <em>Property Class</em>}</li>
  * </ul>
  *
  * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getProperty()
@@ -108,99 +103,29 @@ public interface Property extends ModelElement {
 	void setUpperBound(Integer value);
 
 	/**
-	 * Returns the value of the '<em><b>Property Type</b></em>' reference.
+	 * Returns the value of the '<em><b>Property Class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Property Type</em>' reference isn't clear,
+	 * If the meaning of the '<em>Property Class</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Property Type</em>' reference.
-	 * @see #setPropertyType(br.ufes.inf.nemo.ontol.model.Class)
-	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getProperty_PropertyType()
+	 * @return the value of the '<em>Property Class</em>' reference.
+	 * @see #setPropertyClass(OntoLClass)
+	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getProperty_PropertyClass()
 	 * @model
 	 * @generated
 	 */
-	br.ufes.inf.nemo.ontol.model.Class getPropertyType();
+	OntoLClass getPropertyClass();
 
 	/**
-	 * Sets the value of the '{@link br.ufes.inf.nemo.ontol.model.Property#getPropertyType <em>Property Type</em>}' reference.
+	 * Sets the value of the '{@link br.ufes.inf.nemo.ontol.model.Property#getPropertyClass <em>Property Class</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Property Type</em>' reference.
-	 * @see #getPropertyType()
+	 * @param value the new value of the '<em>Property Class</em>' reference.
+	 * @see #getPropertyClass()
 	 * @generated
 	 */
-	void setPropertyType(br.ufes.inf.nemo.ontol.model.Class value);
-
-	/**
-	 * Returns the value of the '<em><b>Subset Of</b></em>' reference list.
-	 * The list contents are of type {@link br.ufes.inf.nemo.ontol.model.Property}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Subset Of</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Subset Of</em>' reference list.
-	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getProperty_SubsetOf()
-	 * @model
-	 * @generated
-	 */
-	EList<Property> getSubsetOf();
-
-	/**
-	 * Returns the value of the '<em><b>Opposite To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Opposite To</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Opposite To</em>' reference.
-	 * @see #setOppositeTo(Property)
-	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getProperty_OppositeTo()
-	 * @model
-	 * @generated
-	 */
-	Property getOppositeTo();
-
-	/**
-	 * Sets the value of the '{@link br.ufes.inf.nemo.ontol.model.Property#getOppositeTo <em>Opposite To</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Opposite To</em>' reference.
-	 * @see #getOppositeTo()
-	 * @generated
-	 */
-	void setOppositeTo(Property value);
-
-	/**
-	 * Returns the value of the '<em><b>Class Container</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link br.ufes.inf.nemo.ontol.model.Class#getProps <em>Props</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Class Container</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Class Container</em>' container reference.
-	 * @see #setClassContainer(br.ufes.inf.nemo.ontol.model.Class)
-	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getProperty_ClassContainer()
-	 * @see br.ufes.inf.nemo.ontol.model.Class#getProps
-	 * @model opposite="props" transient="false"
-	 * @generated
-	 */
-	br.ufes.inf.nemo.ontol.model.Class getClassContainer();
-
-	/**
-	 * Sets the value of the '{@link br.ufes.inf.nemo.ontol.model.Property#getClassContainer <em>Class Container</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Class Container</em>' container reference.
-	 * @see #getClassContainer()
-	 * @generated
-	 */
-	void setClassContainer(br.ufes.inf.nemo.ontol.model.Class value);
+	void setPropertyClass(OntoLClass value);
 
 } // Property

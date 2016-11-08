@@ -2,10 +2,11 @@
  */
 package br.ufes.inf.nemo.ontol.model.impl;
 
+import br.ufes.inf.nemo.ontol.model.AttributeAssignment;
 import br.ufes.inf.nemo.ontol.model.EntityDeclaration;
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
-import br.ufes.inf.nemo.ontol.model.PropertyAssignment;
-
+import br.ufes.inf.nemo.ontol.model.OntoLClass;
+import br.ufes.inf.nemo.ontol.model.ReferenceAssignment;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -18,7 +19,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -31,13 +32,14 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * </p>
  * <ul>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.EntityDeclarationImpl#getName <em>Name</em>}</li>
- *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.EntityDeclarationImpl#getFixedTypes <em>Fixed Types</em>}</li>
- *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.EntityDeclarationImpl#getPropAssigns <em>Prop Assigns</em>}</li>
+ *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.EntityDeclarationImpl#getInstantiatedClasses <em>Instantiated Classes</em>}</li>
+ *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.EntityDeclarationImpl#getAttAssignments <em>Att Assignments</em>}</li>
+ *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.EntityDeclarationImpl#getRefAssignments <em>Ref Assignments</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class EntityDeclarationImpl extends ModelElementImpl implements EntityDeclaration {
+public abstract class EntityDeclarationImpl extends ModelElementImpl implements EntityDeclaration {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -59,24 +61,34 @@ public class EntityDeclarationImpl extends ModelElementImpl implements EntityDec
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getFixedTypes() <em>Fixed Types</em>}' reference list.
+	 * The cached value of the '{@link #getInstantiatedClasses() <em>Instantiated Classes</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFixedTypes()
+	 * @see #getInstantiatedClasses()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<br.ufes.inf.nemo.ontol.model.Class> fixedTypes;
+	protected EList<OntoLClass> instantiatedClasses;
 
 	/**
-	 * The cached value of the '{@link #getPropAssigns() <em>Prop Assigns</em>}' containment reference list.
+	 * The cached value of the '{@link #getAttAssignments() <em>Att Assignments</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPropAssigns()
+	 * @see #getAttAssignments()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<PropertyAssignment> propAssigns;
+	protected EList<AttributeAssignment> attAssignments;
+
+	/**
+	 * The cached value of the '{@link #getRefAssignments() <em>Ref Assignments</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRefAssignments()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ReferenceAssignment> refAssignments;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -123,11 +135,11 @@ public class EntityDeclarationImpl extends ModelElementImpl implements EntityDec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<br.ufes.inf.nemo.ontol.model.Class> getFixedTypes() {
-		if (fixedTypes == null) {
-			fixedTypes = new EObjectResolvingEList<br.ufes.inf.nemo.ontol.model.Class>(br.ufes.inf.nemo.ontol.model.Class.class, this, ModelPackage.ENTITY_DECLARATION__FIXED_TYPES);
+	public EList<OntoLClass> getInstantiatedClasses() {
+		if (instantiatedClasses == null) {
+			instantiatedClasses = new EObjectResolvingEList<OntoLClass>(OntoLClass.class, this, ModelPackage.ENTITY_DECLARATION__INSTANTIATED_CLASSES);
 		}
-		return fixedTypes;
+		return instantiatedClasses;
 	}
 
 	/**
@@ -135,11 +147,11 @@ public class EntityDeclarationImpl extends ModelElementImpl implements EntityDec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<PropertyAssignment> getPropAssigns() {
-		if (propAssigns == null) {
-			propAssigns = new EObjectContainmentWithInverseEList<PropertyAssignment>(PropertyAssignment.class, this, ModelPackage.ENTITY_DECLARATION__PROP_ASSIGNS, ModelPackage.PROPERTY_ASSIGNMENT__CLASS_CONTAINER);
+	public EList<AttributeAssignment> getAttAssignments() {
+		if (attAssignments == null) {
+			attAssignments = new EObjectContainmentEList<AttributeAssignment>(AttributeAssignment.class, this, ModelPackage.ENTITY_DECLARATION__ATT_ASSIGNMENTS);
 		}
-		return propAssigns;
+		return attAssignments;
 	}
 
 	/**
@@ -147,14 +159,11 @@ public class EntityDeclarationImpl extends ModelElementImpl implements EntityDec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ModelPackage.ENTITY_DECLARATION__PROP_ASSIGNS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPropAssigns()).basicAdd(otherEnd, msgs);
+	public EList<ReferenceAssignment> getRefAssignments() {
+		if (refAssignments == null) {
+			refAssignments = new EObjectContainmentEList<ReferenceAssignment>(ReferenceAssignment.class, this, ModelPackage.ENTITY_DECLARATION__REF_ASSIGNMENTS);
 		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
+		return refAssignments;
 	}
 
 	/**
@@ -165,8 +174,10 @@ public class EntityDeclarationImpl extends ModelElementImpl implements EntityDec
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ModelPackage.ENTITY_DECLARATION__PROP_ASSIGNS:
-				return ((InternalEList<?>)getPropAssigns()).basicRemove(otherEnd, msgs);
+			case ModelPackage.ENTITY_DECLARATION__ATT_ASSIGNMENTS:
+				return ((InternalEList<?>)getAttAssignments()).basicRemove(otherEnd, msgs);
+			case ModelPackage.ENTITY_DECLARATION__REF_ASSIGNMENTS:
+				return ((InternalEList<?>)getRefAssignments()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -181,10 +192,12 @@ public class EntityDeclarationImpl extends ModelElementImpl implements EntityDec
 		switch (featureID) {
 			case ModelPackage.ENTITY_DECLARATION__NAME:
 				return getName();
-			case ModelPackage.ENTITY_DECLARATION__FIXED_TYPES:
-				return getFixedTypes();
-			case ModelPackage.ENTITY_DECLARATION__PROP_ASSIGNS:
-				return getPropAssigns();
+			case ModelPackage.ENTITY_DECLARATION__INSTANTIATED_CLASSES:
+				return getInstantiatedClasses();
+			case ModelPackage.ENTITY_DECLARATION__ATT_ASSIGNMENTS:
+				return getAttAssignments();
+			case ModelPackage.ENTITY_DECLARATION__REF_ASSIGNMENTS:
+				return getRefAssignments();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -201,13 +214,17 @@ public class EntityDeclarationImpl extends ModelElementImpl implements EntityDec
 			case ModelPackage.ENTITY_DECLARATION__NAME:
 				setName((String)newValue);
 				return;
-			case ModelPackage.ENTITY_DECLARATION__FIXED_TYPES:
-				getFixedTypes().clear();
-				getFixedTypes().addAll((Collection<? extends br.ufes.inf.nemo.ontol.model.Class>)newValue);
+			case ModelPackage.ENTITY_DECLARATION__INSTANTIATED_CLASSES:
+				getInstantiatedClasses().clear();
+				getInstantiatedClasses().addAll((Collection<? extends OntoLClass>)newValue);
 				return;
-			case ModelPackage.ENTITY_DECLARATION__PROP_ASSIGNS:
-				getPropAssigns().clear();
-				getPropAssigns().addAll((Collection<? extends PropertyAssignment>)newValue);
+			case ModelPackage.ENTITY_DECLARATION__ATT_ASSIGNMENTS:
+				getAttAssignments().clear();
+				getAttAssignments().addAll((Collection<? extends AttributeAssignment>)newValue);
+				return;
+			case ModelPackage.ENTITY_DECLARATION__REF_ASSIGNMENTS:
+				getRefAssignments().clear();
+				getRefAssignments().addAll((Collection<? extends ReferenceAssignment>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -224,11 +241,14 @@ public class EntityDeclarationImpl extends ModelElementImpl implements EntityDec
 			case ModelPackage.ENTITY_DECLARATION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case ModelPackage.ENTITY_DECLARATION__FIXED_TYPES:
-				getFixedTypes().clear();
+			case ModelPackage.ENTITY_DECLARATION__INSTANTIATED_CLASSES:
+				getInstantiatedClasses().clear();
 				return;
-			case ModelPackage.ENTITY_DECLARATION__PROP_ASSIGNS:
-				getPropAssigns().clear();
+			case ModelPackage.ENTITY_DECLARATION__ATT_ASSIGNMENTS:
+				getAttAssignments().clear();
+				return;
+			case ModelPackage.ENTITY_DECLARATION__REF_ASSIGNMENTS:
+				getRefAssignments().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -244,10 +264,12 @@ public class EntityDeclarationImpl extends ModelElementImpl implements EntityDec
 		switch (featureID) {
 			case ModelPackage.ENTITY_DECLARATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case ModelPackage.ENTITY_DECLARATION__FIXED_TYPES:
-				return fixedTypes != null && !fixedTypes.isEmpty();
-			case ModelPackage.ENTITY_DECLARATION__PROP_ASSIGNS:
-				return propAssigns != null && !propAssigns.isEmpty();
+			case ModelPackage.ENTITY_DECLARATION__INSTANTIATED_CLASSES:
+				return instantiatedClasses != null && !instantiatedClasses.isEmpty();
+			case ModelPackage.ENTITY_DECLARATION__ATT_ASSIGNMENTS:
+				return attAssignments != null && !attAssignments.isEmpty();
+			case ModelPackage.ENTITY_DECLARATION__REF_ASSIGNMENTS:
+				return refAssignments != null && !refAssignments.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

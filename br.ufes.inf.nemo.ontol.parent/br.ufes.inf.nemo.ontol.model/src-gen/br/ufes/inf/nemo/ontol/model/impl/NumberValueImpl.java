@@ -4,14 +4,7 @@ package br.ufes.inf.nemo.ontol.model.impl;
 
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
 import br.ufes.inf.nemo.ontol.model.NumberValue;
-import br.ufes.inf.nemo.ontol.model.Value;
-
-import java.lang.reflect.InvocationTargetException;
-
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -95,15 +88,6 @@ public class NumberValueImpl extends ValueImpl implements NumberValue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getNumber() {
-		return 1;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -155,36 +139,6 @@ public class NumberValueImpl extends ValueImpl implements NumberValue {
 				return value != VALUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
-		if (baseClass == Value.class) {
-			switch (baseOperationID) {
-				case ModelPackage.VALUE___GET_NUMBER: return ModelPackage.NUMBER_VALUE___GET_NUMBER;
-				default: return super.eDerivedOperationID(baseOperationID, baseClass);
-			}
-		}
-		return super.eDerivedOperationID(baseOperationID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case ModelPackage.NUMBER_VALUE___GET_NUMBER:
-				return getNumber();
-		}
-		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

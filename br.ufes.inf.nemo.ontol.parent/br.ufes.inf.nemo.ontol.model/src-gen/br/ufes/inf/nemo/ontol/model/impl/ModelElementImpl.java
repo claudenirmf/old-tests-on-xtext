@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class ModelElementImpl extends MinimalEObjectImpl.Container implements ModelElement {
+public abstract class ModelElementImpl extends MinimalEObjectImpl.Container implements ModelElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

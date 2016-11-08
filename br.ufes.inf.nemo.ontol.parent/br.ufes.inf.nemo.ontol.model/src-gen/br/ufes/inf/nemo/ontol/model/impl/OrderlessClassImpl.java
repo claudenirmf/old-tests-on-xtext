@@ -3,23 +3,24 @@
 package br.ufes.inf.nemo.ontol.model.impl;
 
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
-import br.ufes.inf.nemo.ontol.model.PropertyAssignment;
+import br.ufes.inf.nemo.ontol.model.OrderlessClass;
+
 import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Property Assignment</b></em>'.
+ * An implementation of the model object '<em><b>Orderless Class</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class PropertyAssignmentImpl extends ModelElementImpl implements PropertyAssignment {
+public class OrderlessClassImpl extends OntoLClassImpl implements OrderlessClass {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected PropertyAssignmentImpl() {
+	protected OrderlessClassImpl() {
 		super();
 	}
 
@@ -30,7 +31,7 @@ public class PropertyAssignmentImpl extends ModelElementImpl implements Property
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ModelPackage.Literals.PROPERTY_ASSIGNMENT;
+		return ModelPackage.Literals.ORDERLESS_CLASS;
 	}
 
-} //PropertyAssignmentImpl
+} //OrderlessClassImpl

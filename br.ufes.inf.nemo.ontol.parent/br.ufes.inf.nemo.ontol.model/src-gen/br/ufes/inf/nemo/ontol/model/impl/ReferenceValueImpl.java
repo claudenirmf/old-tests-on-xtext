@@ -104,7 +104,7 @@ public class ReferenceValueImpl extends ValueImpl implements ReferenceValue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getNumber() {
+	public int getNAssignments() {
 		return 1;
 	}
 
@@ -176,7 +176,7 @@ public class ReferenceValueImpl extends ValueImpl implements ReferenceValue {
 	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
 		if (baseClass == Value.class) {
 			switch (baseOperationID) {
-				case ModelPackage.VALUE___GET_NUMBER: return ModelPackage.REFERENCE_VALUE___GET_NUMBER;
+				case ModelPackage.VALUE___GET_NASSIGNMENTS: return ModelPackage.REFERENCE_VALUE___GET_NASSIGNMENTS;
 				default: return super.eDerivedOperationID(baseOperationID, baseClass);
 			}
 		}
@@ -191,8 +191,8 @@ public class ReferenceValueImpl extends ValueImpl implements ReferenceValue {
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case ModelPackage.REFERENCE_VALUE___GET_NUMBER:
-				return getNumber();
+			case ModelPackage.REFERENCE_VALUE___GET_NASSIGNMENTS:
+				return getNAssignments();
 		}
 		return super.eInvoke(operationID, arguments);
 	}
