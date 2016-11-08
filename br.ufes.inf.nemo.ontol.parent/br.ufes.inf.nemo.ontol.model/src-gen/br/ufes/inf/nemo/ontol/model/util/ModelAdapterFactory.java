@@ -103,6 +103,10 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createImportAdapter();
 			}
 			@Override
+			public Adapter caseInclude(Include object) {
+				return createIncludeAdapter();
+			}
+			@Override
 			public Adapter caseEntityDeclaration(EntityDeclaration object) {
 				return createEntityDeclarationAdapter();
 			}
@@ -245,6 +249,20 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createImportAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link br.ufes.inf.nemo.ontol.model.Include <em>Include</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see br.ufes.inf.nemo.ontol.model.Include
+	 * @generated
+	 */
+	public Adapter createIncludeAdapter() {
 		return null;
 	}
 

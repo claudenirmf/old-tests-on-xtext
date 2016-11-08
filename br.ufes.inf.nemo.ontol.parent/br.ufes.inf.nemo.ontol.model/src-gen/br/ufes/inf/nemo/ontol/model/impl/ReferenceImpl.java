@@ -2,7 +2,6 @@
  */
 package br.ufes.inf.nemo.ontol.model.impl;
 
-import br.ufes.inf.nemo.ontol.model.Attribute;
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
 import br.ufes.inf.nemo.ontol.model.Reference;
 
@@ -37,7 +36,7 @@ public class ReferenceImpl extends PropertyImpl implements Reference {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Attribute> subsetOf;
+	protected EList<Reference> subsetOf;
 	/**
 	 * The cached value of the '{@link #getOppositeTo() <em>Opposite To</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -46,7 +45,7 @@ public class ReferenceImpl extends PropertyImpl implements Reference {
 	 * @generated
 	 * @ordered
 	 */
-	protected Attribute oppositeTo;
+	protected Reference oppositeTo;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -72,9 +71,9 @@ public class ReferenceImpl extends PropertyImpl implements Reference {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Attribute> getSubsetOf() {
+	public EList<Reference> getSubsetOf() {
 		if (subsetOf == null) {
-			subsetOf = new EObjectResolvingEList<Attribute>(Attribute.class, this, ModelPackage.REFERENCE__SUBSET_OF);
+			subsetOf = new EObjectResolvingEList<Reference>(Reference.class, this, ModelPackage.REFERENCE__SUBSET_OF);
 		}
 		return subsetOf;
 	}
@@ -84,10 +83,10 @@ public class ReferenceImpl extends PropertyImpl implements Reference {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Attribute getOppositeTo() {
+	public Reference getOppositeTo() {
 		if (oppositeTo != null && oppositeTo.eIsProxy()) {
 			InternalEObject oldOppositeTo = (InternalEObject)oppositeTo;
-			oppositeTo = (Attribute)eResolveProxy(oldOppositeTo);
+			oppositeTo = (Reference)eResolveProxy(oldOppositeTo);
 			if (oppositeTo != oldOppositeTo) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.REFERENCE__OPPOSITE_TO, oldOppositeTo, oppositeTo));
@@ -101,7 +100,7 @@ public class ReferenceImpl extends PropertyImpl implements Reference {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Attribute basicGetOppositeTo() {
+	public Reference basicGetOppositeTo() {
 		return oppositeTo;
 	}
 
@@ -110,8 +109,8 @@ public class ReferenceImpl extends PropertyImpl implements Reference {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOppositeTo(Attribute newOppositeTo) {
-		Attribute oldOppositeTo = oppositeTo;
+	public void setOppositeTo(Reference newOppositeTo) {
+		Reference oldOppositeTo = oppositeTo;
 		oppositeTo = newOppositeTo;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.REFERENCE__OPPOSITE_TO, oldOppositeTo, oppositeTo));
@@ -145,10 +144,10 @@ public class ReferenceImpl extends PropertyImpl implements Reference {
 		switch (featureID) {
 			case ModelPackage.REFERENCE__SUBSET_OF:
 				getSubsetOf().clear();
-				getSubsetOf().addAll((Collection<? extends Attribute>)newValue);
+				getSubsetOf().addAll((Collection<? extends Reference>)newValue);
 				return;
 			case ModelPackage.REFERENCE__OPPOSITE_TO:
-				setOppositeTo((Attribute)newValue);
+				setOppositeTo((Reference)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -166,7 +165,7 @@ public class ReferenceImpl extends PropertyImpl implements Reference {
 				getSubsetOf().clear();
 				return;
 			case ModelPackage.REFERENCE__OPPOSITE_TO:
-				setOppositeTo((Attribute)null);
+				setOppositeTo((Reference)null);
 				return;
 		}
 		super.eUnset(featureID);

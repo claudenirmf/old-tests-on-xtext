@@ -19,7 +19,7 @@ package br.ufes.inf.nemo.ontol.model;
  * @model
  * @generated
  */
-public interface NumberValue extends Value {
+public interface NumberValue extends DataValue {
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->

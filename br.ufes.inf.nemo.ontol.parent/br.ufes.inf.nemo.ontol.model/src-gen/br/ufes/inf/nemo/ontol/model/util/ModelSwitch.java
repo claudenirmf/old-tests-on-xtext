@@ -108,6 +108,13 @@ public class ModelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ModelPackage.INCLUDE: {
+				Include include = (Include)theEObject;
+				T result = caseInclude(include);
+				if (result == null) result = caseModelElement(include);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ModelPackage.ENTITY_DECLARATION: {
 				EntityDeclaration entityDeclaration = (EntityDeclaration)theEObject;
 				T result = caseEntityDeclaration(entityDeclaration);
@@ -248,6 +255,7 @@ public class ModelSwitch<T> extends Switch<T> {
 			case ModelPackage.STRING_VALUE: {
 				StringValue stringValue = (StringValue)theEObject;
 				T result = caseStringValue(stringValue);
+				if (result == null) result = caseDataValue(stringValue);
 				if (result == null) result = caseValue(stringValue);
 				if (result == null) result = caseModelElement(stringValue);
 				if (result == null) result = defaultCase(theEObject);
@@ -256,6 +264,7 @@ public class ModelSwitch<T> extends Switch<T> {
 			case ModelPackage.NUMBER_VALUE: {
 				NumberValue numberValue = (NumberValue)theEObject;
 				T result = caseNumberValue(numberValue);
+				if (result == null) result = caseDataValue(numberValue);
 				if (result == null) result = caseValue(numberValue);
 				if (result == null) result = caseModelElement(numberValue);
 				if (result == null) result = defaultCase(theEObject);
@@ -264,6 +273,7 @@ public class ModelSwitch<T> extends Switch<T> {
 			case ModelPackage.BOOLEAN_VALUE: {
 				BooleanValue booleanValue = (BooleanValue)theEObject;
 				T result = caseBooleanValue(booleanValue);
+				if (result == null) result = caseDataValue(booleanValue);
 				if (result == null) result = caseValue(booleanValue);
 				if (result == null) result = caseModelElement(booleanValue);
 				if (result == null) result = defaultCase(theEObject);
@@ -272,6 +282,7 @@ public class ModelSwitch<T> extends Switch<T> {
 			case ModelPackage.NONE_VALUE: {
 				NoneValue noneValue = (NoneValue)theEObject;
 				T result = caseNoneValue(noneValue);
+				if (result == null) result = caseDataValue(noneValue);
 				if (result == null) result = caseValue(noneValue);
 				if (result == null) result = caseModelElement(noneValue);
 				if (result == null) result = defaultCase(theEObject);
@@ -323,6 +334,21 @@ public class ModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseImport(Import object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Include</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Include</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInclude(Include object) {
 		return null;
 	}
 

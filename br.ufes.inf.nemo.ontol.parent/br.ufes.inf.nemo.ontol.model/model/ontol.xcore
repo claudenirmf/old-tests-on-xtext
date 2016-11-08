@@ -15,6 +15,11 @@ class Import extends ModelElement
 	String importedNamespace
 }
 
+class Include extends ModelElement
+{
+	refers Model include
+}
+
 abstract class EntityDeclaration extends ModelElement 
 {
 	String name
@@ -85,8 +90,8 @@ class Attribute extends Property
 
 class Reference extends Property 
 {
-	refers Attribute[] subsetOf
-	refers Attribute oppositeTo
+	refers Reference[] subsetOf
+	refers Reference oppositeTo
 }
 
 class PropertyAssignment extends ModelElement 
@@ -124,22 +129,22 @@ abstract class DataValue extends Value
 	op int getNAssignments() { return 1 }
 }
 
-class StringValue extends Value 
+class StringValue extends DataValue 
 {
 	String value
 }
 
-class NumberValue extends Value 
+class NumberValue extends DataValue
 {
 	double value
 }
 
-class BooleanValue extends Value 
+class BooleanValue extends DataValue
 {
 	boolean value
 }
 
-class NoneValue extends Value 
+class NoneValue extends DataValue
 {
 	op Object getValue() { return null }
 	op int getNAssignments(){ return 0 }

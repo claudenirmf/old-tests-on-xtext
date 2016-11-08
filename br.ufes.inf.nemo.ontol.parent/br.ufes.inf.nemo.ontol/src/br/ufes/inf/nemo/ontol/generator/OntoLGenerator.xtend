@@ -60,7 +60,7 @@ class OntoLGenerator extends AbstractGenerator {
 		xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
 		xmlns:ontol="http://www.nemo.inf.ufes.br/ontol-schema#">
 		
-		<rdf:Description rdf:about="Â«m.fullyQualifiedNameÂ»"/>
+		<rdf:Description rdf:about="«m.fullyQualifiedName»"/>
 	    
 	</rdf:RDF>
 	'''

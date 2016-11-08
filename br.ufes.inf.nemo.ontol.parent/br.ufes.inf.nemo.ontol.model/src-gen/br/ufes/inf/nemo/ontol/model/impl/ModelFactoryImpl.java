@@ -2,6 +2,7 @@
  */
 package br.ufes.inf.nemo.ontol.model.impl;
 
+import br.ufes.inf.nemo.ontol.model.*;
 import br.ufes.inf.nemo.ontol.model.Attribute;
 import br.ufes.inf.nemo.ontol.model.AttributeAssignment;
 import br.ufes.inf.nemo.ontol.model.BooleanValue;
@@ -78,6 +79,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 		switch (eClass.getClassifierID()) {
 			case ModelPackage.MODEL: return createModel();
 			case ModelPackage.IMPORT: return createImport();
+			case ModelPackage.INCLUDE: return createInclude();
 			case ModelPackage.INDIVIDUAL: return createIndividual();
 			case ModelPackage.ORDERLESS_CLASS: return createOrderlessClass();
 			case ModelPackage.HO_CLASS: return createHOClass();
@@ -147,6 +149,16 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public Import createImport() {
 		ImportImpl import_ = new ImportImpl();
 		return import_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Include createInclude() {
+		IncludeImpl include = new IncludeImpl();
+		return include;
 	}
 
 	/**

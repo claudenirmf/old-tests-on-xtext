@@ -5,28 +5,39 @@
  */
 package br.ufes.inf.nemo.ontol.util;
 
+import br.ufes.inf.nemo.ontol.model.Attribute;
 import br.ufes.inf.nemo.ontol.model.EntityDeclaration;
+import br.ufes.inf.nemo.ontol.model.Include;
+import br.ufes.inf.nemo.ontol.model.Model;
+import br.ufes.inf.nemo.ontol.model.ModelElement;
+import br.ufes.inf.nemo.ontol.model.OntoLClass;
 import br.ufes.inf.nemo.ontol.model.Property;
-import br.ufes.inf.nemo.ontol.util.OntoLIndex;
-import com.google.inject.Inject;
+import br.ufes.inf.nemo.ontol.model.Reference;
+import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class OntoLUtils {
-  @Inject
-  @Extension
-  private OntoLIndex _ontoLIndex;
-  
-  /**
-   * Minimum order of a high-order type.
-   * 
-   * @author Claudenir Fonseca
-   */
-  public final static int HO_TYPE_MIN_ORDER = 2;
+  public Iterable<Model> getRechableModels(final ModelElement elem) {
+    EObject _eContainer = elem.eContainer();
+    EList<ModelElement> _elements = ((Model) _eContainer).getElements();
+    final Function1<ModelElement, Boolean> _function = (ModelElement it) -> {
+      return Boolean.valueOf((it instanceof Include));
+    };
+    Iterable<ModelElement> _filter = IterableExtensions.<ModelElement>filter(_elements, _function);
+    final Function1<ModelElement, Model> _function_1 = (ModelElement it) -> {
+      return ((Include) it).getInclude();
+    };
+    return IterableExtensions.<ModelElement, Model>map(_filter, _function_1);
+  }
   
   /**
    * Returns a set of all super types of the given <b>type</b>. The set does not
@@ -34,25 +45,25 @@ public class OntoLUtils {
    * 
    * @author Claudenir Fonseca
    */
-  public LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> classHierarchy(final br.ufes.inf.nemo.ontol.model.Class c) {
-    LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> _xblockexpression = null;
+  public LinkedHashSet<OntoLClass> classHierarchy(final OntoLClass c) {
+    LinkedHashSet<OntoLClass> _xblockexpression = null;
     {
-      final LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> visited = new LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class>();
+      final LinkedHashSet<OntoLClass> visited = new LinkedHashSet<OntoLClass>();
       _xblockexpression = this.classHierarchy(c, visited);
     }
     return _xblockexpression;
   }
   
-  private LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> classHierarchy(final br.ufes.inf.nemo.ontol.model.Class c, final LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> visited) {
-    LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> _xblockexpression = null;
+  private LinkedHashSet<OntoLClass> classHierarchy(final OntoLClass c, final LinkedHashSet<OntoLClass> visited) {
+    LinkedHashSet<OntoLClass> _xblockexpression = null;
     {
-      EList<br.ufes.inf.nemo.ontol.model.Class> _superClasses = c.getSuperClasses();
-      for (final br.ufes.inf.nemo.ontol.model.Class current : _superClasses) {
+      EList<OntoLClass> _superClasses = c.getSuperClasses();
+      for (final OntoLClass current : _superClasses) {
         boolean _contains = visited.contains(current);
         boolean _not = (!_contains);
         if (_not) {
           visited.add(current);
-          LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> _classHierarchy = this.classHierarchy(current, visited);
+          LinkedHashSet<OntoLClass> _classHierarchy = this.classHierarchy(current, visited);
           visited.addAll(_classHierarchy);
         }
       }
@@ -69,9 +80,41 @@ public class OntoLUtils {
    * 
    * @author Claudenir Fonseca
    */
-  public LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> getBasicFixedTypes(final EntityDeclaration e) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field fixedTypes is undefined for the type EntityDeclaration");
+  public LinkedHashSet<OntoLClass> getBasicInstantiatedClasses(final EntityDeclaration e) {
+    final LinkedHashSet<OntoLClass> basicInstantiatedClasses = new LinkedHashSet<OntoLClass>();
+    EList<OntoLClass> _instantiatedClasses = e.getInstantiatedClasses();
+    basicInstantiatedClasses.addAll(_instantiatedClasses);
+    if ((e instanceof OntoLClass)) {
+      final Iterable<Model> includedModels = this.getRechableModels(e);
+      final Function1<Model, Iterable<ModelElement>> _function = (Model it) -> {
+        EList<ModelElement> _elements = it.getElements();
+        final Function1<ModelElement, Boolean> _function_1 = (ModelElement it_1) -> {
+          boolean _xifexpression = false;
+          if ((it_1 instanceof OntoLClass)) {
+            OntoLClass _powertypeOf = ((OntoLClass)it_1).getPowertypeOf();
+            _xifexpression = (!Objects.equal(_powertypeOf, null));
+          } else {
+            _xifexpression = false;
+          }
+          return Boolean.valueOf(_xifexpression);
+        };
+        return IterableExtensions.<ModelElement>filter(_elements, _function_1);
+      };
+      final Iterable<Iterable<ModelElement>> possiblePowertypes = IterableExtensions.<Model, Iterable<ModelElement>>map(includedModels, _function);
+      final LinkedHashSet<OntoLClass> ch = this.classHierarchy(((OntoLClass)e));
+      final Consumer<Iterable<ModelElement>> _function_1 = (Iterable<ModelElement> it) -> {
+        final OntoLClass pwt = ((OntoLClass) it);
+        OntoLClass _powertypeOf = pwt.getPowertypeOf();
+        boolean _contains = ch.contains(_powertypeOf);
+        if (_contains) {
+          basicInstantiatedClasses.add(pwt);
+        }
+      };
+      possiblePowertypes.forEach(_function_1);
+    } else {
+      return basicInstantiatedClasses;
+    }
+    return null;
   }
   
   /**
@@ -81,17 +124,17 @@ public class OntoLUtils {
    * 
    * @author Claudenir Fonseca
    */
-  public LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> getAllFixedTypes(final EntityDeclaration e) {
-    LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> _xblockexpression = null;
+  public LinkedHashSet<OntoLClass> getAllInstantiatedClasses(final EntityDeclaration e) {
+    LinkedHashSet<OntoLClass> _xblockexpression = null;
     {
-      final LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> visited = new LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class>();
-      LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> _basicFixedTypes = this.getBasicFixedTypes(e);
-      final Consumer<br.ufes.inf.nemo.ontol.model.Class> _function = (br.ufes.inf.nemo.ontol.model.Class it) -> {
+      final LinkedHashSet<OntoLClass> visited = new LinkedHashSet<OntoLClass>();
+      LinkedHashSet<OntoLClass> _basicInstantiatedClasses = this.getBasicInstantiatedClasses(e);
+      final Consumer<OntoLClass> _function = (OntoLClass it) -> {
         visited.add(it);
-        LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> _classHierarchy = this.classHierarchy(it);
+        LinkedHashSet<OntoLClass> _classHierarchy = this.classHierarchy(it);
         visited.addAll(_classHierarchy);
       };
-      _basicFixedTypes.forEach(_function);
+      _basicInstantiatedClasses.forEach(_function);
       _xblockexpression = visited;
     }
     return _xblockexpression;
@@ -104,9 +147,34 @@ public class OntoLUtils {
    * 
    * @author Claudenir Fonseca
    */
-  public LinkedHashSet<Property> getAllProperties(final EntityDeclaration e) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field props is undefined for the type Class");
+  public Set<Property> getAllProperties(final EntityDeclaration e) {
+    try {
+      throw new Exception("Stop using getAllProperties()");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public LinkedHashSet<Attribute> getAllAttributes(final EntityDeclaration e) {
+    final LinkedHashSet<Attribute> attributes = new LinkedHashSet<Attribute>();
+    LinkedHashSet<OntoLClass> _allInstantiatedClasses = this.getAllInstantiatedClasses(e);
+    final Consumer<OntoLClass> _function = (OntoLClass it) -> {
+      EList<Attribute> _attributes = it.getAttributes();
+      attributes.addAll(_attributes);
+    };
+    _allInstantiatedClasses.forEach(_function);
+    return attributes;
+  }
+  
+  public LinkedHashSet<Reference> getAllReferences(final EntityDeclaration e) {
+    final LinkedHashSet<Reference> references = new LinkedHashSet<Reference>();
+    LinkedHashSet<OntoLClass> _allInstantiatedClasses = this.getAllInstantiatedClasses(e);
+    final Consumer<OntoLClass> _function = (OntoLClass it) -> {
+      EList<Reference> _references = it.getReferences();
+      references.addAll(_references);
+    };
+    _allInstantiatedClasses.forEach(_function);
+    return references;
   }
   
   /**
@@ -114,8 +182,31 @@ public class OntoLUtils {
    * 
    * @author Claudenir Fonseca
    */
-  public Set<Object> getAllInheritedProperties(final br.ufes.inf.nemo.ontol.model.Class c) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field props is undefined");
+  public Set<Property> getAllInheritedProperties(final OntoLClass c) {
+    try {
+      throw new Exception("Stop using getAllProperties()");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public Set<Attribute> getAllInheritedAttributes(final OntoLClass c) {
+    LinkedHashSet<OntoLClass> _classHierarchy = this.classHierarchy(c);
+    final Function1<OntoLClass, EList<Attribute>> _function = (OntoLClass it) -> {
+      return it.getAttributes();
+    };
+    Iterable<EList<Attribute>> _map = IterableExtensions.<OntoLClass, EList<Attribute>>map(_classHierarchy, _function);
+    Iterable<Attribute> _flatten = Iterables.<Attribute>concat(_map);
+    return IterableExtensions.<Attribute>toSet(_flatten);
+  }
+  
+  public Set<Reference> getAllInheritedReferences(final OntoLClass c) {
+    LinkedHashSet<OntoLClass> _classHierarchy = this.classHierarchy(c);
+    final Function1<OntoLClass, EList<Reference>> _function = (OntoLClass it) -> {
+      return it.getReferences();
+    };
+    Iterable<EList<Reference>> _map = IterableExtensions.<OntoLClass, EList<Reference>>map(_classHierarchy, _function);
+    Iterable<Reference> _flatten = Iterables.<Reference>concat(_map);
+    return IterableExtensions.<Reference>toSet(_flatten);
   }
 }

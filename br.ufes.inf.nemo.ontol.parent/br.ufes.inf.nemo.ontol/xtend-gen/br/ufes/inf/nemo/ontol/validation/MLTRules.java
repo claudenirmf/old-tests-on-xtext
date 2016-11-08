@@ -1,6 +1,7 @@
 package br.ufes.inf.nemo.ontol.validation;
 
 import br.ufes.inf.nemo.ontol.model.HOClass;
+import br.ufes.inf.nemo.ontol.model.OntoLClass;
 import br.ufes.inf.nemo.ontol.util.OntoLUtils;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
@@ -33,10 +34,10 @@ public class MLTRules {
     return _xifexpression;
   }
   
-  public boolean isMissingSpecializationThroughPowertype(final br.ufes.inf.nemo.ontol.model.Class c, final LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> cHierarchy) {
-    LinkedHashSet<br.ufes.inf.nemo.ontol.model.Class> _allFixedTypes = this._ontoLUtils.getAllFixedTypes(c);
-    final Function1<br.ufes.inf.nemo.ontol.model.Class, Boolean> _function = (br.ufes.inf.nemo.ontol.model.Class ho) -> {
-      br.ufes.inf.nemo.ontol.model.Class _powertypeOf = ho.getPowertypeOf();
+  public boolean isMissingSpecializationThroughPowertype(final OntoLClass c, final LinkedHashSet<OntoLClass> cHierarchy) {
+    LinkedHashSet<OntoLClass> _allInstantiatedClasses = this._ontoLUtils.getAllInstantiatedClasses(c);
+    final Function1<OntoLClass, Boolean> _function = (OntoLClass ho) -> {
+      OntoLClass _powertypeOf = ho.getPowertypeOf();
       boolean _notEquals = (!Objects.equal(_powertypeOf, null));
       if (_notEquals) {
         if (((!cHierarchy.contains(ho.getPowertypeOf())) && (!Objects.equal(ho.getPowertypeOf(), c)))) {
@@ -45,6 +46,6 @@ public class MLTRules {
       }
       return Boolean.valueOf(false);
     };
-    return IterableExtensions.<br.ufes.inf.nemo.ontol.model.Class>exists(_allFixedTypes, _function);
+    return IterableExtensions.<OntoLClass>exists(_allInstantiatedClasses, _function);
   }
 }

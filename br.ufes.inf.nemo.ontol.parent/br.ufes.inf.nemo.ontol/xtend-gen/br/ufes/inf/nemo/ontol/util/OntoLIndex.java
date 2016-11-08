@@ -1,5 +1,6 @@
 package br.ufes.inf.nemo.ontol.util;
 
+import br.ufes.inf.nemo.ontol.model.OntoLClass;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
@@ -62,8 +63,8 @@ public class OntoLIndex {
     return this.getVisibleEObjectDescriptions(o, c);
   }
   
-  public br.ufes.inf.nemo.ontol.model.Class getModelElementFromIndex(final EObject context, final String qualifiedName, final EClass modelElementClass) {
-    br.ufes.inf.nemo.ontol.model.Class _xblockexpression = null;
+  public OntoLClass getModelElementFromIndex(final EObject context, final String qualifiedName, final EClass modelElementClass) {
+    OntoLClass _xblockexpression = null;
     {
       Iterable<IEObjectDescription> _visibleEObjectDescriptions = this.getVisibleEObjectDescriptions(context, modelElementClass);
       final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
@@ -85,7 +86,7 @@ public class OntoLIndex {
         EObject _eObject = _resourceSet.getEObject(_eObjectURI, true);
         o = _eObject;
       }
-      _xblockexpression = ((br.ufes.inf.nemo.ontol.model.Class) o);
+      _xblockexpression = ((OntoLClass) o);
     }
     return _xblockexpression;
   }

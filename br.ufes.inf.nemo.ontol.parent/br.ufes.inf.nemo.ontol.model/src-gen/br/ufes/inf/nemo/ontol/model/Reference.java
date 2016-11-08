@@ -26,7 +26,7 @@ public interface Reference extends Property {
 
 	/**
 	 * Returns the value of the '<em><b>Subset Of</b></em>' reference list.
-	 * The list contents are of type {@link br.ufes.inf.nemo.ontol.model.Attribute}.
+	 * The list contents are of type {@link br.ufes.inf.nemo.ontol.model.Reference}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Subset Of</em>' reference list isn't clear,
@@ -38,7 +38,7 @@ public interface Reference extends Property {
 	 * @model
 	 * @generated
 	 */
-	EList<Attribute> getSubsetOf();
+	EList<Reference> getSubsetOf();
 
 	/**
 	 * Returns the value of the '<em><b>Opposite To</b></em>' reference.
@@ -49,12 +49,12 @@ public interface Reference extends Property {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Opposite To</em>' reference.
-	 * @see #setOppositeTo(Attribute)
+	 * @see #setOppositeTo(Reference)
 	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getReference_OppositeTo()
 	 * @model
 	 * @generated
 	 */
-	Attribute getOppositeTo();
+	Reference getOppositeTo();
 
 	/**
 	 * Sets the value of the '{@link br.ufes.inf.nemo.ontol.model.Reference#getOppositeTo <em>Opposite To</em>}' reference.
@@ -64,5 +64,5 @@ public interface Reference extends Property {
 	 * @see #getOppositeTo()
 	 * @generated
 	 */
-	void setOppositeTo(Attribute value);
+	void setOppositeTo(Reference value);
 } // Reference

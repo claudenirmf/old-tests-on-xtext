@@ -3,13 +3,29 @@
  */
 package br.ufes.inf.nemo.ontol.scoping;
 
+import br.ufes.inf.nemo.ontol.model.Attribute;
+import br.ufes.inf.nemo.ontol.model.AttributeAssignment;
+import br.ufes.inf.nemo.ontol.model.EntityDeclaration;
+import br.ufes.inf.nemo.ontol.model.ModelPackage;
+import br.ufes.inf.nemo.ontol.model.OntoLClass;
+import br.ufes.inf.nemo.ontol.model.Reference;
+import br.ufes.inf.nemo.ontol.model.ReferenceAssignment;
 import br.ufes.inf.nemo.ontol.scoping.AbstractOntoLScopeProvider;
 import br.ufes.inf.nemo.ontol.util.OntoLUtils;
+import com.google.common.base.Function;
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
  * This class contains custom scoping description.
@@ -25,26 +41,166 @@ public class OntoLScopeProvider extends AbstractOntoLScopeProvider {
   
   @Override
   public IScope getScope(final EObject context, final EReference reference) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field propertyAssignment_Property is undefined for the type ModelPackage"
-      + "\nThe method or field propAssigns is undefined for the type EntityDeclaration"
-      + "\nThe method or field property_SubsetOf is undefined for the type ModelPackage"
-      + "\nThe method or field props is undefined for the type Class"
-      + "\nThe method or field name is undefined for the type Object"
-      + "\nThe method or field name is undefined for the type Object"
-      + "\nThe method or field eContainer is undefined for the type Object"
-      + "\nThe method or field name is undefined for the type Object"
-      + "\nThe method or field name is undefined for the type Object"
-      + "\nThe method or field property_OppositeTo is undefined for the type ModelPackage"
-      + "\nThe method or field propertyType is undefined for the type Property"
-      + "\nThe method or field propertyType is undefined for the type Object"
-      + "\nThe method or field props is undefined for the type Class"
-      + "\nThe method or field name is undefined for the type EObject"
-      + "\nBounds mismatch: The type argument <Object> is not a valid substitute for the bounded type parameter <T extends EObject> of the method scopeFor(Iterable<? extends T>, Function<T, QualifiedName>, IScope)"
-      + "\nequals cannot be resolved"
-      + "\n&& cannot be resolved"
-      + "\nprops cannot be resolved"
-      + "\nfilter cannot be resolved"
-      + "\n== cannot be resolved");
+    if (((context instanceof AttributeAssignment) && Objects.equal(reference, ModelPackage.eINSTANCE.getAttributeAssignment_Attribute()))) {
+      return this.getScopeForAttributeAssignmentOnAttributeAssignment_Attribute(context, reference);
+    } else {
+      if (((context instanceof ReferenceAssignment) && Objects.equal(reference, ModelPackage.eINSTANCE.getReferenceAssignment_Reference()))) {
+        return this.getScopeForReferenceAssignmentOnReferenceAssignment_Reference(context, reference);
+      } else {
+        if (((context instanceof Attribute) && Objects.equal(reference, ModelPackage.eINSTANCE.getAttribute_SubsetOf()))) {
+          return this.getScopeForAttributeOnAttribute_SubsetOf(context, reference);
+        } else {
+          if (((context instanceof Reference) && Objects.equal(reference, ModelPackage.eINSTANCE.getReference_SubsetOf()))) {
+            return this.getScopeForReferenceOnReference_SubsetOf(context, reference);
+          } else {
+            if (((context instanceof Attribute) && Objects.equal(reference, ModelPackage.eINSTANCE.getAttribute_OppositeTo()))) {
+              return this.getScopeForAttributeOnAttribute_OppositeTo(context, reference);
+            } else {
+              if (((context instanceof Reference) && Objects.equal(reference, ModelPackage.eINSTANCE.getReference_OppositeTo()))) {
+                return this.getScopeForReferenceOnReference_OppositeTo(context, reference);
+              } else {
+                return super.getScope(context, reference);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  private IScope getScopeForAttributeAssignmentOnAttributeAssignment_Attribute(final EObject context, final EReference reference) {
+    EObject _eContainer = context.eContainer();
+    final EntityDeclaration entity = ((EntityDeclaration) _eContainer);
+    final LinkedHashSet<Attribute> attributes = this._ontoLUtils.getAllAttributes(entity);
+    final Function<Attribute, QualifiedName> _function = (Attribute att) -> {
+      final Function1<Attribute, Boolean> _function_1 = (Attribute it) -> {
+        return Boolean.valueOf((it.getName().equals(att.getName()) && (!Objects.equal(it, att))));
+      };
+      boolean _exists = IterableExtensions.<Attribute>exists(attributes, _function_1);
+      if (_exists) {
+        EObject _eContainer_1 = att.eContainer();
+        String _name = ((EntityDeclaration) _eContainer_1).getName();
+        String _name_1 = att.getName();
+        return QualifiedName.create(_name, _name_1);
+      } else {
+        String _name_2 = att.getName();
+        return QualifiedName.create(_name_2);
+      }
+    };
+    EList<AttributeAssignment> _attAssignments = entity.getAttAssignments();
+    IScope _scopeFor = Scopes.scopeFor(_attAssignments);
+    return Scopes.<Attribute>scopeFor(attributes, _function, _scopeFor);
+  }
+  
+  private IScope getScopeForReferenceAssignmentOnReferenceAssignment_Reference(final EObject context, final EReference reference) {
+    EObject _eContainer = context.eContainer();
+    final EntityDeclaration entity = ((EntityDeclaration) _eContainer);
+    final LinkedHashSet<Reference> references = this._ontoLUtils.getAllReferences(entity);
+    final Function<Reference, QualifiedName> _function = (Reference ref) -> {
+      final Function1<Reference, Boolean> _function_1 = (Reference it) -> {
+        return Boolean.valueOf((it.getName().equals(ref.getName()) && (!Objects.equal(it, ref))));
+      };
+      boolean _exists = IterableExtensions.<Reference>exists(references, _function_1);
+      if (_exists) {
+        EObject _eContainer_1 = ref.eContainer();
+        String _name = ((EntityDeclaration) _eContainer_1).getName();
+        String _name_1 = ref.getName();
+        return QualifiedName.create(_name, _name_1);
+      } else {
+        String _name_2 = ref.getName();
+        return QualifiedName.create(_name_2);
+      }
+    };
+    EList<ReferenceAssignment> _refAssignments = entity.getRefAssignments();
+    IScope _scopeFor = Scopes.scopeFor(_refAssignments);
+    return Scopes.<Reference>scopeFor(references, _function, _scopeFor);
+  }
+  
+  private IScope getScopeForAttributeOnAttribute_SubsetOf(final EObject context, final EReference reference) {
+    EObject _eContainer = context.eContainer();
+    final OntoLClass c = ((OntoLClass) _eContainer);
+    final Set<Attribute> inheritedAtts = this._ontoLUtils.getAllInheritedAttributes(c);
+    final Function<Attribute, QualifiedName> _function = (Attribute att) -> {
+      final Function1<Attribute, Boolean> _function_1 = (Attribute it) -> {
+        return Boolean.valueOf((it.getName().equals(att.getName()) && (!Objects.equal(it, att))));
+      };
+      boolean _exists = IterableExtensions.<Attribute>exists(inheritedAtts, _function_1);
+      if (_exists) {
+        EObject _eContainer_1 = att.eContainer();
+        String _name = ((EntityDeclaration) _eContainer_1).getName();
+        String _name_1 = att.getName();
+        return QualifiedName.create(_name, _name_1);
+      } else {
+        String _name_2 = att.getName();
+        return QualifiedName.create(_name_2);
+      }
+    };
+    EList<Attribute> _attributes = c.getAttributes();
+    IScope _scopeFor = Scopes.scopeFor(_attributes);
+    return Scopes.<Attribute>scopeFor(inheritedAtts, _function, _scopeFor);
+  }
+  
+  private IScope getScopeForReferenceOnReference_SubsetOf(final EObject context, final EReference reference) {
+    EObject _eContainer = context.eContainer();
+    final OntoLClass c = ((OntoLClass) _eContainer);
+    final Set<Reference> inheritedRefs = this._ontoLUtils.getAllInheritedReferences(c);
+    final Function<Reference, QualifiedName> _function = (Reference ref) -> {
+      final Function1<Reference, Boolean> _function_1 = (Reference it) -> {
+        return Boolean.valueOf((it.getName().equals(ref.getName()) && (!Objects.equal(it, ref))));
+      };
+      boolean _exists = IterableExtensions.<Reference>exists(inheritedRefs, _function_1);
+      if (_exists) {
+        EObject _eContainer_1 = ref.eContainer();
+        String _name = ((EntityDeclaration) _eContainer_1).getName();
+        String _name_1 = ref.getName();
+        return QualifiedName.create(_name, _name_1);
+      } else {
+        String _name_2 = ref.getName();
+        return QualifiedName.create(_name_2);
+      }
+    };
+    EList<Reference> _references = c.getReferences();
+    IScope _scopeFor = Scopes.scopeFor(_references);
+    return Scopes.<Reference>scopeFor(inheritedRefs, _function, _scopeFor);
+  }
+  
+  public IScope getScopeForAttributeOnAttribute_OppositeTo(final EObject context, final EReference reference) {
+    EObject _eContainer = context.eContainer();
+    final OntoLClass c = ((OntoLClass) _eContainer);
+    final Attribute att = ((Attribute) context);
+    OntoLClass _propertyClass = att.getPropertyClass();
+    EList<Attribute> _attributes = _propertyClass.getAttributes();
+    final Function1<Attribute, Boolean> _function = (Attribute it) -> {
+      OntoLClass _propertyClass_1 = it.getPropertyClass();
+      return Boolean.valueOf(Objects.equal(_propertyClass_1, c));
+    };
+    Iterable<Attribute> _filter = IterableExtensions.<Attribute>filter(_attributes, _function);
+    final Function<Attribute, QualifiedName> _function_1 = (Attribute it) -> {
+      String _name = it.getName();
+      return QualifiedName.create(_name);
+    };
+    EList<Attribute> _attributes_1 = c.getAttributes();
+    IScope _scopeFor = Scopes.scopeFor(_attributes_1);
+    return Scopes.<Attribute>scopeFor(_filter, _function_1, _scopeFor);
+  }
+  
+  public IScope getScopeForReferenceOnReference_OppositeTo(final EObject context, final EReference reference) {
+    EObject _eContainer = context.eContainer();
+    final OntoLClass c = ((OntoLClass) _eContainer);
+    final Reference ref = ((Reference) context);
+    OntoLClass _propertyClass = ref.getPropertyClass();
+    EList<Reference> _references = _propertyClass.getReferences();
+    final Function1<Reference, Boolean> _function = (Reference it) -> {
+      OntoLClass _propertyClass_1 = it.getPropertyClass();
+      return Boolean.valueOf(Objects.equal(_propertyClass_1, c));
+    };
+    Iterable<Reference> _filter = IterableExtensions.<Reference>filter(_references, _function);
+    final Function<Reference, QualifiedName> _function_1 = (Reference it) -> {
+      String _name = it.getName();
+      return QualifiedName.create(_name);
+    };
+    EList<Reference> _references_1 = c.getReferences();
+    IScope _scopeFor = Scopes.scopeFor(_references_1);
+    return Scopes.<Reference>scopeFor(_filter, _function_1, _scopeFor);
   }
 }

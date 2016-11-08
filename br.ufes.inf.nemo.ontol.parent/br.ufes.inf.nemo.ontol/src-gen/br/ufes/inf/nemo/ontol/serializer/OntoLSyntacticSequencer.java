@@ -21,16 +21,16 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class OntoLSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected OntoLGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_Class___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q;
+	protected AbstractElementAlias match_FOClass_FirstOrderKeyword_0_q;
 	protected AbstractElementAlias match_Individual___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q;
-	protected AbstractElementAlias match_Set___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q;
+	protected AbstractElementAlias match_OntoLClass___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (OntoLGrammarAccess) access;
-		match_Class___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getClassAccess().getRightCurlyBracketKeyword_1_2()));
+		match_FOClass_FirstOrderKeyword_0_q = new TokenAlias(false, true, grammarAccess.getFOClassAccess().getFirstOrderKeyword_0());
 		match_Individual___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getIndividualAccess().getLeftCurlyBracketKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getIndividualAccess().getRightCurlyBracketKeyword_3_2()));
-		match_Set___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getSetAccess().getLeftCurlyBracketKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getSetAccess().getRightCurlyBracketKeyword_3_2()));
+		match_OntoLClass___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getOntoLClassAccess().getLeftCurlyBracketKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getOntoLClassAccess().getRightCurlyBracketKeyword_1_2()));
 	}
 	
 	@Override
@@ -45,37 +45,24 @@ public class OntoLSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_Class___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q.equals(syntax))
-				emit_Class___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			if (match_FOClass_FirstOrderKeyword_0_q.equals(syntax))
+				emit_FOClass_FirstOrderKeyword_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Individual___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q.equals(syntax))
 				emit_Individual___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_Set___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q.equals(syntax))
-				emit_Set___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_OntoLClass___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q.equals(syntax))
+				emit_OntoLClass___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
 	/**
 	 * Ambiguous syntax:
-	 *     ('{' '}')?
+	 *     'first-order'?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     basetype=[Class|QualifiedName] (ambiguity) ';' (rule end)
-	 *     basetype=[Class|QualifiedName] (ambiguity) (rule end)
-	 *     fixedTypes+=[Class|QualifiedName] (ambiguity) ';' (rule end)
-	 *     fixedTypes+=[Class|QualifiedName] (ambiguity) (rule end)
-	 *     name=ID (ambiguity) ';' (rule end)
-	 *     name=ID (ambiguity) (rule end)
-	 *     order=INT (ambiguity) ';' (rule end)
-	 *     order=INT (ambiguity) (rule end)
-	 *     powertypeOf=[Class|QualifiedName] (ambiguity) ';' (rule end)
-	 *     powertypeOf=[Class|QualifiedName] (ambiguity) (rule end)
-	 *     subordinators+=[Class|QualifiedName] (ambiguity) ';' (rule end)
-	 *     subordinators+=[Class|QualifiedName] (ambiguity) (rule end)
-	 *     superClasses+=[Class|QualifiedName] (ambiguity) ';' (rule end)
-	 *     superClasses+=[Class|QualifiedName] (ambiguity) (rule end)
+	 *     (rule start) (ambiguity) 'class' name=ID
 	 */
-	protected void emit_Class___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_FOClass_FirstOrderKeyword_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -84,8 +71,8 @@ public class OntoLSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     ('{' '}')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     fixedTypes+=[Class|QualifiedName] (ambiguity) ';' (rule end)
-	 *     fixedTypes+=[Class|QualifiedName] (ambiguity) (rule end)
+	 *     instantiatedClasses+=[OntoLClass|QualifiedName] (ambiguity) ';' (rule end)
+	 *     instantiatedClasses+=[OntoLClass|QualifiedName] (ambiguity) (rule end)
 	 *     name=ID (ambiguity) ';' (rule end)
 	 *     name=ID (ambiguity) (rule end)
 	 */
@@ -98,12 +85,20 @@ public class OntoLSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     ('{' '}')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     fixedTypes+=[Class|QualifiedName] (ambiguity) ';' (rule end)
-	 *     fixedTypes+=[Class|QualifiedName] (ambiguity) (rule end)
-	 *     name=STRING (ambiguity) ';' (rule end)
-	 *     name=STRING (ambiguity) (rule end)
+	 *     basetype=[OntoLClass|QualifiedName] (ambiguity) ';' (rule end)
+	 *     basetype=[OntoLClass|QualifiedName] (ambiguity) (rule end)
+	 *     instantiatedClasses+=[OntoLClass|QualifiedName] (ambiguity) ';' (rule end)
+	 *     instantiatedClasses+=[OntoLClass|QualifiedName] (ambiguity) (rule end)
+	 *     name=ID (ambiguity) ';' (rule end)
+	 *     name=ID (ambiguity) (rule end)
+	 *     powertypeOf=[OntoLClass|QualifiedName] (ambiguity) ';' (rule end)
+	 *     powertypeOf=[OntoLClass|QualifiedName] (ambiguity) (rule end)
+	 *     subordinators+=[OntoLClass|QualifiedName] (ambiguity) ';' (rule end)
+	 *     subordinators+=[OntoLClass|QualifiedName] (ambiguity) (rule end)
+	 *     superClasses+=[OntoLClass|QualifiedName] (ambiguity) ';' (rule end)
+	 *     superClasses+=[OntoLClass|QualifiedName] (ambiguity) (rule end)
 	 */
-	protected void emit_Set___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_OntoLClass___LeftCurlyBracketKeyword_1_0_RightCurlyBracketKeyword_1_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

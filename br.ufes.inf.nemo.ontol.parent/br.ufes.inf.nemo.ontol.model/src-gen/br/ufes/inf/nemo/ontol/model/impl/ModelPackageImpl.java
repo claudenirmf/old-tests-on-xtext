@@ -12,6 +12,7 @@ import br.ufes.inf.nemo.ontol.model.FOClass;
 import br.ufes.inf.nemo.ontol.model.GeneralizationSet;
 import br.ufes.inf.nemo.ontol.model.HOClass;
 import br.ufes.inf.nemo.ontol.model.Import;
+import br.ufes.inf.nemo.ontol.model.Include;
 import br.ufes.inf.nemo.ontol.model.Individual;
 import br.ufes.inf.nemo.ontol.model.Model;
 import br.ufes.inf.nemo.ontol.model.ModelElement;
@@ -66,6 +67,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass importEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass includeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -337,6 +345,24 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public EAttribute getImport_ImportedNamespace() {
 		return (EAttribute)importEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getInclude() {
+		return includeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getInclude_Include() {
+		return (EReference)includeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -925,6 +951,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		importEClass = createEClass(IMPORT);
 		createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
 
+		includeEClass = createEClass(INCLUDE);
+		createEReference(includeEClass, INCLUDE__INCLUDE);
+
 		entityDeclarationEClass = createEClass(ENTITY_DECLARATION);
 		createEAttribute(entityDeclarationEClass, ENTITY_DECLARATION__NAME);
 		createEReference(entityDeclarationEClass, ENTITY_DECLARATION__INSTANTIATED_CLASSES);
@@ -1042,6 +1071,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		// Add supertypes to classes
 		importEClass.getESuperTypes().add(this.getModelElement());
+		includeEClass.getESuperTypes().add(this.getModelElement());
 		entityDeclarationEClass.getESuperTypes().add(this.getModelElement());
 		individualEClass.getESuperTypes().add(this.getEntityDeclaration());
 		ontoLClassEClass.getESuperTypes().add(this.getEntityDeclaration());
@@ -1059,10 +1089,10 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		valueEClass.getESuperTypes().add(this.getModelElement());
 		referenceValueEClass.getESuperTypes().add(this.getValue());
 		dataValueEClass.getESuperTypes().add(this.getValue());
-		stringValueEClass.getESuperTypes().add(this.getValue());
-		numberValueEClass.getESuperTypes().add(this.getValue());
-		booleanValueEClass.getESuperTypes().add(this.getValue());
-		noneValueEClass.getESuperTypes().add(this.getValue());
+		stringValueEClass.getESuperTypes().add(this.getDataValue());
+		numberValueEClass.getESuperTypes().add(this.getDataValue());
+		booleanValueEClass.getESuperTypes().add(this.getDataValue());
+		noneValueEClass.getESuperTypes().add(this.getDataValue());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1073,6 +1103,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getImport_ImportedNamespace(), theEcorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(includeEClass, Include.class, "Include", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getInclude_Include(), this.getModel(), null, "include", null, 0, 1, Include.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(entityDeclarationEClass, EntityDeclaration.class, "EntityDeclaration", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEntityDeclaration_Name(), theEcorePackage.getEString(), "name", null, 0, 1, EntityDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1119,8 +1152,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getAttribute_OppositeTo(), this.getAttribute(), null, "oppositeTo", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(referenceEClass, Reference.class, "Reference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getReference_SubsetOf(), this.getAttribute(), null, "subsetOf", null, 0, -1, Reference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getReference_OppositeTo(), this.getAttribute(), null, "oppositeTo", null, 0, 1, Reference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getReference_SubsetOf(), this.getReference(), null, "subsetOf", null, 0, -1, Reference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getReference_OppositeTo(), this.getReference(), null, "oppositeTo", null, 0, 1, Reference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(propertyAssignmentEClass, PropertyAssignment.class, "PropertyAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

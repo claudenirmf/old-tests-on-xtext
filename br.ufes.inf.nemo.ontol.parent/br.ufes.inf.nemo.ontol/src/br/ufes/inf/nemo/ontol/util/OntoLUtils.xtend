@@ -5,23 +5,22 @@
  */
 package br.ufes.inf.nemo.ontol.util
 
-import br.ufes.inf.nemo.ontol.model.Class
+import br.ufes.inf.nemo.ontol.model.OntoLClass
 import br.ufes.inf.nemo.ontol.model.EntityDeclaration
-import br.ufes.inf.nemo.ontol.model.Individual
 import br.ufes.inf.nemo.ontol.model.Property
-import com.google.inject.Inject
+import br.ufes.inf.nemo.ontol.model.Attribute
 import java.util.LinkedHashSet
+import br.ufes.inf.nemo.ontol.model.Model
+import br.ufes.inf.nemo.ontol.model.Include
+import br.ufes.inf.nemo.ontol.model.ModelElement
+import java.util.Set
+import br.ufes.inf.nemo.ontol.model.Reference
 
 class OntoLUtils {
 
-	@Inject extension OntoLIndex
-
-	/**
-	 * Minimum order of a high-order type.
-	 * 
-	 * @author Claudenir Fonseca
-	 */
-	public static val HO_TYPE_MIN_ORDER = 2
+	def getRechableModels(ModelElement elem){
+		(elem.eContainer as Model).elements.filter[it instanceof Include].map [(it as Include).include]
+	}
 
 	/** 
 	 * Returns a set of all super types of the given <b>type</b>. The set does not
@@ -29,12 +28,12 @@ class OntoLUtils {
 	 * 
 	 * @author Claudenir Fonseca
 	 */
-	def LinkedHashSet<Class> classHierarchy(Class c) {
-		val visited = new LinkedHashSet<Class>()
+	def LinkedHashSet<OntoLClass> classHierarchy(OntoLClass c) {
+		val visited = new LinkedHashSet<OntoLClass>()
 		c.classHierarchy(visited)
 	}
 
-	def private LinkedHashSet<Class> classHierarchy(Class c, LinkedHashSet<Class> visited) {
+	def private LinkedHashSet<OntoLClass> classHierarchy(OntoLClass c, LinkedHashSet<OntoLClass> visited) {
 		for (current : c.superClasses) {
 			if (!visited.contains(current)) {
 				visited.add(current)
@@ -52,20 +51,37 @@ class OntoLUtils {
 	 * 
 	 * @author Claudenir Fonseca
 	 */
-	def getBasicFixedTypes(EntityDeclaration e) {
-		val basicFixedTypes = new LinkedHashSet<Class>()
-		basicFixedTypes.addAll(e.fixedTypes)
-
-		if (e instanceof Class) {
-			val ch = e.classHierarchy
-			// TODO check every use of EObjectDescription
-			e.visibleEObjectDescriptions.forEach [
-				val c = if(it.getEClass instanceof Class) it.getEClass as Class else null
-				if (c!=null && c.powertypeOf != null && ch.contains(c.powertypeOf))
-					basicFixedTypes.add(c as Class)
+	def getBasicInstantiatedClasses(EntityDeclaration e) {
+		val basicInstantiatedClasses = new LinkedHashSet<OntoLClass>()
+		basicInstantiatedClasses.addAll(e.instantiatedClasses)
+		
+		if(e instanceof OntoLClass) {
+			val includedModels = e.rechableModels
+			val possiblePowertypes = includedModels.map[
+				elements.filter [
+					if(it instanceof OntoLClass) powertypeOf != null else false
+				]
 			]
-			return basicFixedTypes
-		} else if(e instanceof Individual) return basicFixedTypes
+			val ch = e.classHierarchy
+			possiblePowertypes.forEach [
+				val pwt = it as OntoLClass
+				if (ch.contains(pwt.powertypeOf))
+					basicInstantiatedClasses.add(pwt)
+			]
+		} else {
+			return basicInstantiatedClasses
+		} 
+//
+//		if (e instanceof OntoLClass) {
+//			val ch = e.classHierarchy
+//			// TODO check every use of EObjectDescription
+//			e.visibleEObjectDescriptions.forEach [
+//				val c = if(it.getEClass instanceof OntoLClass) it.getEClass as OntoLClass else null
+//				if (c!=null && c.powertypeOf != null && ch.contains(c.powertypeOf))
+//					basicFixedTypes.add(c as OntoLClass)
+//			]
+//			return basicFixedTypes
+//		} else if(e instanceof Individual) return basicFixedTypes
 	}
 
 	/**
@@ -75,9 +91,9 @@ class OntoLUtils {
 	 * 
 	 * @author Claudenir Fonseca
 	 */
-	def getAllFixedTypes(EntityDeclaration e) {
-		val visited = new LinkedHashSet<Class>()
-		e.basicFixedTypes.forEach [
+	def getAllInstantiatedClasses(EntityDeclaration e) {
+		val visited = new LinkedHashSet<OntoLClass>()
+		e.basicInstantiatedClasses.forEach [
 			visited.add(it)
 			visited.addAll(it.classHierarchy)
 		]
@@ -91,10 +107,23 @@ class OntoLUtils {
 	 * 
 	 * @author Claudenir Fonseca
 	 */
-	def getAllProperties(EntityDeclaration e) {
-		val properties = new LinkedHashSet<Property>()
-		e.allFixedTypes.forEach [ properties.addAll(it.props) ]
-		return properties
+	def Set<Property> getAllProperties(EntityDeclaration e) {
+		throw new Exception("Stop using getAllProperties()")
+//		val properties = new LinkedHashSet<Property>()
+//		e.allFixedTypes.forEach [ properties.addAll(it.props) ]
+//		return properties
+	}
+	
+	def getAllAttributes(EntityDeclaration e) {
+		val attributes = new LinkedHashSet<Attribute>()
+		e.allInstantiatedClasses.forEach [ attributes.addAll(it.attributes) ]
+		return attributes
+	}
+	
+	def getAllReferences(EntityDeclaration e) {
+		val references = new LinkedHashSet<Reference>()
+		e.allInstantiatedClasses.forEach [ references.addAll(it.references) ]
+		return references
 	}
 
 	/**
@@ -102,8 +131,17 @@ class OntoLUtils {
 	 * 
 	 * @author Claudenir Fonseca
 	 */
-	def getAllInheritedProperties(Class c) {
-		c.classHierarchy.map[props].flatten.toSet
+	def Set<Property> getAllInheritedProperties(OntoLClass c) {
+		throw new Exception("Stop using getAllProperties()")
+//		c.classHierarchy.map[props].flatten.toSet
+	}
+	
+	def getAllInheritedAttributes(OntoLClass c) {
+		c.classHierarchy.map[attributes].flatten.toSet
+	}
+	
+	def getAllInheritedReferences(OntoLClass c) {
+		c.classHierarchy.map[references].flatten.toSet
 	}
 
 	/**

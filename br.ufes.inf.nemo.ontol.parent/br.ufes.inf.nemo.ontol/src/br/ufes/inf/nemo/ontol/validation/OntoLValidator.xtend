@@ -3,7 +3,7 @@
  */
 package br.ufes.inf.nemo.ontol.validation
 
-import br.ufes.inf.nemo.ontol.model.Class
+import br.ufes.inf.nemo.ontol.model.OntoLClass
 import br.ufes.inf.nemo.ontol.model.EntityDeclaration
 import br.ufes.inf.nemo.ontol.model.GeneralizationSet
 import br.ufes.inf.nemo.ontol.model.HOClass
@@ -51,35 +51,35 @@ class OntoLValidator extends AbstractOntoLValidator {
 	}
 	
 	@Check(CheckType.FAST)
-	def void fastCheckOnClass(Class c){
+	def void fastCheckOnClass(OntoLClass c){
 		val ch = c.classHierarchy
-//		val iof = c.allFixedTypes
+//		val iof = c.allInstantiatedClasses
 		if(!c.isValidSpecialization)
 			error('''Invalid specialization.''', 
-				ModelPackage.eINSTANCE.class_SuperClasses,
+				ModelPackage.eINSTANCE.ontoLClass_SuperClasses,
 				LinguisticRules.INVALID_CLASS_SPECIALIZATION)
 		if(c.hasCyclicSpecialization(ch))
 			error('''Invalid cyclic specialization.''',
-				ModelPackage.eINSTANCE.class_SuperClasses,
+				ModelPackage.eINSTANCE.ontoLClass_SuperClasses,
 				LinguisticRules.CYCLIC_SPECIALIZATION)
 		if(!c.hasValidBasetype)
 			error('''Invalid basetype.''',
-				ModelPackage.eINSTANCE.class_Basetype,
+				ModelPackage.eINSTANCE.ontoLClass_Basetype,
 				LinguisticRules.INVALID_BASETYPE)
 		if(!c.hasValidPowertypeRelation)
 			error('''Invalid powertype relation.''',
-				ModelPackage.eINSTANCE.class_PowertypeOf,
+				ModelPackage.eINSTANCE.ontoLClass_PowertypeOf,
 				LinguisticRules.INVALID_POWERTYPE_RELATION)
 		if(!c.hasValidSubordinators)
 			error('''Invalid subordinator.''',
-				ModelPackage.eINSTANCE.class_Subordinators,
+				ModelPackage.eINSTANCE.ontoLClass_Subordinators,
 				LinguisticRules.INVALID_SUBORDINATOR)
 	}
 	
 	@Check(CheckType.FAST)
 	def void fastChecksOnHOClass(HOClass ho){
 		if(!ho.minOrder)
-			error('''Order must be of Â«MLTRules.MIN_ORDERÂ» or greater.''',
+			error('''Order must be of «MLTRules.MIN_ORDER» or greater.''',
 				ModelPackage.eINSTANCE.HOClass_Order,
 				MLTRules.INVALID_HO_CLASS_ORDER)
 	}
@@ -94,36 +94,36 @@ class OntoLValidator extends AbstractOntoLValidator {
 	
 	@Check(CheckType.NORMAL)
 	def void normalChecksOnEntity(EntityDeclaration e){
-		val iof = e.allFixedTypes
+		val iof = e.allInstantiatedClasses
 		if(e.isInstanceOfDisjointClasses(iof))
-			error('''Â«e.nameÂ» is instance of disjoint classes.''',
-				ModelPackage.eINSTANCE.entityDeclaration_FixedTypes,
+			error('''«e.name» is instance of disjoint classes.''',
+				ModelPackage.eINSTANCE.entityDeclaration_InstantiatedClasses,
 				LinguisticRules.INSTANCE_OF_DISJOINT_CLASSES)
 		if(e.missingInstantiationByCompleteness(iof))
 			error('''Missing instantion of complete generalization set.''',
-				ModelPackage.eINSTANCE.entityDeclaration_FixedTypes,
+				ModelPackage.eINSTANCE.entityDeclaration_InstantiatedClasses,
 				LinguisticRules.MISSING_INSTANTIATION_OF_COMPLETE_GENERALIZATION_SET)
 	}
 	
 	@Check(CheckType.NORMAL)
-	def void normalChecksOnClass(Class c){
+	def void normalChecksOnClass(OntoLClass c){
 		 val ch = c.classHierarchy
-		 val iof = c.allFixedTypes
+		 val iof = c.allInstantiatedClasses
  		if(c.isMissingSpecializationThroughPowertype(ch))
 			error('''Missing specialization through powertype relation.''',
-				ModelPackage.eINSTANCE.class_SuperClasses,
+				ModelPackage.eINSTANCE.ontoLClass_SuperClasses,
 				MLTRules.MISSING_SPECIALIZATION_THROUGH_POWERTYPE)
 		if(!c.obeysSubordination(ch,iof))
 			error('''Missing specialization through subordination.''',
-				ModelPackage.eINSTANCE.class_SuperClasses,
+				ModelPackage.eINSTANCE.ontoLClass_SuperClasses,
 				LinguisticRules.MISSING_SPECIALIZATION_THROUGH_SUBODINATION)
 		if(c.hasSimpleSubordinationCycle)
-			error('''Â«c.nameÂ» is in a subordination cycle.''',
-				ModelPackage.eINSTANCE.class_Subordinators,
+			error('''«c.name» is in a subordination cycle.''',
+				ModelPackage.eINSTANCE.ontoLClass_Subordinators,
 				LinguisticRules.SIMPLE_SUBORDINATION_CYCLE)
 		if(c.isSpecializingDisjointClasses(ch))
-			error('''Â«c.nameÂ» is specializing disjoint classes.''',
-				ModelPackage.eINSTANCE.class_Subordinators,
+			error('''«c.name» is specializing disjoint classes.''',
+				ModelPackage.eINSTANCE.ontoLClass_Subordinators,
 				LinguisticRules.SPECILIZATION_OF_DISJOINT_CLASSES)
 	}
 	

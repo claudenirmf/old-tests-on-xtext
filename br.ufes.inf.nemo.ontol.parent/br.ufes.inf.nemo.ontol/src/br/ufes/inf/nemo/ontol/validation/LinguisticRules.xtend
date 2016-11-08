@@ -1,11 +1,10 @@
 package br.ufes.inf.nemo.ontol.validation
 
 import br.ufes.inf.nemo.ontol.model.EntityDeclaration
-import br.ufes.inf.nemo.ontol.model.Class
+import br.ufes.inf.nemo.ontol.model.OntoLClass
 import br.ufes.inf.nemo.ontol.model.FOClass
 import br.ufes.inf.nemo.ontol.model.HOClass
 import br.ufes.inf.nemo.ontol.model.OrderedClass
-import br.ufes.inf.nemo.ontol.model.WClass
 import java.util.LinkedHashSet
 import br.ufes.inf.nemo.ontol.model.Model
 import br.ufes.inf.nemo.ontol.model.GeneralizationSet
@@ -15,6 +14,7 @@ import br.ufes.inf.nemo.ontol.util.OntoLIndex
 import br.ufes.inf.nemo.ontol.model.ModelPackage
 import com.google.common.collect.Sets
 import java.util.Collections
+import br.ufes.inf.nemo.ontol.model.OrderlessClass
 
 class LinguisticRules {
 	
@@ -39,10 +39,10 @@ class LinguisticRules {
 		if(e.name == e.name.toFirstLower) false		else true
 	}
 	
-	def isValidSpecialization(Class c){
+	def isValidSpecialization(OntoLClass c){
 		if(c.superClasses.exists[ it==c ]){
 			return false
-		} else if(c instanceof WClass && c.superClasses.exists[ it instanceof OrderedClass ]){
+		} else if(c instanceof OrderlessClass && c.superClasses.exists[ it instanceof OrderedClass ]){
 			return false
 		} else if(c instanceof FOClass && c.superClasses.exists[ it instanceof HOClass ]){
 			return false
@@ -57,16 +57,16 @@ class LinguisticRules {
 		}
 	}
 	
-	def hasCyclicSpecialization(Class c, LinkedHashSet<Class> ch){
+	def hasCyclicSpecialization(OntoLClass c, LinkedHashSet<OntoLClass> ch){
 		if(ch.contains(c)) true		else false
 	}
 	
-	def hasValidBasetype(Class c){
+	def hasValidBasetype(OntoLClass c){
 		// TODO Add conditions for instances of WClass
 		val b = c.basetype
 		if(b == null)	return true
 		else if(c instanceof HOClass){
-			if(b instanceof WClass)
+			if(b instanceof OrderlessClass)
 				return false
 			else if(c.order == MLTRules.MIN_ORDER){
 				if(b instanceof FOClass)	return true
@@ -79,12 +79,12 @@ class LinguisticRules {
 		}
 	}
 	
-	def hasValidPowertypeRelation(Class c){
+	def hasValidPowertypeRelation(OntoLClass c){
 		// TODO Add conditions for instances of WClass
 		val b = c.powertypeOf
 		if(b == null)	return true
 		else if(c instanceof HOClass){
-			if(b instanceof WClass)
+			if(b instanceof OrderlessClass)
 				return false
 			else if(c.order == MLTRules.MIN_ORDER){
 				if(b instanceof FOClass)	return true
@@ -97,7 +97,7 @@ class LinguisticRules {
 		}
 	}
 	
-	def hasValidSubordinators(Class c){
+	def hasValidSubordinators(OntoLClass c){
 		// TODO Add conditions for instances of WClass
 		if(c instanceof HOClass)
 			return !c.subordinators.exists[ 
@@ -123,19 +123,19 @@ class LinguisticRules {
 			return false
 		else if(gs.categorizer.basetype!=null && gs.categorizer.basetype!=gs.general)
 			return false
-		else if(gs.categorizer.basetype!=null && gs.specifics.exists[!fixedTypes.contains(gs.categorizer)])
+		else if(gs.categorizer.basetype!=null && gs.specifics.exists[!instantiatedClasses.contains(gs.categorizer)])
 			return false
 		else
 			return true
 	}
 	
-	def obeysSubordination(Class c, LinkedHashSet<Class> ch, LinkedHashSet<Class> iof){
-		val subordinated = new LinkedHashSet<Class>()
+	def obeysSubordination(OntoLClass c, LinkedHashSet<OntoLClass> ch, LinkedHashSet<OntoLClass> iof){
+		val subordinated = new LinkedHashSet<OntoLClass>()
 		iof.forEach[if(subordinators!=null) subordinated.addAll(subordinators)]
 		if(subordinated.size==0)	return true
 		
-		val superClassesIof = new LinkedHashSet<Class>()
-		ch.forEach[superClassesIof.addAll(allFixedTypes)]
+		val superClassesIof = new LinkedHashSet<OntoLClass>()
+		ch.forEach[superClassesIof.addAll(allInstantiatedClasses)]
 		return superClassesIof.containsAll(subordinated)
 	}
 	
@@ -145,14 +145,14 @@ class LinguisticRules {
 	 * <br> - C is subordinated to X, and X is subordinated to C
 	 * <br> - C is subordinated to X, but C is a super class to X
 	 */
-	def hasSimpleSubordinationCycle(Class c){
+	def hasSimpleSubordinationCycle(OntoLClass c){
 		if(c.subordinators==null)	return false
 		else return c.subordinators.exists[ sc |
 			sc == c || sc?.subordinators.contains(c) || sc.classHierarchy.contains(c)
 		]
 	}
 	
-	def isSpecializingDisjointClasses(Class c, LinkedHashSet<Class> ch){
+	def isSpecializingDisjointClasses(OntoLClass c, LinkedHashSet<OntoLClass> ch){
 		c.getVisibleEObjectDescriptions(ModelPackage.eINSTANCE.generalizationSet)
 			.exists[
 				val gs = if(it.EObjectOrProxy instanceof GeneralizationSet) it.EObjectOrProxy as GeneralizationSet else null
@@ -162,7 +162,7 @@ class LinguisticRules {
 			]
 	}
 	
-	def isInstanceOfDisjointClasses(EntityDeclaration e, LinkedHashSet<Class> iof){
+	def isInstanceOfDisjointClasses(EntityDeclaration e, LinkedHashSet<OntoLClass> iof){
 		e.getVisibleEObjectDescriptions(ModelPackage.eINSTANCE.generalizationSet)
 			.exists[
 				val gs = if(it.EObjectOrProxy instanceof GeneralizationSet) it.EObjectOrProxy as GeneralizationSet else null
@@ -172,7 +172,7 @@ class LinguisticRules {
 			]
 	}
 
-	def missingInstantiationByCompleteness(EntityDeclaration e, LinkedHashSet<Class> iof){
+	def missingInstantiationByCompleteness(EntityDeclaration e, LinkedHashSet<OntoLClass> iof){
 		e.getVisibleEObjectDescriptions(ModelPackage.eINSTANCE.generalizationSet)
 			.exists[
 				val gs = if(it.EObjectOrProxy instanceof GeneralizationSet) it.EObjectOrProxy as GeneralizationSet else null

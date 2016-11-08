@@ -11,7 +11,7 @@ Model:
 ;
 
 ModelElement:
-	( Import | EntityDeclaration | GeneralizationSet ) ';'
+	( Import | Include | EntityDeclaration | GeneralizationSet ) ';'
 ;
 
 QualifiedName:
@@ -28,6 +28,10 @@ Import:
 
 EntityDeclaration:
 	OntoLClass | Individual
+;
+
+Include:
+	'include' include = [Model|QualifiedName]
 ;
 
 Individual:
@@ -55,7 +59,7 @@ OrderlessClass:
 	('specializes' superClasses+=[OntoLClass|QualifiedName] (',' superClasses+=[OntoLClass|QualifiedName])*)?
 	('subordinatedto' subordinators+=[OntoLClass|QualifiedName] (',' subordinators+=[OntoLClass|QualifiedName])*)?
 	( 
-		(catType=CategorizationType basetype=[OntoLClass|QualifiedName])
+		(categorizationType=CategorizationType basetype=[OntoLClass|QualifiedName])
 		| ('ispowertypeof' powertypeOf=[OntoLClass|QualifiedName])
 	)?
 ;
@@ -72,7 +76,7 @@ HOClass:
 	('specializes' superClasses+=[OntoLClass|QualifiedName] (',' superClasses+=[OntoLClass|QualifiedName])*)?
 	('subordinatedto' subordinators+=[OntoLClass|QualifiedName] (',' subordinators+=[OntoLClass|QualifiedName])*)?
 	(
-		(catType=CategorizationType basetype=[OntoLClass|QualifiedName])
+		(categorizationType=CategorizationType basetype=[OntoLClass|QualifiedName])
 		| ('ispowertypeof' powertypeOf=[OntoLClass|QualifiedName])
 	)?
 ;
@@ -81,12 +85,12 @@ enum CategorizationType:
 	CATEGORIZER | COMPLETE_CATEGORIZER | DISJOINT_CATEGORIZER | PARTITIONER
 ;
 
-Property:
-	name=ID ':' ('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
-	propertyType=[OntoLClass|QualifiedName]
-	('subsets' subsetOf+=[Property|QualifiedName] (',' subsetOf+=[Property|QualifiedName])*)?
-	('isoppositeto' oppositeTo=[Property|QualifiedName])?
-;
+//Property:
+//	name=ID ':' ('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
+//	propertyType=[OntoLClass|QualifiedName]
+//	('subsets' subsetOf+=[Property|QualifiedName] (',' subsetOf+=[Property|QualifiedName])*)?
+//	('isoppositeto' oppositeTo=[Property|QualifiedName])?
+//;
 
 Attribute:
 	'att' name=ID ':' ('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
@@ -106,25 +110,33 @@ ELEMENTBOUND returns ecore::EIntegerObject:
 	'*' | INT
 ;
 
-PropertyAssignment returns PropertyAssignment:
-	property=[Property|QualifiedName] '=' assignment=Value
-;
+//PropertyAssignment returns PropertyAssignment:
+//	property=[Property|QualifiedName] '=' assignment=Value
+//;
 
 AttributeAssignment: 
+	'att' attribute=[Attribute|QualifiedName] '='
+	( 
+		assignments+=DataValue 
+		| '{' assignments+=DataValue (',' assignments+=DataValue)* '}'
+	)
 ;
 
 ReferenceAssignment: 
-;
-Value:
-	ReferenceValue | ListValue | StringValue | NumberValue | BooleanValue | NoneValue
+	'ref' reference=[Reference|QualifiedName] '='
+	( 
+		assignments+=ReferenceValue
+		| '{' assignments+=ReferenceValue (',' assignments+=ReferenceValue)* '}'
+	)
 ;
 
-ReferenceValue:
+DataValue:
+	StringValue | NumberValue | BooleanValue | NoneValue
+;
+
+
+ReferenceValue returns ReferenceValue:
 	value=[EntityDeclaration|QualifiedName]
-;
-
-ListValue:
-	'(' value+=Value (','value+=Value)* ')'
 ;
 
 StringValue:

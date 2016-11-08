@@ -1,6 +1,6 @@
 package br.ufes.inf.nemo.ontol.util
 
-import br.ufes.inf.nemo.ontol.model.Class
+import br.ufes.inf.nemo.ontol.model.OntoLClass
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
@@ -40,7 +40,7 @@ class OntoLIndex {
 		if(o.eIsProxy){
 			o = context.eResource.resourceSet.getEObject(desc.EObjectURI, true)
 		}
-		o as Class
+		o as OntoLClass
 	}
 	
 }

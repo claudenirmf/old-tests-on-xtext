@@ -2,6 +2,7 @@
  */
 package br.ufes.inf.nemo.ontol.model.impl;
 
+import br.ufes.inf.nemo.ontol.model.DataValue;
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
 import br.ufes.inf.nemo.ontol.model.NoneValue;
 import br.ufes.inf.nemo.ontol.model.Value;
@@ -18,7 +19,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class NoneValueImpl extends ValueImpl implements NoneValue {
+public class NoneValueImpl extends DataValueImpl implements NoneValue {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -66,6 +67,12 @@ public class NoneValueImpl extends ValueImpl implements NoneValue {
 		if (baseClass == Value.class) {
 			switch (baseOperationID) {
 				case ModelPackage.VALUE___GET_NASSIGNMENTS: return ModelPackage.NONE_VALUE___GET_NASSIGNMENTS;
+				default: return super.eDerivedOperationID(baseOperationID, baseClass);
+			}
+		}
+		if (baseClass == DataValue.class) {
+			switch (baseOperationID) {
+				case ModelPackage.DATA_VALUE___GET_NASSIGNMENTS: return ModelPackage.NONE_VALUE___GET_NASSIGNMENTS;
 				default: return super.eDerivedOperationID(baseOperationID, baseClass);
 			}
 		}

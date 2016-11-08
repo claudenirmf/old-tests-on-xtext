@@ -1,6 +1,6 @@
 package br.ufes.inf.nemo.ontol.validation
 
-import br.ufes.inf.nemo.ontol.model.Class
+import br.ufes.inf.nemo.ontol.model.OntoLClass
 import br.ufes.inf.nemo.ontol.model.HOClass
 import java.util.LinkedHashSet
 import com.google.inject.Inject
@@ -19,8 +19,8 @@ class MLTRules {
 		if(ho.order < MIN_ORDER) false		else true
 	}
 	
-	def isMissingSpecializationThroughPowertype(Class c, LinkedHashSet<Class> cHierarchy){
-		return c.allFixedTypes.exists[ ho |
+	def isMissingSpecializationThroughPowertype(OntoLClass c, LinkedHashSet<OntoLClass> cHierarchy){
+		return c.allInstantiatedClasses.exists[ ho |
 				if(ho.powertypeOf != null)
 					if(!cHierarchy.contains(ho.powertypeOf) && ho.powertypeOf!=c)
 						return true

@@ -13,7 +13,7 @@ package br.ufes.inf.nemo.ontol.model;
  * @model
  * @generated
  */
-public interface NoneValue extends Value {
+public interface NoneValue extends DataValue {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
