@@ -10,7 +10,6 @@ import br.ufes.inf.nemo.ontol.model.FOClass;
 import br.ufes.inf.nemo.ontol.model.GeneralizationSet;
 import br.ufes.inf.nemo.ontol.model.HOClass;
 import br.ufes.inf.nemo.ontol.model.Import;
-import br.ufes.inf.nemo.ontol.model.Include;
 import br.ufes.inf.nemo.ontol.model.Individual;
 import br.ufes.inf.nemo.ontol.model.Model;
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
@@ -87,9 +86,6 @@ public class OntoLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 			case ModelPackage.IMPORT:
 				sequence_Import(context, (Import) semanticObject); 
 				return; 
-			case ModelPackage.INCLUDE:
-				sequence_Include(context, (Include) semanticObject); 
-				return; 
 			case ModelPackage.INDIVIDUAL:
 				sequence_Individual(context, (Individual) semanticObject); 
 				return; 
@@ -152,8 +148,7 @@ public class OntoLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *         name=ID 
 	 *         (lowerBound=ELEMENTBOUND upperBound=ELEMENTBOUND)? 
 	 *         propertyClass=[OntoLClass|QualifiedName] 
-	 *         (subsetOf+=[Attribute|QualifiedName] subsetOf+=[Attribute|QualifiedName]*)? 
-	 *         oppositeTo=[Attribute|QualifiedName]?
+	 *         (subsetOf+=[Attribute|QualifiedName] subsetOf+=[Attribute|QualifiedName]*)?
 	 *     )
 	 */
 	protected void sequence_Attribute(ISerializationContext context, Attribute semanticObject) {
@@ -227,7 +222,7 @@ public class OntoLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *         general=[OntoLClass|QualifiedName] 
 	 *         categorizer=[OntoLClass|QualifiedName]? 
 	 *         specifics+=[OntoLClass|QualifiedName] 
-	 *         specifics+=[OntoLClass|QualifiedName]*
+	 *         specifics+=[OntoLClass|QualifiedName]+
 	 *     )
 	 */
 	protected void sequence_GeneralizationSet(ISerializationContext context, GeneralizationSet semanticObject) {
@@ -297,25 +292,6 @@ public class OntoLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Contexts:
-	 *     ModelElement returns Include
-	 *     Include returns Include
-	 *
-	 * Constraint:
-	 *     include=[Model|QualifiedName]
-	 */
-	protected void sequence_Include(ISerializationContext context, Include semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, ModelPackage.Literals.INCLUDE__INCLUDE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ModelPackage.Literals.INCLUDE__INCLUDE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getIncludeAccess().getIncludeModelQualifiedNameParserRuleCall_1_0_1(), semanticObject.getInclude());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
 	 *     ModelElement returns Individual
 	 *     EntityDeclaration returns Individual
 	 *     Individual returns Individual
@@ -337,7 +313,7 @@ public class OntoLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Model returns Model
 	 *
 	 * Constraint:
-	 *     (name=QualifiedName elements+=ModelElement*)
+	 *     (name=QualifiedName (includes+=[Model|QualifiedName] | elements+=ModelElement)*)
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

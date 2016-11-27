@@ -5,21 +5,23 @@
  */
 package br.ufes.inf.nemo.ontol.util
 
-import br.ufes.inf.nemo.ontol.model.OntoLClass
-import br.ufes.inf.nemo.ontol.model.EntityDeclaration
-import br.ufes.inf.nemo.ontol.model.Property
 import br.ufes.inf.nemo.ontol.model.Attribute
-import java.util.LinkedHashSet
+import br.ufes.inf.nemo.ontol.model.EntityDeclaration
 import br.ufes.inf.nemo.ontol.model.Model
-import br.ufes.inf.nemo.ontol.model.Include
 import br.ufes.inf.nemo.ontol.model.ModelElement
-import java.util.Set
+import br.ufes.inf.nemo.ontol.model.OntoLClass
+import br.ufes.inf.nemo.ontol.model.Property
 import br.ufes.inf.nemo.ontol.model.Reference
+import java.util.LinkedHashSet
+import java.util.Set
 
 class OntoLUtils {
 
-	def getRechableModels(ModelElement elem){
-		(elem.eContainer as Model).elements.filter[it instanceof Include].map [(it as Include).include]
+	def private Set<Model> getRechableModels(ModelElement elem){
+		val set = new LinkedHashSet<Model>
+		set.add(elem.eContainer as Model)
+		set.addAll((elem.eContainer as Model).includes)
+		return set
 	}
 
 	/** 
@@ -28,12 +30,12 @@ class OntoLUtils {
 	 * 
 	 * @author Claudenir Fonseca
 	 */
-	def LinkedHashSet<OntoLClass> classHierarchy(OntoLClass c) {
+	def Set<OntoLClass> classHierarchy(OntoLClass c) {
 		val visited = new LinkedHashSet<OntoLClass>()
 		c.classHierarchy(visited)
 	}
 
-	def private LinkedHashSet<OntoLClass> classHierarchy(OntoLClass c, LinkedHashSet<OntoLClass> visited) {
+	def private Set<OntoLClass> classHierarchy(OntoLClass c, LinkedHashSet<OntoLClass> visited) {
 		for (current : c.superClasses) {
 			if (!visited.contains(current)) {
 				visited.add(current)
@@ -56,32 +58,18 @@ class OntoLUtils {
 		basicInstantiatedClasses.addAll(e.instantiatedClasses)
 		
 		if(e instanceof OntoLClass) {
-			val includedModels = e.rechableModels
-			val possiblePowertypes = includedModels.map[
-				elements.filter [
-					if(it instanceof OntoLClass) powertypeOf != null else false
-				]
-			]
 			val ch = e.classHierarchy
-			possiblePowertypes.forEach [
-				val pwt = it as OntoLClass
-				if (ch.contains(pwt.powertypeOf))
-					basicInstantiatedClasses.add(pwt)
+			e.rechableModels.map[elements].flatten.forEach[ 
+				if(it instanceof OntoLClass){
+					val aux = powertypeOf
+					if(aux!=null && (aux==e || ch.contains(aux)))
+							basicInstantiatedClasses.add(it)
+				}
 			]
+			return basicInstantiatedClasses
 		} else {
 			return basicInstantiatedClasses
 		} 
-//
-//		if (e instanceof OntoLClass) {
-//			val ch = e.classHierarchy
-//			// TODO check every use of EObjectDescription
-//			e.visibleEObjectDescriptions.forEach [
-//				val c = if(it.getEClass instanceof OntoLClass) it.getEClass as OntoLClass else null
-//				if (c!=null && c.powertypeOf != null && ch.contains(c.powertypeOf))
-//					basicFixedTypes.add(c as OntoLClass)
-//			]
-//			return basicFixedTypes
-//		} else if(e instanceof Individual) return basicFixedTypes
 	}
 
 	/**

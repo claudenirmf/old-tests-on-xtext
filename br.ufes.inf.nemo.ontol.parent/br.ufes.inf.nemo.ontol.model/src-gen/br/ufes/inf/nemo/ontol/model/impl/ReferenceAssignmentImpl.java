@@ -5,15 +5,20 @@ package br.ufes.inf.nemo.ontol.model.impl;
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
 import br.ufes.inf.nemo.ontol.model.Reference;
 import br.ufes.inf.nemo.ontol.model.ReferenceAssignment;
-
 import br.ufes.inf.nemo.ontol.model.ReferenceValue;
+
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -41,6 +46,7 @@ public class ReferenceAssignmentImpl extends PropertyAssignmentImpl implements R
 	 * @ordered
 	 */
 	protected Reference reference;
+
 	/**
 	 * The cached value of the '{@link #getAssignments() <em>Assignments</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

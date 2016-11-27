@@ -1,20 +1,21 @@
 package br.ufes.inf.nemo.ontol.validation
 
 import br.ufes.inf.nemo.ontol.model.EntityDeclaration
-import br.ufes.inf.nemo.ontol.model.OntoLClass
 import br.ufes.inf.nemo.ontol.model.FOClass
-import br.ufes.inf.nemo.ontol.model.HOClass
-import br.ufes.inf.nemo.ontol.model.OrderedClass
-import java.util.LinkedHashSet
-import br.ufes.inf.nemo.ontol.model.Model
 import br.ufes.inf.nemo.ontol.model.GeneralizationSet
-import br.ufes.inf.nemo.ontol.util.OntoLUtils
-import com.google.inject.Inject
-import br.ufes.inf.nemo.ontol.util.OntoLIndex
+import br.ufes.inf.nemo.ontol.model.HOClass
+import br.ufes.inf.nemo.ontol.model.Model
 import br.ufes.inf.nemo.ontol.model.ModelPackage
-import com.google.common.collect.Sets
-import java.util.Collections
+import br.ufes.inf.nemo.ontol.model.OntoLClass
+import br.ufes.inf.nemo.ontol.model.OrderedClass
 import br.ufes.inf.nemo.ontol.model.OrderlessClass
+import br.ufes.inf.nemo.ontol.util.OntoLIndex
+import br.ufes.inf.nemo.ontol.util.OntoLUtils
+import com.google.common.collect.Sets
+import com.google.inject.Inject
+import java.util.Collections
+import java.util.LinkedHashSet
+import java.util.Set
 
 class LinguisticRules {
 	
@@ -57,7 +58,7 @@ class LinguisticRules {
 		}
 	}
 	
-	def hasCyclicSpecialization(OntoLClass c, LinkedHashSet<OntoLClass> ch){
+	def hasCyclicSpecialization(OntoLClass c, Set<OntoLClass> ch){
 		if(ch.contains(c)) true		else false
 	}
 	
@@ -129,7 +130,7 @@ class LinguisticRules {
 			return true
 	}
 	
-	def obeysSubordination(OntoLClass c, LinkedHashSet<OntoLClass> ch, LinkedHashSet<OntoLClass> iof){
+	def obeysSubordination(OntoLClass c, Set<OntoLClass> ch, Set<OntoLClass> iof){
 		val subordinated = new LinkedHashSet<OntoLClass>()
 		iof.forEach[if(subordinators!=null) subordinated.addAll(subordinators)]
 		if(subordinated.size==0)	return true
@@ -152,21 +153,23 @@ class LinguisticRules {
 		]
 	}
 	
-	def isSpecializingDisjointClasses(OntoLClass c, LinkedHashSet<OntoLClass> ch){
-		c.getVisibleEObjectDescriptions(ModelPackage.eINSTANCE.generalizationSet)
-			.exists[
-				val gs = if(it.EObjectOrProxy instanceof GeneralizationSet) it.EObjectOrProxy as GeneralizationSet else null
-				if(gs==null || !gs.isDisjoint)	return false
-				else if(Sets.intersection(ch,gs?.specifics.toSet).size<2)	return false
-				else	return true
-			]
+	def isSpecializingDisjointClasses(OntoLClass c, Set<OntoLClass> ch){
+		c.getVisibleEObjectDescriptions(ModelPackage.eINSTANCE.generalizationSet).exists [
+			var gs = it.EObjectOrProxy as GeneralizationSet
+			if(gs.eIsProxy) gs = c.eResource.resourceSet.getEObject(it.EObjectURI, true) as GeneralizationSet
+			if (!gs.isDisjoint || Sets.intersection(ch, gs.specifics.toSet).size < 2)
+				return false
+			else
+				return true
+		]
 	}
 	
 	def isInstanceOfDisjointClasses(EntityDeclaration e, LinkedHashSet<OntoLClass> iof){
 		e.getVisibleEObjectDescriptions(ModelPackage.eINSTANCE.generalizationSet)
 			.exists[
-				val gs = if(it.EObjectOrProxy instanceof GeneralizationSet) it.EObjectOrProxy as GeneralizationSet else null
-				if(gs==null || !gs.isDisjoint || Sets.intersection(gs.specifics.toSet,iof).size<2)
+				var gs = it.EObjectOrProxy as GeneralizationSet
+				if(gs.eIsProxy) gs = e.eResource.resourceSet.getEObject(it.EObjectURI, true) as GeneralizationSet
+				if(!gs.isDisjoint || Sets.intersection(gs.specifics.toSet,iof).size<2)
 					return false
 				return true
 			]
@@ -175,8 +178,9 @@ class LinguisticRules {
 	def missingInstantiationByCompleteness(EntityDeclaration e, LinkedHashSet<OntoLClass> iof){
 		e.getVisibleEObjectDescriptions(ModelPackage.eINSTANCE.generalizationSet)
 			.exists[
-				val gs = if(it.EObjectOrProxy instanceof GeneralizationSet) it.EObjectOrProxy as GeneralizationSet else null
-				if(gs==null || !gs.isComplete || !iof.contains(gs.general) || !Collections.disjoint(gs.specifics.toSet,iof))
+				var gs = it.EObjectOrProxy as GeneralizationSet
+				if(gs.eIsProxy) gs = e.eResource.resourceSet.getEObject(it.EObjectURI, true) as GeneralizationSet
+				if(!gs.isComplete || !iof.contains(gs.general) || !Collections.disjoint(gs.specifics.toSet,iof))
 					return false
 				return true
 			]

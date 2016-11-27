@@ -4,7 +4,6 @@ package br.ufes.inf.nemo.ontol.model;
 
 import org.eclipse.emf.common.util.EList;
 
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Reference Assignment</b></em>'.
@@ -23,7 +22,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface ReferenceAssignment extends PropertyAssignment {
-
 	/**
 	 * Returns the value of the '<em><b>Reference</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -65,4 +63,5 @@ public interface ReferenceAssignment extends PropertyAssignment {
 	 * @generated
 	 */
 	EList<ReferenceValue> getAssignments();
+
 } // ReferenceAssignment

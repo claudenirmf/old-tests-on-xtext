@@ -6,11 +6,16 @@ import br.ufes.inf.nemo.ontol.model.ModelPackage;
 import br.ufes.inf.nemo.ontol.model.Reference;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
@@ -37,6 +42,7 @@ public class ReferenceImpl extends PropertyImpl implements Reference {
 	 * @ordered
 	 */
 	protected EList<Reference> subsetOf;
+
 	/**
 	 * The cached value of the '{@link #getOppositeTo() <em>Opposite To</em>}' reference.
 	 * <!-- begin-user-doc -->

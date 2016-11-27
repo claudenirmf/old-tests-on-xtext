@@ -35,6 +35,7 @@ public class OntoLParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
+					put(grammarAccess.getModelAccess().getAlternatives_3(), "rule__Model__Alternatives_3");
 					put(grammarAccess.getModelElementAccess().getAlternatives_0(), "rule__ModelElement__Alternatives_0");
 					put(grammarAccess.getEntityDeclarationAccess().getAlternatives(), "rule__EntityDeclaration__Alternatives");
 					put(grammarAccess.getIndividualAccess().getAlternatives_3_1(), "rule__Individual__Alternatives_3_1");
@@ -50,12 +51,12 @@ public class OntoLParser extends AbstractContentAssistParser {
 					put(grammarAccess.getGeneralizationSetAccess().getAlternatives_0(), "rule__GeneralizationSet__Alternatives_0");
 					put(grammarAccess.getCategorizationTypeAccess().getAlternatives(), "rule__CategorizationType__Alternatives");
 					put(grammarAccess.getModelAccess().getGroup(), "rule__Model__Group__0");
+					put(grammarAccess.getModelAccess().getGroup_3_0(), "rule__Model__Group_3_0__0");
 					put(grammarAccess.getModelElementAccess().getGroup(), "rule__ModelElement__Group__0");
 					put(grammarAccess.getQualifiedNameAccess().getGroup(), "rule__QualifiedName__Group__0");
 					put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
 					put(grammarAccess.getQualifiedNameWithWildcardAccess().getGroup(), "rule__QualifiedNameWithWildcard__Group__0");
 					put(grammarAccess.getImportAccess().getGroup(), "rule__Import__Group__0");
-					put(grammarAccess.getIncludeAccess().getGroup(), "rule__Include__Group__0");
 					put(grammarAccess.getIndividualAccess().getGroup(), "rule__Individual__Group__0");
 					put(grammarAccess.getIndividualAccess().getGroup_2(), "rule__Individual__Group_2__0");
 					put(grammarAccess.getIndividualAccess().getGroup_2_2(), "rule__Individual__Group_2_2__0");
@@ -89,7 +90,6 @@ public class OntoLParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAttributeAccess().getGroup_3(), "rule__Attribute__Group_3__0");
 					put(grammarAccess.getAttributeAccess().getGroup_5(), "rule__Attribute__Group_5__0");
 					put(grammarAccess.getAttributeAccess().getGroup_5_2(), "rule__Attribute__Group_5_2__0");
-					put(grammarAccess.getAttributeAccess().getGroup_6(), "rule__Attribute__Group_6__0");
 					put(grammarAccess.getReferenceAccess().getGroup(), "rule__Reference__Group__0");
 					put(grammarAccess.getReferenceAccess().getGroup_3(), "rule__Reference__Group_3__0");
 					put(grammarAccess.getReferenceAccess().getGroup_5(), "rule__Reference__Group_5__0");
@@ -105,16 +105,14 @@ public class OntoLParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNUMBERAccess().getGroup_2(), "rule__NUMBER__Group_2__0");
 					put(grammarAccess.getNoneValueAccess().getGroup(), "rule__NoneValue__Group__0");
 					put(grammarAccess.getGeneralizationSetAccess().getGroup(), "rule__GeneralizationSet__Group__0");
-					put(grammarAccess.getGeneralizationSetAccess().getGroup_0_0(), "rule__GeneralizationSet__Group_0_0__0");
-					put(grammarAccess.getGeneralizationSetAccess().getGroup_0_1(), "rule__GeneralizationSet__Group_0_1__0");
 					put(grammarAccess.getGeneralizationSetAccess().getGroup_0_2(), "rule__GeneralizationSet__Group_0_2__0");
 					put(grammarAccess.getGeneralizationSetAccess().getGroup_0_3(), "rule__GeneralizationSet__Group_0_3__0");
 					put(grammarAccess.getGeneralizationSetAccess().getGroup_5(), "rule__GeneralizationSet__Group_5__0");
 					put(grammarAccess.getGeneralizationSetAccess().getGroup_8(), "rule__GeneralizationSet__Group_8__0");
 					put(grammarAccess.getModelAccess().getNameAssignment_1(), "rule__Model__NameAssignment_1");
-					put(grammarAccess.getModelAccess().getElementsAssignment_3(), "rule__Model__ElementsAssignment_3");
+					put(grammarAccess.getModelAccess().getIncludesAssignment_3_0_1(), "rule__Model__IncludesAssignment_3_0_1");
+					put(grammarAccess.getModelAccess().getElementsAssignment_3_1(), "rule__Model__ElementsAssignment_3_1");
 					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1(), "rule__Import__ImportedNamespaceAssignment_1");
-					put(grammarAccess.getIncludeAccess().getIncludeAssignment_1(), "rule__Include__IncludeAssignment_1");
 					put(grammarAccess.getIndividualAccess().getNameAssignment_1(), "rule__Individual__NameAssignment_1");
 					put(grammarAccess.getIndividualAccess().getInstantiatedClassesAssignment_2_1(), "rule__Individual__InstantiatedClassesAssignment_2_1");
 					put(grammarAccess.getIndividualAccess().getInstantiatedClassesAssignment_2_2_1(), "rule__Individual__InstantiatedClassesAssignment_2_2_1");
@@ -156,7 +154,6 @@ public class OntoLParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAttributeAccess().getPropertyClassAssignment_4(), "rule__Attribute__PropertyClassAssignment_4");
 					put(grammarAccess.getAttributeAccess().getSubsetOfAssignment_5_1(), "rule__Attribute__SubsetOfAssignment_5_1");
 					put(grammarAccess.getAttributeAccess().getSubsetOfAssignment_5_2_1(), "rule__Attribute__SubsetOfAssignment_5_2_1");
-					put(grammarAccess.getAttributeAccess().getOppositeToAssignment_6_1(), "rule__Attribute__OppositeToAssignment_6_1");
 					put(grammarAccess.getReferenceAccess().getNameAssignment_1(), "rule__Reference__NameAssignment_1");
 					put(grammarAccess.getReferenceAccess().getLowerBoundAssignment_3_1(), "rule__Reference__LowerBoundAssignment_3_1");
 					put(grammarAccess.getReferenceAccess().getUpperBoundAssignment_3_3(), "rule__Reference__UpperBoundAssignment_3_3");
@@ -176,12 +173,12 @@ public class OntoLParser extends AbstractContentAssistParser {
 					put(grammarAccess.getStringValueAccess().getValueAssignment(), "rule__StringValue__ValueAssignment");
 					put(grammarAccess.getNumberValueAccess().getValueAssignment(), "rule__NumberValue__ValueAssignment");
 					put(grammarAccess.getBooleanValueAccess().getValueAssignment(), "rule__BooleanValue__ValueAssignment");
-					put(grammarAccess.getGeneralizationSetAccess().getIsDisjointAssignment_0_0_1(), "rule__GeneralizationSet__IsDisjointAssignment_0_0_1");
-					put(grammarAccess.getGeneralizationSetAccess().getIsCompleteAssignment_0_1_1(), "rule__GeneralizationSet__IsCompleteAssignment_0_1_1");
-					put(grammarAccess.getGeneralizationSetAccess().getIsDisjointAssignment_0_2_1(), "rule__GeneralizationSet__IsDisjointAssignment_0_2_1");
-					put(grammarAccess.getGeneralizationSetAccess().getIsCompleteAssignment_0_2_3(), "rule__GeneralizationSet__IsCompleteAssignment_0_2_3");
-					put(grammarAccess.getGeneralizationSetAccess().getIsCompleteAssignment_0_3_1(), "rule__GeneralizationSet__IsCompleteAssignment_0_3_1");
-					put(grammarAccess.getGeneralizationSetAccess().getIsDisjointAssignment_0_3_3(), "rule__GeneralizationSet__IsDisjointAssignment_0_3_3");
+					put(grammarAccess.getGeneralizationSetAccess().getIsDisjointAssignment_0_0(), "rule__GeneralizationSet__IsDisjointAssignment_0_0");
+					put(grammarAccess.getGeneralizationSetAccess().getIsCompleteAssignment_0_1(), "rule__GeneralizationSet__IsCompleteAssignment_0_1");
+					put(grammarAccess.getGeneralizationSetAccess().getIsDisjointAssignment_0_2_0(), "rule__GeneralizationSet__IsDisjointAssignment_0_2_0");
+					put(grammarAccess.getGeneralizationSetAccess().getIsCompleteAssignment_0_2_1(), "rule__GeneralizationSet__IsCompleteAssignment_0_2_1");
+					put(grammarAccess.getGeneralizationSetAccess().getIsCompleteAssignment_0_3_0(), "rule__GeneralizationSet__IsCompleteAssignment_0_3_0");
+					put(grammarAccess.getGeneralizationSetAccess().getIsDisjointAssignment_0_3_1(), "rule__GeneralizationSet__IsDisjointAssignment_0_3_1");
 					put(grammarAccess.getGeneralizationSetAccess().getNameAssignment_2(), "rule__GeneralizationSet__NameAssignment_2");
 					put(grammarAccess.getGeneralizationSetAccess().getGeneralAssignment_4(), "rule__GeneralizationSet__GeneralAssignment_4");
 					put(grammarAccess.getGeneralizationSetAccess().getCategorizerAssignment_5_1(), "rule__GeneralizationSet__CategorizerAssignment_5_1");

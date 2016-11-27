@@ -21,8 +21,11 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -125,7 +128,7 @@ public class LinguisticRules {
     }
   }
   
-  public boolean hasCyclicSpecialization(final OntoLClass c, final LinkedHashSet<OntoLClass> ch) {
+  public boolean hasCyclicSpecialization(final OntoLClass c, final Set<OntoLClass> ch) {
     boolean _xifexpression = false;
     boolean _contains = ch.contains(c);
     if (_contains) {
@@ -275,7 +278,7 @@ public class LinguisticRules {
     }
   }
   
-  public boolean obeysSubordination(final OntoLClass c, final LinkedHashSet<OntoLClass> ch, final LinkedHashSet<OntoLClass> iof) {
+  public boolean obeysSubordination(final OntoLClass c, final Set<OntoLClass> ch, final Set<OntoLClass> iof) {
     final LinkedHashSet<OntoLClass> subordinated = new LinkedHashSet<OntoLClass>();
     final Consumer<OntoLClass> _function = (OntoLClass it) -> {
       EList<OntoLClass> _subordinators = it.getSubordinators();
@@ -330,7 +333,7 @@ public class LinguisticRules {
         if (_or_1) {
           _or = true;
         } else {
-          LinkedHashSet<OntoLClass> _classHierarchy = this._ontoLUtils.classHierarchy(sc);
+          Set<OntoLClass> _classHierarchy = this._ontoLUtils.classHierarchy(sc);
           boolean _contains_1 = _classHierarchy.contains(c);
           _or = _contains_1;
         }
@@ -340,35 +343,24 @@ public class LinguisticRules {
     }
   }
   
-  public boolean isSpecializingDisjointClasses(final OntoLClass c, final LinkedHashSet<OntoLClass> ch) {
+  public boolean isSpecializingDisjointClasses(final OntoLClass c, final Set<OntoLClass> ch) {
     EClass _generalizationSet = ModelPackage.eINSTANCE.getGeneralizationSet();
     Iterable<IEObjectDescription> _visibleEObjectDescriptions = this._ontoLIndex.getVisibleEObjectDescriptions(c, _generalizationSet);
     final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
-      GeneralizationSet _xifexpression = null;
       EObject _eObjectOrProxy = it.getEObjectOrProxy();
-      if ((_eObjectOrProxy instanceof GeneralizationSet)) {
-        EObject _eObjectOrProxy_1 = it.getEObjectOrProxy();
-        _xifexpression = ((GeneralizationSet) _eObjectOrProxy_1);
-      } else {
-        _xifexpression = null;
+      GeneralizationSet gs = ((GeneralizationSet) _eObjectOrProxy);
+      boolean _eIsProxy = gs.eIsProxy();
+      if (_eIsProxy) {
+        Resource _eResource = c.eResource();
+        ResourceSet _resourceSet = _eResource.getResourceSet();
+        URI _eObjectURI = it.getEObjectURI();
+        EObject _eObject = _resourceSet.getEObject(_eObjectURI, true);
+        gs = ((GeneralizationSet) _eObject);
       }
-      final GeneralizationSet gs = _xifexpression;
-      if ((Objects.equal(gs, null) || (!gs.isIsDisjoint()))) {
+      if (((!gs.isIsDisjoint()) || (Sets.<OntoLClass>intersection(ch, IterableExtensions.<OntoLClass>toSet(gs.getSpecifics())).size() < 2))) {
         return Boolean.valueOf(false);
       } else {
-        EList<OntoLClass> _specifics = null;
-        if (gs!=null) {
-          _specifics=gs.getSpecifics();
-        }
-        Set<OntoLClass> _set = IterableExtensions.<OntoLClass>toSet(_specifics);
-        Sets.SetView<OntoLClass> _intersection = Sets.<OntoLClass>intersection(ch, _set);
-        int _size = _intersection.size();
-        boolean _lessThan = (_size < 2);
-        if (_lessThan) {
-          return Boolean.valueOf(false);
-        } else {
-          return Boolean.valueOf(true);
-        }
+        return Boolean.valueOf(true);
       }
     };
     return IterableExtensions.<IEObjectDescription>exists(_visibleEObjectDescriptions, _function);
@@ -378,16 +370,17 @@ public class LinguisticRules {
     EClass _generalizationSet = ModelPackage.eINSTANCE.getGeneralizationSet();
     Iterable<IEObjectDescription> _visibleEObjectDescriptions = this._ontoLIndex.getVisibleEObjectDescriptions(e, _generalizationSet);
     final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
-      GeneralizationSet _xifexpression = null;
       EObject _eObjectOrProxy = it.getEObjectOrProxy();
-      if ((_eObjectOrProxy instanceof GeneralizationSet)) {
-        EObject _eObjectOrProxy_1 = it.getEObjectOrProxy();
-        _xifexpression = ((GeneralizationSet) _eObjectOrProxy_1);
-      } else {
-        _xifexpression = null;
+      GeneralizationSet gs = ((GeneralizationSet) _eObjectOrProxy);
+      boolean _eIsProxy = gs.eIsProxy();
+      if (_eIsProxy) {
+        Resource _eResource = e.eResource();
+        ResourceSet _resourceSet = _eResource.getResourceSet();
+        URI _eObjectURI = it.getEObjectURI();
+        EObject _eObject = _resourceSet.getEObject(_eObjectURI, true);
+        gs = ((GeneralizationSet) _eObject);
       }
-      final GeneralizationSet gs = _xifexpression;
-      if (((Objects.equal(gs, null) || (!gs.isIsDisjoint())) || (Sets.<OntoLClass>intersection(IterableExtensions.<OntoLClass>toSet(gs.getSpecifics()), iof).size() < 2))) {
+      if (((!gs.isIsDisjoint()) || (Sets.<OntoLClass>intersection(IterableExtensions.<OntoLClass>toSet(gs.getSpecifics()), iof).size() < 2))) {
         return Boolean.valueOf(false);
       }
       return Boolean.valueOf(true);
@@ -399,16 +392,17 @@ public class LinguisticRules {
     EClass _generalizationSet = ModelPackage.eINSTANCE.getGeneralizationSet();
     Iterable<IEObjectDescription> _visibleEObjectDescriptions = this._ontoLIndex.getVisibleEObjectDescriptions(e, _generalizationSet);
     final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
-      GeneralizationSet _xifexpression = null;
       EObject _eObjectOrProxy = it.getEObjectOrProxy();
-      if ((_eObjectOrProxy instanceof GeneralizationSet)) {
-        EObject _eObjectOrProxy_1 = it.getEObjectOrProxy();
-        _xifexpression = ((GeneralizationSet) _eObjectOrProxy_1);
-      } else {
-        _xifexpression = null;
+      GeneralizationSet gs = ((GeneralizationSet) _eObjectOrProxy);
+      boolean _eIsProxy = gs.eIsProxy();
+      if (_eIsProxy) {
+        Resource _eResource = e.eResource();
+        ResourceSet _resourceSet = _eResource.getResourceSet();
+        URI _eObjectURI = it.getEObjectURI();
+        EObject _eObject = _resourceSet.getEObject(_eObjectURI, true);
+        gs = ((GeneralizationSet) _eObject);
       }
-      final GeneralizationSet gs = _xifexpression;
-      if ((((Objects.equal(gs, null) || (!gs.isIsComplete())) || (!iof.contains(gs.getGeneral()))) || (!Collections.disjoint(IterableExtensions.<OntoLClass>toSet(gs.getSpecifics()), iof)))) {
+      if ((((!gs.isIsComplete()) || (!iof.contains(gs.getGeneral()))) || (!Collections.disjoint(IterableExtensions.<OntoLClass>toSet(gs.getSpecifics()), iof)))) {
         return Boolean.valueOf(false);
       }
       return Boolean.valueOf(true);

@@ -6,11 +6,9 @@ import br.ufes.inf.nemo.ontol.model.Attribute;
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
 
 import java.util.Collection;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
@@ -22,7 +20,6 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * </p>
  * <ul>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.AttributeImpl#getSubsetOf <em>Subset Of</em>}</li>
- *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.AttributeImpl#getOppositeTo <em>Opposite To</em>}</li>
  * </ul>
  *
  * @generated
@@ -37,15 +34,6 @@ public class AttributeImpl extends PropertyImpl implements Attribute {
 	 * @ordered
 	 */
 	protected EList<Attribute> subsetOf;
-	/**
-	 * The cached value of the '{@link #getOppositeTo() <em>Opposite To</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOppositeTo()
-	 * @generated
-	 * @ordered
-	 */
-	protected Attribute oppositeTo;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -83,52 +71,11 @@ public class AttributeImpl extends PropertyImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Attribute getOppositeTo() {
-		if (oppositeTo != null && oppositeTo.eIsProxy()) {
-			InternalEObject oldOppositeTo = (InternalEObject)oppositeTo;
-			oppositeTo = (Attribute)eResolveProxy(oldOppositeTo);
-			if (oppositeTo != oldOppositeTo) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.ATTRIBUTE__OPPOSITE_TO, oldOppositeTo, oppositeTo));
-			}
-		}
-		return oppositeTo;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Attribute basicGetOppositeTo() {
-		return oppositeTo;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setOppositeTo(Attribute newOppositeTo) {
-		Attribute oldOppositeTo = oppositeTo;
-		oppositeTo = newOppositeTo;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ATTRIBUTE__OPPOSITE_TO, oldOppositeTo, oppositeTo));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ModelPackage.ATTRIBUTE__SUBSET_OF:
 				return getSubsetOf();
-			case ModelPackage.ATTRIBUTE__OPPOSITE_TO:
-				if (resolve) return getOppositeTo();
-				return basicGetOppositeTo();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -146,9 +93,6 @@ public class AttributeImpl extends PropertyImpl implements Attribute {
 				getSubsetOf().clear();
 				getSubsetOf().addAll((Collection<? extends Attribute>)newValue);
 				return;
-			case ModelPackage.ATTRIBUTE__OPPOSITE_TO:
-				setOppositeTo((Attribute)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -164,9 +108,6 @@ public class AttributeImpl extends PropertyImpl implements Attribute {
 			case ModelPackage.ATTRIBUTE__SUBSET_OF:
 				getSubsetOf().clear();
 				return;
-			case ModelPackage.ATTRIBUTE__OPPOSITE_TO:
-				setOppositeTo((Attribute)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -181,8 +122,6 @@ public class AttributeImpl extends PropertyImpl implements Attribute {
 		switch (featureID) {
 			case ModelPackage.ATTRIBUTE__SUBSET_OF:
 				return subsetOf != null && !subsetOf.isEmpty();
-			case ModelPackage.ATTRIBUTE__OPPOSITE_TO:
-				return oppositeTo != null;
 		}
 		return super.eIsSet(featureID);
 	}

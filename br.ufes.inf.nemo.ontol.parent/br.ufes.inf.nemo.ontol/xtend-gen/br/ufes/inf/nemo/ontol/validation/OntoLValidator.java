@@ -14,6 +14,7 @@ import br.ufes.inf.nemo.ontol.validation.LinguisticRules;
 import br.ufes.inf.nemo.ontol.validation.MLTRules;
 import com.google.inject.Inject;
 import java.util.LinkedHashSet;
+import java.util.Set;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -89,7 +90,7 @@ public class OntoLValidator extends AbstractOntoLValidator {
   
   @Check(CheckType.FAST)
   public void fastCheckOnClass(final OntoLClass c) {
-    final LinkedHashSet<OntoLClass> ch = this._ontoLUtils.classHierarchy(c);
+    final Set<OntoLClass> ch = this._ontoLUtils.classHierarchy(c);
     boolean _isValidSpecialization = this._linguisticRules.isValidSpecialization(c);
     boolean _not = (!_isValidSpecialization);
     if (_not) {
@@ -189,15 +190,14 @@ public class OntoLValidator extends AbstractOntoLValidator {
   
   @Check(CheckType.NORMAL)
   public void normalChecksOnClass(final OntoLClass c) {
-    final LinkedHashSet<OntoLClass> ch = this._ontoLUtils.classHierarchy(c);
+    final Set<OntoLClass> ch = this._ontoLUtils.classHierarchy(c);
     final LinkedHashSet<OntoLClass> iof = this._ontoLUtils.getAllInstantiatedClasses(c);
     boolean _isMissingSpecializationThroughPowertype = this._mLTRules.isMissingSpecializationThroughPowertype(c, ch);
     if (_isMissingSpecializationThroughPowertype) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Missing specialization through powertype relation.");
       EReference _ontoLClass_SuperClasses = ModelPackage.eINSTANCE.getOntoLClass_SuperClasses();
-      this.error(_builder.toString(), _ontoLClass_SuperClasses, 
-        MLTRules.MISSING_SPECIALIZATION_THROUGH_POWERTYPE);
+      this.error(_builder.toString(), _ontoLClass_SuperClasses, MLTRules.MISSING_SPECIALIZATION_THROUGH_POWERTYPE);
     }
     boolean _obeysSubordination = this._linguisticRules.obeysSubordination(c, ch, iof);
     boolean _not = (!_obeysSubordination);

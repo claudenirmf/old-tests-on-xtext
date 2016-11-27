@@ -40,15 +40,6 @@ public interface ModelFactory extends EFactory {
 	Import createImport();
 
 	/**
-	 * Returns a new object of class '<em>Include</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Include</em>'.
-	 * @generated
-	 */
-	Include createInclude();
-
-	/**
 	 * Returns a new object of class '<em>Individual</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -79,7 +79,7 @@ class OntoLValidator extends AbstractOntoLValidator {
 	@Check(CheckType.FAST)
 	def void fastChecksOnHOClass(HOClass ho){
 		if(!ho.minOrder)
-			error('''Order must be of «MLTRules.MIN_ORDER» or greater.''',
+			error('''Order must be of Â«MLTRules.MIN_ORDERÂ» or greater.''',
 				ModelPackage.eINSTANCE.HOClass_Order,
 				MLTRules.INVALID_HO_CLASS_ORDER)
 	}
@@ -96,7 +96,7 @@ class OntoLValidator extends AbstractOntoLValidator {
 	def void normalChecksOnEntity(EntityDeclaration e){
 		val iof = e.allInstantiatedClasses
 		if(e.isInstanceOfDisjointClasses(iof))
-			error('''«e.name» is instance of disjoint classes.''',
+			error('''Â«e.nameÂ» is instance of disjoint classes.''',
 				ModelPackage.eINSTANCE.entityDeclaration_InstantiatedClasses,
 				LinguisticRules.INSTANCE_OF_DISJOINT_CLASSES)
 		if(e.missingInstantiationByCompleteness(iof))
@@ -106,24 +106,20 @@ class OntoLValidator extends AbstractOntoLValidator {
 	}
 	
 	@Check(CheckType.NORMAL)
-	def void normalChecksOnClass(OntoLClass c){
-		 val ch = c.classHierarchy
-		 val iof = c.allInstantiatedClasses
- 		if(c.isMissingSpecializationThroughPowertype(ch))
+	def void normalChecksOnClass(OntoLClass c) {
+		val ch = c.classHierarchy
+		val iof = c.allInstantiatedClasses
+		if (c.isMissingSpecializationThroughPowertype(ch))
 			error('''Missing specialization through powertype relation.''',
-				ModelPackage.eINSTANCE.ontoLClass_SuperClasses,
-				MLTRules.MISSING_SPECIALIZATION_THROUGH_POWERTYPE)
-		if(!c.obeysSubordination(ch,iof))
-			error('''Missing specialization through subordination.''',
-				ModelPackage.eINSTANCE.ontoLClass_SuperClasses,
+				ModelPackage.eINSTANCE.ontoLClass_SuperClasses, MLTRules.MISSING_SPECIALIZATION_THROUGH_POWERTYPE)
+		if (!c.obeysSubordination(ch, iof))
+			error('''Missing specialization through subordination.''', ModelPackage.eINSTANCE.ontoLClass_SuperClasses,
 				LinguisticRules.MISSING_SPECIALIZATION_THROUGH_SUBODINATION)
-		if(c.hasSimpleSubordinationCycle)
-			error('''«c.name» is in a subordination cycle.''',
-				ModelPackage.eINSTANCE.ontoLClass_Subordinators,
+		if (c.hasSimpleSubordinationCycle)
+			error('''Â«c.nameÂ» is in a subordination cycle.''', ModelPackage.eINSTANCE.ontoLClass_Subordinators,
 				LinguisticRules.SIMPLE_SUBORDINATION_CYCLE)
-		if(c.isSpecializingDisjointClasses(ch))
-			error('''«c.name» is specializing disjoint classes.''',
-				ModelPackage.eINSTANCE.ontoLClass_Subordinators,
+		if (c.isSpecializingDisjointClasses(ch))
+			error('''Â«c.nameÂ» is specializing disjoint classes.''', ModelPackage.eINSTANCE.ontoLClass_Subordinators,
 				LinguisticRules.SPECILIZATION_OF_DISJOINT_CLASSES)
 	}
 	

@@ -3,18 +3,17 @@
  */
 package br.ufes.inf.nemo.ontol.generator
 
+import br.ufes.inf.nemo.ontol.model.Model
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
-import com.google.inject.Inject
-import org.eclipse.xtext.naming.IQualifiedNameProvider
-import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
-import org.eclipse.emf.common.util.URI
-import java.io.ByteArrayOutputStream
-import java.io.ByteArrayInputStream
-import br.ufes.inf.nemo.ontol.model.Model
+import org.eclipse.xtext.EcoreUtil2
 
 /**
  * Generates code from your model files on save.
@@ -23,8 +22,6 @@ import br.ufes.inf.nemo.ontol.model.Model
  */
 class OntoLGenerator extends AbstractGenerator {
 
-	@Inject extension IQualifiedNameProvider
-	
 	def void doGenerate(Resource xtextResource, Resource xmiResource) {
 		EcoreUtil.resolveAll(xtextResource)
 		xmiResource.contents.add(xtextResource.contents.get(0))
@@ -36,8 +33,14 @@ class OntoLGenerator extends AbstractGenerator {
 		val rs = new ResourceSetImpl
 		val fileName = "models\\"+xtextResource.URI.segments.last.replace(".ontol","")+".xmi"
 		val xmiResource = rs.createResource(URI.createURI(fileName))
-		EcoreUtil.resolveAll(xtextResource)
-		xmiResource.contents.add(xtextResource.contents.get(0))
+		
+		EcoreUtil2.resolveAll(xtextResource)
+		val model = xtextResource.contents.get(0) as Model
+		val includes = model.includes
+		xmiResource.contents.add(model)//.get(0))
+		if(includes!=null && includes.size>0)
+			xmiResource.contents.addAll(model.includes)
+		
 		val outStream = new ByteArrayOutputStream
 		xmiResource.save(outStream,null)
 		fsa.generateFile(fileName,new ByteArrayInputStream(outStream.toByteArray))
@@ -60,7 +63,7 @@ class OntoLGenerator extends AbstractGenerator {
 		xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
 		xmlns:ontol="http://www.nemo.inf.ufes.br/ontol-schema#">
 		
-		<rdf:Description rdf:about="«m.fullyQualifiedName»"/>
+		<rdf:Description rdf:about="ï¿½m.fullyQualifiedNameï¿½"/>
 	    
 	</rdf:RDF>
 	'''

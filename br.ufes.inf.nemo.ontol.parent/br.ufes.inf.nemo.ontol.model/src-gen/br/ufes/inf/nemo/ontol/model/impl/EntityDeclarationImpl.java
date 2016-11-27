@@ -7,6 +7,7 @@ import br.ufes.inf.nemo.ontol.model.EntityDeclaration;
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
 import br.ufes.inf.nemo.ontol.model.OntoLClass;
 import br.ufes.inf.nemo.ontol.model.ReferenceAssignment;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;

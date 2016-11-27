@@ -2,6 +2,7 @@
  */
 package br.ufes.inf.nemo.ontol.model;
 
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Property</b></em>'.

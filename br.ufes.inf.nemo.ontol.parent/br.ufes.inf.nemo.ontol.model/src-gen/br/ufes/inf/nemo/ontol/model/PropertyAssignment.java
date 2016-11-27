@@ -14,5 +14,4 @@ package br.ufes.inf.nemo.ontol.model;
  * @generated
  */
 public interface PropertyAssignment extends ModelElement {
-
 } // PropertyAssignment

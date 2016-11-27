@@ -3,27 +3,7 @@
 package br.ufes.inf.nemo.ontol.model.impl;
 
 import br.ufes.inf.nemo.ontol.model.*;
-import br.ufes.inf.nemo.ontol.model.Attribute;
-import br.ufes.inf.nemo.ontol.model.AttributeAssignment;
-import br.ufes.inf.nemo.ontol.model.BooleanValue;
-import br.ufes.inf.nemo.ontol.model.CategorizationType;
-import br.ufes.inf.nemo.ontol.model.FOClass;
-import br.ufes.inf.nemo.ontol.model.GeneralizationSet;
-import br.ufes.inf.nemo.ontol.model.HOClass;
-import br.ufes.inf.nemo.ontol.model.Import;
-import br.ufes.inf.nemo.ontol.model.Individual;
-import br.ufes.inf.nemo.ontol.model.Model;
-import br.ufes.inf.nemo.ontol.model.ModelFactory;
-import br.ufes.inf.nemo.ontol.model.ModelPackage;
-import br.ufes.inf.nemo.ontol.model.NoneValue;
-import br.ufes.inf.nemo.ontol.model.NumberValue;
-import br.ufes.inf.nemo.ontol.model.OrderlessClass;
-import br.ufes.inf.nemo.ontol.model.Property;
-import br.ufes.inf.nemo.ontol.model.PropertyAssignment;
-import br.ufes.inf.nemo.ontol.model.Reference;
-import br.ufes.inf.nemo.ontol.model.ReferenceAssignment;
-import br.ufes.inf.nemo.ontol.model.ReferenceValue;
-import br.ufes.inf.nemo.ontol.model.StringValue;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -79,7 +59,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 		switch (eClass.getClassifierID()) {
 			case ModelPackage.MODEL: return createModel();
 			case ModelPackage.IMPORT: return createImport();
-			case ModelPackage.INCLUDE: return createInclude();
 			case ModelPackage.INDIVIDUAL: return createIndividual();
 			case ModelPackage.ORDERLESS_CLASS: return createOrderlessClass();
 			case ModelPackage.HO_CLASS: return createHOClass();
@@ -149,16 +128,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public Import createImport() {
 		ImportImpl import_ = new ImportImpl();
 		return import_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Include createInclude() {
-		IncludeImpl include = new IncludeImpl();
-		return include;
 	}
 
 	/**

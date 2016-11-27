@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.Model#getName <em>Name</em>}</li>
+ *   <li>{@link br.ufes.inf.nemo.ontol.model.Model#getIncludes <em>Includes</em>}</li>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.Model#getElements <em>Elements</em>}</li>
  * </ul>
  *
@@ -49,6 +50,22 @@ public interface Model extends EObject {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Includes</b></em>' reference list.
+	 * The list contents are of type {@link br.ufes.inf.nemo.ontol.model.Model}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Includes</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Includes</em>' reference list.
+	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getModel_Includes()
+	 * @model
+	 * @generated
+	 */
+	EList<Model> getIncludes();
 
 	/**
 	 * Returns the value of the '<em><b>Elements</b></em>' containment reference list.

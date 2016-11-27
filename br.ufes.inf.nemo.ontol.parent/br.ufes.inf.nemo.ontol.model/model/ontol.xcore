@@ -5,6 +5,7 @@ package br.ufes.inf.nemo.ontol.model
 class Model
 {
 	String name
+	refers Model[] includes
 	contains ModelElement[] elements
 }
 
@@ -15,16 +16,10 @@ class Import extends ModelElement
 	String importedNamespace
 }
 
-class Include extends ModelElement
-{
-	refers Model include
-}
-
 abstract class EntityDeclaration extends ModelElement 
 {
 	String name
 	refers OntoLClass[] instantiatedClasses
-//	contains PropertyAssignment[] propAssigns // opposite classContainer
 	contains AttributeAssignment[] attAssignments
 	contains ReferenceAssignment[] refAssignments
 }
@@ -37,7 +32,6 @@ abstract class OntoLClass extends EntityDeclaration
 	refers OntoLClass powertypeOf
 	refers OntoLClass basetype
 	refers OntoLClass[] subordinators
-//	contains Property[] props // opposite classContainer
 	contains Attribute[] attributes
 	contains Reference[] references
 	CategorizationType categorizationType = "none"
@@ -79,13 +73,11 @@ class Property extends ModelElement
 	Integer lowerBound = "1"
 	Integer upperBound = "1"
 	refers OntoLClass propertyClass
-//	container OntoLClass classContainer opposite props
 }
 
 class Attribute extends Property 
 {
 	refers Attribute[] subsetOf
-	refers Attribute oppositeTo
 }
 
 class Reference extends Property 
@@ -94,12 +86,7 @@ class Reference extends Property
 	refers Reference oppositeTo
 }
 
-class PropertyAssignment extends ModelElement 
-{
-//	refers Property property
-//	contains Value assignment
-//	container EntityDeclaration classContainer opposite propAssigns
-}
+class PropertyAssignment extends ModelElement {}
 
 class AttributeAssignment extends PropertyAssignment
 {

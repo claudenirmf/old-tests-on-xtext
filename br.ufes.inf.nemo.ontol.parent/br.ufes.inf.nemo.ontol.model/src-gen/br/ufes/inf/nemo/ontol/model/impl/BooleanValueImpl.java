@@ -4,7 +4,9 @@ package br.ufes.inf.nemo.ontol.model.impl;
 
 import br.ufes.inf.nemo.ontol.model.BooleanValue;
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
+
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;

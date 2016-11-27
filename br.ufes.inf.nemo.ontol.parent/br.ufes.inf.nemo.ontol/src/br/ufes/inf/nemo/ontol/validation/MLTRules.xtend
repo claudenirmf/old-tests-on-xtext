@@ -5,6 +5,7 @@ import br.ufes.inf.nemo.ontol.model.HOClass
 import java.util.LinkedHashSet
 import com.google.inject.Inject
 import br.ufes.inf.nemo.ontol.util.OntoLUtils
+import java.util.Set
 
 class MLTRules {
 	
@@ -19,7 +20,7 @@ class MLTRules {
 		if(ho.order < MIN_ORDER) false		else true
 	}
 	
-	def isMissingSpecializationThroughPowertype(OntoLClass c, LinkedHashSet<OntoLClass> cHierarchy){
+	def isMissingSpecializationThroughPowertype(OntoLClass c, Set<OntoLClass> cHierarchy){
 		return c.allInstantiatedClasses.exists[ ho |
 				if(ho.powertypeOf != null)
 					if(!cHierarchy.contains(ho.powertypeOf) && ho.powertypeOf!=c)

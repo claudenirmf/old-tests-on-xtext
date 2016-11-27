@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -31,6 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * </p>
  * <ul>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.ModelImpl#getName <em>Name</em>}</li>
+ *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.ModelImpl#getIncludes <em>Includes</em>}</li>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.ModelImpl#getElements <em>Elements</em>}</li>
  * </ul>
  *
@@ -56,6 +58,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getIncludes() <em>Includes</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIncludes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Model> includes;
 
 	/**
 	 * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
@@ -112,6 +124,18 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Model> getIncludes() {
+		if (includes == null) {
+			includes = new EObjectResolvingEList<Model>(Model.class, this, ModelPackage.MODEL__INCLUDES);
+		}
+		return includes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<ModelElement> getElements() {
 		if (elements == null) {
 			elements = new EObjectContainmentEList<ModelElement>(ModelElement.class, this, ModelPackage.MODEL__ELEMENTS);
@@ -143,6 +167,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model {
 		switch (featureID) {
 			case ModelPackage.MODEL__NAME:
 				return getName();
+			case ModelPackage.MODEL__INCLUDES:
+				return getIncludes();
 			case ModelPackage.MODEL__ELEMENTS:
 				return getElements();
 		}
@@ -160,6 +186,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model {
 		switch (featureID) {
 			case ModelPackage.MODEL__NAME:
 				setName((String)newValue);
+				return;
+			case ModelPackage.MODEL__INCLUDES:
+				getIncludes().clear();
+				getIncludes().addAll((Collection<? extends Model>)newValue);
 				return;
 			case ModelPackage.MODEL__ELEMENTS:
 				getElements().clear();
@@ -180,6 +210,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model {
 			case ModelPackage.MODEL__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case ModelPackage.MODEL__INCLUDES:
+				getIncludes().clear();
+				return;
 			case ModelPackage.MODEL__ELEMENTS:
 				getElements().clear();
 				return;
@@ -197,6 +230,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model {
 		switch (featureID) {
 			case ModelPackage.MODEL__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case ModelPackage.MODEL__INCLUDES:
+				return includes != null && !includes.isEmpty();
 			case ModelPackage.MODEL__ELEMENTS:
 				return elements != null && !elements.isEmpty();
 		}

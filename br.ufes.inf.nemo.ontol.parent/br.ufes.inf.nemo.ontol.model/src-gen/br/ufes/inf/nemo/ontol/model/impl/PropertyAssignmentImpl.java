@@ -4,6 +4,7 @@ package br.ufes.inf.nemo.ontol.model.impl;
 
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
 import br.ufes.inf.nemo.ontol.model.PropertyAssignment;
+
 import org.eclipse.emf.ecore.EClass;
 
 /**

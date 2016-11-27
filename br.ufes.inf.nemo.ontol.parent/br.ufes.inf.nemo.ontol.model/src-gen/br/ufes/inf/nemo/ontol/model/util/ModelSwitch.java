@@ -3,30 +3,7 @@
 package br.ufes.inf.nemo.ontol.model.util;
 
 import br.ufes.inf.nemo.ontol.model.*;
-import br.ufes.inf.nemo.ontol.model.Attribute;
-import br.ufes.inf.nemo.ontol.model.AttributeAssignment;
-import br.ufes.inf.nemo.ontol.model.BooleanValue;
-import br.ufes.inf.nemo.ontol.model.DataValue;
-import br.ufes.inf.nemo.ontol.model.EntityDeclaration;
-import br.ufes.inf.nemo.ontol.model.FOClass;
-import br.ufes.inf.nemo.ontol.model.GeneralizationSet;
-import br.ufes.inf.nemo.ontol.model.HOClass;
-import br.ufes.inf.nemo.ontol.model.Import;
-import br.ufes.inf.nemo.ontol.model.Individual;
-import br.ufes.inf.nemo.ontol.model.Model;
-import br.ufes.inf.nemo.ontol.model.ModelElement;
-import br.ufes.inf.nemo.ontol.model.ModelPackage;
-import br.ufes.inf.nemo.ontol.model.NoneValue;
-import br.ufes.inf.nemo.ontol.model.NumberValue;
-import br.ufes.inf.nemo.ontol.model.OrderedClass;
-import br.ufes.inf.nemo.ontol.model.OrderlessClass;
-import br.ufes.inf.nemo.ontol.model.Property;
-import br.ufes.inf.nemo.ontol.model.PropertyAssignment;
-import br.ufes.inf.nemo.ontol.model.Reference;
-import br.ufes.inf.nemo.ontol.model.ReferenceAssignment;
-import br.ufes.inf.nemo.ontol.model.ReferenceValue;
-import br.ufes.inf.nemo.ontol.model.StringValue;
-import br.ufes.inf.nemo.ontol.model.Value;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -105,13 +82,6 @@ public class ModelSwitch<T> extends Switch<T> {
 				Import import_ = (Import)theEObject;
 				T result = caseImport(import_);
 				if (result == null) result = caseModelElement(import_);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.INCLUDE: {
-				Include include = (Include)theEObject;
-				T result = caseInclude(include);
-				if (result == null) result = caseModelElement(include);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -334,21 +304,6 @@ public class ModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseImport(Import object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Include</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Include</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseInclude(Include object) {
 		return null;
 	}
 

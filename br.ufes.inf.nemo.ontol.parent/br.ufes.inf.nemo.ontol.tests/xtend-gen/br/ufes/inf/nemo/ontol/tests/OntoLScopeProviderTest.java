@@ -26,26 +26,23 @@ public class OntoLScopeProviderTest {
   private ValidationTestHelper _validationTestHelper;
   
   @Test
-  public void testPropertyAssigmentScopeForProperty() {
+  public void testRefreneceAssigmentScopeForRefrenece() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("module t {");
       _builder.newLine();
-      _builder.append("\t\t\t\t");
+      _builder.append("\t");
+      _builder.append("class A { ref a : A };");
       _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("foclass A { a : A };");
+      _builder.append("\t");
+      _builder.append("class B specializes A { ref a : A };");
       _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("foclass B specializes A { a : A };");
+      _builder.append("\t");
+      _builder.append("individual Y : B { ref A.a = Y };");
       _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("individual Y : B { A.a = Y };");
+      _builder.append("\t");
+      _builder.append("individual Z : A { ref a = Z };");
       _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("individual Z : A { a = Z };");
-      _builder.newLine();
-      _builder.append("\t\t\t");
       _builder.append("}");
       final Model model = this._parseHelper.parse(_builder);
       this._validationTestHelper.assertNoErrors(model);
@@ -55,30 +52,29 @@ public class OntoLScopeProviderTest {
   }
   
   @Test
-  public void testPropertyScopeForSubesetOf() {
+  public void testRefreneceScopeForSubesetOf() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("module t {");
       _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("foclass A { a1:A\ta2:A };");
+      _builder.append("\t");
+      _builder.append("class A { ref a1:A\tref a2:A };");
       _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("foclass B specializes A { a1:C };");
+      _builder.append("\t");
+      _builder.append("class B specializes A { ref a1:C };");
       _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("foclass C specializes B {");
+      _builder.append("\t");
+      _builder.append("class C specializes B {");
       _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("b1:B subsets B.a1");
+      _builder.append("\t\t");
+      _builder.append("ref b1:B subsets B.a1");
       _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("b2:B subsets a2");
+      _builder.append("\t\t");
+      _builder.append("ref b2:B subsets a2");
       _builder.newLine();
-      _builder.append("\t\t\t\t");
+      _builder.append("\t");
       _builder.append("};");
       _builder.newLine();
-      _builder.append("\t\t\t");
       _builder.append("}");
       final Model model = this._parseHelper.parse(_builder);
       this._validationTestHelper.assertNoErrors(model);
@@ -88,39 +84,32 @@ public class OntoLScopeProviderTest {
   }
   
   @Test
-  public void testPropertyScopeForOppositeTo() {
+  public void testRefreneceScopeForOppositeTo() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("module t {");
       _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("foclass A { ");
+      _builder.append("\t");
+      _builder.append("class A { ");
       _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("a1:A isoppositeto a2");
+      _builder.append("\t\t");
+      _builder.append("ref a1:A isoppositeto a2");
       _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("a2:A isoppositeto a1");
+      _builder.append("\t\t");
+      _builder.append("ref a2:A isoppositeto a1");
       _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("c:C isoppositeto a");
+      _builder.append("\t\t");
+      _builder.append("ref c:C isoppositeto a");
       _builder.newLine();
-      _builder.append("\t\t\t\t");
+      _builder.append("\t");
       _builder.append("};");
       _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("foclass B { c:C };");
+      _builder.append("\t");
+      _builder.append("class B { ref c:C };");
       _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("foclass C {");
+      _builder.append("\t");
+      _builder.append("class C { ref a:A isoppositeto c };");
       _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("a:A isoppositeto c");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("};");
-      _builder.newLine();
-      _builder.append("\t\t\t");
       _builder.append("}");
       final Model model = this._parseHelper.parse(_builder);
       this._validationTestHelper.assertNoErrors(model);

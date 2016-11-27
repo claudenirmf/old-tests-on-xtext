@@ -53,14 +53,10 @@ public class OntoLScopeProvider extends AbstractOntoLScopeProvider {
           if (((context instanceof Reference) && Objects.equal(reference, ModelPackage.eINSTANCE.getReference_SubsetOf()))) {
             return this.getScopeForReferenceOnReference_SubsetOf(context, reference);
           } else {
-            if (((context instanceof Attribute) && Objects.equal(reference, ModelPackage.eINSTANCE.getAttribute_OppositeTo()))) {
-              return this.getScopeForAttributeOnAttribute_OppositeTo(context, reference);
+            if (((context instanceof Reference) && Objects.equal(reference, ModelPackage.eINSTANCE.getReference_OppositeTo()))) {
+              return this.getScopeForReferenceOnReference_OppositeTo(context, reference);
             } else {
-              if (((context instanceof Reference) && Objects.equal(reference, ModelPackage.eINSTANCE.getReference_OppositeTo()))) {
-                return this.getScopeForReferenceOnReference_OppositeTo(context, reference);
-              } else {
-                return super.getScope(context, reference);
-              }
+              return super.getScope(context, reference);
             }
           }
         }
@@ -162,26 +158,6 @@ public class OntoLScopeProvider extends AbstractOntoLScopeProvider {
     EList<Reference> _references = c.getReferences();
     IScope _scopeFor = Scopes.scopeFor(_references);
     return Scopes.<Reference>scopeFor(inheritedRefs, _function, _scopeFor);
-  }
-  
-  public IScope getScopeForAttributeOnAttribute_OppositeTo(final EObject context, final EReference reference) {
-    EObject _eContainer = context.eContainer();
-    final OntoLClass c = ((OntoLClass) _eContainer);
-    final Attribute att = ((Attribute) context);
-    OntoLClass _propertyClass = att.getPropertyClass();
-    EList<Attribute> _attributes = _propertyClass.getAttributes();
-    final Function1<Attribute, Boolean> _function = (Attribute it) -> {
-      OntoLClass _propertyClass_1 = it.getPropertyClass();
-      return Boolean.valueOf(Objects.equal(_propertyClass_1, c));
-    };
-    Iterable<Attribute> _filter = IterableExtensions.<Attribute>filter(_attributes, _function);
-    final Function<Attribute, QualifiedName> _function_1 = (Attribute it) -> {
-      String _name = it.getName();
-      return QualifiedName.create(_name);
-    };
-    EList<Attribute> _attributes_1 = c.getAttributes();
-    IScope _scopeFor = Scopes.scopeFor(_attributes_1);
-    return Scopes.<Attribute>scopeFor(_filter, _function_1, _scopeFor);
   }
   
   public IScope getScopeForReferenceOnReference_OppositeTo(final EObject context, final EReference reference) {

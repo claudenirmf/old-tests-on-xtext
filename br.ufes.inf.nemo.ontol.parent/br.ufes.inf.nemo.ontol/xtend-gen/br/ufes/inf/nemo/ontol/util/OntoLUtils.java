@@ -7,7 +7,6 @@ package br.ufes.inf.nemo.ontol.util;
 
 import br.ufes.inf.nemo.ontol.model.Attribute;
 import br.ufes.inf.nemo.ontol.model.EntityDeclaration;
-import br.ufes.inf.nemo.ontol.model.Include;
 import br.ufes.inf.nemo.ontol.model.Model;
 import br.ufes.inf.nemo.ontol.model.ModelElement;
 import br.ufes.inf.nemo.ontol.model.OntoLClass;
@@ -26,17 +25,14 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class OntoLUtils {
-  public Iterable<Model> getRechableModels(final ModelElement elem) {
+  private Set<Model> getRechableModels(final ModelElement elem) {
+    final LinkedHashSet<Model> set = new LinkedHashSet<Model>();
     EObject _eContainer = elem.eContainer();
-    EList<ModelElement> _elements = ((Model) _eContainer).getElements();
-    final Function1<ModelElement, Boolean> _function = (ModelElement it) -> {
-      return Boolean.valueOf((it instanceof Include));
-    };
-    Iterable<ModelElement> _filter = IterableExtensions.<ModelElement>filter(_elements, _function);
-    final Function1<ModelElement, Model> _function_1 = (ModelElement it) -> {
-      return ((Include) it).getInclude();
-    };
-    return IterableExtensions.<ModelElement, Model>map(_filter, _function_1);
+    set.add(((Model) _eContainer));
+    EObject _eContainer_1 = elem.eContainer();
+    EList<Model> _includes = ((Model) _eContainer_1).getIncludes();
+    set.addAll(_includes);
+    return set;
   }
   
   /**
@@ -45,8 +41,8 @@ public class OntoLUtils {
    * 
    * @author Claudenir Fonseca
    */
-  public LinkedHashSet<OntoLClass> classHierarchy(final OntoLClass c) {
-    LinkedHashSet<OntoLClass> _xblockexpression = null;
+  public Set<OntoLClass> classHierarchy(final OntoLClass c) {
+    Set<OntoLClass> _xblockexpression = null;
     {
       final LinkedHashSet<OntoLClass> visited = new LinkedHashSet<OntoLClass>();
       _xblockexpression = this.classHierarchy(c, visited);
@@ -54,7 +50,7 @@ public class OntoLUtils {
     return _xblockexpression;
   }
   
-  private LinkedHashSet<OntoLClass> classHierarchy(final OntoLClass c, final LinkedHashSet<OntoLClass> visited) {
+  private Set<OntoLClass> classHierarchy(final OntoLClass c, final LinkedHashSet<OntoLClass> visited) {
     LinkedHashSet<OntoLClass> _xblockexpression = null;
     {
       EList<OntoLClass> _superClasses = c.getSuperClasses();
@@ -63,7 +59,7 @@ public class OntoLUtils {
         boolean _not = (!_contains);
         if (_not) {
           visited.add(current);
-          LinkedHashSet<OntoLClass> _classHierarchy = this.classHierarchy(current, visited);
+          Set<OntoLClass> _classHierarchy = this.classHierarchy(current, visited);
           visited.addAll(_classHierarchy);
         }
       }
@@ -85,36 +81,26 @@ public class OntoLUtils {
     EList<OntoLClass> _instantiatedClasses = e.getInstantiatedClasses();
     basicInstantiatedClasses.addAll(_instantiatedClasses);
     if ((e instanceof OntoLClass)) {
-      final Iterable<Model> includedModels = this.getRechableModels(e);
-      final Function1<Model, Iterable<ModelElement>> _function = (Model it) -> {
-        EList<ModelElement> _elements = it.getElements();
-        final Function1<ModelElement, Boolean> _function_1 = (ModelElement it_1) -> {
-          boolean _xifexpression = false;
-          if ((it_1 instanceof OntoLClass)) {
-            OntoLClass _powertypeOf = ((OntoLClass)it_1).getPowertypeOf();
-            _xifexpression = (!Objects.equal(_powertypeOf, null));
-          } else {
-            _xifexpression = false;
-          }
-          return Boolean.valueOf(_xifexpression);
-        };
-        return IterableExtensions.<ModelElement>filter(_elements, _function_1);
+      final Set<OntoLClass> ch = this.classHierarchy(((OntoLClass)e));
+      Set<Model> _rechableModels = this.getRechableModels(e);
+      final Function1<Model, EList<ModelElement>> _function = (Model it) -> {
+        return it.getElements();
       };
-      final Iterable<Iterable<ModelElement>> possiblePowertypes = IterableExtensions.<Model, Iterable<ModelElement>>map(includedModels, _function);
-      final LinkedHashSet<OntoLClass> ch = this.classHierarchy(((OntoLClass)e));
-      final Consumer<Iterable<ModelElement>> _function_1 = (Iterable<ModelElement> it) -> {
-        final OntoLClass pwt = ((OntoLClass) it);
-        OntoLClass _powertypeOf = pwt.getPowertypeOf();
-        boolean _contains = ch.contains(_powertypeOf);
-        if (_contains) {
-          basicInstantiatedClasses.add(pwt);
+      Iterable<EList<ModelElement>> _map = IterableExtensions.<Model, EList<ModelElement>>map(_rechableModels, _function);
+      Iterable<ModelElement> _flatten = Iterables.<ModelElement>concat(_map);
+      final Consumer<ModelElement> _function_1 = (ModelElement it) -> {
+        if ((it instanceof OntoLClass)) {
+          final OntoLClass aux = ((OntoLClass)it).getPowertypeOf();
+          if (((!Objects.equal(aux, null)) && (Objects.equal(aux, e) || ch.contains(aux)))) {
+            basicInstantiatedClasses.add(((OntoLClass)it));
+          }
         }
       };
-      possiblePowertypes.forEach(_function_1);
+      _flatten.forEach(_function_1);
+      return basicInstantiatedClasses;
     } else {
       return basicInstantiatedClasses;
     }
-    return null;
   }
   
   /**
@@ -131,7 +117,7 @@ public class OntoLUtils {
       LinkedHashSet<OntoLClass> _basicInstantiatedClasses = this.getBasicInstantiatedClasses(e);
       final Consumer<OntoLClass> _function = (OntoLClass it) -> {
         visited.add(it);
-        LinkedHashSet<OntoLClass> _classHierarchy = this.classHierarchy(it);
+        Set<OntoLClass> _classHierarchy = this.classHierarchy(it);
         visited.addAll(_classHierarchy);
       };
       _basicInstantiatedClasses.forEach(_function);
@@ -191,7 +177,7 @@ public class OntoLUtils {
   }
   
   public Set<Attribute> getAllInheritedAttributes(final OntoLClass c) {
-    LinkedHashSet<OntoLClass> _classHierarchy = this.classHierarchy(c);
+    Set<OntoLClass> _classHierarchy = this.classHierarchy(c);
     final Function1<OntoLClass, EList<Attribute>> _function = (OntoLClass it) -> {
       return it.getAttributes();
     };
@@ -201,7 +187,7 @@ public class OntoLUtils {
   }
   
   public Set<Reference> getAllInheritedReferences(final OntoLClass c) {
-    LinkedHashSet<OntoLClass> _classHierarchy = this.classHierarchy(c);
+    Set<OntoLClass> _classHierarchy = this.classHierarchy(c);
     final Function1<OntoLClass, EList<Reference>> _function = (OntoLClass it) -> {
       return it.getReferences();
     };

@@ -6,6 +6,7 @@ import br.ufes.inf.nemo.ontol.util.OntoLUtils;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.LinkedHashSet;
+import java.util.Set;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -34,7 +35,7 @@ public class MLTRules {
     return _xifexpression;
   }
   
-  public boolean isMissingSpecializationThroughPowertype(final OntoLClass c, final LinkedHashSet<OntoLClass> cHierarchy) {
+  public boolean isMissingSpecializationThroughPowertype(final OntoLClass c, final Set<OntoLClass> cHierarchy) {
     LinkedHashSet<OntoLClass> _allInstantiatedClasses = this._ontoLUtils.getAllInstantiatedClasses(c);
     final Function1<OntoLClass, Boolean> _function = (OntoLClass ho) -> {
       OntoLClass _powertypeOf = ho.getPowertypeOf();

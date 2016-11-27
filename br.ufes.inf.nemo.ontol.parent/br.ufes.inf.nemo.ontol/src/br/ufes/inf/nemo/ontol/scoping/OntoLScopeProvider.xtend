@@ -3,22 +3,20 @@
  */
 package br.ufes.inf.nemo.ontol.scoping
 
-import br.ufes.inf.nemo.ontol.model.OntoLClass
+import br.ufes.inf.nemo.ontol.model.Attribute
+import br.ufes.inf.nemo.ontol.model.AttributeAssignment
 import br.ufes.inf.nemo.ontol.model.EntityDeclaration
 import br.ufes.inf.nemo.ontol.model.ModelPackage
-import br.ufes.inf.nemo.ontol.model.Property
-import br.ufes.inf.nemo.ontol.model.PropertyAssignment
+import br.ufes.inf.nemo.ontol.model.OntoLClass
+import br.ufes.inf.nemo.ontol.model.Reference
+import br.ufes.inf.nemo.ontol.model.ReferenceAssignment
 import br.ufes.inf.nemo.ontol.util.OntoLUtils
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.xtext.naming.QualifiedName
-import org.eclipse.xtext.scoping.Scopes
-import br.ufes.inf.nemo.ontol.model.AttributeAssignment
 import org.eclipse.xtext.scoping.IScope
-import br.ufes.inf.nemo.ontol.model.ReferenceAssignment
-import br.ufes.inf.nemo.ontol.model.Attribute
-import br.ufes.inf.nemo.ontol.model.Reference
+import org.eclipse.xtext.scoping.Scopes
 
 /**
  * This class contains custom scoping description.
@@ -43,40 +41,10 @@ class OntoLScopeProvider extends AbstractOntoLScopeProvider {
 		else if(context instanceof Reference && reference == ModelPackage.eINSTANCE.reference_SubsetOf){
 			return getScopeForReferenceOnReference_SubsetOf(context,reference)
 		}
-		else if(context instanceof Attribute && reference==ModelPackage.eINSTANCE.attribute_OppositeTo){
-			return getScopeForAttributeOnAttribute_OppositeTo(context,reference)
-		}
 		else if(context instanceof Reference && reference==ModelPackage.eINSTANCE.reference_OppositeTo){
 			return getScopeForReferenceOnReference_OppositeTo(context,reference)
 		}
 		else return super.getScope(context, reference)
-//		if(context instanceof PropertyAssignment && reference==ModelPackage.eINSTANCE.propertyAssignment_Property){
-//			// TODO Add options to scope
-//			val entity = context.eContainer as EntityDeclaration
-//			val properties = entity.allProperties
-//			return Scopes.scopeFor(properties, [ p | 
-//					if(properties.exists[it.name.equals(p.name) && it!=p])
-//						return QualifiedName.create((p.eContainer as EntityDeclaration).name,p.name)
-//					else
-//						return QualifiedName.create(p.name)
-//				], Scopes.scopeFor(entity.propAssigns))//IScope.NULLSCOPE)
-//		}
-//		else if(context instanceof Property && reference==ModelPackage.eINSTANCE.property_SubsetOf){
-//			val c = context.eContainer as OntoLClass
-//			val inheritedProps = c.allInheritedProperties
-//			return Scopes.scopeFor(inheritedProps,[ p |
-//					if(inheritedProps.exists[it.name.equals(p.name) && it!=p])
-//						return QualifiedName.create((p.eContainer as EntityDeclaration).name,p.name)
-//					else
-//						return QualifiedName.create(p.name)
-//				], Scopes.scopeFor(c.props))
-//		}
-//		else if(context instanceof Property && reference==ModelPackage.eINSTANCE.property_OppositeTo){
-//			val c = context.eContainer as OntoLClass
-//			val p = context as Property
-//			return Scopes.scopeFor(p.propertyType.props.filter[it.propertyType==c],
-//				[ QualifiedName.create(it.name) ], Scopes.scopeFor(c.props))
-//		}
 	}
 	
 	def private IScope getScopeForAttributeAssignmentOnAttributeAssignment_Attribute(EObject context, EReference reference){
@@ -123,13 +91,6 @@ class OntoLScopeProvider extends AbstractOntoLScopeProvider {
 			else
 				return QualifiedName.create(ref.name)
 		], Scopes.scopeFor(c.references))
-	}
-	
-	def getScopeForAttributeOnAttribute_OppositeTo(EObject context, EReference reference) {
-		val c = context.eContainer as OntoLClass
-		val att = context as Attribute
-		return Scopes.scopeFor(att.propertyClass.attributes.filter[it.propertyClass==c],
-			[ QualifiedName.create(it.name) ], Scopes.scopeFor(c.attributes))
 	}
 	
 	def getScopeForReferenceOnReference_OppositeTo(EObject context, EReference reference) {

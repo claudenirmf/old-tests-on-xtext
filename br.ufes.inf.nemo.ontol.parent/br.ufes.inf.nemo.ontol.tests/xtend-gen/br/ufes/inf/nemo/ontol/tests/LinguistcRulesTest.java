@@ -30,48 +30,200 @@ public class LinguistcRulesTest {
   
   @Test
   public void testIsNameValid() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field class_ is undefined for the type ModelPackage");
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append(" ");
+      _builder.append("module t { class Abc; }");
+      final Model correctModel = this._parseHelper.parse(_builder);
+      this._validationTestHelper.assertNoErrors(correctModel);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append(" ");
+      _builder_1.append("module t { class abc; }");
+      final Model incorrectModel = this._parseHelper.parse(_builder_1);
+      EClass _ontoLClass = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertError(incorrectModel, _ontoLClass, LinguisticRules.INVALID_ENTITY_DECLARATION_NAME);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
   public void testIsValidSpecialization() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field class_ is undefined for the type ModelPackage"
-      + "\nThe method or field class_ is undefined for the type ModelPackage"
-      + "\nThe method or field class_ is undefined for the type ModelPackage"
-      + "\nThe method or field class_ is undefined for the type ModelPackage");
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append(" ");
+      _builder.append("module t{ class A specializes A; }");
+      final Model incorrectModelA = this._parseHelper.parse(_builder);
+      EClass _ontoLClass = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertError(incorrectModelA, _ontoLClass, LinguisticRules.INVALID_CLASS_SPECIALIZATION);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append(" ");
+      _builder_1.append("module t{ order 2 class A; class B specializes A; }");
+      final Model incorrectModelB = this._parseHelper.parse(_builder_1);
+      EClass _ontoLClass_1 = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertError(incorrectModelB, _ontoLClass_1, LinguisticRules.INVALID_CLASS_SPECIALIZATION);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append(" ");
+      _builder_2.append("module t{ order 2 class A; orderless class B specializes A; }");
+      final Model incorrectModelC = this._parseHelper.parse(_builder_2);
+      EClass _ontoLClass_2 = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertError(incorrectModelC, _ontoLClass_2, LinguisticRules.INVALID_CLASS_SPECIALIZATION);
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append(" ");
+      _builder_3.append("module t{ order 2 class A; order 3 class B specializes A; }");
+      final Model incorrectModelD = this._parseHelper.parse(_builder_3);
+      EClass _ontoLClass_3 = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertError(incorrectModelD, _ontoLClass_3, LinguisticRules.INVALID_CLASS_SPECIALIZATION);
+      StringConcatenation _builder_4 = new StringConcatenation();
+      _builder_4.append("module t {");
+      _builder_4.newLine();
+      _builder_4.append("\t\t\t\t");
+      _builder_4.append("orderless class WA; order 2 class HA; class FA;");
+      _builder_4.newLine();
+      _builder_4.append("\t\t\t\t");
+      _builder_4.append("orderless class WB specializes WA;");
+      _builder_4.newLine();
+      _builder_4.append("\t\t\t\t");
+      _builder_4.append("order 2 class HB specializes WA, HA;");
+      _builder_4.newLine();
+      _builder_4.append("\t\t\t\t");
+      _builder_4.append("class FB specializes WA, FA;");
+      _builder_4.newLine();
+      _builder_4.append("\t\t\t");
+      _builder_4.append("}");
+      final Model correctModel = this._parseHelper.parse(_builder_4);
+      this._validationTestHelper.assertNoErrors(correctModel);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
   public void testHasCyclicSpecialization() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field class_ is undefined for the type ModelPackage"
-      + "\nThe method or field class_ is undefined for the type ModelPackage");
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append(" ");
+      _builder.append("module t{ class A specializes A; }");
+      final Model incorrectModelA = this._parseHelper.parse(_builder);
+      EClass _ontoLClass = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertError(incorrectModelA, _ontoLClass, LinguisticRules.CYCLIC_SPECIALIZATION);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append(" ");
+      _builder_1.append("module t{");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("class A specializes B;");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("class B specializes A;");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t");
+      _builder_1.append("}");
+      final Model incorrectModelB = this._parseHelper.parse(_builder_1);
+      EClass _ontoLClass_1 = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertError(incorrectModelB, _ontoLClass_1, LinguisticRules.CYCLIC_SPECIALIZATION);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
   public void testHasValidBasetype() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field class_ is undefined for the type ModelPackage"
-      + "\nThe method or field class_ is undefined for the type ModelPackage"
-      + "\nThe method or field class_ is undefined for the type ModelPackage");
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("module t { order 2 class A categorizes B; orderless class B; }");
+      final Model incorrectModelA = this._parseHelper.parse(_builder);
+      EClass _ontoLClass = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertError(incorrectModelA, _ontoLClass, LinguisticRules.INVALID_BASETYPE);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("module t { order 2 class A categorizes B; order 2 class B ; }");
+      final Model incorrectModelB = this._parseHelper.parse(_builder_1);
+      EClass _ontoLClass_1 = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertError(incorrectModelB, _ontoLClass_1, LinguisticRules.INVALID_BASETYPE);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("module t { order 3 class A categorizes B; order 3 class B; }");
+      final Model incorrectModelC = this._parseHelper.parse(_builder_2);
+      EClass _ontoLClass_2 = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertError(incorrectModelC, _ontoLClass_2, LinguisticRules.INVALID_BASETYPE);
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("module t {");
+      _builder_3.newLine();
+      _builder_3.append("\t\t\t\t");
+      _builder_3.append("order 2 class A categorizes B; class B;");
+      _builder_3.newLine();
+      _builder_3.append("\t\t\t\t");
+      _builder_3.append("order 3 class C categorizes D; order 2 class D;");
+      _builder_3.newLine();
+      _builder_3.append("\t\t\t");
+      _builder_3.append("}");
+      final Model correctModel = this._parseHelper.parse(_builder_3);
+      this._validationTestHelper.assertNoErrors(correctModel);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
   public void testHasValidPowertypeRelation() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field class_ is undefined for the type ModelPackage"
-      + "\nThe method or field class_ is undefined for the type ModelPackage"
-      + "\nThe method or field class_ is undefined for the type ModelPackage");
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("module t { order 2 class A ispowertypeof B; orderless class B; }");
+      final Model incorrectModelA = this._parseHelper.parse(_builder);
+      EClass _ontoLClass = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertError(incorrectModelA, _ontoLClass, LinguisticRules.INVALID_POWERTYPE_RELATION);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("module t { order 2 class A ispowertypeof B; order 2 class B; }");
+      final Model incorrectModelB = this._parseHelper.parse(_builder_1);
+      EClass _ontoLClass_1 = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertError(incorrectModelB, _ontoLClass_1, LinguisticRules.INVALID_POWERTYPE_RELATION);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("module t { order 3 class A ispowertypeof B; order 3 class B; }");
+      final Model incorrectModelC = this._parseHelper.parse(_builder_2);
+      EClass _ontoLClass_2 = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertError(incorrectModelC, _ontoLClass_2, LinguisticRules.INVALID_POWERTYPE_RELATION);
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("module t {");
+      _builder_3.newLine();
+      _builder_3.append("\t\t\t\t");
+      _builder_3.append("order 2 class A ispowertypeof B; class B;");
+      _builder_3.newLine();
+      _builder_3.append("\t\t\t\t");
+      _builder_3.append("order 3 class C ispowertypeof D; order 2 class D;");
+      _builder_3.newLine();
+      _builder_3.append("\t\t\t");
+      _builder_3.append("}");
+      final Model correctModel = this._parseHelper.parse(_builder_3);
+      this._validationTestHelper.assertNoErrors(correctModel);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
   public void testHasValidSubordinators() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field class_ is undefined for the type ModelPackage"
-      + "\nThe method or field class_ is undefined for the type ModelPackage"
-      + "\nThe method or field class_ is undefined for the type ModelPackage");
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("module t { order 2 class A subordinatedto A; }");
+      final Model incorrectModelA = this._parseHelper.parse(_builder);
+      EClass _ontoLClass = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertError(incorrectModelA, _ontoLClass, LinguisticRules.INVALID_SUBORDINATOR);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("module t { order 2 class A subordinatedto B; class B; }");
+      final Model incorrectModelB = this._parseHelper.parse(_builder_1);
+      EClass _ontoLClass_1 = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertError(incorrectModelB, _ontoLClass_1, LinguisticRules.INVALID_SUBORDINATOR);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("module t { order 2 class A subordinatedto B; order 3 class B; }");
+      final Model incorrectModelC = this._parseHelper.parse(_builder_2);
+      EClass _ontoLClass_2 = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertError(incorrectModelC, _ontoLClass_2, LinguisticRules.INVALID_SUBORDINATOR);
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("module t { order 2 class A subordinatedto B; order 2 class B; }");
+      final Model correctModel = this._parseHelper.parse(_builder_3);
+      this._validationTestHelper.assertNoErrors(correctModel);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
@@ -128,7 +280,7 @@ public class LinguistcRulesTest {
       _builder_1.append("class C specializes A;");
       _builder_1.newLine();
       _builder_1.append("\t\t\t\t");
-      _builder_1.append("class X categorizes B;");
+      _builder_1.append("order 2 class X categorizes B;");
       _builder_1.newLine();
       _builder_1.append("\t\t\t\t");
       _builder_1.append("genset gs general A categorizer X specifics B,C;");
@@ -152,7 +304,7 @@ public class LinguistcRulesTest {
       _builder_2.append("class C specializes A;");
       _builder_2.newLine();
       _builder_2.append("\t\t\t\t");
-      _builder_2.append("class X categorizes A;");
+      _builder_2.append("order 2 class X categorizes A;");
       _builder_2.newLine();
       _builder_2.append("\t\t\t\t");
       _builder_2.append("genset gs general A categorizer X specifics B,C;");
@@ -176,7 +328,7 @@ public class LinguistcRulesTest {
       _builder_3.append("class C:X specializes A;");
       _builder_3.newLine();
       _builder_3.append("\t\t\t\t");
-      _builder_3.append("class X categorizes A;");
+      _builder_3.append("order 2 class X categorizes A;");
       _builder_3.newLine();
       _builder_3.append("\t\t\t\t");
       _builder_3.append("genset gs general A categorizer X specifics B,C;");
@@ -192,22 +344,159 @@ public class LinguistcRulesTest {
   
   @Test
   public void testObeysSubordination() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field class_ is undefined for the type ModelPackage");
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("module t{");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("order 2 class XA; ");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("order 2 class XB subordinatedto XA;");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("class YA:XA; class YB:XB;");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      final Model incorrectModel = this._parseHelper.parse(_builder);
+      EClass _ontoLClass = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertError(incorrectModel, _ontoLClass, 
+        LinguisticRules.MISSING_SPECIALIZATION_THROUGH_SUBODINATION);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("module t{");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("order 2 class XA; order 2 class XB subordinatedto XA;");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("class YA:XA; class YB:XB specializes YA;");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t");
+      _builder_1.append("}");
+      final Model correctModel = this._parseHelper.parse(_builder_1);
+      this._validationTestHelper.assertNoErrors(correctModel);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
   public void testHasSimpleSubordinationCycle() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field class_ is undefined for the type ModelPackage"
-      + "\nThe method or field class_ is undefined for the type ModelPackage"
-      + "\nThe method or field class_ is undefined for the type ModelPackage");
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("module t{ orderless class A subordinatedto A; }");
+      final Model incorrectModelA = this._parseHelper.parse(_builder);
+      EClass _ontoLClass = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertError(incorrectModelA, _ontoLClass, 
+        LinguisticRules.SIMPLE_SUBORDINATION_CYCLE);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("module t{");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("orderless class A subordinatedto B;");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("orderless class B subordinatedto A;");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t");
+      _builder_1.append("}");
+      final Model incorrectModelB = this._parseHelper.parse(_builder_1);
+      EClass _ontoLClass_1 = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertError(incorrectModelB, _ontoLClass_1, 
+        LinguisticRules.SIMPLE_SUBORDINATION_CYCLE);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("module t{");
+      _builder_2.newLine();
+      _builder_2.append("\t\t\t\t");
+      _builder_2.append("orderless class A subordinatedto B;");
+      _builder_2.newLine();
+      _builder_2.append("\t\t\t\t");
+      _builder_2.append("orderless class B specializes A;");
+      _builder_2.newLine();
+      _builder_2.append("\t\t\t");
+      _builder_2.append("}");
+      final Model incorrectModelC = this._parseHelper.parse(_builder_2);
+      EClass _ontoLClass_2 = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertError(incorrectModelC, _ontoLClass_2, 
+        LinguisticRules.SIMPLE_SUBORDINATION_CYCLE);
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("module t{");
+      _builder_3.newLine();
+      _builder_3.append("\t\t\t\t");
+      _builder_3.append("orderless class A;");
+      _builder_3.newLine();
+      _builder_3.append("\t\t\t\t");
+      _builder_3.append("orderless class B specializes A subordinatedto A;");
+      _builder_3.newLine();
+      _builder_3.append("\t\t\t");
+      _builder_3.append("}");
+      final Model correctModel = this._parseHelper.parse(_builder_3);
+      this._validationTestHelper.assertNoErrors(correctModel);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
   public void testIsSpecializingDisjointClasses() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field class_ is undefined for the type ModelPackage");
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("module t{");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("orderless class A;");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("orderless class B specializes A;");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("orderless class C specializes A;");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("disjoint genset x general A specifics B,C;");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("orderless class D specializes B,C;");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      final Model incorrectModel = this._parseHelper.parse(_builder);
+      EClass _ontoLClass = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertError(incorrectModel, _ontoLClass, 
+        LinguisticRules.SPECILIZATION_OF_DISJOINT_CLASSES);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("module t{");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("orderless class A;");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("orderless class B specializes A;");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("orderless class C specializes A;");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("disjoint genset x general A specifics B,C;");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("orderless class D specializes C;");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("orderless class E specializes B;");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t");
+      _builder_1.append("}");
+      final Model correctModel = this._parseHelper.parse(_builder_1);
+      this._validationTestHelper.assertNoErrors(correctModel);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
@@ -217,10 +506,18 @@ public class LinguistcRulesTest {
       _builder.append("module t{");
       _builder.newLine();
       _builder.append("\t\t\t\t");
-      _builder.append("class A; class B specializes A; class C specializes A;");
+      _builder.append("orderless class A;");
       _builder.newLine();
       _builder.append("\t\t\t\t");
-      _builder.append("(disjoint) genset a general A specifics B,C;");
+      _builder.append("orderless class B specializes A;");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("orderless class C specializes A;");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("disjoint genset a general A specifics B,C;");
       _builder.newLine();
       _builder.append("\t\t\t\t");
       _builder.append("individual X:B,C;");
@@ -235,7 +532,15 @@ public class LinguistcRulesTest {
       _builder_1.append("module t{");
       _builder_1.newLine();
       _builder_1.append("\t\t\t\t");
-      _builder_1.append("class A; class B specializes A; class C specializes A;");
+      _builder_1.append("orderless class A;");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("orderless class B specializes A;");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("orderless class C specializes A;");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
       _builder_1.newLine();
       _builder_1.append("\t\t\t\t");
       _builder_1.append("genset a general A specifics B,C;");
@@ -259,10 +564,18 @@ public class LinguistcRulesTest {
       _builder.append("module t{");
       _builder.newLine();
       _builder.append("\t\t\t\t");
-      _builder.append("class A; class B specializes A; class C specializes A;");
+      _builder.append("orderless class A;");
       _builder.newLine();
       _builder.append("\t\t\t\t");
-      _builder.append("(complete) genset a general A specifics B,C;");
+      _builder.append("orderless class B specializes A;");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("orderless class C specializes A;");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("complete genset a general A specifics B,C;");
       _builder.newLine();
       _builder.append("\t\t\t\t");
       _builder.append("individual X:A;");
@@ -277,10 +590,18 @@ public class LinguistcRulesTest {
       _builder_1.append("module t{");
       _builder_1.newLine();
       _builder_1.append("\t\t\t\t");
-      _builder_1.append("class A; class B specializes A; class C specializes A;");
+      _builder_1.append("orderless class A;");
       _builder_1.newLine();
       _builder_1.append("\t\t\t\t");
-      _builder_1.append("(complete) genset a general A specifics B,C;");
+      _builder_1.append("orderless class B specializes A;");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("orderless class C specializes A;");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("complete genset a general A specifics B,C;");
       _builder_1.newLine();
       _builder_1.append("\t\t\t\t");
       _builder_1.append("individual X:A,B;");

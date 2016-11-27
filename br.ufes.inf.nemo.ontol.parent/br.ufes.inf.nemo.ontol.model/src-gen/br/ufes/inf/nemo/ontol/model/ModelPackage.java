@@ -79,13 +79,22 @@ public interface ModelPackage extends EPackage {
 	int MODEL__NAME = 0;
 
 	/**
+	 * The feature id for the '<em><b>Includes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__INCLUDES = 1;
+
+	/**
 	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL__ELEMENTS = 1;
+	int MODEL__ELEMENTS = 2;
 
 	/**
 	 * The number of structural features of the '<em>Model</em>' class.
@@ -94,7 +103,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_FEATURE_COUNT = 2;
+	int MODEL_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Model</em>' class.
@@ -171,43 +180,6 @@ public interface ModelPackage extends EPackage {
 	int IMPORT_OPERATION_COUNT = MODEL_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.IncludeImpl <em>Include</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see br.ufes.inf.nemo.ontol.model.impl.IncludeImpl
-	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getInclude()
-	 * @generated
-	 */
-	int INCLUDE = 3;
-
-	/**
-	 * The feature id for the '<em><b>Include</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INCLUDE__INCLUDE = MODEL_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Include</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INCLUDE_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Include</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INCLUDE_OPERATION_COUNT = MODEL_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.EntityDeclarationImpl <em>Entity Declaration</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -215,7 +187,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getEntityDeclaration()
 	 * @generated
 	 */
-	int ENTITY_DECLARATION = 4;
+	int ENTITY_DECLARATION = 3;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -279,7 +251,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getIndividual()
 	 * @generated
 	 */
-	int INDIVIDUAL = 5;
+	int INDIVIDUAL = 4;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -343,7 +315,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getOntoLClass()
 	 * @generated
 	 */
-	int ONTO_LCLASS = 6;
+	int ONTO_LCLASS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -470,7 +442,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getOrderlessClass()
 	 * @generated
 	 */
-	int ORDERLESS_CLASS = 7;
+	int ORDERLESS_CLASS = 6;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -597,7 +569,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getOrderedClass()
 	 * @generated
 	 */
-	int ORDERED_CLASS = 8;
+	int ORDERED_CLASS = 7;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -724,7 +696,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getHOClass()
 	 * @generated
 	 */
-	int HO_CLASS = 9;
+	int HO_CLASS = 8;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -860,7 +832,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getFOClass()
 	 * @generated
 	 */
-	int FO_CLASS = 10;
+	int FO_CLASS = 9;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -987,7 +959,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getGeneralizationSet()
 	 * @generated
 	 */
-	int GENERALIZATION_SET = 11;
+	int GENERALIZATION_SET = 10;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1069,7 +1041,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getProperty()
 	 * @generated
 	 */
-	int PROPERTY = 12;
+	int PROPERTY = 11;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1133,7 +1105,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getAttribute()
 	 * @generated
 	 */
-	int ATTRIBUTE = 13;
+	int ATTRIBUTE = 12;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1181,22 +1153,13 @@ public interface ModelPackage extends EPackage {
 	int ATTRIBUTE__SUBSET_OF = PROPERTY_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Opposite To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE__OPPOSITE_TO = PROPERTY_FEATURE_COUNT + 1;
-
-	/**
 	 * The number of structural features of the '<em>Attribute</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_FEATURE_COUNT = PROPERTY_FEATURE_COUNT + 2;
+	int ATTRIBUTE_FEATURE_COUNT = PROPERTY_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Attribute</em>' class.
@@ -1215,7 +1178,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getReference()
 	 * @generated
 	 */
-	int REFERENCE = 14;
+	int REFERENCE = 13;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1297,7 +1260,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getPropertyAssignment()
 	 * @generated
 	 */
-	int PROPERTY_ASSIGNMENT = 15;
+	int PROPERTY_ASSIGNMENT = 14;
 
 	/**
 	 * The number of structural features of the '<em>Property Assignment</em>' class.
@@ -1325,7 +1288,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getAttributeAssignment()
 	 * @generated
 	 */
-	int ATTRIBUTE_ASSIGNMENT = 16;
+	int ATTRIBUTE_ASSIGNMENT = 15;
 
 	/**
 	 * The feature id for the '<em><b>Attribute</b></em>' reference.
@@ -1371,7 +1334,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getReferenceAssignment()
 	 * @generated
 	 */
-	int REFERENCE_ASSIGNMENT = 17;
+	int REFERENCE_ASSIGNMENT = 16;
 
 	/**
 	 * The feature id for the '<em><b>Reference</b></em>' reference.
@@ -1417,7 +1380,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getValue()
 	 * @generated
 	 */
-	int VALUE = 18;
+	int VALUE = 17;
 
 	/**
 	 * The number of structural features of the '<em>Value</em>' class.
@@ -1454,7 +1417,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getReferenceValue()
 	 * @generated
 	 */
-	int REFERENCE_VALUE = 19;
+	int REFERENCE_VALUE = 18;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' reference.
@@ -1500,7 +1463,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getDataValue()
 	 * @generated
 	 */
-	int DATA_VALUE = 20;
+	int DATA_VALUE = 19;
 
 	/**
 	 * The number of structural features of the '<em>Data Value</em>' class.
@@ -1537,7 +1500,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getStringValue()
 	 * @generated
 	 */
-	int STRING_VALUE = 21;
+	int STRING_VALUE = 20;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1583,7 +1546,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getNumberValue()
 	 * @generated
 	 */
-	int NUMBER_VALUE = 22;
+	int NUMBER_VALUE = 21;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1629,7 +1592,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getBooleanValue()
 	 * @generated
 	 */
-	int BOOLEAN_VALUE = 23;
+	int BOOLEAN_VALUE = 22;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1675,7 +1638,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getNoneValue()
 	 * @generated
 	 */
-	int NONE_VALUE = 24;
+	int NONE_VALUE = 23;
 
 	/**
 	 * The number of structural features of the '<em>None Value</em>' class.
@@ -1721,7 +1684,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getCategorizationType()
 	 * @generated
 	 */
-	int CATEGORIZATION_TYPE = 25;
+	int CATEGORIZATION_TYPE = 24;
 
 
 	/**
@@ -1744,6 +1707,17 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getModel_Name();
+
+	/**
+	 * Returns the meta object for the reference list '{@link br.ufes.inf.nemo.ontol.model.Model#getIncludes <em>Includes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Includes</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.Model#getIncludes()
+	 * @see #getModel()
+	 * @generated
+	 */
+	EReference getModel_Includes();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link br.ufes.inf.nemo.ontol.model.Model#getElements <em>Elements</em>}'.
@@ -1786,27 +1760,6 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getImport_ImportedNamespace();
-
-	/**
-	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.Include <em>Include</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Include</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.Include
-	 * @generated
-	 */
-	EClass getInclude();
-
-	/**
-	 * Returns the meta object for the reference '{@link br.ufes.inf.nemo.ontol.model.Include#getInclude <em>Include</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Include</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.Include#getInclude()
-	 * @see #getInclude()
-	 * @generated
-	 */
-	EReference getInclude_Include();
 
 	/**
 	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.EntityDeclaration <em>Entity Declaration</em>}'.
@@ -2162,17 +2115,6 @@ public interface ModelPackage extends EPackage {
 	EReference getAttribute_SubsetOf();
 
 	/**
-	 * Returns the meta object for the reference '{@link br.ufes.inf.nemo.ontol.model.Attribute#getOppositeTo <em>Opposite To</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Opposite To</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.Attribute#getOppositeTo()
-	 * @see #getAttribute()
-	 * @generated
-	 */
-	EReference getAttribute_OppositeTo();
-
-	/**
 	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.Reference <em>Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2494,6 +2436,14 @@ public interface ModelPackage extends EPackage {
 		EAttribute MODEL__NAME = eINSTANCE.getModel_Name();
 
 		/**
+		 * The meta object literal for the '<em><b>Includes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL__INCLUDES = eINSTANCE.getModel_Includes();
+
+		/**
 		 * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2528,24 +2478,6 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
-
-		/**
-		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.IncludeImpl <em>Include</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see br.ufes.inf.nemo.ontol.model.impl.IncludeImpl
-		 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getInclude()
-		 * @generated
-		 */
-		EClass INCLUDE = eINSTANCE.getInclude();
-
-		/**
-		 * The meta object literal for the '<em><b>Include</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference INCLUDE__INCLUDE = eINSTANCE.getInclude_Include();
 
 		/**
 		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.EntityDeclarationImpl <em>Entity Declaration</em>}' class.
@@ -2830,14 +2762,6 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ATTRIBUTE__SUBSET_OF = eINSTANCE.getAttribute_SubsetOf();
-
-		/**
-		 * The meta object literal for the '<em><b>Opposite To</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ATTRIBUTE__OPPOSITE_TO = eINSTANCE.getAttribute_OppositeTo();
 
 		/**
 		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.ReferenceImpl <em>Reference</em>}' class.

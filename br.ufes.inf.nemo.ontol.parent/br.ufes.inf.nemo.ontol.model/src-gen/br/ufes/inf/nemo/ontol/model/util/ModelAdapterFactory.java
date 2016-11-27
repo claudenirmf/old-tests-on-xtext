@@ -3,30 +3,7 @@
 package br.ufes.inf.nemo.ontol.model.util;
 
 import br.ufes.inf.nemo.ontol.model.*;
-import br.ufes.inf.nemo.ontol.model.Attribute;
-import br.ufes.inf.nemo.ontol.model.AttributeAssignment;
-import br.ufes.inf.nemo.ontol.model.BooleanValue;
-import br.ufes.inf.nemo.ontol.model.DataValue;
-import br.ufes.inf.nemo.ontol.model.EntityDeclaration;
-import br.ufes.inf.nemo.ontol.model.FOClass;
-import br.ufes.inf.nemo.ontol.model.GeneralizationSet;
-import br.ufes.inf.nemo.ontol.model.HOClass;
-import br.ufes.inf.nemo.ontol.model.Import;
-import br.ufes.inf.nemo.ontol.model.Individual;
-import br.ufes.inf.nemo.ontol.model.Model;
-import br.ufes.inf.nemo.ontol.model.ModelElement;
-import br.ufes.inf.nemo.ontol.model.ModelPackage;
-import br.ufes.inf.nemo.ontol.model.NoneValue;
-import br.ufes.inf.nemo.ontol.model.NumberValue;
-import br.ufes.inf.nemo.ontol.model.OrderedClass;
-import br.ufes.inf.nemo.ontol.model.OrderlessClass;
-import br.ufes.inf.nemo.ontol.model.Property;
-import br.ufes.inf.nemo.ontol.model.PropertyAssignment;
-import br.ufes.inf.nemo.ontol.model.Reference;
-import br.ufes.inf.nemo.ontol.model.ReferenceAssignment;
-import br.ufes.inf.nemo.ontol.model.ReferenceValue;
-import br.ufes.inf.nemo.ontol.model.StringValue;
-import br.ufes.inf.nemo.ontol.model.Value;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 
@@ -101,10 +78,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseImport(Import object) {
 				return createImportAdapter();
-			}
-			@Override
-			public Adapter caseInclude(Include object) {
-				return createIncludeAdapter();
 			}
 			@Override
 			public Adapter caseEntityDeclaration(EntityDeclaration object) {
@@ -249,20 +222,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createImportAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link br.ufes.inf.nemo.ontol.model.Include <em>Include</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see br.ufes.inf.nemo.ontol.model.Include
-	 * @generated
-	 */
-	public Adapter createIncludeAdapter() {
 		return null;
 	}
 

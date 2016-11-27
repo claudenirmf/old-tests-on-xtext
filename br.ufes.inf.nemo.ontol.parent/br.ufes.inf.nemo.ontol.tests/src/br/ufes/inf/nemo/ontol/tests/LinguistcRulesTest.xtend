@@ -23,92 +23,90 @@ class LinguistcRulesTest {
 		correctModel.assertNoErrors
 		
 		val incorrectModel = ''' module t { class abc; }'''.parse
-		incorrectModel.assertError(ModelPackage.eINSTANCE.class_,LinguisticRules.INVALID_ENTITY_DECLARATION_NAME)
+		incorrectModel.assertError(ModelPackage.eINSTANCE.ontoLClass,LinguisticRules.INVALID_ENTITY_DECLARATION_NAME)
 	}
 	
 	@Test def testIsValidSpecialization(){
 		val incorrectModelA = ''' module t{ class A specializes A; }'''.parse
-		incorrectModelA.assertError(ModelPackage.eINSTANCE.class_,LinguisticRules.INVALID_CLASS_SPECIALIZATION)
+		incorrectModelA.assertError(ModelPackage.eINSTANCE.ontoLClass,LinguisticRules.INVALID_CLASS_SPECIALIZATION)
 		
-		val incorrectModelB = ''' module t{ hoclass A order 2; foclass B specializes A; }'''.parse
-		incorrectModelB.assertError(ModelPackage.eINSTANCE.class_,LinguisticRules.INVALID_CLASS_SPECIALIZATION)
+		val incorrectModelB = ''' module t{ order 2 class A; class B specializes A; }'''.parse
+		incorrectModelB.assertError(ModelPackage.eINSTANCE.ontoLClass,LinguisticRules.INVALID_CLASS_SPECIALIZATION)
 		
-		val incorrectModelC = ''' module t{ hoclass A order 2; class B specializes A; }'''.parse
-		incorrectModelC.assertError(ModelPackage.eINSTANCE.class_,LinguisticRules.INVALID_CLASS_SPECIALIZATION)
+		val incorrectModelC = ''' module t{ order 2 class A; orderless class B specializes A; }'''.parse
+		incorrectModelC.assertError(ModelPackage.eINSTANCE.ontoLClass,LinguisticRules.INVALID_CLASS_SPECIALIZATION)
 		
-		val incorrectModelD = ''' module t{ hoclass A order 2; hoclass B order 3 specializes A; }'''.parse
-		incorrectModelD.assertError(ModelPackage.eINSTANCE.class_,LinguisticRules.INVALID_CLASS_SPECIALIZATION)
+		val incorrectModelD = ''' module t{ order 2 class A; order 3 class B specializes A; }'''.parse
+		incorrectModelD.assertError(ModelPackage.eINSTANCE.ontoLClass,LinguisticRules.INVALID_CLASS_SPECIALIZATION)
 		
 		val correctModel = '''module t {
-				class WA; hoclass HA order 2; foclass FA;
-				class WB specializes WA;
-				hoclass HB order 2 specializes WA, HA;
-				foclass FB specializes WA, FA;
+				orderless class WA; order 2 class HA; class FA;
+				orderless class WB specializes WA;
+				order 2 class HB specializes WA, HA;
+				class FB specializes WA, FA;
 			}'''.parse
 		correctModel.assertNoErrors
 	}
 	
 	@Test def testHasCyclicSpecialization(){
 		val incorrectModelA = ''' module t{ class A specializes A; }'''.parse
-		incorrectModelA.assertError(ModelPackage.eINSTANCE.class_,LinguisticRules.CYCLIC_SPECIALIZATION)
+		incorrectModelA.assertError(ModelPackage.eINSTANCE.ontoLClass,LinguisticRules.CYCLIC_SPECIALIZATION)
 		
 		val incorrectModelB = ''' module t{
 				class A specializes B;
 				class B specializes A;
 			}'''.parse
-		incorrectModelB.assertError(ModelPackage.eINSTANCE.class_,LinguisticRules.CYCLIC_SPECIALIZATION)
+		incorrectModelB.assertError(ModelPackage.eINSTANCE.ontoLClass,LinguisticRules.CYCLIC_SPECIALIZATION)
 	}
 
 	@Test def testHasValidBasetype(){
 		// TODO Add tests for WClass scenarios
-		val incorrectModelA = '''module t { hoclass A order 2 categorizes B; class B; }'''.parse
-		incorrectModelA.assertError(ModelPackage.eINSTANCE.class_,LinguisticRules.INVALID_BASETYPE)
+		val incorrectModelA = '''module t { order 2 class A categorizes B; orderless class B; }'''.parse
+		incorrectModelA.assertError(ModelPackage.eINSTANCE.ontoLClass,LinguisticRules.INVALID_BASETYPE)
 		
-		val incorrectModelB = '''module t { hoclass A order 2 categorizes B; hoclass B order 2; }'''.parse
-		incorrectModelB.assertError(ModelPackage.eINSTANCE.class_,LinguisticRules.INVALID_BASETYPE)
+		val incorrectModelB = '''module t { order 2 class A categorizes B; order 2 class B ; }'''.parse
+		incorrectModelB.assertError(ModelPackage.eINSTANCE.ontoLClass,LinguisticRules.INVALID_BASETYPE)
 		
-		val incorrectModelC = '''module t { hoclass A order 3 categorizes B; hoclass B order 3; }'''.parse
-		incorrectModelC.assertError(ModelPackage.eINSTANCE.class_,LinguisticRules.INVALID_BASETYPE)
+		val incorrectModelC = '''module t { order 3 class A categorizes B; order 3 class B; }'''.parse
+		incorrectModelC.assertError(ModelPackage.eINSTANCE.ontoLClass,LinguisticRules.INVALID_BASETYPE)
 		
 		val correctModel = '''module t {
-				hoclass A order 2 categorizes B; foclass B;
-				hoclass C order 3 categorizes D; hoclass D order 2;
+				order 2 class A categorizes B; class B;
+				order 3 class C categorizes D; order 2 class D;
 			}'''.parse
 		correctModel.assertNoErrors
 	}
 	
 	@Test def testHasValidPowertypeRelation(){
 		// TODO Add tests for WClass scenarios
-		val incorrectModelA = '''module t { hoclass A order 2 ispowertypeof B; class B; }'''.parse
-		incorrectModelA.assertError(ModelPackage.eINSTANCE.class_,LinguisticRules.INVALID_POWERTYPE_RELATION)
+		val incorrectModelA = '''module t { order 2 class A ispowertypeof B; orderless class B; }'''.parse
+		incorrectModelA.assertError(ModelPackage.eINSTANCE.ontoLClass,LinguisticRules.INVALID_POWERTYPE_RELATION)
 		
-		val incorrectModelB = '''module t { hoclass A order 2 ispowertypeof B; hoclass B order 2; }'''.parse
-		incorrectModelB.assertError(ModelPackage.eINSTANCE.class_,LinguisticRules.INVALID_POWERTYPE_RELATION)
+		val incorrectModelB = '''module t { order 2 class A ispowertypeof B; order 2 class B; }'''.parse
+		incorrectModelB.assertError(ModelPackage.eINSTANCE.ontoLClass,LinguisticRules.INVALID_POWERTYPE_RELATION)
 		
-		val incorrectModelC = '''module t { hoclass A order 3 ispowertypeof B; hoclass B order 3; }'''.parse
-		incorrectModelC.assertError(ModelPackage.eINSTANCE.class_,LinguisticRules.INVALID_POWERTYPE_RELATION)
+		val incorrectModelC = '''module t { order 3 class A ispowertypeof B; order 3 class B; }'''.parse
+		incorrectModelC.assertError(ModelPackage.eINSTANCE.ontoLClass,LinguisticRules.INVALID_POWERTYPE_RELATION)
 		
 		val correctModel = '''module t {
-				hoclass A order 2 ispowertypeof B; foclass B;
-				hoclass C order 3 ispowertypeof D; hoclass D order 2;
+				order 2 class A ispowertypeof B; class B;
+				order 3 class C ispowertypeof D; order 2 class D;
 			}'''.parse
 		correctModel.assertNoErrors
 	}
 	
 	@Test def testHasValidSubordinators(){
 		// TODO Add tests for WClass scenarios
-		val incorrectModelA = '''module t { hoclass A order 2 subordinatedto A; }'''.parse
-		incorrectModelA.assertError(ModelPackage.eINSTANCE.class_,LinguisticRules.INVALID_SUBORDINATOR)
+		val incorrectModelA = '''module t { order 2 class A subordinatedto A; }'''.parse
+		incorrectModelA.assertError(ModelPackage.eINSTANCE.ontoLClass,LinguisticRules.INVALID_SUBORDINATOR)
 		
-		val incorrectModelB = '''module t { hoclass A order 2 subordinatedto B; foclass B; }'''.parse
-		incorrectModelB.assertError(ModelPackage.eINSTANCE.class_,LinguisticRules.INVALID_SUBORDINATOR)
+		val incorrectModelB = '''module t { order 2 class A subordinatedto B; class B; }'''.parse
+		incorrectModelB.assertError(ModelPackage.eINSTANCE.ontoLClass,LinguisticRules.INVALID_SUBORDINATOR)
 		
-		val incorrectModelC = '''module t { hoclass A order 2 subordinatedto B; hoclass B order 3; }'''.parse
-		incorrectModelC.assertError(ModelPackage.eINSTANCE.class_,LinguisticRules.INVALID_SUBORDINATOR)
+		val incorrectModelC = '''module t { order 2 class A subordinatedto B; order 3 class B; }'''.parse
+		incorrectModelC.assertError(ModelPackage.eINSTANCE.ontoLClass,LinguisticRules.INVALID_SUBORDINATOR)
 		
-		val correctModel = '''module t {
-				hoclass A order 2 subordinatedto B; hoclass B order 2;
-			}'''.parse
+		val correctModel = '''module t { order 2 class A subordinatedto B; order 2 class B; }'''.parse
 		correctModel.assertNoErrors
 	}
 	
@@ -134,7 +132,7 @@ class LinguistcRulesTest {
 				class A;
 				class B specializes A;
 				class C specializes A;
-				class X categorizes B;
+				order 2 class X categorizes B;
 				genset gs general A categorizer X specifics B,C;
 			}'''.parse
 		incorrectModelB.assertError(ModelPackage.eINSTANCE.generalizationSet,
@@ -144,7 +142,7 @@ class LinguistcRulesTest {
 				class A;
 				class B specializes A;
 				class C specializes A;
-				class X categorizes A;
+				order 2 class X categorizes A;
 				genset gs general A categorizer X specifics B,C;
 			}'''.parse
 		incorrectModelC.assertError(ModelPackage.eINSTANCE.generalizationSet,
@@ -154,7 +152,7 @@ class LinguistcRulesTest {
 				class A;
 				class B:X specializes A;
 				class C:X specializes A;
-				class X categorizes A;
+				order 2 class X categorizes A;
 				genset gs general A categorizer X specifics B,C;
 			}'''.parse
 		correctModel.assertNoErrors
@@ -162,56 +160,66 @@ class LinguistcRulesTest {
 	
 	@Test def testObeysSubordination(){
 		val incorrectModel = '''module t{
-				class XA; class XB subordinatedto XA;
+				order 2 class XA; 
+				order 2 class XB subordinatedto XA;
 				class YA:XA; class YB:XB;
 			}'''.parse
-		incorrectModel.assertError(ModelPackage.eINSTANCE.class_,
+		incorrectModel.assertError(ModelPackage.eINSTANCE.ontoLClass,
 			LinguisticRules.MISSING_SPECIALIZATION_THROUGH_SUBODINATION)
 		
 		val correctModel = '''module t{
-				class XA; class XB subordinatedto XA;
+				order 2 class XA; order 2 class XB subordinatedto XA;
 				class YA:XA; class YB:XB specializes YA;
 			}'''.parse
 		correctModel.assertNoErrors
 	}
 	
 	@Test def testHasSimpleSubordinationCycle(){
-		val incorrectModelA = '''module t{ class A subordinatedto A; }'''.parse
-		incorrectModelA.assertError(ModelPackage.eINSTANCE.class_,
+		val incorrectModelA = '''module t{ orderless class A subordinatedto A; }'''.parse
+		incorrectModelA.assertError(ModelPackage.eINSTANCE.ontoLClass,
 			LinguisticRules.SIMPLE_SUBORDINATION_CYCLE)
 		
 		val incorrectModelB = '''module t{
-				class A subordinatedto B; class B subordinatedto A;
+				orderless class A subordinatedto B;
+				orderless class B subordinatedto A;
 			}'''.parse
-		incorrectModelB.assertError(ModelPackage.eINSTANCE.class_,
+		incorrectModelB.assertError(ModelPackage.eINSTANCE.ontoLClass,
 			LinguisticRules.SIMPLE_SUBORDINATION_CYCLE)
 		
 		val incorrectModelC = '''module t{
-				class A subordinatedto B; class B specializes A;
+				orderless class A subordinatedto B;
+				orderless class B specializes A;
 			}'''.parse
-		incorrectModelC.assertError(ModelPackage.eINSTANCE.class_,
+		incorrectModelC.assertError(ModelPackage.eINSTANCE.ontoLClass,
 			LinguisticRules.SIMPLE_SUBORDINATION_CYCLE)
 		
 		val correctModel = '''module t{
-				class A; class B specializes A subordinatedto A;
+				orderless class A;
+				orderless class B specializes A subordinatedto A;
 			}'''.parse
 		correctModel.assertNoErrors
 	}
 	
 	@Test def testIsSpecializingDisjointClasses(){
 		val incorrectModel = '''module t{
-				class A; class B specializes A; class C specializes A;
-				(disjoint) genset x general A specifics B,C;
-				class D specializes B,C;
+				orderless class A;
+				orderless class B specializes A;
+				orderless class C specializes A;
+				
+				disjoint genset x general A specifics B,C;
+				orderless class D specializes B,C;
 			}'''.parse
-		incorrectModel.assertError(ModelPackage.eINSTANCE.class_,
+		incorrectModel.assertError(ModelPackage.eINSTANCE.ontoLClass,
 			LinguisticRules.SPECILIZATION_OF_DISJOINT_CLASSES)
 		
 		val correctModel = '''module t{
-				class A; class B specializes A; class C specializes A;
-				(disjoint) genset x general A specifics B,C;
-				class D specializes C;
-				class E specializes B;
+				orderless class A;
+				orderless class B specializes A;
+				orderless class C specializes A;
+				
+				disjoint genset x general A specifics B,C;
+				orderless class D specializes C;
+				orderless class E specializes B;
 			}'''.parse
 		correctModel.assertNoErrors
 	}
@@ -219,15 +227,21 @@ class LinguistcRulesTest {
 	@Test def testIsInstanceOfDisjointClasses(){
 		// TODO Investigate for errors
 		val incorrectModel = '''module t{
-				class A; class B specializes A; class C specializes A;
-				(disjoint) genset a general A specifics B,C;
+				orderless class A;
+				orderless class B specializes A;
+				orderless class C specializes A;
+				
+				disjoint genset a general A specifics B,C;
 				individual X:B,C;
 			}'''.parse
 		incorrectModel.assertError(ModelPackage.eINSTANCE.entityDeclaration,
 			LinguisticRules.INSTANCE_OF_DISJOINT_CLASSES)
 		
 		val correctModel = '''module t{
-				class A; class B specializes A; class C specializes A;
+				orderless class A;
+				orderless class B specializes A;
+				orderless class C specializes A;
+				
 				genset a general A specifics B,C;
 				individual X:B,C;
 			}'''.parse
@@ -236,16 +250,22 @@ class LinguistcRulesTest {
 	
 	@Test def testMissingInstantiationByCompleteness(){
 		val incorrectModel = '''module t{
-				class A; class B specializes A; class C specializes A;
-				(complete) genset a general A specifics B,C;
+				orderless class A;
+				orderless class B specializes A;
+				orderless class C specializes A;
+				
+				complete genset a general A specifics B,C;
 				individual X:A;
 			}'''.parse
 		incorrectModel.assertError(ModelPackage.eINSTANCE.entityDeclaration,
 			LinguisticRules.MISSING_INSTANTIATION_OF_COMPLETE_GENERALIZATION_SET)
 		
 		val correctModel = '''module t{
-				class A; class B specializes A; class C specializes A;
-				(complete) genset a general A specifics B,C;
+				orderless class A;
+				orderless class B specializes A;
+				orderless class C specializes A;
+				
+				complete genset a general A specifics B,C;
 				individual X:A,B;
 			}'''.parse
 		correctModel.assertNoErrors

@@ -4,7 +4,7 @@
 package br.ufes.inf.nemo.ontol.generator;
 
 import br.ufes.inf.nemo.ontol.model.Model;
-import com.google.inject.Inject;
+import com.google.common.base.Objects;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import org.eclipse.emf.common.util.EList;
@@ -14,14 +14,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
@@ -31,10 +29,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
  */
 @SuppressWarnings("all")
 public class OntoLGenerator extends AbstractGenerator {
-  @Inject
-  @Extension
-  private IQualifiedNameProvider _iQualifiedNameProvider;
-  
   public void doGenerate(final Resource xtextResource, final Resource xmiResource) {
     try {
       EcoreUtil.resolveAll(xtextResource);
@@ -60,11 +54,18 @@ public class OntoLGenerator extends AbstractGenerator {
       final String fileName = (_plus + ".xmi");
       URI _createURI = URI.createURI(fileName);
       final Resource xmiResource = rs.createResource(_createURI);
-      EcoreUtil.resolveAll(xtextResource);
-      EList<EObject> _contents = xmiResource.getContents();
-      EList<EObject> _contents_1 = xtextResource.getContents();
-      EObject _get = _contents_1.get(0);
-      _contents.add(_get);
+      EcoreUtil2.resolveAll(xtextResource);
+      EList<EObject> _contents = xtextResource.getContents();
+      EObject _get = _contents.get(0);
+      final Model model = ((Model) _get);
+      final EList<Model> includes = model.getIncludes();
+      EList<EObject> _contents_1 = xmiResource.getContents();
+      _contents_1.add(model);
+      if (((!Objects.equal(includes, null)) && (includes.size() > 0))) {
+        EList<EObject> _contents_2 = xmiResource.getContents();
+        EList<Model> _includes = model.getIncludes();
+        _contents_2.addAll(_includes);
+      }
       final ByteArrayOutputStream outStream = new ByteArrayOutputStream();
       xmiResource.save(outStream, null);
       byte[] _byteArray = outStream.toByteArray();
@@ -105,11 +106,8 @@ public class OntoLGenerator extends AbstractGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("<rdf:Description rdf:about=\"");
-    QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(m);
-    _builder.append(_fullyQualifiedName, "\t");
-    _builder.append("\"/>");
-    _builder.newLineIfNotEmpty();
+    _builder.append("<rdf:Description rdf:about=\"�m.fullyQualifiedName�\"/>");
+    _builder.newLine();
     _builder.append("    ");
     _builder.newLine();
     _builder.append("</rdf:RDF>");

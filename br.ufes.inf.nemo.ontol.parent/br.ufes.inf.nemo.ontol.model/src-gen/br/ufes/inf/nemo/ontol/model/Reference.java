@@ -4,7 +4,6 @@ package br.ufes.inf.nemo.ontol.model;
 
 import org.eclipse.emf.common.util.EList;
 
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Reference</b></em>'.
@@ -23,7 +22,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface Reference extends Property {
-
 	/**
 	 * Returns the value of the '<em><b>Subset Of</b></em>' reference list.
 	 * The list contents are of type {@link br.ufes.inf.nemo.ontol.model.Reference}.
@@ -65,4 +63,5 @@ public interface Reference extends Property {
 	 * @generated
 	 */
 	void setOppositeTo(Reference value);
+
 } // Reference
