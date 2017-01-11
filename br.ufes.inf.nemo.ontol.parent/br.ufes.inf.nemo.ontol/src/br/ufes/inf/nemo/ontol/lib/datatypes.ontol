@@ -1,0 +1,9 @@
+module br.ufes.inf.nemo.ontol.lib.datatypes
+{
+	
+	class DataType;
+	class Boolean specializes DataType;
+	class Number specializes DataType;
+	class String specializes DataType;
+	
+}

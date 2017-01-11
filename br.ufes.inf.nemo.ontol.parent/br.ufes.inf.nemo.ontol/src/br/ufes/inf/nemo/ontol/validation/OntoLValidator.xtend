@@ -12,6 +12,8 @@ import br.ufes.inf.nemo.ontol.util.OntoLUtils
 import com.google.inject.Inject
 import org.eclipse.xtext.validation.CheckType
 import org.eclipse.xtext.validation.Check
+import br.ufes.inf.nemo.ontol.model.FOClass
+import br.ufes.inf.nemo.ontol.lib.OntoLLib
 
 /**
  * This class contains custom validation rules. 
@@ -21,8 +23,11 @@ import org.eclipse.xtext.validation.Check
 class OntoLValidator extends AbstractOntoLValidator {
 	
 	@Inject extension OntoLUtils
+	@Inject extension OntoLLib
+	
 	@Inject extension LinguisticRules
 	@Inject extension MLTRules
+	@Inject extension UFORules
 	
 	public static val INSTANTIATION_OF_DISJOINT_TYPES = "br.ufes.inf.nemo.ontol.InstantiationOfDisjointTypes"
 	public static val MISSING_COMPLETE_INSTANTIATION = "br.ufes.inf.nemo.ontol.MissingCompleteInstantiation"
@@ -37,6 +42,11 @@ class OntoLValidator extends AbstractOntoLValidator {
 	public static val MISSING_IDENTITY = "br.ufes.inf.nemo.ontol.MissingIdentity"
 	public static val NECESSARY_INSTANTIATION = "br.ufes.inf.nemo.ontol.NecessaryInstantiation"
 	public static val MISSING_SPECIALIZATION_TO_BASETYPE = "br.ufes.inf.nemo.ontol.MissingSpecializationToBasetype"
+	
+	// TODO Update checks table
+	public static val UFO_A_MISSING_MUST_INSTANTIATION = "br.ufes.inf.nemo.ontol.ufo.a.MissingMustInstantiation"
+	public static val UFO_A_ILLEGAL_SORTAL_SPECIALIZATION = "br.ufes.inf.nemo.ontol.ufo.a.IllegalSortalSpecialization"
+	public static val UFO_A_ILLEGAL_RIGID_SPECIALIZATION = "br.ufes.inf.nemo.ontol.ufo.a.IllegalRigidSpecialization"
 	
 	@Check(CheckType.FAST)
 	def void fastChecksOnEntityDeclaration(EntityDeclaration e){
@@ -121,6 +131,68 @@ class OntoLValidator extends AbstractOntoLValidator {
 		if (c.isSpecializingDisjointClasses(ch))
 			error('''«c.name» is specializing disjoint classes.''', ModelPackage.eINSTANCE.ontoLClass_Subordinators,
 				LinguisticRules.SPECILIZATION_OF_DISJOINT_CLASSES)
+	}
+	
+	@Check(CheckType.EXPENSIVE)
+	def void expensiveChecksOnFOClass(FOClass c) {
+		val ch = (c as OntoLClass).classHierarchy
+		val iof = (c as OntoLClass).allInstantiatedClasses
+		val endurant = c.UFOEndurant
+//		if(!ch.contains(endurant))	return ;
+		
+		val mustInstantiate = c.UFOMustInstantiateClasses
+//		val sortalclass = c.getLibClass(OntoLLib.UFO_A_SORTAL_CLASS)
+		val mixinclass = c.getLibClass(OntoLLib.UFO_A_MIXIN_CLASS)
+		val rigidclass = c.getLibClass(OntoLLib.UFO_A_RIGID_CLASS)
+		val semirigidclass = c.getLibClass(OntoLLib.UFO_A_SEMI_RIGID_CLASS)
+//		val antirigidclass = c.getLibClass(OntoLLib.UFO_A_ANTI_RIGID_CLASS)
+		
+		var issue = c.mustInstantiateUFOMetaproperties(ch,iof,endurant,mustInstantiate)//?.runIssue
+		if(issue!=null)	error(issue.message,issue.source,issue.feature,issue.code)
+		issue = c.checkSpecializationAndSortality(ch,iof,mixinclass)//?.runIssue
+		if(issue!=null)	error(issue.message,issue.source,issue.feature,issue.code)
+		issue = c.checkSpecializationAndRigidity(ch,iof,rigidclass,semirigidclass)//?.runIssue
+		if(issue!=null)	error(issue.message,issue.source,issue.feature,issue.code)
+	}
+	
+	def private dispatch runIssue(ValidationError issue){
+		val it = issue
+		if(source!=null && feature!=null && index!=-1 && code!=null && issueData!=null)
+			error(message,source,feature,index,code,issueData)
+		else if(source!=null && feature!=null && code!=null && issueData!=null)
+			error(message,source,feature,code,issueData)
+		else if(feature!=null && index!=-1 && code!=null && issueData!=null)
+			error(message,feature,index,code,issueData)
+		else if(source!=null && feature!=null && index!=-1)
+			error(message,source,feature,index)
+		else if(source!=null && feature!=null)
+			error(message,source,feature)
+		else if(feature!=null && code!=null && issueData!=null)
+			error(message,feature,code,issueData)
+		else if(feature!=null && index!=-1)
+			error(message,feature,index)
+		else if(source!=null && feature!=null)
+			error(message,feature)
+	}
+	
+	def private dispatch runIssue(ValidationWarning issue){
+		val it = issue
+		if(source!=null && feature!=null && index!=-1 && code!=null && issueData!=null)
+			warning(message,source,feature,index,code,issueData)
+		else if(source!=null && feature!=null && code!=null && issueData!=null)
+			warning(message,source,feature,code,issueData)
+		else if(source!=null && feature!=null && index!=-1)
+			warning(message,source,feature,index)
+		else if(source!=null && feature!=null)
+			warning(message,source,feature)
+		else if(feature!=null && index!=-1 && code!=null && issueData!=null)
+			warning(message,feature,index,code,issueData)
+		else if(feature!=null && code!=null && issueData!=null)
+			warning(message,feature,code,issueData)
+		else if(feature!=null && index!=-1)
+			warning(message,feature,index)
+		else if(source!=null && feature!=null)
+			warning(message,feature)
 	}
 	
 }

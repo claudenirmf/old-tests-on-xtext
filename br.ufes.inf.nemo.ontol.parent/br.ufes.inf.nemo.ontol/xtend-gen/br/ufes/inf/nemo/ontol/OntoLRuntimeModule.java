@@ -4,8 +4,20 @@
 package br.ufes.inf.nemo.ontol;
 
 import br.ufes.inf.nemo.ontol.AbstractOntoLRuntimeModule;
+import br.ufes.inf.nemo.ontol.generator.OntoLOutputConfigurationProvider;
+import br.ufes.inf.nemo.ontol.scoping.OntoLImportedNamespaceAwareLocalScopeProvider;
 import br.ufes.inf.nemo.ontol.util.OntoLValueConverter;
+import com.google.inject.Binder;
+import com.google.inject.Singleton;
+import com.google.inject.binder.AnnotatedBindingBuilder;
+import com.google.inject.binder.LinkedBindingBuilder;
+import com.google.inject.binder.ScopedBindingBuilder;
+import com.google.inject.name.Named;
+import com.google.inject.name.Names;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.generator.IOutputConfigurationProvider;
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -13,7 +25,23 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 @SuppressWarnings("all")
 public class OntoLRuntimeModule extends AbstractOntoLRuntimeModule {
   @Override
+  public void configureIScopeProviderDelegate(final Binder binder) {
+    AnnotatedBindingBuilder<IScopeProvider> _bind = binder.<IScopeProvider>bind(IScopeProvider.class);
+    Named _named = Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE);
+    LinkedBindingBuilder<IScopeProvider> _annotatedWith = _bind.annotatedWith(_named);
+    _annotatedWith.to(OntoLImportedNamespaceAwareLocalScopeProvider.class);
+  }
+  
+  @Override
   public Class<? extends IValueConverterService> bindIValueConverterService() {
     return OntoLValueConverter.class;
+  }
+  
+  @Override
+  public void configure(final Binder binder) {
+    super.configure(binder);
+    AnnotatedBindingBuilder<IOutputConfigurationProvider> _bind = binder.<IOutputConfigurationProvider>bind(IOutputConfigurationProvider.class);
+    ScopedBindingBuilder _to = _bind.to(OntoLOutputConfigurationProvider.class);
+    _to.in(Singleton.class);
   }
 }

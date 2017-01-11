@@ -10,14 +10,14 @@ var rs = org.eclipse.xtext.resource.XtextResourceSet {} //:theResourceSet {}
 Workflow {
 	
 	bean = StandaloneSetup {
-		scanClassPath = true
-		platformUri = "${rootPath}/.."
 		resourceSet = rs
 		registerGeneratedEPackage = "br.ufes.inf.nemo.ontol.model.ModelPackage"
-		uriMap = {
-			from = "http://www.eclipse.org/emf/2011/Xcore"
-			to = "classpath:/"
-		}
+		scanClassPath = true
+//		platformUri = "${rootPath}/.."
+//		uriMap = {
+//			from = "http://www.eclipse.org/emf/2011/Xcore"
+//			to = "classpath:/"
+//		}
 	}
 	
 	component = XtextGenerator {

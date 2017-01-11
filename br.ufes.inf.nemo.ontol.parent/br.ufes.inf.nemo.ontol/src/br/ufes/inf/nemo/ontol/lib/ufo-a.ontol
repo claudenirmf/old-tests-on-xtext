@@ -1,0 +1,151 @@
+module br.ufes.inf.nemo.ontol.lib.ufo.a
+{
+	
+	import br.ufes.inf.nemo.ontol.lib.datatypes.*;
+	
+	include br.ufes.inf.nemo.ontol.lib.datatypes;
+	
+	// TODO Check the use of Thing and analyze who should instantiate/specialize it
+	orderless class Thing;
+	
+	order 2 class Universal specializes Thing
+		ispowertypeof Individual;
+	class Individual : Universal specializes Thing;
+	
+	order 2 class EndurantPowertype specializes Universal
+		ispowertypeof Endurant;
+	order 2 class EventPowertype specializes Universal
+		ispowertypeof Event;
+		
+	
+	class Endurant : EndurantPowertype specializes Individual;
+	class Event : EventPowertype specializes Individual;
+	
+	disjoint genset whole_in_time
+		general Universal specifics EndurantPowertype, EventPowertype;
+	
+	/**
+	 * Every individual is an instance of either Endurant or Event
+	 * depending on its temporal characteristics.
+	 */
+	disjoint complete genset whole_in_time
+		general Individual specifics Endurant, Event;
+	
+	orderless class SortalClass specializes Thing;
+	orderless class MixinClass specializes Thing;
+	disjoint genset sortality
+		general Thing specifics SortalClass, MixinClass;
+	
+	orderless class RigidClass specializes Thing;
+	orderless class SemiRigidClass specializes Thing;
+	orderless class AntiRigidClass specializes Thing;
+	disjoint genset rigidity
+		general Thing specifics RigidClass, SemiRigidClass, AntiRigidClass;
+	
+	orderless class ExternallyDependentClass specializes AntiRigidClass;
+	
+	order 2 class Category specializes EndurantPowertype, MixinClass, RigidClass;
+	order 2 class Mixin specializes EndurantPowertype, MixinClass, SemiRigidClass;
+	order 2 class AntiRigidMixin specializes EndurantPowertype, MixinClass, AntiRigidClass;
+	
+	order 2 class RigidSortal specializes EndurantPowertype, SortalClass, RigidClass;
+	order 2 class Sortal specializes EndurantPowertype, SortalClass, SemiRigidClass;
+	order 2 class AntiRigidSortal specializes EndurantPowertype, SortalClass, AntiRigidClass;
+	
+	disjoint genset endurant_type_metaproperties
+		general EndurantPowertype specifics Category, Mixin, AntiRigidMixin, RigidSortal, Sortal, AntiRigidSortal;
+	
+	order 2 class Kind specializes RigidSortal partitions Endurant;
+	order 2 class Subkind specializes RigidSortal subordinatedto Kind;
+	disjoint complete genset identity_principle_supplier
+		general RigidSortal specifics Kind, Subkind;
+	
+	order 2 class Role specializes AntiRigidSortal, ExternallyDependentClass subordinatedto Kind;
+	order 2 class Phase specializes AntiRigidSortal subordinatedto Kind;
+	disjoint complete genset external_dependence
+		general AntiRigidSortal specifics Role, Phase;
+	
+	order 2 class RoleMixin specializes AntiRigidMixin, ExternallyDependentClass subordinatedto Category;
+	order 2 class PhaseMixin specializes AntiRigidMixin subordinatedto Category;
+	disjoint complete genset external_dependence
+		general AntiRigidMixin specifics RoleMixin, PhaseMixin;
+	
+	class Substantial : Category specializes Endurant;
+	class Moment :  Category specializes Endurant;
+	disjoint complete genset existential_dependence
+		general Endurant specifics Substantial, Moment;
+	
+	class FunctionalComplex : Category specializes Substantial;
+	class Collective : Category specializes Substantial;
+	class Quantity : Category specializes Substantial;
+	disjoint complete genset substantial_nature
+		general Substantial specifics FunctionalComplex, Collective, Quantity;
+	
+	// TODO Review this name
+	order 2 class CollectiveTypeByExtensionalDefinition
+		specializes EndurantPowertype
+		completecategorizes Collective
+	{
+		att isExtensional : Boolean
+	};
+	
+	class Relator : Category specializes Moment
+	{
+		ref connects : [2..*] Endurant
+	};
+	class IntrinsicMoment :  Category specializes Moment
+	{
+		ref inheresIn : Endurant
+	};
+	disjoint complete genset unique_inherence
+		general Moment specifics Relator, IntrinsicMoment;
+	
+	class Mode : Category specializes IntrinsicMoment;
+	class Quality : Category specializes IntrinsicMoment;
+	disjoint complete genset measurability
+		general IntrinsicMoment specifics Mode, Quality;
+	
+	class ExternallyDependentMode : Category specializes Mode
+	{
+		ref partOf : Relator
+	};
+	
+	class ParthoodRelator : Category specializes Relator
+	{
+		ref whole : Endurant subsets connects
+		ref parts : [1..*] Endurant subsets connects
+	};
+	
+	order 2 class ParthoodRelatorType specializes EndurantPowertype
+		completecategorizes ParthoodRelator
+	{
+		att isShareable : Boolean
+		att isEssential : Boolean
+		att isInseperable : Boolean
+	};
+	
+	class MembershipRelator : Category specializes ParthoodRelator
+	{
+		ref collective : Collective subsets whole
+		ref members : [1..*] FunctionalComplex subsets parts
+	};
+	class ComponentRelator : Category specializes ParthoodRelator
+	{
+		ref whole : FunctionalComplex subsets whole
+		ref parts : [1..*] FunctionalComplex subsets parts
+	};
+	class QuantityAggregationRelator : Category specializes ParthoodRelator
+	{
+		ref whole : Quantity subsets whole
+		ref parts : [1..*] Quantity subsets parts
+	};
+	class CollectionAggregationRelator : Category specializes ParthoodRelator
+	{
+		ref whole : Collective
+		ref parts : [1..*] Collective
+	};
+	
+	disjoint genset parthood_relator_types general ParthoodRelator 
+		specifics MembershipRelator, ComponentRelator, QuantityAggregationRelator, CollectionAggregationRelator;
+
+}

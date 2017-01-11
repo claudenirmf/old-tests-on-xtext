@@ -1,106 +1,108 @@
 package br.ufes.inf.nemo.ontol.tests
 
-//import br.ufes.inf.nemo.ontol.model.Model
-//import com.google.inject.Inject
-//import com.google.inject.Provider
-//import java.io.BufferedReader
-//import java.io.InputStreamReader
-//import org.eclipse.emf.common.util.URI
-//import org.eclipse.emf.ecore.resource.ResourceSet
-//import org.eclipse.xtext.junit4.util.ParseHelper
-//import org.eclipse.xtext.junit4.validation.ValidationTestHelper
-//import org.junit.Before
-//import org.junit.Test
+import br.ufes.inf.nemo.ontol.lib.OntoLLib
+import br.ufes.inf.nemo.ontol.model.Model
+import br.ufes.inf.nemo.ontol.model.ModelPackage
+import br.ufes.inf.nemo.ontol.validation.OntoLValidator
+import com.google.inject.Inject
+import com.google.inject.Provider
+import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(OntoLInjectorProvider))
 class LibraryTest {
 	
-//	@Inject extension ParseHelper<Model>
-//	@Inject extension ValidationTestHelper
-//	
-//	@Inject Provider<ResourceSet> resourceSetProvider
-//	
-//	protected static val path_prefix = "br/ufes/inf/nemo/ontol/lib/"
-//	protected static val UFO_X = path_prefix + "UFO-X Core.ontol"
-//	protected static val UFO_A = path_prefix + "UFO-A.ontol"
-//	protected static val UFO_B = path_prefix + "UFO-B.ontol"
-//	protected static val UFO_C = path_prefix + "UFO-C.ontol"
-//	protected static val UFO_S = path_prefix + "UFO-S.ontol"
-//
+	@Inject extension ParseHelper<Model>
+	@Inject extension ValidationTestHelper
+	@Inject extension OntoLLib
+	
+	@Inject Provider<ResourceSet> resourceSetProvider
+
 //	private var ResourceSet rs
-//	
+	
 //	@Before def void intialize(){
 //		rs = resourceSetProvider.get
+//		rs.loadDatatypeLib
+//		rs.loadUFOALib
 //	}
-//	
-//	def protected loadModelText(String modelFileName){
-//		val inpstr = class.classLoader.getResourceAsStream(modelFileName)
-//		val br = new BufferedReader(new InputStreamReader(inpstr))
-//		val sb = new StringBuilder
-//		
-//		try {
-//			var String line = null
-//			while((line = br.readLine)!=null){
-//				sb.append(line+"\n")
-//			}
-//		} catch (Exception exception) {}
-//		return sb
-//	}
-//	
-//	def private void loadModelToResourceSet(String modelName){
-//		rs.createResource(URI.createURI(modelName))
-//			.load(class.classLoader.getResourceAsStream(modelName),rs.loadOptions)
-//	}
-//	
-//	def private getResourceFromResourceSet(String modelName) {
-//		rs.getResource(URI.createURI(modelName),true)
-//	}
-//	
-//	@Test def testUFOXModel(){
-//		loadModelText(UFO_X).parse.assertNoErrors
-//	}
-//	
-//	@Test def testUFOAModel(){
-//		// TODO Try to use Resource.resolve in the validation in order to get the object instead of its proxy
-//		loadModelText(UFO_X).parse(rs)
-//		loadModelText(UFO_A).parse(rs).assertNoErrors
-//	}
-//	
-//	@Test def testUFOBModel(){
-//		loadModelText(UFO_X).parse(rs)
-//		loadModelText(UFO_A).parse(rs)
-//		loadModelText(UFO_B).parse(rs).assertNoErrors
-//	}
-//	
-//	@Test def testUFOCModel(){
-//		loadModelText(UFO_X).parse(rs)
-//		loadModelText(UFO_A).parse(rs)
-//		loadModelText(UFO_B).parse(rs)
-//		loadModelText(UFO_C).parse(rs).assertNoErrors
-//	}
-//	
-//	@Test def testUFOSModel(){
-//		loadModelText(UFO_X).parse(rs)
-//		loadModelText(UFO_A).parse(rs)
-//		loadModelText(UFO_B).parse(rs)
-//		loadModelText(UFO_C).parse(rs)
-//		loadModelText(UFO_S).parse(rs).assertNoErrors
-//	}
-//	
-////	@Test def loadUFOCoreFile(){
-//////		loadModelText(UFO_X).parse(rs)
-////		loadModelToResourceSet(UFO_X)
-////		getResourceFromResourceSet(UFO_X).assertNoErrors
-////		
-////		val m = '''module t { 
-////				import nemo.lib.ufo.x.*;
-////				class X:WClass specializes WClass;
-////			}'''.parse(rs)
-////		m.assertNoErrors
-////	}
+	
+	def ResourceSet loadResourceSet(){
+		val rs = resourceSetProvider.get
+		rs.loadDatatypeLib
+		rs.loadUFOALib
+	}
+	
+	def includeStatements()'''
+		include «OntoLLib.UFO_A_LIB_NAME»;
+		include «OntoLLib.DATATYPES_LIB_NAME»;'''
+	
+	@Test def void testDefaultLibs(){
+		val rs = resourceSetProvider.get
+		rs.loadDatatypeLib
+		rs.loadUFOALib
+		rs.resources.forEach[ assertNoErrors ]
+	}
+	
+	@Test def void testMustInstantiate(){
+		val rs = loadResourceSet()
+		val incorrectModel = '''module t {
+				«includeStatements»
+				class X specializes «OntoLLib.UFO_A_ENDURANT»;
+			}'''.parse(rs)
+		incorrectModel.assertError(ModelPackage.eINSTANCE.ontoLClass,OntoLValidator.UFO_A_MISSING_MUST_INSTANTIATION)
+		
+		val correctModel = '''module t {
+				«includeStatements»
+				class X : «OntoLLib.UFO_A_KIND» specializes «OntoLLib.UFO_A_ENDURANT»;
+			}'''.parse(rs)
+		correctModel.assertNoError(OntoLValidator.UFO_A_MISSING_MUST_INSTANTIATION)
+	}
+	
+	@Test def void testCheckSpecializationAndSortality(){
+		val rs = loadResourceSet()
+		val incorrectModel = '''module t {
+				«includeStatements»
+				class X : «OntoLLib.UFO_A_SORTAL_CLASS»;
+				class Y : «OntoLLib.UFO_A_MIXIN_CLASS» specializes X;
+			}'''.parse(rs)
+		incorrectModel.assertError(ModelPackage.eINSTANCE.ontoLClass,OntoLValidator.UFO_A_ILLEGAL_SORTAL_SPECIALIZATION)
+		
+		val correctModel = '''module t {
+				«includeStatements»
+				class Y : «OntoLLib.UFO_A_MIXIN_CLASS»;
+				class X : «OntoLLib.UFO_A_SORTAL_CLASS» specializes Y;
+			}'''.parse(rs)
+		correctModel.assertNoError(OntoLValidator.UFO_A_ILLEGAL_SORTAL_SPECIALIZATION)
+	}
+	
+	@Test def void testCheckSpecializationAndRigidity(){
+		val rs = loadResourceSet()
+		val incorrectModel1 = '''module t {
+				«includeStatements»
+				class Y : «OntoLLib.UFO_A_ANTI_RIGID_CLASS»;
+				class X : «OntoLLib.UFO_A_RIGID_CLASS» specializes Y;
+			}'''.parse(rs)
+		incorrectModel1.assertError(ModelPackage.eINSTANCE.ontoLClass,OntoLValidator.UFO_A_ILLEGAL_RIGID_SPECIALIZATION)
+		
+		val incorrectModel2 = '''module t {
+				«includeStatements»
+				class Y : «OntoLLib.UFO_A_ANTI_RIGID_CLASS»;
+				class X : «OntoLLib.UFO_A_SEMI_RIGID_CLASS» specializes Y;
+			}'''.parse(rs)
+		incorrectModel2.assertError(ModelPackage.eINSTANCE.ontoLClass,OntoLValidator.UFO_A_ILLEGAL_RIGID_SPECIALIZATION)
+		
+		val correctModel = '''module t {
+				«includeStatements»
+				class Y : «OntoLLib.UFO_A_RIGID_CLASS»;
+				class X : «OntoLLib.UFO_A_ANTI_RIGID_CLASS» specializes Y;
+			}'''.parse(rs)
+		correctModel.assertNoError(OntoLValidator.UFO_A_ILLEGAL_SORTAL_SPECIALIZATION)
+	}
 	
 }

@@ -6,12 +6,19 @@ package br.ufes.inf.nemo.ontol.tests
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.runner.RunWith
+import com.google.inject.Inject
+import org.eclipse.xtext.junit4.util.ParseHelper
+import br.ufes.inf.nemo.ontol.model.Model
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.junit.Test
 
 @RunWith(XtextRunner)
 @InjectWith(OntoLInjectorProvider)
 class OntoLParsingTest{
 
-//	@Inject	extension ParseHelper<Model>
-//	@Inject extension ValidationTestHelper
+	@Inject	extension ParseHelper<Model>
+	@Inject extension ValidationTestHelper
+	
+	@Test def void emptyTest() {}
 
 }

@@ -3,7 +3,9 @@
  */
 package br.ufes.inf.nemo.ontol.validation;
 
+import br.ufes.inf.nemo.ontol.lib.OntoLLib;
 import br.ufes.inf.nemo.ontol.model.EntityDeclaration;
+import br.ufes.inf.nemo.ontol.model.FOClass;
 import br.ufes.inf.nemo.ontol.model.GeneralizationSet;
 import br.ufes.inf.nemo.ontol.model.HOClass;
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
@@ -12,11 +14,19 @@ import br.ufes.inf.nemo.ontol.util.OntoLUtils;
 import br.ufes.inf.nemo.ontol.validation.AbstractOntoLValidator;
 import br.ufes.inf.nemo.ontol.validation.LinguisticRules;
 import br.ufes.inf.nemo.ontol.validation.MLTRules;
+import br.ufes.inf.nemo.ontol.validation.UFORules;
+import br.ufes.inf.nemo.ontol.validation.ValidationError;
+import br.ufes.inf.nemo.ontol.validation.ValidationIssue;
+import br.ufes.inf.nemo.ontol.validation.ValidationWarning;
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
@@ -35,11 +45,19 @@ public class OntoLValidator extends AbstractOntoLValidator {
   
   @Inject
   @Extension
+  private OntoLLib _ontoLLib;
+  
+  @Inject
+  @Extension
   private LinguisticRules _linguisticRules;
   
   @Inject
   @Extension
   private MLTRules _mLTRules;
+  
+  @Inject
+  @Extension
+  private UFORules _uFORules;
   
   public final static String INSTANTIATION_OF_DISJOINT_TYPES = "br.ufes.inf.nemo.ontol.InstantiationOfDisjointTypes";
   
@@ -66,6 +84,12 @@ public class OntoLValidator extends AbstractOntoLValidator {
   public final static String NECESSARY_INSTANTIATION = "br.ufes.inf.nemo.ontol.NecessaryInstantiation";
   
   public final static String MISSING_SPECIALIZATION_TO_BASETYPE = "br.ufes.inf.nemo.ontol.MissingSpecializationToBasetype";
+  
+  public final static String UFO_A_MISSING_MUST_INSTANTIATION = "br.ufes.inf.nemo.ontol.ufo.a.MissingMustInstantiation";
+  
+  public final static String UFO_A_ILLEGAL_SORTAL_SPECIALIZATION = "br.ufes.inf.nemo.ontol.ufo.a.IllegalSortalSpecialization";
+  
+  public final static String UFO_A_ILLEGAL_RIGID_SPECIALIZATION = "br.ufes.inf.nemo.ontol.ufo.a.IllegalRigidSpecialization";
   
   @Check(CheckType.FAST)
   public void fastChecksOnEntityDeclaration(final EntityDeclaration e) {
@@ -227,6 +251,193 @@ public class OntoLValidator extends AbstractOntoLValidator {
       EReference _ontoLClass_Subordinators_1 = ModelPackage.eINSTANCE.getOntoLClass_Subordinators();
       this.error(_builder_3.toString(), _ontoLClass_Subordinators_1, 
         LinguisticRules.SPECILIZATION_OF_DISJOINT_CLASSES);
+    }
+  }
+  
+  @Check(CheckType.EXPENSIVE)
+  public void expensiveChecksOnFOClass(final FOClass c) {
+    final Set<OntoLClass> ch = this._ontoLUtils.classHierarchy(((OntoLClass) c));
+    final LinkedHashSet<OntoLClass> iof = this._ontoLUtils.getAllInstantiatedClasses(((OntoLClass) c));
+    final OntoLClass endurant = this._ontoLLib.getUFOEndurant(c);
+    final Set<OntoLClass> mustInstantiate = this._ontoLLib.getUFOMustInstantiateClasses(c);
+    final OntoLClass mixinclass = this._ontoLLib.getLibClass(c, OntoLLib.UFO_A_MIXIN_CLASS);
+    final OntoLClass rigidclass = this._ontoLLib.getLibClass(c, OntoLLib.UFO_A_RIGID_CLASS);
+    final OntoLClass semirigidclass = this._ontoLLib.getLibClass(c, OntoLLib.UFO_A_SEMI_RIGID_CLASS);
+    ValidationIssue issue = this._uFORules.mustInstantiateUFOMetaproperties(c, ch, iof, endurant, mustInstantiate);
+    boolean _notEquals = (!Objects.equal(issue, null));
+    if (_notEquals) {
+      String _message = issue.getMessage();
+      EObject _source = issue.getSource();
+      EStructuralFeature _feature = issue.getFeature();
+      String _code = issue.getCode();
+      this.error(_message, _source, _feature, _code);
+    }
+    ValidationIssue _checkSpecializationAndSortality = this._uFORules.checkSpecializationAndSortality(c, ch, iof, mixinclass);
+    issue = _checkSpecializationAndSortality;
+    boolean _notEquals_1 = (!Objects.equal(issue, null));
+    if (_notEquals_1) {
+      String _message_1 = issue.getMessage();
+      EObject _source_1 = issue.getSource();
+      EStructuralFeature _feature_1 = issue.getFeature();
+      String _code_1 = issue.getCode();
+      this.error(_message_1, _source_1, _feature_1, _code_1);
+    }
+    ValidationIssue _checkSpecializationAndRigidity = this._uFORules.checkSpecializationAndRigidity(c, ch, iof, rigidclass, semirigidclass);
+    issue = _checkSpecializationAndRigidity;
+    boolean _notEquals_2 = (!Objects.equal(issue, null));
+    if (_notEquals_2) {
+      String _message_2 = issue.getMessage();
+      EObject _source_2 = issue.getSource();
+      EStructuralFeature _feature_2 = issue.getFeature();
+      String _code_2 = issue.getCode();
+      this.error(_message_2, _source_2, _feature_2, _code_2);
+    }
+  }
+  
+  private void _runIssue(final ValidationError issue) {
+    final ValidationError it = issue;
+    if ((((((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null))) && (it.getIndex() != (-1))) && (!Objects.equal(it.getCode(), null))) && (!Objects.equal(it.getIssueData(), null)))) {
+      String _message = it.getMessage();
+      EObject _source = it.getSource();
+      EStructuralFeature _feature = it.getFeature();
+      int _index = it.getIndex();
+      String _code = it.getCode();
+      String[] _issueData = it.getIssueData();
+      this.error(_message, _source, _feature, _index, _code, _issueData);
+    } else {
+      if (((((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null))) && (!Objects.equal(it.getCode(), null))) && (!Objects.equal(it.getIssueData(), null)))) {
+        String _message_1 = it.getMessage();
+        EObject _source_1 = it.getSource();
+        EStructuralFeature _feature_1 = it.getFeature();
+        String _code_1 = it.getCode();
+        String[] _issueData_1 = it.getIssueData();
+        this.error(_message_1, _source_1, _feature_1, _code_1, _issueData_1);
+      } else {
+        if (((((!Objects.equal(it.getFeature(), null)) && (it.getIndex() != (-1))) && (!Objects.equal(it.getCode(), null))) && (!Objects.equal(it.getIssueData(), null)))) {
+          String _message_2 = it.getMessage();
+          EStructuralFeature _feature_2 = it.getFeature();
+          int _index_1 = it.getIndex();
+          String _code_2 = it.getCode();
+          String[] _issueData_2 = it.getIssueData();
+          this.error(_message_2, _feature_2, _index_1, _code_2, _issueData_2);
+        } else {
+          if ((((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null))) && (it.getIndex() != (-1)))) {
+            String _message_3 = it.getMessage();
+            EObject _source_2 = it.getSource();
+            EStructuralFeature _feature_3 = it.getFeature();
+            int _index_2 = it.getIndex();
+            this.error(_message_3, _source_2, _feature_3, _index_2);
+          } else {
+            if (((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null)))) {
+              String _message_4 = it.getMessage();
+              EObject _source_3 = it.getSource();
+              EStructuralFeature _feature_4 = it.getFeature();
+              this.error(_message_4, _source_3, _feature_4);
+            } else {
+              if ((((!Objects.equal(it.getFeature(), null)) && (!Objects.equal(it.getCode(), null))) && (!Objects.equal(it.getIssueData(), null)))) {
+                String _message_5 = it.getMessage();
+                EStructuralFeature _feature_5 = it.getFeature();
+                String _code_3 = it.getCode();
+                String[] _issueData_3 = it.getIssueData();
+                this.error(_message_5, _feature_5, _code_3, _issueData_3);
+              } else {
+                if (((!Objects.equal(it.getFeature(), null)) && (it.getIndex() != (-1)))) {
+                  String _message_6 = it.getMessage();
+                  EStructuralFeature _feature_6 = it.getFeature();
+                  int _index_3 = it.getIndex();
+                  this.error(_message_6, _feature_6, _index_3);
+                } else {
+                  if (((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null)))) {
+                    String _message_7 = it.getMessage();
+                    EStructuralFeature _feature_7 = it.getFeature();
+                    this.error(_message_7, _feature_7);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  private void _runIssue(final ValidationWarning issue) {
+    final ValidationWarning it = issue;
+    if ((((((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null))) && (it.getIndex() != (-1))) && (!Objects.equal(it.getCode(), null))) && (!Objects.equal(it.getIssueData(), null)))) {
+      String _message = it.getMessage();
+      EObject _source = it.getSource();
+      EStructuralFeature _feature = it.getFeature();
+      int _index = it.getIndex();
+      String _code = it.getCode();
+      String[] _issueData = it.getIssueData();
+      this.warning(_message, _source, _feature, _index, _code, _issueData);
+    } else {
+      if (((((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null))) && (!Objects.equal(it.getCode(), null))) && (!Objects.equal(it.getIssueData(), null)))) {
+        String _message_1 = it.getMessage();
+        EObject _source_1 = it.getSource();
+        EStructuralFeature _feature_1 = it.getFeature();
+        String _code_1 = it.getCode();
+        String[] _issueData_1 = it.getIssueData();
+        this.warning(_message_1, _source_1, _feature_1, _code_1, _issueData_1);
+      } else {
+        if ((((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null))) && (it.getIndex() != (-1)))) {
+          String _message_2 = it.getMessage();
+          EObject _source_2 = it.getSource();
+          EStructuralFeature _feature_2 = it.getFeature();
+          int _index_1 = it.getIndex();
+          this.warning(_message_2, _source_2, _feature_2, _index_1);
+        } else {
+          if (((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null)))) {
+            String _message_3 = it.getMessage();
+            EObject _source_3 = it.getSource();
+            EStructuralFeature _feature_3 = it.getFeature();
+            this.warning(_message_3, _source_3, _feature_3);
+          } else {
+            if (((((!Objects.equal(it.getFeature(), null)) && (it.getIndex() != (-1))) && (!Objects.equal(it.getCode(), null))) && (!Objects.equal(it.getIssueData(), null)))) {
+              String _message_4 = it.getMessage();
+              EStructuralFeature _feature_4 = it.getFeature();
+              int _index_2 = it.getIndex();
+              String _code_2 = it.getCode();
+              String[] _issueData_2 = it.getIssueData();
+              this.warning(_message_4, _feature_4, _index_2, _code_2, _issueData_2);
+            } else {
+              if ((((!Objects.equal(it.getFeature(), null)) && (!Objects.equal(it.getCode(), null))) && (!Objects.equal(it.getIssueData(), null)))) {
+                String _message_5 = it.getMessage();
+                EStructuralFeature _feature_5 = it.getFeature();
+                String _code_3 = it.getCode();
+                String[] _issueData_3 = it.getIssueData();
+                this.warning(_message_5, _feature_5, _code_3, _issueData_3);
+              } else {
+                if (((!Objects.equal(it.getFeature(), null)) && (it.getIndex() != (-1)))) {
+                  String _message_6 = it.getMessage();
+                  EStructuralFeature _feature_6 = it.getFeature();
+                  int _index_3 = it.getIndex();
+                  this.warning(_message_6, _feature_6, _index_3);
+                } else {
+                  if (((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null)))) {
+                    String _message_7 = it.getMessage();
+                    EStructuralFeature _feature_7 = it.getFeature();
+                    this.warning(_message_7, _feature_7);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  private void runIssue(final ValidationIssue issue) {
+    if (issue instanceof ValidationError) {
+      _runIssue((ValidationError)issue);
+      return;
+    } else if (issue instanceof ValidationWarning) {
+      _runIssue((ValidationWarning)issue);
+      return;
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(issue).toString());
     }
   }
 }

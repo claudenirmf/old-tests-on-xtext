@@ -3,6 +3,7 @@
  */
 package br.ufes.inf.nemo.ontol.generator;
 
+import br.ufes.inf.nemo.ontol.generator.OntoLOutputConfigurationProvider;
 import br.ufes.inf.nemo.ontol.model.Model;
 import com.google.common.base.Objects;
 import java.io.ByteArrayInputStream;
@@ -11,9 +12,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
@@ -54,64 +55,31 @@ public class OntoLGenerator extends AbstractGenerator {
       final String fileName = (_plus + ".xmi");
       URI _createURI = URI.createURI(fileName);
       final Resource xmiResource = rs.createResource(_createURI);
-      EcoreUtil2.resolveAll(xtextResource);
+      ResourceSet _resourceSet = xtextResource.getResourceSet();
+      EcoreUtil2.resolveAll(_resourceSet);
       EList<EObject> _contents = xtextResource.getContents();
-      EObject _get = _contents.get(0);
+      boolean _isEmpty = _contents.isEmpty();
+      if (_isEmpty) {
+        return;
+      }
+      EList<EObject> _contents_1 = xtextResource.getContents();
+      EObject _get = _contents_1.get(0);
       final Model model = ((Model) _get);
       final EList<Model> includes = model.getIncludes();
-      EList<EObject> _contents_1 = xmiResource.getContents();
-      _contents_1.add(model);
+      EList<EObject> _contents_2 = xmiResource.getContents();
+      _contents_2.add(model);
       if (((!Objects.equal(includes, null)) && (includes.size() > 0))) {
-        EList<EObject> _contents_2 = xmiResource.getContents();
+        EList<EObject> _contents_3 = xmiResource.getContents();
         EList<Model> _includes = model.getIncludes();
-        _contents_2.addAll(_includes);
+        _contents_3.addAll(_includes);
       }
       final ByteArrayOutputStream outStream = new ByteArrayOutputStream();
       xmiResource.save(outStream, null);
       byte[] _byteArray = outStream.toByteArray();
       ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_byteArray);
-      fsa.generateFile(fileName, _byteArrayInputStream);
+      fsa.generateFile(fileName, OntoLOutputConfigurationProvider.MODELS_OUTPUT, _byteArrayInputStream);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-  
-  public CharSequence compile(final Model m) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("<?xml version=\"1.0\"?>");
-    _builder.newLine();
-    _builder.append("<rdf:RDF xmlns=\"http://www.ontol.nemo.inf.ufes.br/#\"");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("xml:base=\"http://www.ontol.nemo.inf.ufes.br/\"");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("xmlns:mlt=\"http://www.nemo.inf.ufes.br/mlt#\"");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("xmlns:owl=\"http://www.w3.org/2002/07/owl#\"");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("xmlns:xsd=\"http://www.w3.org/2001/XMLSchema#\"");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("xmlns:ontol=\"http://www.nemo.inf.ufes.br/ontol-schema#\">");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("<rdf:Description rdf:about=\"�m.fullyQualifiedName�\"/>");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.newLine();
-    _builder.append("</rdf:RDF>");
-    _builder.newLine();
-    return _builder;
   }
 }

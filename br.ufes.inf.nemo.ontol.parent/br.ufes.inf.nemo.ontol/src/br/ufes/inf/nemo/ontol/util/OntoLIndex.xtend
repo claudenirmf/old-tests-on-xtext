@@ -26,21 +26,33 @@ class OntoLIndex {
 		o.visibleContainers.map[ getExportedObjectsByType(type)].flatten
 	}
 	
-	def getVisibleEClassDescriptions(EObject o, EClass c){
-		o.getVisibleEObjectDescriptions(c)
-	}
+//	def getVisibleEClassDescriptions(EObject o, EClass c){
+//		o.getVisibleEObjectDescriptions(c)
+//	}
+	
+//	def getModelElementFromIndex(EObject context, String qualifiedName, EClass modelElementClass){
+//		val desc = context.getVisibleEObjectDescriptions(modelElementClass)
+//			.findFirst[ it.qualifiedName.toString == qualifiedName ]
+//		
+//		if(desc == null) { return null }
+//		
+//		var o = desc.EObjectOrProxy
+//		if(o.eIsProxy){
+//			o = context.eResource.resourceSet.getEObject(desc.EObjectURI, true)
+//		}
+//		o as OntoLClass
+//	}
 	
 	def getModelElementFromIndex(EObject context, String qualifiedName, EClass modelElementClass){
-		val desc = context.getVisibleEObjectDescriptions(modelElementClass)
-			.findFirst[ it.qualifiedName.toString == qualifiedName ]
-		
-		if(desc == null) { return null }
-		
+		val desc = context.getVisibleEObjectDescriptions(modelElementClass).findFirst [
+			it.qualifiedName.toString == qualifiedName
+		]
+		if (desc == null)	return null
+
 		var o = desc.EObjectOrProxy
-		if(o.eIsProxy){
+		if (o.eIsProxy)
 			o = context.eResource.resourceSet.getEObject(desc.EObjectURI, true)
-		}
-		o as OntoLClass
+		return o
 	}
 	
 }

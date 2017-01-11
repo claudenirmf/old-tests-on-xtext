@@ -34,37 +34,18 @@ class OntoLGenerator extends AbstractGenerator {
 		val fileName = "models\\"+xtextResource.URI.segments.last.replace(".ontol","")+".xmi"
 		val xmiResource = rs.createResource(URI.createURI(fileName))
 		
-		EcoreUtil2.resolveAll(xtextResource)
+		EcoreUtil2.resolveAll(xtextResource.resourceSet)
+		// TODO Fix IndexOutOfBounds exception
+		if(xtextResource.contents.empty)	return ;
 		val model = xtextResource.contents.get(0) as Model
 		val includes = model.includes
-		xmiResource.contents.add(model)//.get(0))
+		xmiResource.contents.add(model)
 		if(includes!=null && includes.size>0)
 			xmiResource.contents.addAll(model.includes)
 		
 		val outStream = new ByteArrayOutputStream
 		xmiResource.save(outStream,null)
-		fsa.generateFile(fileName,new ByteArrayInputStream(outStream.toByteArray))
-
-//		fsa.generateFile("persisted_models/"+fileName+".xmi",in)
-//		for(m : resource.allContents.toIterable.filter[it instanceof Model]){
-//			fsa.generateFile("owl/"+m.fullyQualifiedName+".rdf",
-//				(m as Model).compile)
-//		}
+		fsa.generateFile(fileName, OntoLOutputConfigurationProvider.MODELS_OUTPUT,new ByteArrayInputStream(outStream.toByteArray))
 	}
 	
-	def CharSequence compile(Model m)'''
-	<?xml version="1.0"?>
-	<rdf:RDF xmlns="http://www.ontol.nemo.inf.ufes.br/#"
-		xml:base="http://www.ontol.nemo.inf.ufes.br/"
-		xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-		xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-		xmlns:mlt="http://www.nemo.inf.ufes.br/mlt#"
-		xmlns:owl="http://www.w3.org/2002/07/owl#"
-		xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-		xmlns:ontol="http://www.nemo.inf.ufes.br/ontol-schema#">
-		
-		<rdf:Description rdf:about="�m.fullyQualifiedName�"/>
-	    
-	</rdf:RDF>
-	'''
 }

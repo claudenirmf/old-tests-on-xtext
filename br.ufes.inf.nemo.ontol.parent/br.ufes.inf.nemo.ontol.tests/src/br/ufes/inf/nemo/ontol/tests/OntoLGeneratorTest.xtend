@@ -1,36 +1,25 @@
 package br.ufes.inf.nemo.ontol.tests
 
-//import br.ufes.inf.nemo.ontol.model.Model
-//import com.google.inject.Inject
-//import org.eclipse.xtext.generator.IGenerator2
-//import org.eclipse.xtext.generator.IGeneratorContext
-//import org.eclipse.xtext.generator.InMemoryFileSystemAccess
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
-//import org.eclipse.xtext.junit4.util.ParseHelper
-//import org.eclipse.xtext.util.CancelIndicator
-//import org.junit.Test
 import org.junit.runner.RunWith
-//import org.eclipse.emf.ecore.resource.ResourceSet
-//import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
-//import org.eclipse.emf.ecore.resource.Resource
-//import org.eclipse.emf.common.util.URI
-//import java.util.Collections
-//import br.ufes.inf.nemo.ontol.generator.OntoLGenerator
-//import java.io.FileOutputStream
-//import java.io.FileInputStream
-//import java.io.PipedOutputStream
-//import java.io.PipedInputStream
+import com.google.inject.Inject
+import org.eclipse.xtext.junit4.util.ParseHelper
+import br.ufes.inf.nemo.ontol.model.Model
+import org.eclipse.xtext.generator.IGenerator2
+import org.junit.Test
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(OntoLInjectorProvider))
 class OntoLGeneratorTest {
 	
-//	@Inject extension ParseHelper<Model>
-//	@Inject extension LibraryTest
-//	@Inject extension IGenerator2
-//	@Inject IGenerator2 gen
-//	
+	@Inject extension ParseHelper<Model>
+	@Inject extension LibraryTest
+	@Inject extension IGenerator2
+	@Inject IGenerator2 gen
+	
+	@Test def void emptyTest() {}
+	
 //	@Test def void testGenerator(){
 //		val model = loadModelText(LibraryTest.UFO_X).parse
 //		val fsa =  new InMemoryFileSystemAccess

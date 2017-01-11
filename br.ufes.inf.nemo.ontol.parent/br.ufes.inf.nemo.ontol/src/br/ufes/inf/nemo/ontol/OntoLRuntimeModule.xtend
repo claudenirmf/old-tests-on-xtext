@@ -3,22 +3,37 @@
  */
 package br.ufes.inf.nemo.ontol
 
-import org.eclipse.xtext.conversion.IValueConverterService
+import br.ufes.inf.nemo.ontol.generator.OntoLOutputConfigurationProvider
 import br.ufes.inf.nemo.ontol.util.OntoLValueConverter
+
+import org.eclipse.xtext.conversion.IValueConverterService
+import org.eclipse.xtext.generator.IOutputConfigurationProvider
+
+import com.google.inject.Binder
+import com.google.inject.Singleton
+import org.eclipse.xtext.scoping.IScopeProvider
+import com.google.inject.name.Names
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider
+import br.ufes.inf.nemo.ontol.scoping.OntoLImportedNamespaceAwareLocalScopeProvider
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 class OntoLRuntimeModule extends AbstractOntoLRuntimeModule {
 
-//	override configureIScopeProviderDelegate(Binder binder) {
-//		binder.bind(IScopeProvider)
-//			.annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
-//			.to(OntoLImportedNamespaceAwareLocalScopeProvider)
-//	}
+	override configureIScopeProviderDelegate(Binder binder) {
+		binder.bind(IScopeProvider)
+			.annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
+			.to(OntoLImportedNamespaceAwareLocalScopeProvider)
+	}
 	
 	override Class<? extends IValueConverterService> bindIValueConverterService() {
 		return OntoLValueConverter
+	}
+	
+	override configure(Binder binder) {
+		super.configure(binder);
+		binder.bind(IOutputConfigurationProvider).to(OntoLOutputConfigurationProvider).in(Singleton);
 	}
 
 }

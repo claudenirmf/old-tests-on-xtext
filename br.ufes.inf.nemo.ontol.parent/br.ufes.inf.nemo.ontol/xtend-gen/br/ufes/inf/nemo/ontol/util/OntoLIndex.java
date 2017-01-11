@@ -1,6 +1,5 @@
 package br.ufes.inf.nemo.ontol.util;
 
-import br.ufes.inf.nemo.ontol.model.OntoLClass;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
@@ -59,35 +58,27 @@ public class OntoLIndex {
     return Iterables.<IEObjectDescription>concat(_map);
   }
   
-  public Iterable<IEObjectDescription> getVisibleEClassDescriptions(final EObject o, final EClass c) {
-    return this.getVisibleEObjectDescriptions(o, c);
-  }
-  
-  public OntoLClass getModelElementFromIndex(final EObject context, final String qualifiedName, final EClass modelElementClass) {
-    OntoLClass _xblockexpression = null;
-    {
-      Iterable<IEObjectDescription> _visibleEObjectDescriptions = this.getVisibleEObjectDescriptions(context, modelElementClass);
-      final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
-        QualifiedName _qualifiedName = it.getQualifiedName();
-        String _string = _qualifiedName.toString();
-        return Boolean.valueOf(Objects.equal(_string, qualifiedName));
-      };
-      final IEObjectDescription desc = IterableExtensions.<IEObjectDescription>findFirst(_visibleEObjectDescriptions, _function);
-      boolean _equals = Objects.equal(desc, null);
-      if (_equals) {
-        return null;
-      }
-      EObject o = desc.getEObjectOrProxy();
-      boolean _eIsProxy = o.eIsProxy();
-      if (_eIsProxy) {
-        Resource _eResource = context.eResource();
-        ResourceSet _resourceSet = _eResource.getResourceSet();
-        URI _eObjectURI = desc.getEObjectURI();
-        EObject _eObject = _resourceSet.getEObject(_eObjectURI, true);
-        o = _eObject;
-      }
-      _xblockexpression = ((OntoLClass) o);
+  public EObject getModelElementFromIndex(final EObject context, final String qualifiedName, final EClass modelElementClass) {
+    Iterable<IEObjectDescription> _visibleEObjectDescriptions = this.getVisibleEObjectDescriptions(context, modelElementClass);
+    final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
+      QualifiedName _qualifiedName = it.getQualifiedName();
+      String _string = _qualifiedName.toString();
+      return Boolean.valueOf(Objects.equal(_string, qualifiedName));
+    };
+    final IEObjectDescription desc = IterableExtensions.<IEObjectDescription>findFirst(_visibleEObjectDescriptions, _function);
+    boolean _equals = Objects.equal(desc, null);
+    if (_equals) {
+      return null;
     }
-    return _xblockexpression;
+    EObject o = desc.getEObjectOrProxy();
+    boolean _eIsProxy = o.eIsProxy();
+    if (_eIsProxy) {
+      Resource _eResource = context.eResource();
+      ResourceSet _resourceSet = _eResource.getResourceSet();
+      URI _eObjectURI = desc.getEObjectURI();
+      EObject _eObject = _resourceSet.getEObject(_eObjectURI, true);
+      o = _eObject;
+    }
+    return o;
   }
 }
