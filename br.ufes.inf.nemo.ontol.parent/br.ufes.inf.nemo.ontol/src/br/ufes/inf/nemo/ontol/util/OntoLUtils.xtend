@@ -14,8 +14,19 @@ import br.ufes.inf.nemo.ontol.model.Property
 import br.ufes.inf.nemo.ontol.model.Reference
 import java.util.LinkedHashSet
 import java.util.Set
+import br.ufes.inf.nemo.ontol.model.Value
+import br.ufes.inf.nemo.ontol.model.ReferenceValue
+import br.ufes.inf.nemo.ontol.model.StringValue
+import br.ufes.inf.nemo.ontol.model.NumberValue
+import br.ufes.inf.nemo.ontol.model.BooleanValue
+import br.ufes.inf.nemo.ontol.model.NoneValue
+import br.ufes.inf.nemo.ontol.model.DataValue
+import br.ufes.inf.nemo.ontol.lib.OntoLLib
+import com.google.inject.Inject
 
 class OntoLUtils {
+	
+	@Inject extension OntoLLib
 
 	def private Set<Model> getRechableModels(ModelElement elem){
 		val set = new LinkedHashSet<Model>
@@ -137,7 +148,26 @@ class OntoLUtils {
 	 * 
 	 * @author Claudenir Fonseca
 	 */
-//	def boolean isConformantTo(Value assignment, Type type) {
+	def boolean isConformantTo(Value assignment, OntoLClass assigType) {
+		if(assignment instanceof StringValue){
+			return true
+		} else if(assignment instanceof NumberValue){
+			return true
+		} else if(assignment instanceof BooleanValue){
+			return true
+		} else if(assignment instanceof NoneValue){
+			return true;
+		} else if(assignment instanceof ReferenceValue){
+			val actualValue = assignment.value
+			if(actualValue.allInstantiatedClasses.contains(assigType))
+				 return true
+		} else if(assignment instanceof DataValue){
+			val datatype = assigType.getLibClass(OntoLLib.DATATYPES_DATATYPE)
+			if(!assigType.classHierarchy.contains(datatype))
+				return false
+			// TODO continue
+		}
+		return false
 //		if (assignment instanceof ReferenceValue) {
 //			if (assignment.value == null || !assignment.value.allFixedTypesList.contains(type)) {
 //				return false
@@ -157,6 +187,6 @@ class OntoLUtils {
 //		} else {
 //			return false
 //		}
-//	}
+	}
 
 }

@@ -5,26 +5,40 @@
  */
 package br.ufes.inf.nemo.ontol.util;
 
+import br.ufes.inf.nemo.ontol.lib.OntoLLib;
 import br.ufes.inf.nemo.ontol.model.Attribute;
+import br.ufes.inf.nemo.ontol.model.BooleanValue;
+import br.ufes.inf.nemo.ontol.model.DataValue;
 import br.ufes.inf.nemo.ontol.model.EntityDeclaration;
 import br.ufes.inf.nemo.ontol.model.Model;
 import br.ufes.inf.nemo.ontol.model.ModelElement;
+import br.ufes.inf.nemo.ontol.model.NoneValue;
+import br.ufes.inf.nemo.ontol.model.NumberValue;
 import br.ufes.inf.nemo.ontol.model.OntoLClass;
 import br.ufes.inf.nemo.ontol.model.Property;
 import br.ufes.inf.nemo.ontol.model.Reference;
+import br.ufes.inf.nemo.ontol.model.ReferenceValue;
+import br.ufes.inf.nemo.ontol.model.StringValue;
+import br.ufes.inf.nemo.ontol.model.Value;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class OntoLUtils {
+  @Inject
+  @Extension
+  private OntoLLib _ontoLLib;
+  
   private Set<Model> getRechableModels(final ModelElement elem) {
     final LinkedHashSet<Model> set = new LinkedHashSet<Model>();
     EObject _eContainer = elem.eContainer();
@@ -194,5 +208,48 @@ public class OntoLUtils {
     Iterable<EList<Reference>> _map = IterableExtensions.<OntoLClass, EList<Reference>>map(_classHierarchy, _function);
     Iterable<Reference> _flatten = Iterables.<Reference>concat(_map);
     return IterableExtensions.<Reference>toSet(_flatten);
+  }
+  
+  /**
+   * Checks if an <b>assignment</b> conforms to a given <b>type</b>.
+   * 
+   * @author Claudenir Fonseca
+   */
+  public boolean isConformantTo(final Value assignment, final OntoLClass assigType) {
+    if ((assignment instanceof StringValue)) {
+      return true;
+    } else {
+      if ((assignment instanceof NumberValue)) {
+        return true;
+      } else {
+        if ((assignment instanceof BooleanValue)) {
+          return true;
+        } else {
+          if ((assignment instanceof NoneValue)) {
+            return true;
+          } else {
+            if ((assignment instanceof ReferenceValue)) {
+              final EntityDeclaration actualValue = ((ReferenceValue)assignment).getValue();
+              LinkedHashSet<OntoLClass> _allInstantiatedClasses = this.getAllInstantiatedClasses(actualValue);
+              boolean _contains = _allInstantiatedClasses.contains(assigType);
+              if (_contains) {
+                return true;
+              }
+            } else {
+              if ((assignment instanceof DataValue)) {
+                final OntoLClass datatype = this._ontoLLib.getLibClass(assigType, OntoLLib.DATATYPES_DATATYPE);
+                Set<OntoLClass> _classHierarchy = this.classHierarchy(assigType);
+                boolean _contains_1 = _classHierarchy.contains(datatype);
+                boolean _not = (!_contains_1);
+                if (_not) {
+                  return false;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    return false;
   }
 }

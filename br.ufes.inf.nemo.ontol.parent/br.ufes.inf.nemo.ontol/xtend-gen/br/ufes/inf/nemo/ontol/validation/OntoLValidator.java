@@ -10,6 +10,8 @@ import br.ufes.inf.nemo.ontol.model.GeneralizationSet;
 import br.ufes.inf.nemo.ontol.model.HOClass;
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
 import br.ufes.inf.nemo.ontol.model.OntoLClass;
+import br.ufes.inf.nemo.ontol.model.Property;
+import br.ufes.inf.nemo.ontol.model.PropertyAssignment;
 import br.ufes.inf.nemo.ontol.util.OntoLUtils;
 import br.ufes.inf.nemo.ontol.validation.AbstractOntoLValidator;
 import br.ufes.inf.nemo.ontol.validation.LinguisticRules;
@@ -90,6 +92,8 @@ public class OntoLValidator extends AbstractOntoLValidator {
   public final static String UFO_A_ILLEGAL_SORTAL_SPECIALIZATION = "br.ufes.inf.nemo.ontol.ufo.a.IllegalSortalSpecialization";
   
   public final static String UFO_A_ILLEGAL_RIGID_SPECIALIZATION = "br.ufes.inf.nemo.ontol.ufo.a.IllegalRigidSpecialization";
+  
+  public final static String NON_CONFORMANT_ASSIGNMENT = "br.ufes.inf.nemo.ontol.NonConformantAssigment";
   
   @Check(CheckType.FAST)
   public void fastChecksOnEntityDeclaration(final EntityDeclaration e) {
@@ -189,26 +193,40 @@ public class OntoLValidator extends AbstractOntoLValidator {
     }
   }
   
+  @Check(CheckType.FAST)
+  public void fastChecksOnProperty(final Property p) {
+    ValidationIssue _checkSubsettedMultiplicity = this._linguisticRules.checkSubsettedMultiplicity(p);
+    if (_checkSubsettedMultiplicity!=null) {
+      this.runIssue(_checkSubsettedMultiplicity);
+    }
+  }
+  
+  @Check(CheckType.FAST)
+  public void fastChecksOnPropertyAssignment(final PropertyAssignment pa) {
+    ValidationIssue _checkMultiplicityAndAssignment = this._linguisticRules.checkMultiplicityAndAssignment(pa);
+    if (_checkMultiplicityAndAssignment!=null) {
+      this.runIssue(_checkMultiplicityAndAssignment);
+    }
+  }
+  
+  @Check(CheckType.NORMAL)
+  public void normalChecksOnPropertyAssignment(final PropertyAssignment pa) {
+    ValidationIssue _checkPropertyAssignmentType = this._linguisticRules.checkPropertyAssignmentType(pa);
+    if (_checkPropertyAssignmentType!=null) {
+      this.runIssue(_checkPropertyAssignmentType);
+    }
+  }
+  
   @Check(CheckType.NORMAL)
   public void normalChecksOnEntity(final EntityDeclaration e) {
     final LinkedHashSet<OntoLClass> iof = this._ontoLUtils.getAllInstantiatedClasses(e);
-    boolean _isInstanceOfDisjointClasses = this._linguisticRules.isInstanceOfDisjointClasses(e, iof);
-    if (_isInstanceOfDisjointClasses) {
-      StringConcatenation _builder = new StringConcatenation();
-      String _name = e.getName();
-      _builder.append(_name, "");
-      _builder.append(" is instance of disjoint classes.");
-      EReference _entityDeclaration_InstantiatedClasses = ModelPackage.eINSTANCE.getEntityDeclaration_InstantiatedClasses();
-      this.error(_builder.toString(), _entityDeclaration_InstantiatedClasses, 
-        LinguisticRules.INSTANCE_OF_DISJOINT_CLASSES);
+    ValidationIssue _isInstanceOfDisjointClasses = this._linguisticRules.isInstanceOfDisjointClasses(e, iof);
+    if (_isInstanceOfDisjointClasses!=null) {
+      this.runIssue(_isInstanceOfDisjointClasses);
     }
-    boolean _missingInstantiationByCompleteness = this._linguisticRules.missingInstantiationByCompleteness(e, iof);
-    if (_missingInstantiationByCompleteness) {
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("Missing instantion of complete generalization set.");
-      EReference _entityDeclaration_InstantiatedClasses_1 = ModelPackage.eINSTANCE.getEntityDeclaration_InstantiatedClasses();
-      this.error(_builder_1.toString(), _entityDeclaration_InstantiatedClasses_1, 
-        LinguisticRules.MISSING_INSTANTIATION_OF_COMPLETE_GENERALIZATION_SET);
+    ValidationIssue _missingInstantiationByCompleteness = this._linguisticRules.missingInstantiationByCompleteness(e, iof);
+    if (_missingInstantiationByCompleteness!=null) {
+      this.runIssue(_missingInstantiationByCompleteness);
     }
   }
   
@@ -242,15 +260,9 @@ public class OntoLValidator extends AbstractOntoLValidator {
       this.error(_builder_2.toString(), _ontoLClass_Subordinators, 
         LinguisticRules.SIMPLE_SUBORDINATION_CYCLE);
     }
-    boolean _isSpecializingDisjointClasses = this._linguisticRules.isSpecializingDisjointClasses(c, ch);
-    if (_isSpecializingDisjointClasses) {
-      StringConcatenation _builder_3 = new StringConcatenation();
-      String _name_1 = c.getName();
-      _builder_3.append(_name_1, "");
-      _builder_3.append(" is specializing disjoint classes.");
-      EReference _ontoLClass_Subordinators_1 = ModelPackage.eINSTANCE.getOntoLClass_Subordinators();
-      this.error(_builder_3.toString(), _ontoLClass_Subordinators_1, 
-        LinguisticRules.SPECILIZATION_OF_DISJOINT_CLASSES);
+    ValidationIssue _isSpecializingDisjointClasses = this._linguisticRules.isSpecializingDisjointClasses(c, ch);
+    if (_isSpecializingDisjointClasses!=null) {
+      this.runIssue(_isSpecializingDisjointClasses);
     }
   }
   
@@ -263,40 +275,23 @@ public class OntoLValidator extends AbstractOntoLValidator {
     final OntoLClass mixinclass = this._ontoLLib.getLibClass(c, OntoLLib.UFO_A_MIXIN_CLASS);
     final OntoLClass rigidclass = this._ontoLLib.getLibClass(c, OntoLLib.UFO_A_RIGID_CLASS);
     final OntoLClass semirigidclass = this._ontoLLib.getLibClass(c, OntoLLib.UFO_A_SEMI_RIGID_CLASS);
-    ValidationIssue issue = this._uFORules.mustInstantiateUFOMetaproperties(c, ch, iof, endurant, mustInstantiate);
-    boolean _notEquals = (!Objects.equal(issue, null));
-    if (_notEquals) {
-      String _message = issue.getMessage();
-      EObject _source = issue.getSource();
-      EStructuralFeature _feature = issue.getFeature();
-      String _code = issue.getCode();
-      this.error(_message, _source, _feature, _code);
+    ValidationIssue _mustInstantiateUFOMetaproperties = this._uFORules.mustInstantiateUFOMetaproperties(c, ch, iof, endurant, mustInstantiate);
+    if (_mustInstantiateUFOMetaproperties!=null) {
+      this.runIssue(_mustInstantiateUFOMetaproperties);
     }
     ValidationIssue _checkSpecializationAndSortality = this._uFORules.checkSpecializationAndSortality(c, ch, iof, mixinclass);
-    issue = _checkSpecializationAndSortality;
-    boolean _notEquals_1 = (!Objects.equal(issue, null));
-    if (_notEquals_1) {
-      String _message_1 = issue.getMessage();
-      EObject _source_1 = issue.getSource();
-      EStructuralFeature _feature_1 = issue.getFeature();
-      String _code_1 = issue.getCode();
-      this.error(_message_1, _source_1, _feature_1, _code_1);
+    if (_checkSpecializationAndSortality!=null) {
+      this.runIssue(_checkSpecializationAndSortality);
     }
     ValidationIssue _checkSpecializationAndRigidity = this._uFORules.checkSpecializationAndRigidity(c, ch, iof, rigidclass, semirigidclass);
-    issue = _checkSpecializationAndRigidity;
-    boolean _notEquals_2 = (!Objects.equal(issue, null));
-    if (_notEquals_2) {
-      String _message_2 = issue.getMessage();
-      EObject _source_2 = issue.getSource();
-      EStructuralFeature _feature_2 = issue.getFeature();
-      String _code_2 = issue.getCode();
-      this.error(_message_2, _source_2, _feature_2, _code_2);
+    if (_checkSpecializationAndRigidity!=null) {
+      this.runIssue(_checkSpecializationAndRigidity);
     }
   }
   
   private void _runIssue(final ValidationError issue) {
     final ValidationError it = issue;
-    if ((((((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null))) && (it.getIndex() != (-1))) && (!Objects.equal(it.getCode(), null))) && (!Objects.equal(it.getIssueData(), null)))) {
+    if (((((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null))) && (it.getIndex() != (-1))) && (!Objects.equal(it.getCode(), null)))) {
       String _message = it.getMessage();
       EObject _source = it.getSource();
       EStructuralFeature _feature = it.getFeature();
@@ -305,7 +300,7 @@ public class OntoLValidator extends AbstractOntoLValidator {
       String[] _issueData = it.getIssueData();
       this.error(_message, _source, _feature, _index, _code, _issueData);
     } else {
-      if (((((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null))) && (!Objects.equal(it.getCode(), null))) && (!Objects.equal(it.getIssueData(), null)))) {
+      if ((((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null))) && (!Objects.equal(it.getCode(), null)))) {
         String _message_1 = it.getMessage();
         EObject _source_1 = it.getSource();
         EStructuralFeature _feature_1 = it.getFeature();
@@ -313,7 +308,7 @@ public class OntoLValidator extends AbstractOntoLValidator {
         String[] _issueData_1 = it.getIssueData();
         this.error(_message_1, _source_1, _feature_1, _code_1, _issueData_1);
       } else {
-        if (((((!Objects.equal(it.getFeature(), null)) && (it.getIndex() != (-1))) && (!Objects.equal(it.getCode(), null))) && (!Objects.equal(it.getIssueData(), null)))) {
+        if ((((!Objects.equal(it.getFeature(), null)) && (it.getIndex() != (-1))) && (!Objects.equal(it.getCode(), null)))) {
           String _message_2 = it.getMessage();
           EStructuralFeature _feature_2 = it.getFeature();
           int _index_1 = it.getIndex();
@@ -334,7 +329,7 @@ public class OntoLValidator extends AbstractOntoLValidator {
               EStructuralFeature _feature_4 = it.getFeature();
               this.error(_message_4, _source_3, _feature_4);
             } else {
-              if ((((!Objects.equal(it.getFeature(), null)) && (!Objects.equal(it.getCode(), null))) && (!Objects.equal(it.getIssueData(), null)))) {
+              if (((!Objects.equal(it.getFeature(), null)) && (!Objects.equal(it.getCode(), null)))) {
                 String _message_5 = it.getMessage();
                 EStructuralFeature _feature_5 = it.getFeature();
                 String _code_3 = it.getCode();
@@ -363,7 +358,7 @@ public class OntoLValidator extends AbstractOntoLValidator {
   
   private void _runIssue(final ValidationWarning issue) {
     final ValidationWarning it = issue;
-    if ((((((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null))) && (it.getIndex() != (-1))) && (!Objects.equal(it.getCode(), null))) && (!Objects.equal(it.getIssueData(), null)))) {
+    if (((((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null))) && (it.getIndex() != (-1))) && (!Objects.equal(it.getCode(), null)))) {
       String _message = it.getMessage();
       EObject _source = it.getSource();
       EStructuralFeature _feature = it.getFeature();
@@ -372,7 +367,7 @@ public class OntoLValidator extends AbstractOntoLValidator {
       String[] _issueData = it.getIssueData();
       this.warning(_message, _source, _feature, _index, _code, _issueData);
     } else {
-      if (((((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null))) && (!Objects.equal(it.getCode(), null))) && (!Objects.equal(it.getIssueData(), null)))) {
+      if ((((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null))) && (!Objects.equal(it.getCode(), null)))) {
         String _message_1 = it.getMessage();
         EObject _source_1 = it.getSource();
         EStructuralFeature _feature_1 = it.getFeature();
@@ -393,7 +388,7 @@ public class OntoLValidator extends AbstractOntoLValidator {
             EStructuralFeature _feature_3 = it.getFeature();
             this.warning(_message_3, _source_3, _feature_3);
           } else {
-            if (((((!Objects.equal(it.getFeature(), null)) && (it.getIndex() != (-1))) && (!Objects.equal(it.getCode(), null))) && (!Objects.equal(it.getIssueData(), null)))) {
+            if ((((!Objects.equal(it.getFeature(), null)) && (it.getIndex() != (-1))) && (!Objects.equal(it.getCode(), null)))) {
               String _message_4 = it.getMessage();
               EStructuralFeature _feature_4 = it.getFeature();
               int _index_2 = it.getIndex();
@@ -401,7 +396,7 @@ public class OntoLValidator extends AbstractOntoLValidator {
               String[] _issueData_2 = it.getIssueData();
               this.warning(_message_4, _feature_4, _index_2, _code_2, _issueData_2);
             } else {
-              if ((((!Objects.equal(it.getFeature(), null)) && (!Objects.equal(it.getCode(), null))) && (!Objects.equal(it.getIssueData(), null)))) {
+              if (((!Objects.equal(it.getFeature(), null)) && (!Objects.equal(it.getCode(), null)))) {
                 String _message_5 = it.getMessage();
                 EStructuralFeature _feature_5 = it.getFeature();
                 String _code_3 = it.getCode();

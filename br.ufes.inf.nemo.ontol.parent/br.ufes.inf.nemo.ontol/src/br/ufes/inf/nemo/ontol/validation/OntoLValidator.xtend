@@ -3,10 +3,11 @@
  */
 package br.ufes.inf.nemo.ontol.validation
 
-import br.ufes.inf.nemo.ontol.model.OntoLClass
 import br.ufes.inf.nemo.ontol.model.EntityDeclaration
-import br.ufes.inf.nemo.ontol.model.GeneralizationSet
+import br.ufes.inf.nemo.ontol.model.OntoLClass
 import br.ufes.inf.nemo.ontol.model.HOClass
+import br.ufes.inf.nemo.ontol.model.GeneralizationSet
+import br.ufes.inf.nemo.ontol.model.Property
 import br.ufes.inf.nemo.ontol.model.ModelPackage
 import br.ufes.inf.nemo.ontol.util.OntoLUtils
 import com.google.inject.Inject
@@ -14,6 +15,7 @@ import org.eclipse.xtext.validation.CheckType
 import org.eclipse.xtext.validation.Check
 import br.ufes.inf.nemo.ontol.model.FOClass
 import br.ufes.inf.nemo.ontol.lib.OntoLLib
+import br.ufes.inf.nemo.ontol.model.PropertyAssignment
 
 /**
  * This class contains custom validation rules. 
@@ -47,6 +49,7 @@ class OntoLValidator extends AbstractOntoLValidator {
 	public static val UFO_A_MISSING_MUST_INSTANTIATION = "br.ufes.inf.nemo.ontol.ufo.a.MissingMustInstantiation"
 	public static val UFO_A_ILLEGAL_SORTAL_SPECIALIZATION = "br.ufes.inf.nemo.ontol.ufo.a.IllegalSortalSpecialization"
 	public static val UFO_A_ILLEGAL_RIGID_SPECIALIZATION = "br.ufes.inf.nemo.ontol.ufo.a.IllegalRigidSpecialization"
+	public static val NON_CONFORMANT_ASSIGNMENT = "br.ufes.inf.nemo.ontol.NonConformantAssigment"
 	
 	@Check(CheckType.FAST)
 	def void fastChecksOnEntityDeclaration(EntityDeclaration e){
@@ -102,17 +105,26 @@ class OntoLValidator extends AbstractOntoLValidator {
 				LinguisticRules.INVALID_GENERALIZATION_SET_MEMBERS)
 	}
 	
+	@Check(CheckType.FAST)
+	def void fastChecksOnProperty(Property p){
+		p.checkSubsettedMultiplicity?.runIssue
+	}
+	
+	@Check(CheckType.FAST)
+	def void fastChecksOnPropertyAssignment(PropertyAssignment pa){
+		pa.checkMultiplicityAndAssignment?.runIssue
+	}
+	
+	@Check(CheckType.NORMAL)
+	def void normalChecksOnPropertyAssignment(PropertyAssignment pa){
+		pa.checkPropertyAssignmentType?.runIssue
+	}
+	
 	@Check(CheckType.NORMAL)
 	def void normalChecksOnEntity(EntityDeclaration e){
 		val iof = e.allInstantiatedClasses
-		if(e.isInstanceOfDisjointClasses(iof))
-			error('''«e.name» is instance of disjoint classes.''',
-				ModelPackage.eINSTANCE.entityDeclaration_InstantiatedClasses,
-				LinguisticRules.INSTANCE_OF_DISJOINT_CLASSES)
-		if(e.missingInstantiationByCompleteness(iof))
-			error('''Missing instantion of complete generalization set.''',
-				ModelPackage.eINSTANCE.entityDeclaration_InstantiatedClasses,
-				LinguisticRules.MISSING_INSTANTIATION_OF_COMPLETE_GENERALIZATION_SET)
+		e.isInstanceOfDisjointClasses(iof)?.runIssue
+		e.missingInstantiationByCompleteness(iof)?.runIssue
 	}
 	
 	@Check(CheckType.NORMAL)
@@ -128,9 +140,7 @@ class OntoLValidator extends AbstractOntoLValidator {
 		if (c.hasSimpleSubordinationCycle)
 			error('''«c.name» is in a subordination cycle.''', ModelPackage.eINSTANCE.ontoLClass_Subordinators,
 				LinguisticRules.SIMPLE_SUBORDINATION_CYCLE)
-		if (c.isSpecializingDisjointClasses(ch))
-			error('''«c.name» is specializing disjoint classes.''', ModelPackage.eINSTANCE.ontoLClass_Subordinators,
-				LinguisticRules.SPECILIZATION_OF_DISJOINT_CLASSES)
+		c.isSpecializingDisjointClasses(ch)?.runIssue
 	}
 	
 	@Check(CheckType.EXPENSIVE)
@@ -138,36 +148,30 @@ class OntoLValidator extends AbstractOntoLValidator {
 		val ch = (c as OntoLClass).classHierarchy
 		val iof = (c as OntoLClass).allInstantiatedClasses
 		val endurant = c.UFOEndurant
-//		if(!ch.contains(endurant))	return ;
 		
 		val mustInstantiate = c.UFOMustInstantiateClasses
-//		val sortalclass = c.getLibClass(OntoLLib.UFO_A_SORTAL_CLASS)
 		val mixinclass = c.getLibClass(OntoLLib.UFO_A_MIXIN_CLASS)
 		val rigidclass = c.getLibClass(OntoLLib.UFO_A_RIGID_CLASS)
 		val semirigidclass = c.getLibClass(OntoLLib.UFO_A_SEMI_RIGID_CLASS)
-//		val antirigidclass = c.getLibClass(OntoLLib.UFO_A_ANTI_RIGID_CLASS)
-		
-		var issue = c.mustInstantiateUFOMetaproperties(ch,iof,endurant,mustInstantiate)//?.runIssue
-		if(issue!=null)	error(issue.message,issue.source,issue.feature,issue.code)
-		issue = c.checkSpecializationAndSortality(ch,iof,mixinclass)//?.runIssue
-		if(issue!=null)	error(issue.message,issue.source,issue.feature,issue.code)
-		issue = c.checkSpecializationAndRigidity(ch,iof,rigidclass,semirigidclass)//?.runIssue
-		if(issue!=null)	error(issue.message,issue.source,issue.feature,issue.code)
+
+		c.mustInstantiateUFOMetaproperties(ch,iof,endurant,mustInstantiate)?.runIssue
+		c.checkSpecializationAndSortality(ch,iof,mixinclass)?.runIssue
+		c.checkSpecializationAndRigidity(ch,iof,rigidclass,semirigidclass)?.runIssue
 	}
 	
 	def private dispatch runIssue(ValidationError issue){
 		val it = issue
-		if(source!=null && feature!=null && index!=-1 && code!=null && issueData!=null)
+		if(source!=null && feature!=null && index!=-1 && code!=null)// && issueData!=null)
 			error(message,source,feature,index,code,issueData)
-		else if(source!=null && feature!=null && code!=null && issueData!=null)
+		else if(source!=null && feature!=null && code!=null)// && issueData!=null)
 			error(message,source,feature,code,issueData)
-		else if(feature!=null && index!=-1 && code!=null && issueData!=null)
+		else if(feature!=null && index!=-1 && code!=null)// && issueData!=null)
 			error(message,feature,index,code,issueData)
 		else if(source!=null && feature!=null && index!=-1)
 			error(message,source,feature,index)
 		else if(source!=null && feature!=null)
 			error(message,source,feature)
-		else if(feature!=null && code!=null && issueData!=null)
+		else if(feature!=null && code!=null)// && issueData!=null)
 			error(message,feature,code,issueData)
 		else if(feature!=null && index!=-1)
 			error(message,feature,index)
@@ -177,17 +181,17 @@ class OntoLValidator extends AbstractOntoLValidator {
 	
 	def private dispatch runIssue(ValidationWarning issue){
 		val it = issue
-		if(source!=null && feature!=null && index!=-1 && code!=null && issueData!=null)
+		if(source!=null && feature!=null && index!=-1 && code!=null)// && issueData!=null)
 			warning(message,source,feature,index,code,issueData)
-		else if(source!=null && feature!=null && code!=null && issueData!=null)
+		else if(source!=null && feature!=null && code!=null)// && issueData!=null)
 			warning(message,source,feature,code,issueData)
 		else if(source!=null && feature!=null && index!=-1)
 			warning(message,source,feature,index)
 		else if(source!=null && feature!=null)
 			warning(message,source,feature)
-		else if(feature!=null && index!=-1 && code!=null && issueData!=null)
+		else if(feature!=null && index!=-1 && code!=null)// && issueData!=null)
 			warning(message,feature,index,code,issueData)
-		else if(feature!=null && code!=null && issueData!=null)
+		else if(feature!=null && code!=null)// && issueData!=null)
 			warning(message,feature,code,issueData)
 		else if(feature!=null && index!=-1)
 			warning(message,feature,index)

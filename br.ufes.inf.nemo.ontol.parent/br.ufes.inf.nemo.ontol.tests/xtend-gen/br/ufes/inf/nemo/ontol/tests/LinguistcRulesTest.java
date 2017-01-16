@@ -465,7 +465,7 @@ public class LinguistcRulesTest {
       _builder.append("}");
       final Model incorrectModel = this._parseHelper.parse(_builder);
       EClass _ontoLClass = ModelPackage.eINSTANCE.getOntoLClass();
-      this._validationTestHelper.assertError(incorrectModel, _ontoLClass, 
+      this._validationTestHelper.assertWarning(incorrectModel, _ontoLClass, 
         LinguisticRules.SPECILIZATION_OF_DISJOINT_CLASSES);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("module t{");
@@ -493,7 +493,9 @@ public class LinguistcRulesTest {
       _builder_1.append("\t\t\t");
       _builder_1.append("}");
       final Model correctModel = this._parseHelper.parse(_builder_1);
-      this._validationTestHelper.assertNoErrors(correctModel);
+      EClass _ontoLClass_1 = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertNoWarnings(correctModel, _ontoLClass_1, 
+        LinguisticRules.SPECILIZATION_OF_DISJOINT_CLASSES);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -526,7 +528,7 @@ public class LinguistcRulesTest {
       _builder.append("}");
       final Model incorrectModel = this._parseHelper.parse(_builder);
       EClass _entityDeclaration = ModelPackage.eINSTANCE.getEntityDeclaration();
-      this._validationTestHelper.assertError(incorrectModel, _entityDeclaration, 
+      this._validationTestHelper.assertWarning(incorrectModel, _entityDeclaration, 
         LinguisticRules.INSTANCE_OF_DISJOINT_CLASSES);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("module t{");
@@ -551,7 +553,9 @@ public class LinguistcRulesTest {
       _builder_1.append("\t\t\t");
       _builder_1.append("}");
       final Model correctModel = this._parseHelper.parse(_builder_1);
-      this._validationTestHelper.assertNoErrors(correctModel);
+      EClass _entityDeclaration_1 = ModelPackage.eINSTANCE.getEntityDeclaration();
+      this._validationTestHelper.assertNoWarnings(correctModel, _entityDeclaration_1, 
+        LinguisticRules.INSTANCE_OF_DISJOINT_CLASSES);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -584,7 +588,7 @@ public class LinguistcRulesTest {
       _builder.append("}");
       final Model incorrectModel = this._parseHelper.parse(_builder);
       EClass _entityDeclaration = ModelPackage.eINSTANCE.getEntityDeclaration();
-      this._validationTestHelper.assertError(incorrectModel, _entityDeclaration, 
+      this._validationTestHelper.assertWarning(incorrectModel, _entityDeclaration, 
         LinguisticRules.MISSING_INSTANTIATION_OF_COMPLETE_GENERALIZATION_SET);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("module t{");
@@ -609,7 +613,305 @@ public class LinguistcRulesTest {
       _builder_1.append("\t\t\t");
       _builder_1.append("}");
       final Model correctModel = this._parseHelper.parse(_builder_1);
-      this._validationTestHelper.assertNoErrors(correctModel);
+      EClass _entityDeclaration_1 = ModelPackage.eINSTANCE.getEntityDeclaration();
+      this._validationTestHelper.assertNoWarnings(correctModel, _entityDeclaration_1, 
+        LinguisticRules.MISSING_INSTANTIATION_OF_COMPLETE_GENERALIZATION_SET);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testSubsettedMultiplicity() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("module t {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("class A {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("ref refToA : [2..3] A");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("att nickname : [2..3] A");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("};");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("class B specializes A {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("ref refToB : [1..3] B subsets refToA");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("att nickname2 : [1..3] B subsets nickname");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("};");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      final Model incorrectModelA = this._parseHelper.parse(_builder);
+      EClass _reference = ModelPackage.eINSTANCE.getReference();
+      this._validationTestHelper.assertError(incorrectModelA, _reference, 
+        LinguisticRules.INVALID_MULTIPLICITY);
+      EClass _attribute = ModelPackage.eINSTANCE.getAttribute();
+      this._validationTestHelper.assertError(incorrectModelA, _attribute, 
+        LinguisticRules.INVALID_MULTIPLICITY);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("module t {");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("class A {");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t\t");
+      _builder_1.append("ref refToA : [2..3] A");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t\t");
+      _builder_1.append("att nickname : [2..3] A");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("};");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("class B specializes A {");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t\t");
+      _builder_1.append("ref refToB : [2..4] B subsets refToA");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t\t");
+      _builder_1.append("att nickname2 : [2..5] B subsets nickname");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("};");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t");
+      _builder_1.append("}");
+      final Model incorrectModelB = this._parseHelper.parse(_builder_1);
+      EClass _reference_1 = ModelPackage.eINSTANCE.getReference();
+      this._validationTestHelper.assertError(incorrectModelB, _reference_1, 
+        LinguisticRules.INVALID_MULTIPLICITY);
+      EClass _attribute_1 = ModelPackage.eINSTANCE.getAttribute();
+      this._validationTestHelper.assertError(incorrectModelB, _attribute_1, 
+        LinguisticRules.INVALID_MULTIPLICITY);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("module t {");
+      _builder_2.newLine();
+      _builder_2.append("\t\t\t\t");
+      _builder_2.append("class A {");
+      _builder_2.newLine();
+      _builder_2.append("\t\t\t\t\t");
+      _builder_2.append("ref refToA : [2..3] A");
+      _builder_2.newLine();
+      _builder_2.append("\t\t\t\t\t");
+      _builder_2.append("att nickname : [2..3] A");
+      _builder_2.newLine();
+      _builder_2.append("\t\t\t\t");
+      _builder_2.append("};");
+      _builder_2.newLine();
+      _builder_2.append("\t\t\t\t");
+      _builder_2.newLine();
+      _builder_2.append("\t\t\t\t");
+      _builder_2.append("class B specializes A {");
+      _builder_2.newLine();
+      _builder_2.append("\t\t\t\t\t");
+      _builder_2.append("ref refToB : [2..2] B subsets refToA");
+      _builder_2.newLine();
+      _builder_2.append("\t\t\t\t\t");
+      _builder_2.append("att nickname2 : [3..3] B subsets nickname");
+      _builder_2.newLine();
+      _builder_2.append("\t\t\t\t");
+      _builder_2.append("};");
+      _builder_2.newLine();
+      _builder_2.append("\t\t\t");
+      _builder_2.append("}");
+      final Model correctModel = this._parseHelper.parse(_builder_2);
+      this._validationTestHelper.assertNoError(correctModel, LinguisticRules.INVALID_MULTIPLICITY);
+      this._validationTestHelper.assertNoError(correctModel, LinguisticRules.INVALID_MULTIPLICITY);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testMultiplicityAndAssignment() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("module t {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("class A { ");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("ref refToA : [2..3] A");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("att nicknames : [2..3] A\t// This is going to fire other issues not related to multiplicity");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("};");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("individual X : A { ");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("ref refToA = X");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("att nicknames = \"John\"");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("};");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      final Model incorrectModelA = this._parseHelper.parse(_builder);
+      EClass _referenceAssignment = ModelPackage.eINSTANCE.getReferenceAssignment();
+      this._validationTestHelper.assertWarning(incorrectModelA, _referenceAssignment, 
+        LinguisticRules.INVALID_MULTIPLICITY);
+      EClass _attributeAssignment = ModelPackage.eINSTANCE.getAttributeAssignment();
+      this._validationTestHelper.assertWarning(incorrectModelA, _attributeAssignment, 
+        LinguisticRules.INVALID_MULTIPLICITY);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("module t {");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("class A { ");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t\t");
+      _builder_1.append("ref refToA : [2..3] A");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t\t");
+      _builder_1.append("att nicknames : [2..3] A\t// This is going to fire other issues not related to multiplicity");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("};");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("individual X : A { ");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t\t");
+      _builder_1.append("ref refToA = {X,X,X,X}");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t\t");
+      _builder_1.append("att nicknames = {\"John\",\"Bob\",\"Gary\",\"Nick\"}");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("};");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t");
+      _builder_1.append("}");
+      final Model incorrectModelB = this._parseHelper.parse(_builder_1);
+      EClass _referenceAssignment_1 = ModelPackage.eINSTANCE.getReferenceAssignment();
+      this._validationTestHelper.assertWarning(incorrectModelB, _referenceAssignment_1, 
+        LinguisticRules.INVALID_MULTIPLICITY);
+      EClass _attributeAssignment_1 = ModelPackage.eINSTANCE.getAttributeAssignment();
+      this._validationTestHelper.assertWarning(incorrectModelB, _attributeAssignment_1, 
+        LinguisticRules.INVALID_MULTIPLICITY);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("module t {");
+      _builder_2.newLine();
+      _builder_2.append("\t\t\t\t");
+      _builder_2.append("class A { ");
+      _builder_2.newLine();
+      _builder_2.append("\t\t\t\t\t");
+      _builder_2.append("ref refToA : [2..3] A");
+      _builder_2.newLine();
+      _builder_2.append("\t\t\t\t\t");
+      _builder_2.append("att nicknames : [2..3] A\t// This is going to fire other issues not related to multiplicity");
+      _builder_2.newLine();
+      _builder_2.append("\t\t\t\t");
+      _builder_2.append("};");
+      _builder_2.newLine();
+      _builder_2.append("\t\t\t\t");
+      _builder_2.append("individual X : A { ");
+      _builder_2.newLine();
+      _builder_2.append("\t\t\t\t\t");
+      _builder_2.append("ref refToA = {X,X}");
+      _builder_2.newLine();
+      _builder_2.append("\t\t\t\t\t");
+      _builder_2.append("att nicknames = {\"John\",\"Bob\",\"Gary\"}");
+      _builder_2.newLine();
+      _builder_2.append("\t\t\t\t");
+      _builder_2.append("};");
+      _builder_2.newLine();
+      _builder_2.append("\t\t\t");
+      _builder_2.append("}");
+      final Model correctModel = this._parseHelper.parse(_builder_2);
+      EClass _referenceAssignment_2 = ModelPackage.eINSTANCE.getReferenceAssignment();
+      this._validationTestHelper.assertNoWarnings(correctModel, _referenceAssignment_2, 
+        LinguisticRules.INVALID_MULTIPLICITY);
+      EClass _attributeAssignment_2 = ModelPackage.eINSTANCE.getAttributeAssignment();
+      this._validationTestHelper.assertNoWarnings(correctModel, _attributeAssignment_2, 
+        LinguisticRules.INVALID_MULTIPLICITY);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testCheckPropertyAssignmentType() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("module t {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("class A { ");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("ref refToA : [1..3] A");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("};");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("individual X : A { ");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("ref refToA = {X, X, A}");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("};");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      final Model incorrectModelA = this._parseHelper.parse(_builder);
+      EClass _referenceAssignment = ModelPackage.eINSTANCE.getReferenceAssignment();
+      this._validationTestHelper.assertError(incorrectModelA, _referenceAssignment, 
+        LinguisticRules.NON_CONFORMANT_ASSIGNMENT);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("module t {");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("class A { ");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t\t");
+      _builder_1.append("ref refToA : [1..3] A");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("};");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("individual X : A { ");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t\t");
+      _builder_1.append("ref refToA = {X,X}");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("};");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t");
+      _builder_1.append("}");
+      final Model correctModel = this._parseHelper.parse(_builder_1);
+      EClass _referenceAssignment_1 = ModelPackage.eINSTANCE.getReferenceAssignment();
+      this._validationTestHelper.assertNoErrors(correctModel, _referenceAssignment_1, 
+        LinguisticRules.INVALID_MULTIPLICITY);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -209,7 +209,7 @@ class LinguistcRulesTest {
 				disjoint genset x general A specifics B,C;
 				orderless class D specializes B,C;
 			}'''.parse
-		incorrectModel.assertError(ModelPackage.eINSTANCE.ontoLClass,
+		incorrectModel.assertWarning(ModelPackage.eINSTANCE.ontoLClass,
 			LinguisticRules.SPECILIZATION_OF_DISJOINT_CLASSES)
 		
 		val correctModel = '''module t{
@@ -221,7 +221,8 @@ class LinguistcRulesTest {
 				orderless class D specializes C;
 				orderless class E specializes B;
 			}'''.parse
-		correctModel.assertNoErrors
+		correctModel.assertNoWarnings(ModelPackage.eINSTANCE.ontoLClass,
+			LinguisticRules.SPECILIZATION_OF_DISJOINT_CLASSES)
 	}
 	
 	@Test def testIsInstanceOfDisjointClasses(){
@@ -234,7 +235,7 @@ class LinguistcRulesTest {
 				disjoint genset a general A specifics B,C;
 				individual X:B,C;
 			}'''.parse
-		incorrectModel.assertError(ModelPackage.eINSTANCE.entityDeclaration,
+		incorrectModel.assertWarning(ModelPackage.eINSTANCE.entityDeclaration,
 			LinguisticRules.INSTANCE_OF_DISJOINT_CLASSES)
 		
 		val correctModel = '''module t{
@@ -245,7 +246,8 @@ class LinguistcRulesTest {
 				genset a general A specifics B,C;
 				individual X:B,C;
 			}'''.parse
-		correctModel.assertNoErrors
+		correctModel.assertNoWarnings(ModelPackage.eINSTANCE.entityDeclaration,
+			LinguisticRules.INSTANCE_OF_DISJOINT_CLASSES)
 	}
 	
 	@Test def testMissingInstantiationByCompleteness(){
@@ -257,7 +259,7 @@ class LinguistcRulesTest {
 				complete genset a general A specifics B,C;
 				individual X:A;
 			}'''.parse
-		incorrectModel.assertError(ModelPackage.eINSTANCE.entityDeclaration,
+		incorrectModel.assertWarning(ModelPackage.eINSTANCE.entityDeclaration,
 			LinguisticRules.MISSING_INSTANTIATION_OF_COMPLETE_GENERALIZATION_SET)
 		
 		val correctModel = '''module t{
@@ -268,7 +270,127 @@ class LinguistcRulesTest {
 				complete genset a general A specifics B,C;
 				individual X:A,B;
 			}'''.parse
-		correctModel.assertNoErrors
+		correctModel.assertNoWarnings(ModelPackage.eINSTANCE.entityDeclaration,
+			LinguisticRules.MISSING_INSTANTIATION_OF_COMPLETE_GENERALIZATION_SET)
+	}
+	
+	@Test def testSubsettedMultiplicity() {
+		val incorrectModelA = '''module t {
+				class A {
+					ref refToA : [2..3] A
+					att nickname : [2..3] A
+				};
+				
+				class B specializes A {
+					ref refToB : [1..3] B subsets refToA
+					att nickname2 : [1..3] B subsets nickname
+				};
+			}'''.parse
+		incorrectModelA.assertError(ModelPackage.eINSTANCE.reference,
+			LinguisticRules.INVALID_MULTIPLICITY)
+		incorrectModelA.assertError(ModelPackage.eINSTANCE.attribute,
+			LinguisticRules.INVALID_MULTIPLICITY)
+		
+		val incorrectModelB = '''module t {
+				class A {
+					ref refToA : [2..3] A
+					att nickname : [2..3] A
+				};
+				
+				class B specializes A {
+					ref refToB : [2..4] B subsets refToA
+					att nickname2 : [2..5] B subsets nickname
+				};
+			}'''.parse
+		incorrectModelB.assertError(ModelPackage.eINSTANCE.reference,
+			LinguisticRules.INVALID_MULTIPLICITY)
+		incorrectModelB.assertError(ModelPackage.eINSTANCE.attribute,
+			LinguisticRules.INVALID_MULTIPLICITY)
+		
+		val correctModel = '''module t {
+				class A {
+					ref refToA : [2..3] A
+					att nickname : [2..3] A
+				};
+				
+				class B specializes A {
+					ref refToB : [2..2] B subsets refToA
+					att nickname2 : [3..3] B subsets nickname
+				};
+			}'''.parse
+		correctModel.assertNoError(LinguisticRules.INVALID_MULTIPLICITY)
+		correctModel.assertNoError(LinguisticRules.INVALID_MULTIPLICITY)
+	}
+	
+	@Test def testMultiplicityAndAssignment(){
+		val incorrectModelA = '''module t {
+				class A { 
+					ref refToA : [2..3] A
+					att nicknames : [2..3] A	// This is going to fire other issues not related to multiplicity
+				};
+				individual X : A { 
+					ref refToA = X
+					att nicknames = "John"
+				};
+			}'''.parse
+		incorrectModelA.assertWarning(ModelPackage.eINSTANCE.referenceAssignment,
+			LinguisticRules.INVALID_MULTIPLICITY)
+		incorrectModelA.assertWarning(ModelPackage.eINSTANCE.attributeAssignment,
+			LinguisticRules.INVALID_MULTIPLICITY)
+		
+		val incorrectModelB = '''module t {
+				class A { 
+					ref refToA : [2..3] A
+					att nicknames : [2..3] A	// This is going to fire other issues not related to multiplicity
+				};
+				individual X : A { 
+					ref refToA = {X,X,X,X}
+					att nicknames = {"John","Bob","Gary","Nick"}
+				};
+			}'''.parse
+		incorrectModelB.assertWarning(ModelPackage.eINSTANCE.referenceAssignment,
+			LinguisticRules.INVALID_MULTIPLICITY)
+		incorrectModelB.assertWarning(ModelPackage.eINSTANCE.attributeAssignment,
+			LinguisticRules.INVALID_MULTIPLICITY)
+		
+		val correctModel = '''module t {
+				class A { 
+					ref refToA : [2..3] A
+					att nicknames : [2..3] A	// This is going to fire other issues not related to multiplicity
+				};
+				individual X : A { 
+					ref refToA = {X,X}
+					att nicknames = {"John","Bob","Gary"}
+				};
+			}'''.parse
+		correctModel.assertNoWarnings(ModelPackage.eINSTANCE.referenceAssignment,
+			LinguisticRules.INVALID_MULTIPLICITY)
+		correctModel.assertNoWarnings(ModelPackage.eINSTANCE.attributeAssignment,
+			LinguisticRules.INVALID_MULTIPLICITY)
+	}
+	
+	@Test def testCheckPropertyAssignmentType(){
+		val incorrectModelA = '''module t {
+				class A { 
+					ref refToA : [1..3] A
+				};
+				individual X : A { 
+					ref refToA = {X, X, A}
+				};
+			}'''.parse
+		incorrectModelA.assertError(ModelPackage.eINSTANCE.referenceAssignment,
+			LinguisticRules.NON_CONFORMANT_ASSIGNMENT)
+		
+		val correctModel = '''module t {
+				class A { 
+					ref refToA : [1..3] A
+				};
+				individual X : A { 
+					ref refToA = {X,X}
+				};
+			}'''.parse
+		correctModel.assertNoErrors(ModelPackage.eINSTANCE.referenceAssignment,
+			LinguisticRules.INVALID_MULTIPLICITY)
 	}
 	
 }
