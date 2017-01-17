@@ -10,6 +10,9 @@ import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
 import org.junit.runner.RunWith
+import br.ufes.inf.nemo.ontol.lib.OntoLLib
+import com.google.inject.Provider
+import org.eclipse.emf.ecore.resource.ResourceSet
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(OntoLInjectorProvider))
@@ -17,6 +20,9 @@ class LinguistcRulesTest {
 	
 	@Inject extension ParseHelper<Model>
 	@Inject extension ValidationTestHelper
+	@Inject extension OntoLLib
+	
+	@Inject Provider<ResourceSet> resourceSetProvider
 
 	@Test def testIsNameValid(){
 		val correctModel = ''' module t { class Abc; }'''.parse
@@ -370,27 +376,45 @@ class LinguistcRulesTest {
 	}
 	
 	@Test def testCheckPropertyAssignmentType(){
-		val incorrectModelA = '''module t {
-				class A { 
-					ref refToA : [1..3] A
-				};
-				individual X : A { 
-					ref refToA = {X, X, A}
-				};
-			}'''.parse
-		incorrectModelA.assertError(ModelPackage.eINSTANCE.referenceAssignment,
-			LinguisticRules.NON_CONFORMANT_ASSIGNMENT)
+//		val incorrectModelA = '''module t {
+//				class A { 
+//					ref refToA : [1..3] A
+//				};
+//				individual X : A { 
+//					ref refToA = {X, X, A}
+//				};
+//			}'''.parse
+//		incorrectModelA.assertError(ModelPackage.eINSTANCE.referenceAssignment,
+//			LinguisticRules.NON_CONFORMANT_ASSIGNMENT)
+//		
+//		val correctModelA = '''module t {
+//				class A { 
+//					ref refToA : [1..3] A
+//				};
+//				individual X : A { 
+//					ref refToA = {X,X}
+//				};
+//			}'''.parse
+//		correctModelA.assertNoErrors(ModelPackage.eINSTANCE.referenceAssignment,
+//			LinguisticRules.NON_CONFORMANT_ASSIGNMENT)
 		
-		val correctModel = '''module t {
-				class A { 
-					ref refToA : [1..3] A
+		val rs = resourceSetProvider.get
+		rs.loadDatatypeLib
+		val correctModelB = '''module t {
+				include br.ufes.inf.nemo.ontol.lib.datatypes; import br.ufes.inf.nemo.ontol.lib.datatypes.*;
+				class Color specializes DataType {
+					att red : Number
+					att blue : Number
+					att green : Number
 				};
-				individual X : A { 
-					ref refToA = {X,X}
-				};
-			}'''.parse
-		correctModel.assertNoErrors(ModelPackage.eINSTANCE.referenceAssignment,
-			LinguisticRules.INVALID_MULTIPLICITY)
+				individual Black : Color { att red=0	att green=0	att blue=0 };
+				class ColoredObject { att color : [1..2] Color };
+				individual SomeCube : ColoredObject { att color = {[ red=255, green=255, blue=255 ]} };
+				individual OtherCube : ColoredObject { att color = Black };
+			}'''.parse(rs)
+		correctModelB.assertNoErrors(ModelPackage.eINSTANCE.attributeAssignment,
+			LinguisticRules.NON_CONFORMANT_ASSIGNMENT)
+		correctModelB.assertNoErrors
 	}
 	
 }

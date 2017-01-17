@@ -1,11 +1,14 @@
 package br.ufes.inf.nemo.ontol.tests;
 
+import br.ufes.inf.nemo.ontol.lib.OntoLLib;
 import br.ufes.inf.nemo.ontol.model.Model;
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
 import br.ufes.inf.nemo.ontol.tests.OntoLInjectorProvider;
 import br.ufes.inf.nemo.ontol.validation.LinguisticRules;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -27,6 +30,13 @@ public class LinguistcRulesTest {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
+  
+  @Inject
+  @Extension
+  private OntoLLib _ontoLLib;
+  
+  @Inject
+  private Provider<ResourceSet> resourceSetProvider;
   
   @Test
   public void testIsNameValid() {
@@ -858,60 +868,48 @@ public class LinguistcRulesTest {
   @Test
   public void testCheckPropertyAssignmentType() {
     try {
+      final ResourceSet rs = this.resourceSetProvider.get();
+      this._ontoLLib.loadDatatypeLib(rs);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("module t {");
       _builder.newLine();
       _builder.append("\t\t\t\t");
-      _builder.append("class A { ");
+      _builder.append("include br.ufes.inf.nemo.ontol.lib.datatypes; import br.ufes.inf.nemo.ontol.lib.datatypes.*;");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("class Color specializes DataType {");
       _builder.newLine();
       _builder.append("\t\t\t\t\t");
-      _builder.append("ref refToA : [1..3] A");
+      _builder.append("att red : Number");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("att blue : Number");
+      _builder.newLine();
+      _builder.append("\t\t\t\t\t");
+      _builder.append("att green : Number");
       _builder.newLine();
       _builder.append("\t\t\t\t");
       _builder.append("};");
       _builder.newLine();
       _builder.append("\t\t\t\t");
-      _builder.append("individual X : A { ");
-      _builder.newLine();
-      _builder.append("\t\t\t\t\t");
-      _builder.append("ref refToA = {X, X, A}");
+      _builder.append("individual Black : Color { att red=0\tatt green=0\tatt blue=0 };");
       _builder.newLine();
       _builder.append("\t\t\t\t");
-      _builder.append("};");
+      _builder.append("class ColoredObject { att color : [1..2] Color };");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("individual SomeCube : ColoredObject { att color = {[ red=255, green=255, blue=255 ]} };");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("individual OtherCube : ColoredObject { att color = Black };");
       _builder.newLine();
       _builder.append("\t\t\t");
       _builder.append("}");
-      final Model incorrectModelA = this._parseHelper.parse(_builder);
-      EClass _referenceAssignment = ModelPackage.eINSTANCE.getReferenceAssignment();
-      this._validationTestHelper.assertError(incorrectModelA, _referenceAssignment, 
+      final Model correctModelB = this._parseHelper.parse(_builder, rs);
+      EClass _attributeAssignment = ModelPackage.eINSTANCE.getAttributeAssignment();
+      this._validationTestHelper.assertNoErrors(correctModelB, _attributeAssignment, 
         LinguisticRules.NON_CONFORMANT_ASSIGNMENT);
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("module t {");
-      _builder_1.newLine();
-      _builder_1.append("\t\t\t\t");
-      _builder_1.append("class A { ");
-      _builder_1.newLine();
-      _builder_1.append("\t\t\t\t\t");
-      _builder_1.append("ref refToA : [1..3] A");
-      _builder_1.newLine();
-      _builder_1.append("\t\t\t\t");
-      _builder_1.append("};");
-      _builder_1.newLine();
-      _builder_1.append("\t\t\t\t");
-      _builder_1.append("individual X : A { ");
-      _builder_1.newLine();
-      _builder_1.append("\t\t\t\t\t");
-      _builder_1.append("ref refToA = {X,X}");
-      _builder_1.newLine();
-      _builder_1.append("\t\t\t\t");
-      _builder_1.append("};");
-      _builder_1.newLine();
-      _builder_1.append("\t\t\t");
-      _builder_1.append("}");
-      final Model correctModel = this._parseHelper.parse(_builder_1);
-      EClass _referenceAssignment_1 = ModelPackage.eINSTANCE.getReferenceAssignment();
-      this._validationTestHelper.assertNoErrors(correctModel, _referenceAssignment_1, 
-        LinguisticRules.INVALID_MULTIPLICITY);
+      this._validationTestHelper.assertNoErrors(correctModelB);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

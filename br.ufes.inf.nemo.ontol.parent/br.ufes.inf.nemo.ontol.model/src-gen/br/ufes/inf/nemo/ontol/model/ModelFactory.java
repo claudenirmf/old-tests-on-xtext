@@ -184,6 +184,15 @@ public interface ModelFactory extends EFactory {
 	NoneValue createNoneValue();
 
 	/**
+	 * Returns a new object of class '<em>Complex Data Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Complex Data Value</em>'.
+	 * @generated
+	 */
+	ComplexDataValue createComplexDataValue();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

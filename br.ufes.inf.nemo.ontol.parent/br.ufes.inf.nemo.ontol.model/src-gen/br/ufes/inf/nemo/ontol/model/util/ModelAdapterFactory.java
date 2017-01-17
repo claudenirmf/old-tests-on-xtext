@@ -164,6 +164,10 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createNoneValueAdapter();
 			}
 			@Override
+			public Adapter caseComplexDataValue(ComplexDataValue object) {
+				return createComplexDataValueAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -516,6 +520,20 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNoneValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link br.ufes.inf.nemo.ontol.model.ComplexDataValue <em>Complex Data Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see br.ufes.inf.nemo.ontol.model.ComplexDataValue
+	 * @generated
+	 */
+	public Adapter createComplexDataValueAdapter() {
 		return null;
 	}
 

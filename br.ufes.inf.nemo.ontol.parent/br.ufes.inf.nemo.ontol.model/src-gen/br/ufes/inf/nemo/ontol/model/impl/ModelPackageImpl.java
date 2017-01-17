@@ -6,6 +6,7 @@ import br.ufes.inf.nemo.ontol.model.Attribute;
 import br.ufes.inf.nemo.ontol.model.AttributeAssignment;
 import br.ufes.inf.nemo.ontol.model.BooleanValue;
 import br.ufes.inf.nemo.ontol.model.CategorizationType;
+import br.ufes.inf.nemo.ontol.model.ComplexDataValue;
 import br.ufes.inf.nemo.ontol.model.DataValue;
 import br.ufes.inf.nemo.ontol.model.EntityDeclaration;
 import br.ufes.inf.nemo.ontol.model.FOClass;
@@ -214,6 +215,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass noneValueEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass complexDataValueEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -750,15 +758,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getValue__GetNAssignments() {
-		return valueEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getReferenceValue() {
 		return referenceValueEClass;
 	}
@@ -777,26 +776,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getReferenceValue__GetNAssignments() {
-		return referenceValueEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getDataValue() {
 		return dataValueEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getDataValue__GetNAssignments() {
-		return dataValueEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -876,8 +857,26 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getNoneValue__GetNAssignments() {
-		return noneValueEClass.getEOperations().get(1);
+	public EClass getComplexDataValue() {
+		return complexDataValueEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getComplexDataValue_Value() {
+		return (EReference)complexDataValueEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getComplexDataValue_UnnamedValue() {
+		return (EReference)complexDataValueEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -985,14 +984,11 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(referenceAssignmentEClass, REFERENCE_ASSIGNMENT__ASSIGNMENTS);
 
 		valueEClass = createEClass(VALUE);
-		createEOperation(valueEClass, VALUE___GET_NASSIGNMENTS);
 
 		referenceValueEClass = createEClass(REFERENCE_VALUE);
 		createEReference(referenceValueEClass, REFERENCE_VALUE__VALUE);
-		createEOperation(referenceValueEClass, REFERENCE_VALUE___GET_NASSIGNMENTS);
 
 		dataValueEClass = createEClass(DATA_VALUE);
-		createEOperation(dataValueEClass, DATA_VALUE___GET_NASSIGNMENTS);
 
 		stringValueEClass = createEClass(STRING_VALUE);
 		createEAttribute(stringValueEClass, STRING_VALUE__VALUE);
@@ -1005,7 +1001,10 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		noneValueEClass = createEClass(NONE_VALUE);
 		createEOperation(noneValueEClass, NONE_VALUE___GET_VALUE);
-		createEOperation(noneValueEClass, NONE_VALUE___GET_NASSIGNMENTS);
+
+		complexDataValueEClass = createEClass(COMPLEX_DATA_VALUE);
+		createEReference(complexDataValueEClass, COMPLEX_DATA_VALUE__VALUE);
+		createEReference(complexDataValueEClass, COMPLEX_DATA_VALUE__UNNAMED_VALUE);
 
 		// Create enums
 		categorizationTypeEEnum = createEEnum(CATEGORIZATION_TYPE);
@@ -1064,6 +1063,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		numberValueEClass.getESuperTypes().add(this.getDataValue());
 		booleanValueEClass.getESuperTypes().add(this.getDataValue());
 		noneValueEClass.getESuperTypes().add(this.getDataValue());
+		complexDataValueEClass.getESuperTypes().add(this.getDataValue());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1135,16 +1135,10 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(valueEClass, Value.class, "Value", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEOperation(getValue__GetNAssignments(), theEcorePackage.getEInt(), "getNAssignments", 0, 1, !IS_UNIQUE, IS_ORDERED);
-
 		initEClass(referenceValueEClass, ReferenceValue.class, "ReferenceValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getReferenceValue_Value(), this.getEntityDeclaration(), null, "value", null, 0, 1, ReferenceValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getReferenceValue__GetNAssignments(), theEcorePackage.getEInt(), "getNAssignments", 0, 1, !IS_UNIQUE, IS_ORDERED);
-
 		initEClass(dataValueEClass, DataValue.class, "DataValue", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEOperation(getDataValue__GetNAssignments(), theEcorePackage.getEInt(), "getNAssignments", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(stringValueEClass, StringValue.class, "StringValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getStringValue_Value(), theEcorePackage.getEString(), "value", null, 0, 1, StringValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1159,7 +1153,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEOperation(getNoneValue__GetValue(), theEcorePackage.getEJavaObject(), "getValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getNoneValue__GetNAssignments(), theEcorePackage.getEInt(), "getNAssignments", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEClass(complexDataValueEClass, ComplexDataValue.class, "ComplexDataValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getComplexDataValue_Value(), this.getIndividual(), null, "value", null, 0, 1, ComplexDataValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComplexDataValue_UnnamedValue(), this.getIndividual(), null, "unnamedValue", null, 0, 1, ComplexDataValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(categorizationTypeEEnum, CategorizationType.class, "CategorizationType");

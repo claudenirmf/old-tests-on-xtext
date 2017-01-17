@@ -1392,22 +1392,13 @@ public interface ModelPackage extends EPackage {
 	int VALUE_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Get NAssignments</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VALUE___GET_NASSIGNMENTS = MODEL_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The number of operations of the '<em>Value</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VALUE_OPERATION_COUNT = MODEL_ELEMENT_OPERATION_COUNT + 1;
+	int VALUE_OPERATION_COUNT = MODEL_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.ReferenceValueImpl <em>Reference Value</em>}' class.
@@ -1438,22 +1429,13 @@ public interface ModelPackage extends EPackage {
 	int REFERENCE_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Get NAssignments</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFERENCE_VALUE___GET_NASSIGNMENTS = VALUE_OPERATION_COUNT + 0;
-
-	/**
 	 * The number of operations of the '<em>Reference Value</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 1;
+	int REFERENCE_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.DataValueImpl <em>Data Value</em>}' class.
@@ -1475,22 +1457,13 @@ public interface ModelPackage extends EPackage {
 	int DATA_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Get NAssignments</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_VALUE___GET_NASSIGNMENTS = VALUE_OPERATION_COUNT + 0;
-
-	/**
 	 * The number of operations of the '<em>Data Value</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 1;
+	int DATA_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.StringValueImpl <em>String Value</em>}' class.
@@ -1519,15 +1492,6 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRING_VALUE_FEATURE_COUNT = DATA_VALUE_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Get NAssignments</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_VALUE___GET_NASSIGNMENTS = DATA_VALUE___GET_NASSIGNMENTS;
 
 	/**
 	 * The number of operations of the '<em>String Value</em>' class.
@@ -1567,15 +1531,6 @@ public interface ModelPackage extends EPackage {
 	int NUMBER_VALUE_FEATURE_COUNT = DATA_VALUE_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Get NAssignments</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMBER_VALUE___GET_NASSIGNMENTS = DATA_VALUE___GET_NASSIGNMENTS;
-
-	/**
 	 * The number of operations of the '<em>Number Value</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1611,15 +1566,6 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOOLEAN_VALUE_FEATURE_COUNT = DATA_VALUE_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Get NAssignments</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_VALUE___GET_NASSIGNMENTS = DATA_VALUE___GET_NASSIGNMENTS;
 
 	/**
 	 * The number of operations of the '<em>Boolean Value</em>' class.
@@ -1659,22 +1605,59 @@ public interface ModelPackage extends EPackage {
 	int NONE_VALUE___GET_VALUE = DATA_VALUE_OPERATION_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Get NAssignments</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NONE_VALUE___GET_NASSIGNMENTS = DATA_VALUE_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>None Value</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NONE_VALUE_OPERATION_COUNT = DATA_VALUE_OPERATION_COUNT + 2;
+	int NONE_VALUE_OPERATION_COUNT = DATA_VALUE_OPERATION_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.ComplexDataValueImpl <em>Complex Data Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see br.ufes.inf.nemo.ontol.model.impl.ComplexDataValueImpl
+	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getComplexDataValue()
+	 * @generated
+	 */
+	int COMPLEX_DATA_VALUE = 24;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_DATA_VALUE__VALUE = DATA_VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Unnamed Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_DATA_VALUE__UNNAMED_VALUE = DATA_VALUE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Complex Data Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_DATA_VALUE_FEATURE_COUNT = DATA_VALUE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Complex Data Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_DATA_VALUE_OPERATION_COUNT = DATA_VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.CategorizationType <em>Categorization Type</em>}' enum.
@@ -1684,7 +1667,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getCategorizationType()
 	 * @generated
 	 */
-	int CATEGORIZATION_TYPE = 24;
+	int CATEGORIZATION_TYPE = 25;
 
 
 	/**
@@ -2231,16 +2214,6 @@ public interface ModelPackage extends EPackage {
 	EClass getValue();
 
 	/**
-	 * Returns the meta object for the '{@link br.ufes.inf.nemo.ontol.model.Value#getNAssignments() <em>Get NAssignments</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get NAssignments</em>' operation.
-	 * @see br.ufes.inf.nemo.ontol.model.Value#getNAssignments()
-	 * @generated
-	 */
-	EOperation getValue__GetNAssignments();
-
-	/**
 	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.ReferenceValue <em>Reference Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2262,16 +2235,6 @@ public interface ModelPackage extends EPackage {
 	EReference getReferenceValue_Value();
 
 	/**
-	 * Returns the meta object for the '{@link br.ufes.inf.nemo.ontol.model.ReferenceValue#getNAssignments() <em>Get NAssignments</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get NAssignments</em>' operation.
-	 * @see br.ufes.inf.nemo.ontol.model.ReferenceValue#getNAssignments()
-	 * @generated
-	 */
-	EOperation getReferenceValue__GetNAssignments();
-
-	/**
 	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.DataValue <em>Data Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2280,16 +2243,6 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getDataValue();
-
-	/**
-	 * Returns the meta object for the '{@link br.ufes.inf.nemo.ontol.model.DataValue#getNAssignments() <em>Get NAssignments</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get NAssignments</em>' operation.
-	 * @see br.ufes.inf.nemo.ontol.model.DataValue#getNAssignments()
-	 * @generated
-	 */
-	EOperation getDataValue__GetNAssignments();
 
 	/**
 	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.StringValue <em>String Value</em>}'.
@@ -2375,14 +2328,36 @@ public interface ModelPackage extends EPackage {
 	EOperation getNoneValue__GetValue();
 
 	/**
-	 * Returns the meta object for the '{@link br.ufes.inf.nemo.ontol.model.NoneValue#getNAssignments() <em>Get NAssignments</em>}' operation.
+	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.ComplexDataValue <em>Complex Data Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get NAssignments</em>' operation.
-	 * @see br.ufes.inf.nemo.ontol.model.NoneValue#getNAssignments()
+	 * @return the meta object for class '<em>Complex Data Value</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.ComplexDataValue
 	 * @generated
 	 */
-	EOperation getNoneValue__GetNAssignments();
+	EClass getComplexDataValue();
+
+	/**
+	 * Returns the meta object for the reference '{@link br.ufes.inf.nemo.ontol.model.ComplexDataValue#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Value</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.ComplexDataValue#getValue()
+	 * @see #getComplexDataValue()
+	 * @generated
+	 */
+	EReference getComplexDataValue_Value();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link br.ufes.inf.nemo.ontol.model.ComplexDataValue#getUnnamedValue <em>Unnamed Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Unnamed Value</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.ComplexDataValue#getUnnamedValue()
+	 * @see #getComplexDataValue()
+	 * @generated
+	 */
+	EReference getComplexDataValue_UnnamedValue();
 
 	/**
 	 * Returns the meta object for enum '{@link br.ufes.inf.nemo.ontol.model.CategorizationType <em>Categorization Type</em>}'.
@@ -2862,14 +2837,6 @@ public interface ModelPackage extends EPackage {
 		EClass VALUE = eINSTANCE.getValue();
 
 		/**
-		 * The meta object literal for the '<em><b>Get NAssignments</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation VALUE___GET_NASSIGNMENTS = eINSTANCE.getValue__GetNAssignments();
-
-		/**
 		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.ReferenceValueImpl <em>Reference Value</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2888,14 +2855,6 @@ public interface ModelPackage extends EPackage {
 		EReference REFERENCE_VALUE__VALUE = eINSTANCE.getReferenceValue_Value();
 
 		/**
-		 * The meta object literal for the '<em><b>Get NAssignments</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation REFERENCE_VALUE___GET_NASSIGNMENTS = eINSTANCE.getReferenceValue__GetNAssignments();
-
-		/**
 		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.DataValueImpl <em>Data Value</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2904,14 +2863,6 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass DATA_VALUE = eINSTANCE.getDataValue();
-
-		/**
-		 * The meta object literal for the '<em><b>Get NAssignments</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation DATA_VALUE___GET_NASSIGNMENTS = eINSTANCE.getDataValue__GetNAssignments();
 
 		/**
 		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.StringValueImpl <em>String Value</em>}' class.
@@ -2986,12 +2937,30 @@ public interface ModelPackage extends EPackage {
 		EOperation NONE_VALUE___GET_VALUE = eINSTANCE.getNoneValue__GetValue();
 
 		/**
-		 * The meta object literal for the '<em><b>Get NAssignments</b></em>' operation.
+		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.ComplexDataValueImpl <em>Complex Data Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see br.ufes.inf.nemo.ontol.model.impl.ComplexDataValueImpl
+		 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getComplexDataValue()
+		 * @generated
+		 */
+		EClass COMPLEX_DATA_VALUE = eINSTANCE.getComplexDataValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation NONE_VALUE___GET_NASSIGNMENTS = eINSTANCE.getNoneValue__GetNAssignments();
+		EReference COMPLEX_DATA_VALUE__VALUE = eINSTANCE.getComplexDataValue_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Unnamed Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPLEX_DATA_VALUE__UNNAMED_VALUE = eINSTANCE.getComplexDataValue_UnnamedValue();
 
 		/**
 		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.CategorizationType <em>Categorization Type</em>}' enum.

@@ -5,13 +5,8 @@ package br.ufes.inf.nemo.ontol.model.impl;
 import br.ufes.inf.nemo.ontol.model.EntityDeclaration;
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
 import br.ufes.inf.nemo.ontol.model.ReferenceValue;
-import br.ufes.inf.nemo.ontol.model.Value;
-
-import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -104,15 +99,6 @@ public class ReferenceValueImpl extends ValueImpl implements ReferenceValue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getNAssignments() {
-		return 1;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -165,36 +151,6 @@ public class ReferenceValueImpl extends ValueImpl implements ReferenceValue {
 				return value != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
-		if (baseClass == Value.class) {
-			switch (baseOperationID) {
-				case ModelPackage.VALUE___GET_NASSIGNMENTS: return ModelPackage.REFERENCE_VALUE___GET_NASSIGNMENTS;
-				default: return super.eDerivedOperationID(baseOperationID, baseClass);
-			}
-		}
-		return super.eDerivedOperationID(baseOperationID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case ModelPackage.REFERENCE_VALUE___GET_NASSIGNMENTS:
-				return getNAssignments();
-		}
-		return super.eInvoke(operationID, arguments);
 	}
 
 } //ReferenceValueImpl

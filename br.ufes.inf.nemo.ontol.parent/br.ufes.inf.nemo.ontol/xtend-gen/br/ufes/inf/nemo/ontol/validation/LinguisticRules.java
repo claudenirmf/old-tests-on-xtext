@@ -2,6 +2,7 @@ package br.ufes.inf.nemo.ontol.validation;
 
 import br.ufes.inf.nemo.ontol.model.Attribute;
 import br.ufes.inf.nemo.ontol.model.AttributeAssignment;
+import br.ufes.inf.nemo.ontol.model.ComplexDataValue;
 import br.ufes.inf.nemo.ontol.model.DataValue;
 import br.ufes.inf.nemo.ontol.model.EntityDeclaration;
 import br.ufes.inf.nemo.ontol.model.FOClass;
@@ -89,17 +90,11 @@ public class LinguisticRules {
   public final static String NON_CONFORMANT_ASSIGNMENT = "br.ufes.inf.nemo.ontol.NonConformantAssigment";
   
   public boolean isNameValid(final EntityDeclaration e) {
-    boolean _xifexpression = false;
-    String _name = e.getName();
-    String _name_1 = e.getName();
-    String _firstLower = StringExtensions.toFirstLower(_name_1);
-    boolean _equals = Objects.equal(_name, _firstLower);
-    if (_equals) {
-      _xifexpression = false;
+    if (((!e.getName().equals(StringExtensions.toFirstLower(e.getName()))) || (e.eContainer() instanceof ComplexDataValue))) {
+      return true;
     } else {
-      _xifexpression = true;
+      return false;
     }
-    return _xifexpression;
   }
   
   public boolean isValidSpecialization(final OntoLClass c) {
@@ -255,7 +250,11 @@ public class LinguisticRules {
   
   public boolean duplicatedEntityName(final EntityDeclaration e) {
     EObject _eContainer = e.eContainer();
-    final Model model = ((Model) _eContainer);
+    if ((_eContainer instanceof ComplexDataValue)) {
+      return false;
+    }
+    EObject _eContainer_1 = e.eContainer();
+    final Model model = ((Model) _eContainer_1);
     EList<ModelElement> _elements = model.getElements();
     final Function1<ModelElement, Boolean> _function = (ModelElement it) -> {
       boolean _xifexpression = false;

@@ -75,6 +75,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.NUMBER_VALUE: return createNumberValue();
 			case ModelPackage.BOOLEAN_VALUE: return createBooleanValue();
 			case ModelPackage.NONE_VALUE: return createNoneValue();
+			case ModelPackage.COMPLEX_DATA_VALUE: return createComplexDataValue();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -288,6 +289,16 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public NoneValue createNoneValue() {
 		NoneValueImpl noneValue = new NoneValueImpl();
 		return noneValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ComplexDataValue createComplexDataValue() {
+		ComplexDataValueImpl complexDataValue = new ComplexDataValueImpl();
+		return complexDataValue;
 	}
 
 	/**

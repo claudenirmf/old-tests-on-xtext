@@ -23,6 +23,7 @@ import br.ufes.inf.nemo.ontol.model.Reference
 import br.ufes.inf.nemo.ontol.model.Attribute
 import org.eclipse.xtext.resource.IEObjectDescription
 import br.ufes.inf.nemo.ontol.model.Value
+import br.ufes.inf.nemo.ontol.model.ComplexDataValue
 
 class LinguisticRules {
 	
@@ -48,7 +49,10 @@ class LinguisticRules {
 	public static val NON_CONFORMANT_ASSIGNMENT = "br.ufes.inf.nemo.ontol.NonConformantAssigment"
 	
 	def isNameValid(EntityDeclaration e){
-		if(e.name == e.name.toFirstLower) false		else true
+		if(!e.name.equals(e.name.toFirstLower) || e.eContainer instanceof ComplexDataValue)
+			return true
+		else 
+			return false
 	}
 	
 	def isValidSpecialization(OntoLClass c){
@@ -123,6 +127,8 @@ class LinguisticRules {
 	}
 	
 	def duplicatedEntityName(EntityDeclaration e){
+		if(e.eContainer instanceof ComplexDataValue)	return false
+		
 		val model = e.eContainer as Model
 		return model.elements.exists[ 
 			if(it instanceof EntityDeclaration) it.name.equals(e.name) && it!=e

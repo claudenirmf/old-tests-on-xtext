@@ -1274,6 +1274,83 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_3_1_3() { return cRightCurlyBracketKeyword_3_1_3; }
 	}
+	public class SimpleAttributeAssignmentElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "br.ufes.inf.nemo.ontol.OntoL.SimpleAttributeAssignment");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cAttributeAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final CrossReference cAttributeAttributeCrossReference_0_0 = (CrossReference)cAttributeAssignment_0.eContents().get(0);
+		private final RuleCall cAttributeAttributeQualifiedNameParserRuleCall_0_0_1 = (RuleCall)cAttributeAttributeCrossReference_0_0.eContents().get(1);
+		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Assignment cAssignmentsAssignment_2_0 = (Assignment)cAlternatives_2.eContents().get(0);
+		private final RuleCall cAssignmentsDataValueParserRuleCall_2_0_0 = (RuleCall)cAssignmentsAssignment_2_0.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cAlternatives_2.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Assignment cAssignmentsAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
+		private final RuleCall cAssignmentsDataValueParserRuleCall_2_1_1_0 = (RuleCall)cAssignmentsAssignment_2_1_1.eContents().get(0);
+		private final Group cGroup_2_1_2 = (Group)cGroup_2_1.eContents().get(2);
+		private final Keyword cCommaKeyword_2_1_2_0 = (Keyword)cGroup_2_1_2.eContents().get(0);
+		private final Assignment cAssignmentsAssignment_2_1_2_1 = (Assignment)cGroup_2_1_2.eContents().get(1);
+		private final RuleCall cAssignmentsDataValueParserRuleCall_2_1_2_1_0 = (RuleCall)cAssignmentsAssignment_2_1_2_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_2_1_3 = (Keyword)cGroup_2_1.eContents().get(3);
+		
+		//SimpleAttributeAssignment AttributeAssignment:
+		//	attribute=[Attribute|QualifiedName] '=' (assignments+=DataValue
+		//	| '{' assignments+=DataValue (',' assignments+=DataValue)* '}')
+		@Override public ParserRule getRule() { return rule; }
+		
+		//attribute=[Attribute|QualifiedName] '=' (assignments+=DataValue | '{' assignments+=DataValue (','
+		//assignments+=DataValue)* '}')
+		public Group getGroup() { return cGroup; }
+		
+		//attribute=[Attribute|QualifiedName]
+		public Assignment getAttributeAssignment_0() { return cAttributeAssignment_0; }
+		
+		//[Attribute|QualifiedName]
+		public CrossReference getAttributeAttributeCrossReference_0_0() { return cAttributeAttributeCrossReference_0_0; }
+		
+		//QualifiedName
+		public RuleCall getAttributeAttributeQualifiedNameParserRuleCall_0_0_1() { return cAttributeAttributeQualifiedNameParserRuleCall_0_0_1; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
+		
+		//(assignments+=DataValue | '{' assignments+=DataValue (',' assignments+=DataValue)* '}')
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+		
+		//assignments+=DataValue
+		public Assignment getAssignmentsAssignment_2_0() { return cAssignmentsAssignment_2_0; }
+		
+		//DataValue
+		public RuleCall getAssignmentsDataValueParserRuleCall_2_0_0() { return cAssignmentsDataValueParserRuleCall_2_0_0; }
+		
+		//'{' assignments+=DataValue (',' assignments+=DataValue)* '}'
+		public Group getGroup_2_1() { return cGroup_2_1; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2_1_0() { return cLeftCurlyBracketKeyword_2_1_0; }
+		
+		//assignments+=DataValue
+		public Assignment getAssignmentsAssignment_2_1_1() { return cAssignmentsAssignment_2_1_1; }
+		
+		//DataValue
+		public RuleCall getAssignmentsDataValueParserRuleCall_2_1_1_0() { return cAssignmentsDataValueParserRuleCall_2_1_1_0; }
+		
+		//(',' assignments+=DataValue)*
+		public Group getGroup_2_1_2() { return cGroup_2_1_2; }
+		
+		//','
+		public Keyword getCommaKeyword_2_1_2_0() { return cCommaKeyword_2_1_2_0; }
+		
+		//assignments+=DataValue
+		public Assignment getAssignmentsAssignment_2_1_2_1() { return cAssignmentsAssignment_2_1_2_1; }
+		
+		//DataValue
+		public RuleCall getAssignmentsDataValueParserRuleCall_2_1_2_1_0() { return cAssignmentsDataValueParserRuleCall_2_1_2_1_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_2_1_3() { return cRightCurlyBracketKeyword_2_1_3; }
+	}
 	public class ReferenceAssignmentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "br.ufes.inf.nemo.ontol.OntoL.ReferenceAssignment");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1362,12 +1439,13 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNumberValueParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cBooleanValueParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cNoneValueParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cComplexDataValueParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//DataValue:
-		//	StringValue | NumberValue | BooleanValue | NoneValue;
+		//	StringValue | NumberValue | BooleanValue | NoneValue | ComplexDataValue;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//StringValue | NumberValue | BooleanValue | NoneValue
+		//StringValue | NumberValue | BooleanValue | NoneValue | ComplexDataValue
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//StringValue
@@ -1381,6 +1459,9 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//NoneValue
 		public RuleCall getNoneValueParserRuleCall_3() { return cNoneValueParserRuleCall_3; }
+		
+		//ComplexDataValue
+		public RuleCall getComplexDataValueParserRuleCall_4() { return cComplexDataValueParserRuleCall_4; }
 	}
 	public class ReferenceValueElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "br.ufes.inf.nemo.ontol.OntoL.ReferenceValue");
@@ -1514,6 +1595,82 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//'none'
 		public Keyword getNoneKeyword_1() { return cNoneKeyword_1; }
+	}
+	public class ComplexDataValueElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "br.ufes.inf.nemo.ontol.OntoL.ComplexDataValue");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Assignment cValueAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
+		private final CrossReference cValueIndividualCrossReference_0_0 = (CrossReference)cValueAssignment_0.eContents().get(0);
+		private final RuleCall cValueIndividualQualifiedNameParserRuleCall_0_0_1 = (RuleCall)cValueIndividualCrossReference_0_0.eContents().get(1);
+		private final Assignment cUnnamedValueAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
+		private final RuleCall cUnnamedValueUnamedIndividualParserRuleCall_1_0 = (RuleCall)cUnnamedValueAssignment_1.eContents().get(0);
+		
+		//ComplexDataValue:
+		//	value=[Individual|QualifiedName] | unnamedValue=UnamedIndividual;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//value=[Individual|QualifiedName] | unnamedValue=UnamedIndividual
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//value=[Individual|QualifiedName]
+		public Assignment getValueAssignment_0() { return cValueAssignment_0; }
+		
+		//[Individual|QualifiedName]
+		public CrossReference getValueIndividualCrossReference_0_0() { return cValueIndividualCrossReference_0_0; }
+		
+		//QualifiedName
+		public RuleCall getValueIndividualQualifiedNameParserRuleCall_0_0_1() { return cValueIndividualQualifiedNameParserRuleCall_0_0_1; }
+		
+		//unnamedValue=UnamedIndividual
+		public Assignment getUnnamedValueAssignment_1() { return cUnnamedValueAssignment_1; }
+		
+		//UnamedIndividual
+		public RuleCall getUnnamedValueUnamedIndividualParserRuleCall_1_0() { return cUnnamedValueUnamedIndividualParserRuleCall_1_0; }
+	}
+	public class UnamedIndividualElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "br.ufes.inf.nemo.ontol.OntoL.UnamedIndividual");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cLeftSquareBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cAttAssignmentsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cAttAssignmentsSimpleAttributeAssignmentParserRuleCall_1_0 = (RuleCall)cAttAssignmentsAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cCommaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cAttAssignmentsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cAttAssignmentsSimpleAttributeAssignmentParserRuleCall_2_1_0 = (RuleCall)cAttAssignmentsAssignment_2_1.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		//UnamedIndividual Individual:
+		//	'['
+		//	attAssignments+=SimpleAttributeAssignment (',' attAssignments+=SimpleAttributeAssignment)*
+		//	']'
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'[' attAssignments+=SimpleAttributeAssignment (',' attAssignments+=SimpleAttributeAssignment)* ']'
+		public Group getGroup() { return cGroup; }
+		
+		//'['
+		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
+		
+		//attAssignments+=SimpleAttributeAssignment
+		public Assignment getAttAssignmentsAssignment_1() { return cAttAssignmentsAssignment_1; }
+		
+		//SimpleAttributeAssignment
+		public RuleCall getAttAssignmentsSimpleAttributeAssignmentParserRuleCall_1_0() { return cAttAssignmentsSimpleAttributeAssignmentParserRuleCall_1_0; }
+		
+		//(',' attAssignments+=SimpleAttributeAssignment)*
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//','
+		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
+		
+		//attAssignments+=SimpleAttributeAssignment
+		public Assignment getAttAssignmentsAssignment_2_1() { return cAttAssignmentsAssignment_2_1; }
+		
+		//SimpleAttributeAssignment
+		public RuleCall getAttAssignmentsSimpleAttributeAssignmentParserRuleCall_2_1_0() { return cAttAssignmentsSimpleAttributeAssignmentParserRuleCall_2_1_0; }
+		
+		//']'
+		public Keyword getRightSquareBracketKeyword_3() { return cRightSquareBracketKeyword_3; }
 	}
 	public class GeneralizationSetElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "br.ufes.inf.nemo.ontol.OntoL.GeneralizationSet");
@@ -1742,6 +1899,7 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 	private final ReferenceElements pReference;
 	private final ELEMENTBOUNDElements pELEMENTBOUND;
 	private final AttributeAssignmentElements pAttributeAssignment;
+	private final SimpleAttributeAssignmentElements pSimpleAttributeAssignment;
 	private final ReferenceAssignmentElements pReferenceAssignment;
 	private final DataValueElements pDataValue;
 	private final ReferenceValueElements pReferenceValue;
@@ -1751,6 +1909,8 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 	private final BooleanValueElements pBooleanValue;
 	private final BOOLEANElements pBOOLEAN;
 	private final NoneValueElements pNoneValue;
+	private final ComplexDataValueElements pComplexDataValue;
+	private final UnamedIndividualElements pUnamedIndividual;
 	private final GeneralizationSetElements pGeneralizationSet;
 	
 	private final Grammar grammar;
@@ -1778,6 +1938,7 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		this.pReference = new ReferenceElements();
 		this.pELEMENTBOUND = new ELEMENTBOUNDElements();
 		this.pAttributeAssignment = new AttributeAssignmentElements();
+		this.pSimpleAttributeAssignment = new SimpleAttributeAssignmentElements();
 		this.pReferenceAssignment = new ReferenceAssignmentElements();
 		this.pDataValue = new DataValueElements();
 		this.pReferenceValue = new ReferenceValueElements();
@@ -1787,6 +1948,8 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		this.pBooleanValue = new BooleanValueElements();
 		this.pBOOLEAN = new BOOLEANElements();
 		this.pNoneValue = new NoneValueElements();
+		this.pComplexDataValue = new ComplexDataValueElements();
+		this.pUnamedIndividual = new UnamedIndividualElements();
 		this.pGeneralizationSet = new GeneralizationSetElements();
 	}
 	
@@ -2002,6 +2165,17 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		return getAttributeAssignmentAccess().getRule();
 	}
 	
+	//SimpleAttributeAssignment AttributeAssignment:
+	//	attribute=[Attribute|QualifiedName] '=' (assignments+=DataValue
+	//	| '{' assignments+=DataValue (',' assignments+=DataValue)* '}')
+	public SimpleAttributeAssignmentElements getSimpleAttributeAssignmentAccess() {
+		return pSimpleAttributeAssignment;
+	}
+	
+	public ParserRule getSimpleAttributeAssignmentRule() {
+		return getSimpleAttributeAssignmentAccess().getRule();
+	}
+	
 	//ReferenceAssignment:
 	//	'ref' reference=[Reference|QualifiedName] '=' (assignments+=ReferenceValue
 	//	| '{' assignments+=ReferenceValue (',' assignments+=ReferenceValue)* '}');
@@ -2014,7 +2188,7 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//DataValue:
-	//	StringValue | NumberValue | BooleanValue | NoneValue;
+	//	StringValue | NumberValue | BooleanValue | NoneValue | ComplexDataValue;
 	public DataValueElements getDataValueAccess() {
 		return pDataValue;
 	}
@@ -2091,6 +2265,28 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getNoneValueRule() {
 		return getNoneValueAccess().getRule();
+	}
+	
+	//ComplexDataValue:
+	//	value=[Individual|QualifiedName] | unnamedValue=UnamedIndividual;
+	public ComplexDataValueElements getComplexDataValueAccess() {
+		return pComplexDataValue;
+	}
+	
+	public ParserRule getComplexDataValueRule() {
+		return getComplexDataValueAccess().getRule();
+	}
+	
+	//UnamedIndividual Individual:
+	//	'['
+	//	attAssignments+=SimpleAttributeAssignment (',' attAssignments+=SimpleAttributeAssignment)*
+	//	']'
+	public UnamedIndividualElements getUnamedIndividualAccess() {
+		return pUnamedIndividual;
+	}
+	
+	public ParserRule getUnamedIndividualRule() {
+		return getUnamedIndividualAccess().getRule();
 	}
 	
 	//GeneralizationSet:

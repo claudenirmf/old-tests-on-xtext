@@ -7,9 +7,11 @@ package br.ufes.inf.nemo.ontol.util;
 
 import br.ufes.inf.nemo.ontol.lib.OntoLLib;
 import br.ufes.inf.nemo.ontol.model.Attribute;
+import br.ufes.inf.nemo.ontol.model.AttributeAssignment;
 import br.ufes.inf.nemo.ontol.model.BooleanValue;
-import br.ufes.inf.nemo.ontol.model.DataValue;
+import br.ufes.inf.nemo.ontol.model.ComplexDataValue;
 import br.ufes.inf.nemo.ontol.model.EntityDeclaration;
+import br.ufes.inf.nemo.ontol.model.Individual;
 import br.ufes.inf.nemo.ontol.model.Model;
 import br.ufes.inf.nemo.ontol.model.ModelElement;
 import br.ufes.inf.nemo.ontol.model.NoneValue;
@@ -91,9 +93,20 @@ public class OntoLUtils {
    * @author Claudenir Fonseca
    */
   public LinkedHashSet<OntoLClass> getBasicInstantiatedClasses(final EntityDeclaration e) {
-    final LinkedHashSet<OntoLClass> basicInstantiatedClasses = new LinkedHashSet<OntoLClass>();
+    EObject _eContainer = e.eContainer();
+    if ((_eContainer instanceof ComplexDataValue)) {
+      EObject _eContainer_1 = e.eContainer();
+      EObject _eContainer_2 = _eContainer_1.eContainer();
+      final AttributeAssignment attAssign = ((AttributeAssignment) _eContainer_2);
+      Attribute _attribute = attAssign.getAttribute();
+      final OntoLClass propClass = _attribute.getPropertyClass();
+      final LinkedHashSet<OntoLClass> basicInstantiatedClasses = new LinkedHashSet<OntoLClass>();
+      basicInstantiatedClasses.add(propClass);
+      return basicInstantiatedClasses;
+    }
+    final LinkedHashSet<OntoLClass> basicInstantiatedClasses_1 = new LinkedHashSet<OntoLClass>();
     EList<OntoLClass> _instantiatedClasses = e.getInstantiatedClasses();
-    basicInstantiatedClasses.addAll(_instantiatedClasses);
+    basicInstantiatedClasses_1.addAll(_instantiatedClasses);
     if ((e instanceof OntoLClass)) {
       final Set<OntoLClass> ch = this.classHierarchy(((OntoLClass)e));
       Set<Model> _rechableModels = this.getRechableModels(e);
@@ -106,14 +119,14 @@ public class OntoLUtils {
         if ((it instanceof OntoLClass)) {
           final OntoLClass aux = ((OntoLClass)it).getPowertypeOf();
           if (((!Objects.equal(aux, null)) && (Objects.equal(aux, e) || ch.contains(aux)))) {
-            basicInstantiatedClasses.add(((OntoLClass)it));
+            basicInstantiatedClasses_1.add(((OntoLClass)it));
           }
         }
       };
       _flatten.forEach(_function_1);
-      return basicInstantiatedClasses;
+      return basicInstantiatedClasses_1;
     } else {
-      return basicInstantiatedClasses;
+      return basicInstantiatedClasses_1;
     }
   }
   
@@ -236,13 +249,20 @@ public class OntoLUtils {
                 return true;
               }
             } else {
-              if ((assignment instanceof DataValue)) {
-                final OntoLClass datatype = this._ontoLLib.getLibClass(assigType, OntoLLib.DATATYPES_DATATYPE);
-                Set<OntoLClass> _classHierarchy = this.classHierarchy(assigType);
-                boolean _contains_1 = _classHierarchy.contains(datatype);
-                boolean _not = (!_contains_1);
-                if (_not) {
-                  return false;
+              if ((assignment instanceof ComplexDataValue)) {
+                Individual _xifexpression = null;
+                Individual _value = ((ComplexDataValue)assignment).getValue();
+                boolean _notEquals = (!Objects.equal(_value, null));
+                if (_notEquals) {
+                  _xifexpression = ((ComplexDataValue)assignment).getValue();
+                } else {
+                  _xifexpression = ((ComplexDataValue)assignment).getUnnamedValue();
+                }
+                final Individual actualValue_1 = _xifexpression;
+                LinkedHashSet<OntoLClass> _allInstantiatedClasses_1 = this.getAllInstantiatedClasses(actualValue_1);
+                boolean _contains_1 = _allInstantiatedClasses_1.contains(assigType);
+                if (_contains_1) {
+                  return true;
                 }
               }
             }

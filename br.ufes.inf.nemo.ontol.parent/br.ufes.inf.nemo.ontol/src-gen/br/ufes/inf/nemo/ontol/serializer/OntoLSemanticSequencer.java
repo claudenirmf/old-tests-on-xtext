@@ -6,6 +6,7 @@ package br.ufes.inf.nemo.ontol.serializer;
 import br.ufes.inf.nemo.ontol.model.Attribute;
 import br.ufes.inf.nemo.ontol.model.AttributeAssignment;
 import br.ufes.inf.nemo.ontol.model.BooleanValue;
+import br.ufes.inf.nemo.ontol.model.ComplexDataValue;
 import br.ufes.inf.nemo.ontol.model.FOClass;
 import br.ufes.inf.nemo.ontol.model.GeneralizationSet;
 import br.ufes.inf.nemo.ontol.model.HOClass;
@@ -51,10 +52,20 @@ public class OntoLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				sequence_Attribute(context, (Attribute) semanticObject); 
 				return; 
 			case ModelPackage.ATTRIBUTE_ASSIGNMENT:
-				sequence_AttributeAssignment(context, (AttributeAssignment) semanticObject); 
-				return; 
+				if (rule == grammarAccess.getAttributeAssignmentRule()) {
+					sequence_AttributeAssignment(context, (AttributeAssignment) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getSimpleAttributeAssignmentRule()) {
+					sequence_SimpleAttributeAssignment(context, (AttributeAssignment) semanticObject); 
+					return; 
+				}
+				else break;
 			case ModelPackage.BOOLEAN_VALUE:
 				sequence_BooleanValue(context, (BooleanValue) semanticObject); 
+				return; 
+			case ModelPackage.COMPLEX_DATA_VALUE:
+				sequence_ComplexDataValue(context, (ComplexDataValue) semanticObject); 
 				return; 
 			case ModelPackage.FO_CLASS:
 				if (rule == grammarAccess.getFOClassRule()) {
@@ -87,8 +98,17 @@ public class OntoLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				sequence_Import(context, (Import) semanticObject); 
 				return; 
 			case ModelPackage.INDIVIDUAL:
-				sequence_Individual(context, (Individual) semanticObject); 
-				return; 
+				if (rule == grammarAccess.getModelElementRule()
+						|| rule == grammarAccess.getEntityDeclarationRule()
+						|| rule == grammarAccess.getIndividualRule()) {
+					sequence_Individual(context, (Individual) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getUnamedIndividualRule()) {
+					sequence_UnamedIndividual(context, (Individual) semanticObject); 
+					return; 
+				}
+				else break;
 			case ModelPackage.MODEL:
 				sequence_Model(context, (Model) semanticObject); 
 				return; 
@@ -172,6 +192,19 @@ public class OntoLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getBooleanValueAccess().getValueBOOLEANParserRuleCall_0(), semanticObject.isValue());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     DataValue returns ComplexDataValue
+	 *     ComplexDataValue returns ComplexDataValue
+	 *
+	 * Constraint:
+	 *     (value=[Individual|QualifiedName] | unnamedValue=UnamedIndividual)
+	 */
+	protected void sequence_ComplexDataValue(ISerializationContext context, ComplexDataValue semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -441,6 +474,18 @@ public class OntoLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Contexts:
+	 *     SimpleAttributeAssignment returns AttributeAssignment
+	 *
+	 * Constraint:
+	 *     (attribute=[Attribute|QualifiedName] (assignments+=DataValue | (assignments+=DataValue assignments+=DataValue*)))
+	 */
+	protected void sequence_SimpleAttributeAssignment(ISerializationContext context, AttributeAssignment semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     DataValue returns StringValue
 	 *     StringValue returns StringValue
 	 *
@@ -455,6 +500,18 @@ public class OntoLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getStringValueAccess().getValueSTRINGTerminalRuleCall_0(), semanticObject.getValue());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     UnamedIndividual returns Individual
+	 *
+	 * Constraint:
+	 *     (attAssignments+=SimpleAttributeAssignment attAssignments+=SimpleAttributeAssignment*)
+	 */
+	protected void sequence_UnamedIndividual(ISerializationContext context, Individual semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

@@ -110,6 +110,14 @@ AttributeAssignment:
 	)
 ;
 
+SimpleAttributeAssignment returns AttributeAssignment: 
+	attribute=[Attribute|QualifiedName] '='
+	( 
+		assignments+=DataValue 
+		| '{' assignments+=DataValue (',' assignments+=DataValue)* '}'
+	)
+;
+
 ReferenceAssignment: 
 	'ref' reference=[Reference|QualifiedName] '='
 	( 
@@ -119,9 +127,8 @@ ReferenceAssignment:
 ;
 
 DataValue:
-	StringValue | NumberValue | BooleanValue | NoneValue
+	StringValue | NumberValue | BooleanValue | NoneValue | ComplexDataValue
 ;
-
 
 ReferenceValue returns ReferenceValue:
 	value=[EntityDeclaration|QualifiedName]
@@ -149,6 +156,16 @@ BOOLEAN returns ecore::EBoolean:
 
 NoneValue:
 	{NoneValue} 'none'
+;
+
+ComplexDataValue returns ComplexDataValue:
+	value = [Individual | QualifiedName] | unnamedValue = UnamedIndividual
+;
+
+UnamedIndividual returns Individual:
+	'[' 
+		attAssignments+=SimpleAttributeAssignment (',' attAssignments+=SimpleAttributeAssignment)*
+	']'
 ;
 
 GeneralizationSet:

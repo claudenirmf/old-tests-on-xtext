@@ -23,6 +23,8 @@ import br.ufes.inf.nemo.ontol.model.NoneValue
 import br.ufes.inf.nemo.ontol.model.DataValue
 import br.ufes.inf.nemo.ontol.lib.OntoLLib
 import com.google.inject.Inject
+import br.ufes.inf.nemo.ontol.model.ComplexDataValue
+import br.ufes.inf.nemo.ontol.model.AttributeAssignment
 
 class OntoLUtils {
 	
@@ -65,6 +67,14 @@ class OntoLUtils {
 	 * @author Claudenir Fonseca
 	 */
 	def getBasicInstantiatedClasses(EntityDeclaration e) {
+		if(e.eContainer instanceof ComplexDataValue){
+			val attAssign = (e.eContainer.eContainer as AttributeAssignment)
+			val propClass = attAssign.attribute.propertyClass
+			val basicInstantiatedClasses = new LinkedHashSet<OntoLClass>()
+			basicInstantiatedClasses.add(propClass)
+			return basicInstantiatedClasses
+		}
+		
 		val basicInstantiatedClasses = new LinkedHashSet<OntoLClass>()
 		basicInstantiatedClasses.addAll(e.instantiatedClasses)
 		
@@ -161,11 +171,15 @@ class OntoLUtils {
 			val actualValue = assignment.value
 			if(actualValue.allInstantiatedClasses.contains(assigType))
 				 return true
-		} else if(assignment instanceof DataValue){
-			val datatype = assigType.getLibClass(OntoLLib.DATATYPES_DATATYPE)
-			if(!assigType.classHierarchy.contains(datatype))
-				return false
-			// TODO continue
+		} else if(assignment instanceof ComplexDataValue){
+			val actualValue = if(assignment.value!=null) assignment.value	else assignment.unnamedValue
+			if(actualValue.allInstantiatedClasses.contains(assigType))
+				return true
+//			val datatype = assigType.getLibClass(OntoLLib.DATATYPES_DATATYPE)
+//			if(!assigType.classHierarchy.contains(datatype))
+//				return false
+//			else
+//				return true
 		}
 		return false
 //		if (assignment instanceof ReferenceValue) {

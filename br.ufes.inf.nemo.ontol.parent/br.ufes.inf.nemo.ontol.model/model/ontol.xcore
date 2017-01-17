@@ -100,21 +100,14 @@ class ReferenceAssignment extends PropertyAssignment
 	contains ReferenceValue[] assignments
 }
 
-abstract class Value extends ModelElement 
-{
-	op int getNAssignments() { return 0; }
-}
+abstract class Value extends ModelElement {}
 
 class ReferenceValue extends Value 
 {
 	refers EntityDeclaration value
-	op int getNAssignments() { return 1 }
 }
 
-abstract class DataValue extends Value 
-{
-	op int getNAssignments() { return 1 }
-}
+abstract class DataValue extends Value {}
 
 class StringValue extends DataValue 
 {
@@ -134,5 +127,9 @@ class BooleanValue extends DataValue
 class NoneValue extends DataValue
 {
 	op Object getValue() { return null }
-	op int getNAssignments(){ return 0 }
+}
+
+class ComplexDataValue extends DataValue {
+	refers Individual value
+	contains Individual unnamedValue
 }

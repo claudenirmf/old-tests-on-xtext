@@ -14,13 +14,4 @@ package br.ufes.inf.nemo.ontol.model;
  * @generated
  */
 public interface Value extends ModelElement {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation" unique="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return 0;'"
-	 * @generated
-	 */
-	int getNAssignments();
-
 } // Value
