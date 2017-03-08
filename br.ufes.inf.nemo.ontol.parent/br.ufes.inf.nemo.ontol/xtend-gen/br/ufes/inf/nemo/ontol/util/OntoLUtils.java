@@ -105,7 +105,22 @@ public class OntoLUtils {
       final Consumer<ModelElement> _function_1 = (ModelElement it) -> {
         if ((it instanceof OntoLClass)) {
           final OntoLClass aux = ((OntoLClass)it).getPowertypeOf();
-          if (((!Objects.equal(aux, null)) && (Objects.equal(aux, e) || ch.contains(aux)))) {
+          boolean _and = false;
+          boolean _notEquals = (!Objects.equal(aux, null));
+          if (!_notEquals) {
+            _and = false;
+          } else {
+            boolean _or = false;
+            boolean _equals = Objects.equal(aux, e);
+            if (_equals) {
+              _or = true;
+            } else {
+              boolean _contains = ch.contains(aux);
+              _or = _contains;
+            }
+            _and = _or;
+          }
+          if (_and) {
             basicInstantiatedClasses.add(((OntoLClass)it));
           }
         }
@@ -148,11 +163,16 @@ public class OntoLUtils {
    * @author Claudenir Fonseca
    */
   public Set<Property> getAllProperties(final EntityDeclaration e) {
-    try {
-      throw new Exception("Stop using getAllProperties()");
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    final LinkedHashSet<Property> properties = new LinkedHashSet<Property>();
+    LinkedHashSet<OntoLClass> _allInstantiatedClasses = this.getAllInstantiatedClasses(e);
+    final Consumer<OntoLClass> _function = (OntoLClass it) -> {
+      EList<Attribute> _attributes = it.getAttributes();
+      properties.addAll(_attributes);
+      EList<Reference> _references = it.getReferences();
+      properties.addAll(_references);
+    };
+    _allInstantiatedClasses.forEach(_function);
+    return properties;
   }
   
   public LinkedHashSet<Attribute> getAllAttributes(final EntityDeclaration e) {

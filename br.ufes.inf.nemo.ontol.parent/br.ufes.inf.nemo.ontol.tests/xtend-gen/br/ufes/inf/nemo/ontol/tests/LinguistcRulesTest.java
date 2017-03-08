@@ -916,4 +916,42 @@ public class LinguistcRulesTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testCheckInstantiatedRegularities() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("module t {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("class A : B;");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("class B { regularity ref self : B };");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      final Model incorretModel = this._parseHelper.parse(_builder);
+      EClass _ontoLClass = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertWarning(incorretModel, _ontoLClass, 
+        LinguisticRules.MISSING_ASSIGNMENT_BY_REGULARITY);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("module t {");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("class A : B { ref self = A };");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t\t");
+      _builder_1.append("class B { regularity ref self : B };");
+      _builder_1.newLine();
+      _builder_1.append("\t\t\t");
+      _builder_1.append("}");
+      final Model corretModel = this._parseHelper.parse(_builder_1);
+      EClass _ontoLClass_1 = ModelPackage.eINSTANCE.getOntoLClass();
+      this._validationTestHelper.assertNoWarnings(corretModel, _ontoLClass_1, 
+        LinguisticRules.MISSING_ASSIGNMENT_BY_REGULARITY);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

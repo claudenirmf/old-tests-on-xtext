@@ -393,4 +393,20 @@ class LinguistcRulesTest {
 			LinguisticRules.INVALID_MULTIPLICITY)
 	}
 	
+	@Test def testCheckInstantiatedRegularities(){
+		val incorretModel = '''module t {
+				class A : B;
+				class B { regularity ref self : B };
+			}'''.parse
+		incorretModel.assertWarning(ModelPackage.eINSTANCE.ontoLClass,
+			LinguisticRules.MISSING_ASSIGNMENT_BY_REGULARITY)
+		
+		val corretModel = '''module t {
+				class A : B { ref self = A };
+				class B { regularity ref self : B };
+			}'''.parse
+		corretModel.assertNoWarnings(ModelPackage.eINSTANCE.ontoLClass,
+			LinguisticRules.MISSING_ASSIGNMENT_BY_REGULARITY)
+	}
+	
 }

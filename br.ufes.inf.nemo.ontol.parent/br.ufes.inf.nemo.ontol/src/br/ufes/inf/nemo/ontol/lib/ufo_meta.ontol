@@ -1,0 +1,97 @@
+module ontol.core.meta
+{
+	
+	import ontol.core.datatype.*;
+	import ontol.core.base.*;
+	import ontol.core.endurant.*;
+	
+	include ontol.core.datatype;
+	include ontol.core.base;
+	include ontol.core.endurant;
+	
+	/*
+	 * 	requires br.ufes.inf.nemo.ontol.lib.datatypes;
+	 *	requires ontol.core.base;
+	 *	requires ontol.core.ontology;
+	 */
+	
+	/**		 					RIGIDITY		 					*/
+	
+	orderless class RigidClass : OrderlessClass, Category specializes Class;
+	orderless class SemiRigidClass : OrderlessClass, Category specializes Class;
+	orderless class AntiRigidClass : OrderlessClass, Category specializes Class;
+	
+	disjoint complete genset rigidity
+		general Class
+		specifics RigidClass, SemiRigidClass, AntiRigidClass;
+	
+	/**		 					SORTALITY		 					*/
+	
+	orderless class SortalClass : OrderlessClass, Category specializes Class;
+	orderless class MixinClass : OrderlessClass, Category specializes Class;
+	
+	disjoint complete genset sortality
+		general Class
+		specifics SortalClass, MixinClass;
+	
+	/**		 					RIGID SORTALS		 					*/
+	
+	orderless class RigidSortalClass : OrderlessClass, Category
+		specializes RigidClass, SortalClass;
+	orderless class Kind : OrderlessClass, Category
+		specializes RigidSortalClass partitions ontol.core.endurant.Endurant;
+	orderless class Subkind : OrderlessClass, Category
+		specializes RigidSortalClass subordinatedto Kind;
+	
+	disjoint complete genset identity_principle_suply
+		general RigidSortalClass
+		specifics Kind, Subkind;
+	
+	orderless class Sortal : OrderlessClass, Category
+		specializes SemiRigidClass, SortalClass subordinatedto Kind;
+	
+	/**		 					ANTI-RIGID SORTALS		 					*/
+	
+	orderless class AntiRigidSortalClass : OrderlessClass, Category
+		specializes AntiRigidClass, SortalClass;
+	orderless class Role : OrderlessClass, Category
+		specializes AntiRigidSortalClass subordinatedto Kind
+	{
+		regularity ref isInvolvedIn : ontol.core.endurant.Relator
+	};
+	orderless class Phase : OrderlessClass, Category
+		specializes AntiRigidSortalClass subordinatedto Kind
+	{
+		regularity ref classifiedOver : [1..*] ontol.core.endurant.IntrinsicMoment
+	};
+	
+	disjoint complete genset contingent_classification
+		general AntiRigidSortalClass
+		specifics Role, Phase;
+	
+	orderless class PhasePartition : OrderlessClass, Category specializes Phase;
+	
+	/**		 					RIGID MIXINS		 					*/
+	
+	orderless class Category : OrderlessClass, Category specializes RigidClass, MixinClass;
+	
+	orderless class Mixin : OrderlessClass, Category
+		specializes SemiRigidClass, MixinClass subordinatedto Category;
+	
+	/**		 					ANTI-RIGID MIXINS		 					*/
+	
+	orderless class AntiRigidMixinClass : OrderlessClass, Category
+		specializes AntiRigidClass, MixinClass subordinatedto Category;
+	orderless class RoleMixin : OrderlessClass, Category
+		specializes AntiRigidMixinClass subordinatedto Category;
+	orderless class PhaseMixin : OrderlessClass, Category
+		specializes AntiRigidMixinClass;
+	
+	disjoint complete genset contingent_classification
+		general AntiRigidMixinClass
+		specifics RoleMixin, PhaseMixin;
+	
+	orderless class PhaseMixinPartition : OrderlessClass, Category
+		specializes PhaseMixin;
+	
+}

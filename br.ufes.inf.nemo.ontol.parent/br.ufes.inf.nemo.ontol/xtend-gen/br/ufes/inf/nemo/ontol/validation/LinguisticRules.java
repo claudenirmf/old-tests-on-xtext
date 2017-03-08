@@ -88,6 +88,10 @@ public class LinguisticRules {
   
   public final static String NON_CONFORMANT_ASSIGNMENT = "br.ufes.inf.nemo.ontol.NonConformantAssigment";
   
+  public final static String FIRST_ORDER_REGULARITY = "br.ufes.inf.nemo.ontol.FirstOrderRegularity";
+  
+  public final static String MISSING_ASSIGNMENT_BY_REGULARITY = "br.ufes.inf.nemo.ontol.MissingAssignmentByRegularity";
+  
   public boolean isNameValid(final EntityDeclaration e) {
     boolean _xifexpression = false;
     String _name = e.getName();
@@ -111,34 +115,70 @@ public class LinguisticRules {
     if (_exists) {
       return false;
     } else {
-      if (((c instanceof OrderlessClass) && IterableExtensions.<OntoLClass>exists(c.getSuperClasses(), ((Function1<OntoLClass, Boolean>) (OntoLClass it) -> {
-        return Boolean.valueOf((it instanceof OrderedClass));
-      })))) {
+      boolean _and = false;
+      if (!(c instanceof OrderlessClass)) {
+        _and = false;
+      } else {
+        EList<OntoLClass> _superClasses_1 = c.getSuperClasses();
+        final Function1<OntoLClass, Boolean> _function_1 = (OntoLClass it) -> {
+          return Boolean.valueOf((it instanceof OrderedClass));
+        };
+        boolean _exists_1 = IterableExtensions.<OntoLClass>exists(_superClasses_1, _function_1);
+        _and = _exists_1;
+      }
+      if (_and) {
         return false;
       } else {
-        if (((c instanceof FOClass) && IterableExtensions.<OntoLClass>exists(c.getSuperClasses(), ((Function1<OntoLClass, Boolean>) (OntoLClass it) -> {
-          return Boolean.valueOf((it instanceof HOClass));
-        })))) {
+        boolean _and_1 = false;
+        if (!(c instanceof FOClass)) {
+          _and_1 = false;
+        } else {
+          EList<OntoLClass> _superClasses_2 = c.getSuperClasses();
+          final Function1<OntoLClass, Boolean> _function_2 = (OntoLClass it) -> {
+            return Boolean.valueOf((it instanceof HOClass));
+          };
+          boolean _exists_2 = IterableExtensions.<OntoLClass>exists(_superClasses_2, _function_2);
+          _and_1 = _exists_2;
+        }
+        if (_and_1) {
           return false;
         } else {
-          if (((c instanceof HOClass) && IterableExtensions.<OntoLClass>exists(c.getSuperClasses(), ((Function1<OntoLClass, Boolean>) (OntoLClass it) -> {
-            return Boolean.valueOf((it instanceof FOClass));
-          })))) {
+          boolean _and_2 = false;
+          if (!(c instanceof HOClass)) {
+            _and_2 = false;
+          } else {
+            EList<OntoLClass> _superClasses_3 = c.getSuperClasses();
+            final Function1<OntoLClass, Boolean> _function_3 = (OntoLClass it) -> {
+              return Boolean.valueOf((it instanceof FOClass));
+            };
+            boolean _exists_3 = IterableExtensions.<OntoLClass>exists(_superClasses_3, _function_3);
+            _and_2 = _exists_3;
+          }
+          if (_and_2) {
             return false;
           } else {
             if ((c instanceof HOClass)) {
-              EList<OntoLClass> _superClasses_1 = ((HOClass)c).getSuperClasses();
-              final Function1<OntoLClass, Boolean> _function_1 = (OntoLClass it) -> {
+              EList<OntoLClass> _superClasses_4 = ((HOClass)c).getSuperClasses();
+              final Function1<OntoLClass, Boolean> _function_4 = (OntoLClass it) -> {
                 boolean _xifexpression = false;
-                if (((it instanceof HOClass) && (!Objects.equal(((HOClass) it).getOrder(), ((HOClass)c).getOrder())))) {
+                boolean _and_3 = false;
+                if (!(it instanceof HOClass)) {
+                  _and_3 = false;
+                } else {
+                  Integer _order = ((HOClass) it).getOrder();
+                  Integer _order_1 = ((HOClass)c).getOrder();
+                  boolean _notEquals = (!Objects.equal(_order, _order_1));
+                  _and_3 = _notEquals;
+                }
+                if (_and_3) {
                   _xifexpression = true;
                 } else {
                   _xifexpression = false;
                 }
                 return Boolean.valueOf(_xifexpression);
               };
-              boolean _exists_1 = IterableExtensions.<OntoLClass>exists(_superClasses_1, _function_1);
-              return (!_exists_1);
+              boolean _exists_4 = IterableExtensions.<OntoLClass>exists(_superClasses_4, _function_4);
+              return (!_exists_4);
             } else {
               return true;
             }
@@ -178,11 +218,19 @@ public class LinguisticRules {
               return false;
             }
           } else {
-            if ((((((HOClass)c).getOrder()).intValue() != MLTRules.MIN_ORDER) && (b instanceof HOClass))) {
-              Integer _order_1 = ((HOClass)c).getOrder();
-              Integer _order_2 = ((HOClass) b).getOrder();
-              int _plus = ((_order_2).intValue() + 1);
-              return ((_order_1).intValue() == _plus);
+            boolean _and = false;
+            Integer _order_1 = ((HOClass)c).getOrder();
+            boolean _notEquals = ((_order_1).intValue() != MLTRules.MIN_ORDER);
+            if (!_notEquals) {
+              _and = false;
+            } else {
+              _and = (b instanceof HOClass);
+            }
+            if (_and) {
+              Integer _order_2 = ((HOClass)c).getOrder();
+              Integer _order_3 = ((HOClass) b).getOrder();
+              int _plus = ((_order_3).intValue() + 1);
+              return ((_order_2).intValue() == _plus);
             }
           }
         }
@@ -212,11 +260,19 @@ public class LinguisticRules {
               return false;
             }
           } else {
-            if ((((((HOClass)c).getOrder()).intValue() != MLTRules.MIN_ORDER) && (b instanceof HOClass))) {
-              Integer _order_1 = ((HOClass)c).getOrder();
-              Integer _order_2 = ((HOClass) b).getOrder();
-              int _plus = ((_order_2).intValue() + 1);
-              return ((_order_1).intValue() == _plus);
+            boolean _and = false;
+            Integer _order_1 = ((HOClass)c).getOrder();
+            boolean _notEquals = ((_order_1).intValue() != MLTRules.MIN_ORDER);
+            if (!_notEquals) {
+              _and = false;
+            } else {
+              _and = (b instanceof HOClass);
+            }
+            if (_and) {
+              Integer _order_2 = ((HOClass)c).getOrder();
+              Integer _order_3 = ((HOClass) b).getOrder();
+              int _plus = ((_order_3).intValue() + 1);
+              return ((_order_2).intValue() == _plus);
             }
           }
         }
@@ -238,7 +294,16 @@ public class LinguisticRules {
           if ((it instanceof FOClass)) {
             return Boolean.valueOf(true);
           } else {
-            if (((it instanceof HOClass) && (!Objects.equal(((HOClass) it).getOrder(), ((HOClass)c).getOrder())))) {
+            boolean _and = false;
+            if (!(it instanceof HOClass)) {
+              _and = false;
+            } else {
+              Integer _order = ((HOClass) it).getOrder();
+              Integer _order_1 = ((HOClass)c).getOrder();
+              boolean _notEquals = (!Objects.equal(_order, _order_1));
+              _and = _notEquals;
+            }
+            if (_and) {
               return Boolean.valueOf(true);
             } else {
               return Boolean.valueOf(false);
@@ -260,7 +325,17 @@ public class LinguisticRules {
     final Function1<ModelElement, Boolean> _function = (ModelElement it) -> {
       boolean _xifexpression = false;
       if ((it instanceof EntityDeclaration)) {
-        _xifexpression = (((EntityDeclaration)it).getName().equals(e.getName()) && (!Objects.equal(it, e)));
+        boolean _and = false;
+        String _name = ((EntityDeclaration)it).getName();
+        String _name_1 = e.getName();
+        boolean _equals = _name.equals(_name_1);
+        if (!_equals) {
+          _and = false;
+        } else {
+          boolean _notEquals = (!Objects.equal(it, e));
+          _and = _notEquals;
+        }
+        _xifexpression = _and;
       } else {
         _xifexpression = false;
       }
@@ -281,15 +356,40 @@ public class LinguisticRules {
     if (_exists) {
       return false;
     } else {
-      if (((!Objects.equal(gs.getCategorizer().getBasetype(), null)) && (!Objects.equal(gs.getCategorizer().getBasetype(), gs.getGeneral())))) {
+      boolean _and = false;
+      OntoLClass _categorizer = gs.getCategorizer();
+      OntoLClass _basetype = _categorizer.getBasetype();
+      boolean _notEquals = (!Objects.equal(_basetype, null));
+      if (!_notEquals) {
+        _and = false;
+      } else {
+        OntoLClass _categorizer_1 = gs.getCategorizer();
+        OntoLClass _basetype_1 = _categorizer_1.getBasetype();
+        OntoLClass _general = gs.getGeneral();
+        boolean _notEquals_1 = (!Objects.equal(_basetype_1, _general));
+        _and = _notEquals_1;
+      }
+      if (_and) {
         return false;
       } else {
-        if (((!Objects.equal(gs.getCategorizer().getBasetype(), null)) && IterableExtensions.<OntoLClass>exists(gs.getSpecifics(), ((Function1<OntoLClass, Boolean>) (OntoLClass it) -> {
-          EList<OntoLClass> _instantiatedClasses = it.getInstantiatedClasses();
-          OntoLClass _categorizer = gs.getCategorizer();
-          boolean _contains = _instantiatedClasses.contains(_categorizer);
-          return Boolean.valueOf((!_contains));
-        })))) {
+        boolean _and_1 = false;
+        OntoLClass _categorizer_2 = gs.getCategorizer();
+        OntoLClass _basetype_2 = _categorizer_2.getBasetype();
+        boolean _notEquals_2 = (!Objects.equal(_basetype_2, null));
+        if (!_notEquals_2) {
+          _and_1 = false;
+        } else {
+          EList<OntoLClass> _specifics_1 = gs.getSpecifics();
+          final Function1<OntoLClass, Boolean> _function_1 = (OntoLClass it) -> {
+            EList<OntoLClass> _instantiatedClasses = it.getInstantiatedClasses();
+            OntoLClass _categorizer_3 = gs.getCategorizer();
+            boolean _contains = _instantiatedClasses.contains(_categorizer_3);
+            return Boolean.valueOf((!_contains));
+          };
+          boolean _exists_1 = IterableExtensions.<OntoLClass>exists(_specifics_1, _function_1);
+          _and_1 = _exists_1;
+        }
+        if (_and_1) {
           return false;
         } else {
           return true;
@@ -378,7 +478,19 @@ public class LinguisticRules {
           EObject _eObject = _resourceSet.getEObject(_eObjectURI, true);
           gs = ((GeneralizationSet) _eObject);
         }
-        if ((gs.isIsDisjoint() && (Sets.<OntoLClass>intersection(ch, IterableExtensions.<OntoLClass>toSet(gs.getSpecifics())).size() > 1))) {
+        boolean _and = false;
+        boolean _isIsDisjoint = gs.isIsDisjoint();
+        if (!_isIsDisjoint) {
+          _and = false;
+        } else {
+          EList<OntoLClass> _specifics = gs.getSpecifics();
+          Set<OntoLClass> _set = IterableExtensions.<OntoLClass>toSet(_specifics);
+          Sets.SetView<OntoLClass> _intersection = Sets.<OntoLClass>intersection(ch, _set);
+          int _size = _intersection.size();
+          boolean _greaterThan = (_size > 1);
+          _and = _greaterThan;
+        }
+        if (_and) {
           final ValidationWarning issue = new ValidationWarning();
           StringConcatenation _builder = new StringConcatenation();
           String _name = c.getName();
@@ -387,10 +499,10 @@ public class LinguisticRules {
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t\t\t\t");
           {
-            EList<OntoLClass> _specifics = gs.getSpecifics();
-            Set<OntoLClass> _set = IterableExtensions.<OntoLClass>toSet(_specifics);
-            Sets.SetView<OntoLClass> _intersection = Sets.<OntoLClass>intersection(ch, _set);
-            for(final OntoLClass disjoint : _intersection) {
+            EList<OntoLClass> _specifics_1 = gs.getSpecifics();
+            Set<OntoLClass> _set_1 = IterableExtensions.<OntoLClass>toSet(_specifics_1);
+            Sets.SetView<OntoLClass> _intersection_1 = Sets.<OntoLClass>intersection(ch, _set_1);
+            for(final OntoLClass disjoint : _intersection_1) {
               _builder.append(" ");
               EObject _eContainer = disjoint.eContainer();
               String _name_1 = ((Model) _eContainer).getName();
@@ -429,7 +541,19 @@ public class LinguisticRules {
           EObject _eObject = _resourceSet.getEObject(_eObjectURI, true);
           gs = ((GeneralizationSet) _eObject);
         }
-        if ((gs.isIsDisjoint() && (Sets.<OntoLClass>intersection(iof, IterableExtensions.<OntoLClass>toSet(gs.getSpecifics())).size() > 1))) {
+        boolean _and = false;
+        boolean _isIsDisjoint = gs.isIsDisjoint();
+        if (!_isIsDisjoint) {
+          _and = false;
+        } else {
+          EList<OntoLClass> _specifics = gs.getSpecifics();
+          Set<OntoLClass> _set = IterableExtensions.<OntoLClass>toSet(_specifics);
+          Sets.SetView<OntoLClass> _intersection = Sets.<OntoLClass>intersection(iof, _set);
+          int _size = _intersection.size();
+          boolean _greaterThan = (_size > 1);
+          _and = _greaterThan;
+        }
+        if (_and) {
           final ValidationWarning issue = new ValidationWarning();
           StringConcatenation _builder = new StringConcatenation();
           String _name = e.getName();
@@ -438,10 +562,10 @@ public class LinguisticRules {
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t\t\t\t");
           {
-            EList<OntoLClass> _specifics = gs.getSpecifics();
-            Set<OntoLClass> _set = IterableExtensions.<OntoLClass>toSet(_specifics);
-            Sets.SetView<OntoLClass> _intersection = Sets.<OntoLClass>intersection(iof, _set);
-            for(final OntoLClass disjoint : _intersection) {
+            EList<OntoLClass> _specifics_1 = gs.getSpecifics();
+            Set<OntoLClass> _set_1 = IterableExtensions.<OntoLClass>toSet(_specifics_1);
+            Sets.SetView<OntoLClass> _intersection_1 = Sets.<OntoLClass>intersection(iof, _set_1);
+            for(final OntoLClass disjoint : _intersection_1) {
               _builder.append(" ");
               EObject _eContainer = disjoint.eContainer();
               String _name_1 = ((Model) _eContainer).getName();
@@ -480,15 +604,33 @@ public class LinguisticRules {
           EObject _eObject = _resourceSet.getEObject(_eObjectURI, true);
           gs = ((GeneralizationSet) _eObject);
         }
-        if (((gs.isIsComplete() && iof.contains(gs.getGeneral())) && Collections.disjoint(IterableExtensions.<OntoLClass>toSet(gs.getSpecifics()), iof))) {
+        boolean _and = false;
+        boolean _and_1 = false;
+        boolean _isIsComplete = gs.isIsComplete();
+        if (!_isIsComplete) {
+          _and_1 = false;
+        } else {
+          OntoLClass _general = gs.getGeneral();
+          boolean _contains = iof.contains(_general);
+          _and_1 = _contains;
+        }
+        if (!_and_1) {
+          _and = false;
+        } else {
+          EList<OntoLClass> _specifics = gs.getSpecifics();
+          Set<OntoLClass> _set = IterableExtensions.<OntoLClass>toSet(_specifics);
+          boolean _disjoint = Collections.disjoint(_set, iof);
+          _and = _disjoint;
+        }
+        if (_and) {
           final ValidationWarning issue = new ValidationWarning();
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("Missing instantions due to completeness of generalization sets.");
           _builder.newLine();
           _builder.append("\t\t\t\t\t");
           {
-            EList<OntoLClass> _specifics = gs.getSpecifics();
-            for(final OntoLClass mustiof : _specifics) {
+            EList<OntoLClass> _specifics_1 = gs.getSpecifics();
+            for(final OntoLClass mustiof : _specifics_1) {
               _builder.append(" ");
               EObject _eContainer = mustiof.eContainer();
               String _name = ((Model) _eContainer).getName();
@@ -537,7 +679,18 @@ public class LinguisticRules {
         issue.setMessage(_builder.toString());
         return issue;
       } else {
-        if (((ref.getUpperBound().compareTo(superRef.getUpperBound()) > 0) && ((superRef.getUpperBound()).intValue() > 0))) {
+        boolean _and = false;
+        Integer _upperBound = ref.getUpperBound();
+        Integer _upperBound_1 = superRef.getUpperBound();
+        boolean _greaterThan = (_upperBound.compareTo(_upperBound_1) > 0);
+        if (!_greaterThan) {
+          _and = false;
+        } else {
+          Integer _upperBound_2 = superRef.getUpperBound();
+          boolean _greaterThan_1 = ((_upperBound_2).intValue() > 0);
+          _and = _greaterThan_1;
+        }
+        if (_and) {
           StringConcatenation _builder_1 = new StringConcatenation();
           _builder_1.append("The cardinality must be as restrictive as the the subsetted one (");
           String _name_1 = superRef.getName();
@@ -548,7 +701,18 @@ public class LinguisticRules {
           issue.setFeature(_property_UpperBound);
           return issue;
         } else {
-          if ((((ref.getUpperBound()).intValue() == (-1)) && (!Objects.equal(ref.getUpperBound(), superRef.getUpperBound())))) {
+          boolean _and_1 = false;
+          Integer _upperBound_3 = ref.getUpperBound();
+          boolean _equals_1 = ((_upperBound_3).intValue() == (-1));
+          if (!_equals_1) {
+            _and_1 = false;
+          } else {
+            Integer _upperBound_4 = ref.getUpperBound();
+            Integer _upperBound_5 = superRef.getUpperBound();
+            boolean _notEquals = (!Objects.equal(_upperBound_4, _upperBound_5));
+            _and_1 = _notEquals;
+          }
+          if (_and_1) {
             StringConcatenation _builder_2 = new StringConcatenation();
             _builder_2.append("The cardinality must be as restrictive as the the subsetted one (");
             String _name_2 = superRef.getName();
@@ -590,7 +754,18 @@ public class LinguisticRules {
         issue.setMessage(_builder.toString());
         return issue;
       } else {
-        if (((att.getUpperBound().compareTo(superAtt.getUpperBound()) > 0) && ((superAtt.getUpperBound()).intValue() > 0))) {
+        boolean _and = false;
+        Integer _upperBound = att.getUpperBound();
+        Integer _upperBound_1 = superAtt.getUpperBound();
+        boolean _greaterThan = (_upperBound.compareTo(_upperBound_1) > 0);
+        if (!_greaterThan) {
+          _and = false;
+        } else {
+          Integer _upperBound_2 = superAtt.getUpperBound();
+          boolean _greaterThan_1 = ((_upperBound_2).intValue() > 0);
+          _and = _greaterThan_1;
+        }
+        if (_and) {
           StringConcatenation _builder_1 = new StringConcatenation();
           _builder_1.append("The cardinality must be as restrictive as the the subsetted one (");
           String _name_1 = superAtt.getName();
@@ -601,7 +776,18 @@ public class LinguisticRules {
           issue.setFeature(_property_UpperBound);
           return issue;
         } else {
-          if ((((att.getUpperBound()).intValue() == (-1)) && (!Objects.equal(att.getUpperBound(), superAtt.getUpperBound())))) {
+          boolean _and_1 = false;
+          Integer _upperBound_3 = att.getUpperBound();
+          boolean _equals_1 = ((_upperBound_3).intValue() == (-1));
+          if (!_equals_1) {
+            _and_1 = false;
+          } else {
+            Integer _upperBound_4 = att.getUpperBound();
+            Integer _upperBound_5 = superAtt.getUpperBound();
+            boolean _notEquals = (!Objects.equal(_upperBound_4, _upperBound_5));
+            _and_1 = _notEquals;
+          }
+          if (_and_1) {
             StringConcatenation _builder_2 = new StringConcatenation();
             _builder_2.append("The cardinality must be as restrictive as the the subsetted one (");
             String _name_2 = superAtt.getName();
@@ -642,12 +828,22 @@ public class LinguisticRules {
       issue.setCode(LinguisticRules.INVALID_MULTIPLICITY);
       return issue;
     } else {
-      if (((nAssgns > (ref.getUpperBound()).intValue()) && ((ref.getUpperBound()).intValue() > 0))) {
+      boolean _and = false;
+      Integer _upperBound = ref.getUpperBound();
+      boolean _greaterThan = (nAssgns > (_upperBound).intValue());
+      if (!_greaterThan) {
+        _and = false;
+      } else {
+        Integer _upperBound_1 = ref.getUpperBound();
+        boolean _greaterThan_1 = ((_upperBound_1).intValue() > 0);
+        _and = _greaterThan_1;
+      }
+      if (_and) {
         final ValidationWarning issue_1 = new ValidationWarning();
         StringConcatenation _builder_1 = new StringConcatenation();
         _builder_1.append("Number of assignments must equal or less than ");
-        Integer _upperBound = ref.getUpperBound();
-        _builder_1.append(_upperBound, "");
+        Integer _upperBound_2 = ref.getUpperBound();
+        _builder_1.append(_upperBound_2, "");
         _builder_1.append(".");
         issue_1.setMessage(_builder_1.toString());
         issue_1.setSource(ra);
@@ -685,11 +881,21 @@ public class LinguisticRules {
       issue.setMessage(_builder.toString());
       return issue;
     } else {
-      if (((nAssgns > (att.getUpperBound()).intValue()) && ((att.getUpperBound()).intValue() > 0))) {
+      boolean _and = false;
+      Integer _upperBound = att.getUpperBound();
+      boolean _greaterThan = (nAssgns > (_upperBound).intValue());
+      if (!_greaterThan) {
+        _and = false;
+      } else {
+        Integer _upperBound_1 = att.getUpperBound();
+        boolean _greaterThan_1 = ((_upperBound_1).intValue() > 0);
+        _and = _greaterThan_1;
+      }
+      if (_and) {
         StringConcatenation _builder_1 = new StringConcatenation();
         _builder_1.append("Number of assignments must equal or less than ");
-        Integer _upperBound = att.getUpperBound();
-        _builder_1.append(_upperBound, "");
+        Integer _upperBound_2 = att.getUpperBound();
+        _builder_1.append(_upperBound_2, "");
         _builder_1.append(".");
         issue.setMessage(_builder_1.toString());
         return issue;
@@ -753,6 +959,67 @@ public class LinguisticRules {
       }
     }
     return null;
+  }
+  
+  public ValidationIssue checkRegularityAndContainer(final Property p) {
+    boolean _and = false;
+    Boolean _regularity = p.getRegularity();
+    if (!(_regularity).booleanValue()) {
+      _and = false;
+    } else {
+      EObject _eContainer = p.eContainer();
+      _and = (_eContainer instanceof FOClass);
+    }
+    if (_and) {
+      final ValidationError issue = new ValidationError();
+      issue.setSource(p);
+      EAttribute _property_Regularity = ModelPackage.eINSTANCE.getProperty_Regularity();
+      issue.setFeature(_property_Regularity);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("Regularity attributes do not apply to first-order classes.");
+      issue.setMessage(_builder.toString());
+      issue.setCode(LinguisticRules.FIRST_ORDER_REGULARITY);
+      return issue;
+    }
+    return null;
+  }
+  
+  public ValidationIssue checkInstantiatedRegularities(final OntoLClass c) {
+    Set<Property> _allProperties = this._ontoLUtils.getAllProperties(c);
+    final Function1<Property, Boolean> _function = (Property it) -> {
+      return it.getRegularity();
+    };
+    Iterable<Property> _filter = IterableExtensions.<Property>filter(_allProperties, _function);
+    final Set<Property> props = IterableExtensions.<Property>toSet(_filter);
+    EList<AttributeAssignment> _attAssignments = c.getAttAssignments();
+    final Consumer<AttributeAssignment> _function_1 = (AttributeAssignment it) -> {
+      Attribute _attribute = it.getAttribute();
+      props.remove(_attribute);
+    };
+    _attAssignments.forEach(_function_1);
+    EList<ReferenceAssignment> _refAssignments = c.getRefAssignments();
+    final Consumer<ReferenceAssignment> _function_2 = (ReferenceAssignment it) -> {
+      Reference _reference = it.getReference();
+      props.remove(_reference);
+    };
+    _refAssignments.forEach(_function_2);
+    boolean _isEmpty = props.isEmpty();
+    if (_isEmpty) {
+      return null;
+    }
+    final ValidationWarning issue = new ValidationWarning();
+    issue.setSource(c);
+    EAttribute _entityDeclaration_Name = ModelPackage.eINSTANCE.getEntityDeclaration_Name();
+    issue.setFeature(_entityDeclaration_Name);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("The regularity property ");
+    Property _head = IterableExtensions.<Property>head(props);
+    String _name = _head.getName();
+    _builder.append(_name, "");
+    _builder.append(" should hava an assigned value.");
+    issue.setMessage(_builder.toString());
+    issue.setCode(LinguisticRules.MISSING_ASSIGNMENT_BY_REGULARITY);
+    return issue;
   }
   
   public ValidationIssue checkSubsettedMultiplicity(final Property att) {

@@ -31,7 +31,7 @@ class UFORules {
 	def ValidationIssue checkSpecializationAndSortality(FOClass c, Set<OntoLClass> ch, Set<OntoLClass> iof,
 		OntoLClass mixinclass) {
 		if (iof.contains(mixinclass)) {
-			val sortalclass = c.getLibClass(OntoLLib.UFO_A_SORTAL_CLASS)
+			val sortalclass = c.getLibClass(OntoLLib.UFO_SORTAL_CLASS)
 			val dude = ch.findFirst[instantiatedClasses.contains(sortalclass)]
 			if(dude == null) return null
 
@@ -48,7 +48,7 @@ class UFORules {
 	def ValidationIssue checkSpecializationAndRigidity(FOClass c, Set<OntoLClass> ch, Set<OntoLClass> iof,
 		OntoLClass rigidclass, OntoLClass semirigidclass) {
 		if(iof.contains(rigidclass)){
-			val antirigidclass = c.getLibClass(OntoLLib.UFO_A_ANTI_RIGID_CLASS)
+			val antirigidclass = c.getLibClass(OntoLLib.UFO_ANTI_RIGID_CLASS)
 			val dude = ch.findFirst[instantiatedClasses.contains(antirigidclass)]
 			if(dude == null) return null
 			
@@ -60,7 +60,7 @@ class UFORules {
 			return issue
 		}
 		else if(iof.contains(semirigidclass)){
-			val antirigidclass = c.getLibClass(OntoLLib.UFO_A_ANTI_RIGID_CLASS)
+			val antirigidclass = c.getLibClass(OntoLLib.UFO_ANTI_RIGID_CLASS)
 			val dude = ch.findFirst[instantiatedClasses.contains(antirigidclass)]
 			if(dude == null) return null
 			

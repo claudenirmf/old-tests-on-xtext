@@ -16,13 +16,16 @@ import com.google.inject.Inject
 import java.util.Collections
 import java.util.LinkedHashSet
 import java.util.Set
-import br.ufes.inf.nemo.ontol.model.PropertyAssignment
+import br.ufes.inf.nemo.ontol.model.Property
 import br.ufes.inf.nemo.ontol.model.ReferenceAssignment
 import br.ufes.inf.nemo.ontol.model.AttributeAssignment
 import br.ufes.inf.nemo.ontol.model.Reference
 import br.ufes.inf.nemo.ontol.model.Attribute
 import org.eclipse.xtext.resource.IEObjectDescription
 import br.ufes.inf.nemo.ontol.model.Value
+import org.eclipse.xtext.EcoreUtil2
+import java.util.HashSet
+import br.ufes.inf.nemo.ontol.model.PropertyAssignment
 
 class LinguisticRules {
 	
@@ -46,6 +49,8 @@ class LinguisticRules {
 	
 	// TODO Update checks table
 	public static val NON_CONFORMANT_ASSIGNMENT = "br.ufes.inf.nemo.ontol.NonConformantAssigment"
+	public static val FIRST_ORDER_REGULARITY = "br.ufes.inf.nemo.ontol.FirstOrderRegularity"
+	public static val MISSING_ASSIGNMENT_BY_REGULARITY = "br.ufes.inf.nemo.ontol.MissingAssignmentByRegularity"
 	
 	def isNameValid(EntityDeclaration e){
 		if(e.name == e.name.toFirstLower) false		else true
@@ -352,6 +357,33 @@ class LinguisticRules {
 			}
 		}
 		return null;
+	}
+	
+	def ValidationIssue checkRegularityAndContainer(Property p) {
+		if(p.regularity && (p.eContainer instanceof FOClass)){
+			val issue = new ValidationError
+			issue.source = p
+			issue.feature = ModelPackage.eINSTANCE.property_Regularity
+			issue.message = '''Regularity attributes do not apply to first-order classes.'''
+			issue.code = FIRST_ORDER_REGULARITY
+			return issue
+		}
+		return null
+	}
+	
+	def ValidationIssue checkInstantiatedRegularities(OntoLClass c){
+		val props = c.allProperties.filter[ it.regularity ].toSet
+		c.attAssignments.forEach[ props.remove(it.attribute) ]
+		c.refAssignments.forEach[ props.remove(it.reference) ]
+		
+		if(props.empty)	return null
+		
+		val issue = new ValidationWarning
+		issue.source = c
+		issue.feature = ModelPackage.eINSTANCE.entityDeclaration_Name
+		issue.message = '''The regularity property «props.head.name» should hava an assigned value.'''
+		issue.code = MISSING_ASSIGNMENT_BY_REGULARITY
+		return issue
 	}
 	
 }

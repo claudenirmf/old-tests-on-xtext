@@ -145,6 +145,7 @@ public class OntoLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *
 	 * Constraint:
 	 *     (
+	 *         regularity?='regularity'? 
 	 *         name=ID 
 	 *         (lowerBound=ELEMENTBOUND upperBound=ELEMENTBOUND)? 
 	 *         propertyClass=[OntoLClass|QualifiedName] 
@@ -427,6 +428,7 @@ public class OntoLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *
 	 * Constraint:
 	 *     (
+	 *         regularity?='regularity'? 
 	 *         name=ID 
 	 *         (lowerBound=ELEMENTBOUND upperBound=ELEMENTBOUND)? 
 	 *         propertyClass=[OntoLClass|QualifiedName] 

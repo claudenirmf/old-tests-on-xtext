@@ -1,4 +1,4 @@
-module br.ufes.inf.nemo.ontol.lib.datatypes
+module ontol.core.datatype
 {
 	
 	class DataType;

@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.PropertyImpl#getName <em>Name</em>}</li>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.PropertyImpl#getLowerBound <em>Lower Bound</em>}</li>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.PropertyImpl#getUpperBound <em>Upper Bound</em>}</li>
+ *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.PropertyImpl#getRegularity <em>Regularity</em>}</li>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.PropertyImpl#getPropertyClass <em>Property Class</em>}</li>
  * </ul>
  *
@@ -89,6 +90,26 @@ public class PropertyImpl extends ModelElementImpl implements Property {
 	 * @ordered
 	 */
 	protected Integer upperBound = UPPER_BOUND_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getRegularity() <em>Regularity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRegularity()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean REGULARITY_EDEFAULT = Boolean.FALSE;
+
+	/**
+	 * The cached value of the '{@link #getRegularity() <em>Regularity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRegularity()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean regularity = REGULARITY_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getPropertyClass() <em>Property Class</em>}' reference.
@@ -187,6 +208,27 @@ public class PropertyImpl extends ModelElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Boolean getRegularity() {
+		return regularity;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRegularity(Boolean newRegularity) {
+		Boolean oldRegularity = regularity;
+		regularity = newRegularity;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PROPERTY__REGULARITY, oldRegularity, regularity));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public OntoLClass getPropertyClass() {
 		if (propertyClass != null && propertyClass.eIsProxy()) {
 			InternalEObject oldPropertyClass = (InternalEObject)propertyClass;
@@ -234,6 +276,8 @@ public class PropertyImpl extends ModelElementImpl implements Property {
 				return getLowerBound();
 			case ModelPackage.PROPERTY__UPPER_BOUND:
 				return getUpperBound();
+			case ModelPackage.PROPERTY__REGULARITY:
+				return getRegularity();
 			case ModelPackage.PROPERTY__PROPERTY_CLASS:
 				if (resolve) return getPropertyClass();
 				return basicGetPropertyClass();
@@ -257,6 +301,9 @@ public class PropertyImpl extends ModelElementImpl implements Property {
 				return;
 			case ModelPackage.PROPERTY__UPPER_BOUND:
 				setUpperBound((Integer)newValue);
+				return;
+			case ModelPackage.PROPERTY__REGULARITY:
+				setRegularity((Boolean)newValue);
 				return;
 			case ModelPackage.PROPERTY__PROPERTY_CLASS:
 				setPropertyClass((OntoLClass)newValue);
@@ -282,6 +329,9 @@ public class PropertyImpl extends ModelElementImpl implements Property {
 			case ModelPackage.PROPERTY__UPPER_BOUND:
 				setUpperBound(UPPER_BOUND_EDEFAULT);
 				return;
+			case ModelPackage.PROPERTY__REGULARITY:
+				setRegularity(REGULARITY_EDEFAULT);
+				return;
 			case ModelPackage.PROPERTY__PROPERTY_CLASS:
 				setPropertyClass((OntoLClass)null);
 				return;
@@ -303,6 +353,8 @@ public class PropertyImpl extends ModelElementImpl implements Property {
 				return LOWER_BOUND_EDEFAULT == null ? lowerBound != null : !LOWER_BOUND_EDEFAULT.equals(lowerBound);
 			case ModelPackage.PROPERTY__UPPER_BOUND:
 				return UPPER_BOUND_EDEFAULT == null ? upperBound != null : !UPPER_BOUND_EDEFAULT.equals(upperBound);
+			case ModelPackage.PROPERTY__REGULARITY:
+				return REGULARITY_EDEFAULT == null ? regularity != null : !REGULARITY_EDEFAULT.equals(regularity);
 			case ModelPackage.PROPERTY__PROPERTY_CLASS:
 				return propertyClass != null;
 		}
@@ -325,6 +377,8 @@ public class PropertyImpl extends ModelElementImpl implements Property {
 		result.append(lowerBound);
 		result.append(", upperBound: ");
 		result.append(upperBound);
+		result.append(", regularity: ");
+		result.append(regularity);
 		result.append(')');
 		return result.toString();
 	}
