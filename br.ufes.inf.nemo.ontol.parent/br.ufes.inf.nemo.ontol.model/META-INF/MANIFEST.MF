@@ -15,4 +15,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.emf.ecore.xcore.lib,
  br.ufes.inf.nemo.ontol.model;visibility:=reexport
+Eclipse-LazyStart: true
 Bundle-ActivationPolicy: lazy
