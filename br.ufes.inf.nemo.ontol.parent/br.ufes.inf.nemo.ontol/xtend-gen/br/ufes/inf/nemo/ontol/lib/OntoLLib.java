@@ -31,75 +31,87 @@ public class OntoLLib {
   @Extension
   private OntoLIndex _ontoLIndex;
   
-  public final static String MODEL_DATATYPES = "br/ufes/inf/nemo/ontol/lib/datatypes.ontol";
+  public final static String MODEL_DATATYPES = "br/ufes/inf/nemo/ontol/lib/datatype.ontol";
   
-  public final static String DATATYPES_LIB_NAME = "br.ufes.inf.nemo.ontol.lib.datatypes";
+  public final static String DATATYPES_LIB = "ontol.core.datatype";
   
-  public final static String DATATYPES_DATATYPE = (OntoLLib.DATATYPES_LIB_NAME + ".Datatype");
+  public final static String DATATYPES_DATATYPE = (OntoLLib.DATATYPES_LIB + ".Datatype");
   
-  public final static String DATATYPES_STRING = (OntoLLib.DATATYPES_LIB_NAME + ".String");
+  public final static String DATATYPES_STRING = (OntoLLib.DATATYPES_LIB + ".String");
   
-  public final static String DATATYPES_NUMBER = (OntoLLib.DATATYPES_LIB_NAME + ".Number");
+  public final static String DATATYPES_NUMBER = (OntoLLib.DATATYPES_LIB + ".Number");
   
-  public final static String DATATYPES_BOOLEAN = (OntoLLib.DATATYPES_LIB_NAME + ".Boolean");
+  public final static String DATATYPES_BOOLEAN = (OntoLLib.DATATYPES_LIB + ".Boolean");
   
-  public final static String MODEL_UFO_A = "br/ufes/inf/nemo/ontol/lib/ufo-a.ontol";
+  public final static String MODEL_UFO_BASE = "br/ufes/inf/nemo/ontol/lib/ufo_base.ontol";
   
-  public final static String UFO_A_LIB_NAME = "br.ufes.inf.nemo.ontol.lib.ufo.a";
+  public final static String MODEL_UFO_ENDURANT = "br/ufes/inf/nemo/ontol/lib/ufo_endurant.ontol";
   
-  public final static String UFO_A_ENDURANT = (OntoLLib.UFO_A_LIB_NAME + ".Endurant");
+  public final static String MODEL_UFO_META = "br/ufes/inf/nemo/ontol/lib/ufo_meta.ontol";
   
-  public final static String UFO_A_SUBSTANTIAL = (OntoLLib.UFO_A_LIB_NAME + ".Substantial");
+  public final static String UFO_BASE_LIB = "ontol.core.base";
   
-  public final static String UFO_A_MOMENT = (OntoLLib.UFO_A_LIB_NAME + ".Moment");
+  public final static String UFO_ENDURANT_LIB = "ontol.core.endurant";
   
-  public final static String UFO_A_FUNCTIONAL_COMPLEX = (OntoLLib.UFO_A_LIB_NAME + ".FunctionalComplex");
+  public final static String UFO_META_LIB = "ontol.core.meta";
   
-  public final static String UFO_A_COLLECTIVE = (OntoLLib.UFO_A_LIB_NAME + ".Collective");
+  public final static String UFO_ENDURANT = (OntoLLib.UFO_ENDURANT_LIB + ".Endurant");
   
-  public final static String UFO_A_QUANTITY = (OntoLLib.UFO_A_LIB_NAME + ".Quantity");
+  public final static String UFO_SUBSTANTIAL = (OntoLLib.UFO_ENDURANT_LIB + ".Substantial");
   
-  public final static String UFO_A_RELATOR = (OntoLLib.UFO_A_LIB_NAME + ".Relator");
+  public final static String UFO_MOMENT = (OntoLLib.UFO_ENDURANT_LIB + ".Moment");
   
-  public final static String UFO_A_INTRINSIC_MOMENT = (OntoLLib.UFO_A_LIB_NAME + ".IntrinsicMoment");
+  public final static String UFO_FUNCTIONAL_COMPLEX = (OntoLLib.UFO_ENDURANT_LIB + ".FunctionalComplex");
   
-  public final static String UFO_A_MODE = (OntoLLib.UFO_A_LIB_NAME + ".Mode");
+  public final static String UFO_COLLECTIVE = (OntoLLib.UFO_ENDURANT_LIB + ".Collective");
   
-  public final static String UFO_A_QUALITY = (OntoLLib.UFO_A_LIB_NAME + ".Quality");
+  public final static String UFO_QUANTITY = (OntoLLib.UFO_ENDURANT_LIB + ".Quantity");
   
-  public final static String UFO_A_SORTAL_CLASS = (OntoLLib.UFO_A_LIB_NAME + ".SortalClass");
+  public final static String UFO_RELATOR = (OntoLLib.UFO_ENDURANT_LIB + ".Relator");
   
-  public final static String UFO_A_MIXIN_CLASS = (OntoLLib.UFO_A_LIB_NAME + ".MixinClass");
+  public final static String UFO_CONCRETE_RELATOR_TYPE = (OntoLLib.UFO_ENDURANT_LIB + ".ConcreteRelatorType");
   
-  public final static String UFO_A_RIGID_CLASS = (OntoLLib.UFO_A_LIB_NAME + ".RigidClass");
+  public final static String UFO_INTRINSIC_MOMENT = (OntoLLib.UFO_ENDURANT_LIB + ".IntrinsicMoment");
   
-  public final static String UFO_A_SEMI_RIGID_CLASS = (OntoLLib.UFO_A_LIB_NAME + ".SemiRigidClass");
+  public final static String UFO_QUALITY = (OntoLLib.UFO_ENDURANT_LIB + ".Quality");
   
-  public final static String UFO_A_ANTI_RIGID_CLASS = (OntoLLib.UFO_A_LIB_NAME + ".AntiRigidClass");
+  public final static String UFO_MODE = (OntoLLib.UFO_ENDURANT_LIB + ".Mode");
   
-  public final static String UFO_A_RIGID_SORTAL = (OntoLLib.UFO_A_LIB_NAME + ".RigidSortal");
+  public final static String UFO_EXTERNALLY_DEPENDENT_MODE = (OntoLLib.UFO_ENDURANT_LIB + ".ExternallyDependentMode");
   
-  public final static String UFO_A_ANTI_RIGID_SORTAL = (OntoLLib.UFO_A_LIB_NAME + ".AntiRigidSortal");
+  public final static String UFO_QUA_INDIVIDUAL = (OntoLLib.UFO_ENDURANT_LIB + ".QuaIndividual");
   
-  public final static String UFO_A_ANTI_RIGID_MIXIN = (OntoLLib.UFO_A_LIB_NAME + ".AntiRigidMixin");
+  public final static String UFO_SORTAL_CLASS = (OntoLLib.UFO_META_LIB + ".SortalClass");
   
-  public final static String UFO_A_KIND = (OntoLLib.UFO_A_LIB_NAME + ".Kind");
+  public final static String UFO_MIXIN_CLASS = (OntoLLib.UFO_META_LIB + ".MixinClass");
   
-  public final static String UFO_A_SUBKIND = (OntoLLib.UFO_A_LIB_NAME + ".Subkind");
+  public final static String UFO_RIGID_CLASS = (OntoLLib.UFO_META_LIB + ".RigidClass");
   
-  public final static String UFO_A_SORTAL = (OntoLLib.UFO_A_LIB_NAME + ".Sortal");
+  public final static String UFO_SEMI_RIGID_CLASS = (OntoLLib.UFO_META_LIB + ".SemiRigidClass");
   
-  public final static String UFO_A_ROLE = (OntoLLib.UFO_A_LIB_NAME + ".Role");
+  public final static String UFO_ANTI_RIGID_CLASS = (OntoLLib.UFO_META_LIB + ".AntiRigidClass");
   
-  public final static String UFO_A_PHASE = (OntoLLib.UFO_A_LIB_NAME + ".Phase");
+  public final static String UFO_KIND = (OntoLLib.UFO_META_LIB + ".Kind");
   
-  public final static String UFO_A_CATEGORY = (OntoLLib.UFO_A_LIB_NAME + ".Category");
+  public final static String UFO_SUBKIND = (OntoLLib.UFO_META_LIB + ".Subkind");
   
-  public final static String UFO_A_MIXIN = (OntoLLib.UFO_A_LIB_NAME + ".Mixin");
+  public final static String UFO_SORTAL = (OntoLLib.UFO_META_LIB + ".Sortal");
   
-  public final static String UFO_A_ROLE_MIXIN = (OntoLLib.UFO_A_LIB_NAME + ".RoleMixin");
+  public final static String UFO_ROLE = (OntoLLib.UFO_META_LIB + ".Role");
   
-  public final static String UFO_A_PHASE_MIXIN = (OntoLLib.UFO_A_LIB_NAME + ".PhaseMixin");
+  public final static String UFO_PHASE = (OntoLLib.UFO_META_LIB + ".Phase");
+  
+  public final static String UFO_PHASE_PARTITION = (OntoLLib.UFO_META_LIB + ".PhasePartition");
+  
+  public final static String UFO_CATEGORY = (OntoLLib.UFO_META_LIB + ".Category");
+  
+  public final static String UFO_MIXIN = (OntoLLib.UFO_META_LIB + ".Mixin");
+  
+  public final static String UFO_ROLE_MIXIN = (OntoLLib.UFO_META_LIB + ".RoleMixin");
+  
+  public final static String UFO_PHASE_MIXIN = (OntoLLib.UFO_META_LIB + ".PhaseMixin");
+  
+  public final static String UFO_PHASE_MIXIN_PARTITION = (OntoLLib.UFO_META_LIB + ".PhaseMixinPartition");
   
   public ResourceSet loadLib(final String libname) {
     ResourceSet _xblockexpression = null;
@@ -144,12 +156,20 @@ public class OntoLLib {
     return _xblockexpression;
   }
   
-  public ResourceSet loadUFOALib() {
-    return this.loadLib(OntoLLib.MODEL_UFO_A);
+  public ResourceSet loadUFOLib() {
+    ResourceSet _loadLib = this.loadLib(OntoLLib.MODEL_UFO_META);
+    ResourceSet _loadLib_1 = this.loadLib(OntoLLib.MODEL_UFO_ENDURANT, _loadLib);
+    return this.loadLib(OntoLLib.MODEL_UFO_BASE, _loadLib_1);
   }
   
-  public ResourceSet loadUFOALib(final ResourceSet rs) {
-    return this.loadLib(OntoLLib.MODEL_UFO_A, rs);
+  public ResourceSet loadUFOLib(final ResourceSet rs) {
+    ResourceSet _xblockexpression = null;
+    {
+      this.loadLib(OntoLLib.MODEL_UFO_BASE, rs);
+      this.loadLib(OntoLLib.MODEL_UFO_ENDURANT, rs);
+      _xblockexpression = this.loadLib(OntoLLib.MODEL_UFO_META, rs);
+    }
+    return _xblockexpression;
   }
   
   public ResourceSet loadDatatypeLib() {
@@ -168,7 +188,7 @@ public class OntoLLib {
   
   public OntoLClass getUFOEndurant(final EObject context) {
     EClass _ontoLClass = ModelPackage.eINSTANCE.getOntoLClass();
-    EObject _modelElementFromIndex = this._ontoLIndex.getModelElementFromIndex(context, OntoLLib.UFO_A_ENDURANT, _ontoLClass);
+    EObject _modelElementFromIndex = this._ontoLIndex.getModelElementFromIndex(context, OntoLLib.UFO_ENDURANT, _ontoLClass);
     return ((OntoLClass) _modelElementFromIndex);
   }
   
@@ -177,9 +197,57 @@ public class OntoLLib {
     final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
       QualifiedName _qualifiedName = it.getQualifiedName();
       final String fqn = _qualifiedName.toString();
-      return Boolean.valueOf((((((((fqn.equals(OntoLLib.UFO_A_KIND) || fqn.equals(OntoLLib.UFO_A_SUBKIND)) || fqn.equals(OntoLLib.UFO_A_PHASE)) || 
-        fqn.equals(OntoLLib.UFO_A_ROLE)) || fqn.equals(OntoLLib.UFO_A_CATEGORY)) || fqn.equals(OntoLLib.UFO_A_MIXIN)) || 
-        fqn.equals(OntoLLib.UFO_A_PHASE_MIXIN)) || fqn.equals(OntoLLib.UFO_A_ROLE_MIXIN)));
+      boolean _or = false;
+      boolean _or_1 = false;
+      boolean _or_2 = false;
+      boolean _or_3 = false;
+      boolean _or_4 = false;
+      boolean _or_5 = false;
+      boolean _or_6 = false;
+      boolean _equals = fqn.equals(OntoLLib.UFO_KIND);
+      if (_equals) {
+        _or_6 = true;
+      } else {
+        boolean _equals_1 = fqn.equals(OntoLLib.UFO_SUBKIND);
+        _or_6 = _equals_1;
+      }
+      if (_or_6) {
+        _or_5 = true;
+      } else {
+        boolean _equals_2 = fqn.equals(OntoLLib.UFO_PHASE);
+        _or_5 = _equals_2;
+      }
+      if (_or_5) {
+        _or_4 = true;
+      } else {
+        boolean _equals_3 = fqn.equals(OntoLLib.UFO_ROLE);
+        _or_4 = _equals_3;
+      }
+      if (_or_4) {
+        _or_3 = true;
+      } else {
+        boolean _equals_4 = fqn.equals(OntoLLib.UFO_CATEGORY);
+        _or_3 = _equals_4;
+      }
+      if (_or_3) {
+        _or_2 = true;
+      } else {
+        boolean _equals_5 = fqn.equals(OntoLLib.UFO_MIXIN);
+        _or_2 = _equals_5;
+      }
+      if (_or_2) {
+        _or_1 = true;
+      } else {
+        boolean _equals_6 = fqn.equals(OntoLLib.UFO_PHASE_MIXIN);
+        _or_1 = _equals_6;
+      }
+      if (_or_1) {
+        _or = true;
+      } else {
+        boolean _equals_7 = fqn.equals(OntoLLib.UFO_ROLE_MIXIN);
+        _or = _equals_7;
+      }
+      return Boolean.valueOf(_or);
     };
     final Iterable<IEObjectDescription> descs = IterableExtensions.<IEObjectDescription>filter(_visibleEObjectDescriptions, _function);
     final Function1<IEObjectDescription, OntoLClass> _function_1 = (IEObjectDescription it) -> {

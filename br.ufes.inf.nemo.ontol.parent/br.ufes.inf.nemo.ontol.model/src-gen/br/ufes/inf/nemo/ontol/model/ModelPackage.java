@@ -1071,13 +1071,22 @@ public interface ModelPackage extends EPackage {
 	int PROPERTY__UPPER_BOUND = MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Regularity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__REGULARITY = MODEL_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Property Class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__PROPERTY_CLASS = MODEL_ELEMENT_FEATURE_COUNT + 3;
+	int PROPERTY__PROPERTY_CLASS = MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Property</em>' class.
@@ -1086,7 +1095,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 4;
+	int PROPERTY_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of operations of the '<em>Property</em>' class.
@@ -1133,6 +1142,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int ATTRIBUTE__UPPER_BOUND = PROPERTY__UPPER_BOUND;
+
+	/**
+	 * The feature id for the '<em><b>Regularity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__REGULARITY = PROPERTY__REGULARITY;
 
 	/**
 	 * The feature id for the '<em><b>Property Class</b></em>' reference.
@@ -1206,6 +1224,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int REFERENCE__UPPER_BOUND = PROPERTY__UPPER_BOUND;
+
+	/**
+	 * The feature id for the '<em><b>Regularity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__REGULARITY = PROPERTY__REGULARITY;
 
 	/**
 	 * The feature id for the '<em><b>Property Class</b></em>' reference.
@@ -2066,6 +2093,17 @@ public interface ModelPackage extends EPackage {
 	EAttribute getProperty_UpperBound();
 
 	/**
+	 * Returns the meta object for the attribute '{@link br.ufes.inf.nemo.ontol.model.Property#getRegularity <em>Regularity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Regularity</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.Property#getRegularity()
+	 * @see #getProperty()
+	 * @generated
+	 */
+	EAttribute getProperty_Regularity();
+
+	/**
 	 * Returns the meta object for the reference '{@link br.ufes.inf.nemo.ontol.model.Property#getPropertyClass <em>Property Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2711,6 +2749,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PROPERTY__UPPER_BOUND = eINSTANCE.getProperty_UpperBound();
+
+		/**
+		 * The meta object literal for the '<em><b>Regularity</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY__REGULARITY = eINSTANCE.getProperty_Regularity();
 
 		/**
 		 * The meta object literal for the '<em><b>Property Class</b></em>' reference feature.

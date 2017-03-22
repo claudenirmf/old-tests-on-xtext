@@ -1,0 +1,43 @@
+module ontol.core.base
+{
+		
+	import ontol.core.datatype.*;
+	import ontol.core.meta.*;
+	import ontol.core.endurant.*;
+	
+	include ontol.core.datatype;
+	include ontol.core.meta;
+	include ontol.core.endurant;
+	
+	/*
+	 * 	requires br.ufes.inf.nemo.ontol.lib.datatypes;
+	 *	requires ontol.core.meta;
+	 *	requires ontol.core.ontology;
+	 */
+	
+	orderless class Thing : OrderlessClass, Category;
+	
+	orderless class Class : OrderlessClass, Category specializes Thing, ontol.core.endurant.Endurant;
+	class Individual : FirstOrderClass, Category specializes Thing;
+	
+	disjoint complete genset has_instances
+		general Thing
+		specifics Class, Individual;
+	
+	orderless class OrderlessClass : OrderlessClass, Category specializes Class;
+	orderless class OrderedClass : OrderlessClass, Category specializes Class;
+	
+	disjoint complete genset fixed_order
+		general Class
+		specifics OrderedClass, OrderlessClass;
+	
+	order 2 class FirstOrderClass : HighOrderClass, Category
+		specializes OrderedClass ispowertypeof Individual;
+	orderless class HighOrderClass : OrderlessClass, Category
+			specializes OrderedClass;
+	
+	disjoint complete genset high_order
+		general OrderedClass
+		specifics FirstOrderClass, HighOrderClass;
+	
+}

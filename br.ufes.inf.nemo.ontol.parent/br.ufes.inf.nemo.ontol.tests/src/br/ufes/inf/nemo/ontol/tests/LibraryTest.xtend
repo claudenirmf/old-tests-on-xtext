@@ -23,29 +23,23 @@ class LibraryTest {
 	@Inject extension OntoLLib
 	
 	@Inject Provider<ResourceSet> resourceSetProvider
-
-//	private var ResourceSet rs
-	
-//	@Before def void intialize(){
-//		rs = resourceSetProvider.get
-//		rs.loadDatatypeLib
-//		rs.loadUFOALib
-//	}
 	
 	def ResourceSet loadResourceSet(){
 		val rs = resourceSetProvider.get
 		rs.loadDatatypeLib
-		rs.loadUFOALib
+		rs.loadUFOLib
 	}
 	
 	def includeStatements()'''
-		include «OntoLLib.UFO_A_LIB_NAME»;
-		include «OntoLLib.DATATYPES_LIB_NAME»;'''
+		include «OntoLLib.UFO_BASE_LIB»;
+		include «OntoLLib.UFO_ENDURANT_LIB»;
+		include «OntoLLib.UFO_META_LIB»;
+		include «OntoLLib.DATATYPES_LIB»;'''
 	
 	@Test def void testDefaultLibs(){
 		val rs = resourceSetProvider.get
 		rs.loadDatatypeLib
-		rs.loadUFOALib
+		rs.loadUFOLib
 		rs.resources.forEach[ assertNoErrors ]
 	}
 	
@@ -53,13 +47,13 @@ class LibraryTest {
 		val rs = loadResourceSet()
 		val incorrectModel = '''module t {
 				«includeStatements»
-				class X specializes «OntoLLib.UFO_A_ENDURANT»;
+				class X specializes «OntoLLib.UFO_ENDURANT»;
 			}'''.parse(rs)
 		incorrectModel.assertError(ModelPackage.eINSTANCE.ontoLClass,OntoLValidator.UFO_A_MISSING_MUST_INSTANTIATION)
 		
 		val correctModel = '''module t {
 				«includeStatements»
-				class X : «OntoLLib.UFO_A_KIND» specializes «OntoLLib.UFO_A_ENDURANT»;
+				class X : «OntoLLib.UFO_KIND» specializes «OntoLLib.UFO_ENDURANT»;
 			}'''.parse(rs)
 		correctModel.assertNoError(OntoLValidator.UFO_A_MISSING_MUST_INSTANTIATION)
 	}
@@ -68,15 +62,15 @@ class LibraryTest {
 		val rs = loadResourceSet()
 		val incorrectModel = '''module t {
 				«includeStatements»
-				class X : «OntoLLib.UFO_A_SORTAL_CLASS»;
-				class Y : «OntoLLib.UFO_A_MIXIN_CLASS» specializes X;
+				class X : «OntoLLib.UFO_SORTAL_CLASS»;
+				class Y : «OntoLLib.UFO_MIXIN_CLASS» specializes X;
 			}'''.parse(rs)
 		incorrectModel.assertError(ModelPackage.eINSTANCE.ontoLClass,OntoLValidator.UFO_A_ILLEGAL_SORTAL_SPECIALIZATION)
 		
 		val correctModel = '''module t {
 				«includeStatements»
-				class Y : «OntoLLib.UFO_A_MIXIN_CLASS»;
-				class X : «OntoLLib.UFO_A_SORTAL_CLASS» specializes Y;
+				class Y : «OntoLLib.UFO_MIXIN_CLASS»;
+				class X : «OntoLLib.UFO_SORTAL_CLASS» specializes Y;
 			}'''.parse(rs)
 		correctModel.assertNoError(OntoLValidator.UFO_A_ILLEGAL_SORTAL_SPECIALIZATION)
 	}
@@ -85,22 +79,22 @@ class LibraryTest {
 		val rs = loadResourceSet()
 		val incorrectModel1 = '''module t {
 				«includeStatements»
-				class Y : «OntoLLib.UFO_A_ANTI_RIGID_CLASS»;
-				class X : «OntoLLib.UFO_A_RIGID_CLASS» specializes Y;
+				class Y : «OntoLLib.UFO_ANTI_RIGID_CLASS»;
+				class X : «OntoLLib.UFO_RIGID_CLASS» specializes Y;
 			}'''.parse(rs)
 		incorrectModel1.assertError(ModelPackage.eINSTANCE.ontoLClass,OntoLValidator.UFO_A_ILLEGAL_RIGID_SPECIALIZATION)
 		
 		val incorrectModel2 = '''module t {
 				«includeStatements»
-				class Y : «OntoLLib.UFO_A_ANTI_RIGID_CLASS»;
-				class X : «OntoLLib.UFO_A_SEMI_RIGID_CLASS» specializes Y;
+				class Y : «OntoLLib.UFO_ANTI_RIGID_CLASS»;
+				class X : «OntoLLib.UFO_SEMI_RIGID_CLASS» specializes Y;
 			}'''.parse(rs)
 		incorrectModel2.assertError(ModelPackage.eINSTANCE.ontoLClass,OntoLValidator.UFO_A_ILLEGAL_RIGID_SPECIALIZATION)
 		
 		val correctModel = '''module t {
 				«includeStatements»
-				class Y : «OntoLLib.UFO_A_RIGID_CLASS»;
-				class X : «OntoLLib.UFO_A_ANTI_RIGID_CLASS» specializes Y;
+				class Y : «OntoLLib.UFO_RIGID_CLASS»;
+				class X : «OntoLLib.UFO_ANTI_RIGID_CLASS» specializes Y;
 			}'''.parse(rs)
 		correctModel.assertNoError(OntoLValidator.UFO_A_ILLEGAL_SORTAL_SPECIALIZATION)
 	}

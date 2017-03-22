@@ -85,13 +85,14 @@ enum CategorizationType:
 ;
 
 Attribute:
+	(regularity?='regularity')?
 	'att' name=ID ':' ('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
 	propertyClass=[OntoLClass|QualifiedName]
 	('subsets' subsetOf+=[Attribute|QualifiedName] (',' subsetOf+=[Attribute|QualifiedName])*)?
-//	('isoppositeto' oppositeTo=[Attribute|QualifiedName])?
 ;
 
 Reference: 
+	(regularity?='regularity')?
 	'ref' name=ID ':' ('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
 	propertyClass=[OntoLClass|QualifiedName]
 	('subsets' subsetOf+=[Reference|QualifiedName] (',' subsetOf+=[Reference|QualifiedName])*)?

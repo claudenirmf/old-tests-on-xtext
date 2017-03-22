@@ -10,13 +10,10 @@ class OntoLImportedNamespaceAwareLocalScopeProvider extends ImportedNamespaceAwa
 	
 	// TODO Implement automated library import
 	override protected getImplicitImports(boolean ignoreCase) {
-//		val List<ImportNormalizer> list = newArrayList()
-//		list.add(new ImportNormalizer(QualifiedName.create(OntoLLib.UFO_A_LIB_NAME),true,ignoreCase))
-//		list.add(new ImportNormalizer(QualifiedName.create(OntoLLib.DATATYPES_LIB_NAME),true,ignoreCase))
-//		return list
 		return newArrayList(
-			new ImportNormalizer(QualifiedName.create(OntoLLib.UFO_A_LIB_NAME,"ontol"), true, ignoreCase),
-			new ImportNormalizer(QualifiedName.create(OntoLLib.DATATYPES_LIB_NAME,"ontol"), true, ignoreCase))
-	}
+			new ImportNormalizer(QualifiedName.create(OntoLLib.UFO_BASE_LIB,"ontol"), true, ignoreCase),
+			new ImportNormalizer(QualifiedName.create(OntoLLib.UFO_ENDURANT_LIB,"ontol"), true, ignoreCase),
+			new ImportNormalizer(QualifiedName.create(OntoLLib.UFO_META_LIB,"ontol"), true, ignoreCase),
+			new ImportNormalizer(QualifiedName.create(OntoLLib.DATATYPES_LIB,"ontol"), true, ignoreCase))}
 	
 }

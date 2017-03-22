@@ -632,8 +632,17 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getProperty_Regularity() {
+		return (EAttribute)propertyEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getProperty_PropertyClass() {
-		return (EReference)propertyEClass.getEStructuralFeatures().get(3);
+		return (EReference)propertyEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -964,6 +973,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(propertyEClass, PROPERTY__NAME);
 		createEAttribute(propertyEClass, PROPERTY__LOWER_BOUND);
 		createEAttribute(propertyEClass, PROPERTY__UPPER_BOUND);
+		createEAttribute(propertyEClass, PROPERTY__REGULARITY);
 		createEReference(propertyEClass, PROPERTY__PROPERTY_CLASS);
 
 		attributeEClass = createEClass(ATTRIBUTE);
@@ -1114,6 +1124,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getProperty_Name(), theEcorePackage.getEString(), "name", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getProperty_LowerBound(), theEcorePackage.getEIntegerObject(), "lowerBound", "1", 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getProperty_UpperBound(), theEcorePackage.getEIntegerObject(), "upperBound", "1", 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProperty_Regularity(), theEcorePackage.getEBooleanObject(), "regularity", "false", 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProperty_PropertyClass(), this.getOntoLClass(), null, "propertyClass", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

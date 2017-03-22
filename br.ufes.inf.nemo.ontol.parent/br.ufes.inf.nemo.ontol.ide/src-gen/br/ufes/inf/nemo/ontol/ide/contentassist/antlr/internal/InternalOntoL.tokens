@@ -13,9 +13,9 @@
 'categorizer'=49
 'categorizes'=14
 'class'=30
-'complete'=51
+'complete'=52
 'completecategorizes'=15
-'disjoint'=50
+'disjoint'=51
 'disjointcategorizes'=16
 'false'=13
 'first-order'=34
@@ -32,6 +32,7 @@
 'orderless'=29
 'partitions'=17
 'ref'=41
+'regularity'=50
 'specializes'=31
 'specifics'=48
 'subordinatedto'=32
@@ -87,3 +88,4 @@ T__48=48
 T__49=49
 T__50=50
 T__51=51
+T__52=52

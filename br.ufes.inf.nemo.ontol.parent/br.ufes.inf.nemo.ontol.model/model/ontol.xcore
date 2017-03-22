@@ -72,6 +72,7 @@ class Property extends ModelElement
 	String name
 	Integer lowerBound = "1"
 	Integer upperBound = "1"
+	Boolean regularity = "false"
 	refers OntoLClass propertyClass
 }
 

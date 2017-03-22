@@ -117,10 +117,13 @@ class OntoLUtils {
 	 * @author Claudenir Fonseca
 	 */
 	def Set<Property> getAllProperties(EntityDeclaration e) {
-		throw new Exception("Stop using getAllProperties()")
-//		val properties = new LinkedHashSet<Property>()
-//		e.allFixedTypes.forEach [ properties.addAll(it.props) ]
-//		return properties
+//		throw new Exception("Stop using getAllProperties()")
+		val properties = new LinkedHashSet<Property>()
+		e.allInstantiatedClasses.forEach [ 
+			properties.addAll(it.attributes)
+			properties.addAll(it.references)
+		]
+		return properties
 	}
 	
 	def getAllAttributes(EntityDeclaration e) {

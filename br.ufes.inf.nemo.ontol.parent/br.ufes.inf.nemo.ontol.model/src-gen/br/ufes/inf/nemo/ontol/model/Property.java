@@ -15,6 +15,7 @@ package br.ufes.inf.nemo.ontol.model;
  *   <li>{@link br.ufes.inf.nemo.ontol.model.Property#getName <em>Name</em>}</li>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.Property#getLowerBound <em>Lower Bound</em>}</li>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.Property#getUpperBound <em>Upper Bound</em>}</li>
+ *   <li>{@link br.ufes.inf.nemo.ontol.model.Property#getRegularity <em>Regularity</em>}</li>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.Property#getPropertyClass <em>Property Class</em>}</li>
  * </ul>
  *
@@ -102,6 +103,33 @@ public interface Property extends ModelElement {
 	 * @generated
 	 */
 	void setUpperBound(Integer value);
+
+	/**
+	 * Returns the value of the '<em><b>Regularity</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Regularity</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Regularity</em>' attribute.
+	 * @see #setRegularity(Boolean)
+	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getProperty_Regularity()
+	 * @model default="false" unique="false"
+	 * @generated
+	 */
+	Boolean getRegularity();
+
+	/**
+	 * Sets the value of the '{@link br.ufes.inf.nemo.ontol.model.Property#getRegularity <em>Regularity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Regularity</em>' attribute.
+	 * @see #getRegularity()
+	 * @generated
+	 */
+	void setRegularity(Boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Property Class</b></em>' reference.

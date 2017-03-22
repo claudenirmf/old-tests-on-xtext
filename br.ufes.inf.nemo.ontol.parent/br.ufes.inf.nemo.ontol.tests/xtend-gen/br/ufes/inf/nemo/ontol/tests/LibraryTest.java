@@ -46,7 +46,7 @@ public class LibraryTest {
     {
       final ResourceSet rs = this.resourceSetProvider.get();
       this._ontoLLib.loadDatatypeLib(rs);
-      _xblockexpression = this._ontoLLib.loadUFOALib(rs);
+      _xblockexpression = this._ontoLLib.loadUFOLib(rs);
     }
     return _xblockexpression;
   }
@@ -54,11 +54,19 @@ public class LibraryTest {
   public CharSequence includeStatements() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("include ");
-    _builder.append(OntoLLib.UFO_A_LIB_NAME, "");
+    _builder.append(OntoLLib.UFO_BASE_LIB, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.append("include ");
-    _builder.append(OntoLLib.DATATYPES_LIB_NAME, "");
+    _builder.append(OntoLLib.UFO_ENDURANT_LIB, "");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.append("include ");
+    _builder.append(OntoLLib.UFO_META_LIB, "");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.append("include ");
+    _builder.append(OntoLLib.DATATYPES_LIB, "");
     _builder.append(";");
     return _builder;
   }
@@ -67,7 +75,7 @@ public class LibraryTest {
   public void testDefaultLibs() {
     final ResourceSet rs = this.resourceSetProvider.get();
     this._ontoLLib.loadDatatypeLib(rs);
-    this._ontoLLib.loadUFOALib(rs);
+    this._ontoLLib.loadUFOLib(rs);
     EList<Resource> _resources = rs.getResources();
     final Consumer<Resource> _function = (Resource it) -> {
       this._validationTestHelper.assertNoErrors(it);
@@ -88,7 +96,7 @@ public class LibraryTest {
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t\t");
       _builder.append("class X specializes ");
-      _builder.append(OntoLLib.UFO_A_ENDURANT, "\t\t\t\t");
+      _builder.append(OntoLLib.UFO_ENDURANT, "\t\t\t\t");
       _builder.append(";");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t");
@@ -105,9 +113,9 @@ public class LibraryTest {
       _builder_1.newLineIfNotEmpty();
       _builder_1.append("\t\t\t\t");
       _builder_1.append("class X : ");
-      _builder_1.append(OntoLLib.UFO_A_KIND, "\t\t\t\t");
+      _builder_1.append(OntoLLib.UFO_KIND, "\t\t\t\t");
       _builder_1.append(" specializes ");
-      _builder_1.append(OntoLLib.UFO_A_ENDURANT, "\t\t\t\t");
+      _builder_1.append(OntoLLib.UFO_ENDURANT, "\t\t\t\t");
       _builder_1.append(";");
       _builder_1.newLineIfNotEmpty();
       _builder_1.append("\t\t\t");
@@ -132,12 +140,12 @@ public class LibraryTest {
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t\t");
       _builder.append("class X : ");
-      _builder.append(OntoLLib.UFO_A_SORTAL_CLASS, "\t\t\t\t");
+      _builder.append(OntoLLib.UFO_SORTAL_CLASS, "\t\t\t\t");
       _builder.append(";");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t\t");
       _builder.append("class Y : ");
-      _builder.append(OntoLLib.UFO_A_MIXIN_CLASS, "\t\t\t\t");
+      _builder.append(OntoLLib.UFO_MIXIN_CLASS, "\t\t\t\t");
       _builder.append(" specializes X;");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t");
@@ -154,12 +162,12 @@ public class LibraryTest {
       _builder_1.newLineIfNotEmpty();
       _builder_1.append("\t\t\t\t");
       _builder_1.append("class Y : ");
-      _builder_1.append(OntoLLib.UFO_A_MIXIN_CLASS, "\t\t\t\t");
+      _builder_1.append(OntoLLib.UFO_MIXIN_CLASS, "\t\t\t\t");
       _builder_1.append(";");
       _builder_1.newLineIfNotEmpty();
       _builder_1.append("\t\t\t\t");
       _builder_1.append("class X : ");
-      _builder_1.append(OntoLLib.UFO_A_SORTAL_CLASS, "\t\t\t\t");
+      _builder_1.append(OntoLLib.UFO_SORTAL_CLASS, "\t\t\t\t");
       _builder_1.append(" specializes Y;");
       _builder_1.newLineIfNotEmpty();
       _builder_1.append("\t\t\t");
@@ -184,12 +192,12 @@ public class LibraryTest {
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t\t");
       _builder.append("class Y : ");
-      _builder.append(OntoLLib.UFO_A_ANTI_RIGID_CLASS, "\t\t\t\t");
+      _builder.append(OntoLLib.UFO_ANTI_RIGID_CLASS, "\t\t\t\t");
       _builder.append(";");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t\t");
       _builder.append("class X : ");
-      _builder.append(OntoLLib.UFO_A_RIGID_CLASS, "\t\t\t\t");
+      _builder.append(OntoLLib.UFO_RIGID_CLASS, "\t\t\t\t");
       _builder.append(" specializes Y;");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t");
@@ -206,12 +214,12 @@ public class LibraryTest {
       _builder_1.newLineIfNotEmpty();
       _builder_1.append("\t\t\t\t");
       _builder_1.append("class Y : ");
-      _builder_1.append(OntoLLib.UFO_A_ANTI_RIGID_CLASS, "\t\t\t\t");
+      _builder_1.append(OntoLLib.UFO_ANTI_RIGID_CLASS, "\t\t\t\t");
       _builder_1.append(";");
       _builder_1.newLineIfNotEmpty();
       _builder_1.append("\t\t\t\t");
       _builder_1.append("class X : ");
-      _builder_1.append(OntoLLib.UFO_A_SEMI_RIGID_CLASS, "\t\t\t\t");
+      _builder_1.append(OntoLLib.UFO_SEMI_RIGID_CLASS, "\t\t\t\t");
       _builder_1.append(" specializes Y;");
       _builder_1.newLineIfNotEmpty();
       _builder_1.append("\t\t\t");
@@ -228,12 +236,12 @@ public class LibraryTest {
       _builder_2.newLineIfNotEmpty();
       _builder_2.append("\t\t\t\t");
       _builder_2.append("class Y : ");
-      _builder_2.append(OntoLLib.UFO_A_RIGID_CLASS, "\t\t\t\t");
+      _builder_2.append(OntoLLib.UFO_RIGID_CLASS, "\t\t\t\t");
       _builder_2.append(";");
       _builder_2.newLineIfNotEmpty();
       _builder_2.append("\t\t\t\t");
       _builder_2.append("class X : ");
-      _builder_2.append(OntoLLib.UFO_A_ANTI_RIGID_CLASS, "\t\t\t\t");
+      _builder_2.append(OntoLLib.UFO_ANTI_RIGID_CLASS, "\t\t\t\t");
       _builder_2.append(" specializes Y;");
       _builder_2.newLineIfNotEmpty();
       _builder_2.append("\t\t\t");

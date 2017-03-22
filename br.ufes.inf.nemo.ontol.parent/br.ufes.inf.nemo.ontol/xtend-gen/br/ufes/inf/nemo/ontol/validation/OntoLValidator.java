@@ -199,6 +199,10 @@ public class OntoLValidator extends AbstractOntoLValidator {
     if (_checkSubsettedMultiplicity!=null) {
       this.runIssue(_checkSubsettedMultiplicity);
     }
+    ValidationIssue _checkRegularityAndContainer = this._linguisticRules.checkRegularityAndContainer(p);
+    if (_checkRegularityAndContainer!=null) {
+      this.runIssue(_checkRegularityAndContainer);
+    }
   }
   
   @Check(CheckType.FAST)
@@ -264,6 +268,10 @@ public class OntoLValidator extends AbstractOntoLValidator {
     if (_isSpecializingDisjointClasses!=null) {
       this.runIssue(_isSpecializingDisjointClasses);
     }
+    ValidationIssue _checkInstantiatedRegularities = this._linguisticRules.checkInstantiatedRegularities(c);
+    if (_checkInstantiatedRegularities!=null) {
+      this.runIssue(_checkInstantiatedRegularities);
+    }
   }
   
   @Check(CheckType.EXPENSIVE)
@@ -272,9 +280,9 @@ public class OntoLValidator extends AbstractOntoLValidator {
     final LinkedHashSet<OntoLClass> iof = this._ontoLUtils.getAllInstantiatedClasses(((OntoLClass) c));
     final OntoLClass endurant = this._ontoLLib.getUFOEndurant(c);
     final Set<OntoLClass> mustInstantiate = this._ontoLLib.getUFOMustInstantiateClasses(c);
-    final OntoLClass mixinclass = this._ontoLLib.getLibClass(c, OntoLLib.UFO_A_MIXIN_CLASS);
-    final OntoLClass rigidclass = this._ontoLLib.getLibClass(c, OntoLLib.UFO_A_RIGID_CLASS);
-    final OntoLClass semirigidclass = this._ontoLLib.getLibClass(c, OntoLLib.UFO_A_SEMI_RIGID_CLASS);
+    final OntoLClass mixinclass = this._ontoLLib.getLibClass(c, OntoLLib.UFO_MIXIN_CLASS);
+    final OntoLClass rigidclass = this._ontoLLib.getLibClass(c, OntoLLib.UFO_RIGID_CLASS);
+    final OntoLClass semirigidclass = this._ontoLLib.getLibClass(c, OntoLLib.UFO_SEMI_RIGID_CLASS);
     ValidationIssue _mustInstantiateUFOMetaproperties = this._uFORules.mustInstantiateUFOMetaproperties(c, ch, iof, endurant, mustInstantiate);
     if (_mustInstantiateUFOMetaproperties!=null) {
       this.runIssue(_mustInstantiateUFOMetaproperties);
@@ -291,61 +299,181 @@ public class OntoLValidator extends AbstractOntoLValidator {
   
   private void _runIssue(final ValidationError issue) {
     final ValidationError it = issue;
-    if (((((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null))) && (it.getIndex() != (-1))) && (!Objects.equal(it.getCode(), null)))) {
-      String _message = it.getMessage();
-      EObject _source = it.getSource();
-      EStructuralFeature _feature = it.getFeature();
-      int _index = it.getIndex();
-      String _code = it.getCode();
-      String[] _issueData = it.getIssueData();
-      this.error(_message, _source, _feature, _index, _code, _issueData);
+    boolean _and = false;
+    boolean _and_1 = false;
+    boolean _and_2 = false;
+    EObject _source = it.getSource();
+    boolean _notEquals = (!Objects.equal(_source, null));
+    if (!_notEquals) {
+      _and_2 = false;
     } else {
-      if ((((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null))) && (!Objects.equal(it.getCode(), null)))) {
-        String _message_1 = it.getMessage();
-        EObject _source_1 = it.getSource();
-        EStructuralFeature _feature_1 = it.getFeature();
-        String _code_1 = it.getCode();
-        String[] _issueData_1 = it.getIssueData();
-        this.error(_message_1, _source_1, _feature_1, _code_1, _issueData_1);
+      EStructuralFeature _feature = it.getFeature();
+      boolean _notEquals_1 = (!Objects.equal(_feature, null));
+      _and_2 = _notEquals_1;
+    }
+    if (!_and_2) {
+      _and_1 = false;
+    } else {
+      int _index = it.getIndex();
+      boolean _notEquals_2 = (_index != (-1));
+      _and_1 = _notEquals_2;
+    }
+    if (!_and_1) {
+      _and = false;
+    } else {
+      String _code = it.getCode();
+      boolean _notEquals_3 = (!Objects.equal(_code, null));
+      _and = _notEquals_3;
+    }
+    if (_and) {
+      String _message = it.getMessage();
+      EObject _source_1 = it.getSource();
+      EStructuralFeature _feature_1 = it.getFeature();
+      int _index_1 = it.getIndex();
+      String _code_1 = it.getCode();
+      String[] _issueData = it.getIssueData();
+      this.error(_message, _source_1, _feature_1, _index_1, _code_1, _issueData);
+    } else {
+      boolean _and_3 = false;
+      boolean _and_4 = false;
+      EObject _source_2 = it.getSource();
+      boolean _notEquals_4 = (!Objects.equal(_source_2, null));
+      if (!_notEquals_4) {
+        _and_4 = false;
       } else {
-        if ((((!Objects.equal(it.getFeature(), null)) && (it.getIndex() != (-1))) && (!Objects.equal(it.getCode(), null)))) {
-          String _message_2 = it.getMessage();
-          EStructuralFeature _feature_2 = it.getFeature();
-          int _index_1 = it.getIndex();
-          String _code_2 = it.getCode();
-          String[] _issueData_2 = it.getIssueData();
-          this.error(_message_2, _feature_2, _index_1, _code_2, _issueData_2);
+        EStructuralFeature _feature_2 = it.getFeature();
+        boolean _notEquals_5 = (!Objects.equal(_feature_2, null));
+        _and_4 = _notEquals_5;
+      }
+      if (!_and_4) {
+        _and_3 = false;
+      } else {
+        String _code_2 = it.getCode();
+        boolean _notEquals_6 = (!Objects.equal(_code_2, null));
+        _and_3 = _notEquals_6;
+      }
+      if (_and_3) {
+        String _message_1 = it.getMessage();
+        EObject _source_3 = it.getSource();
+        EStructuralFeature _feature_3 = it.getFeature();
+        String _code_3 = it.getCode();
+        String[] _issueData_1 = it.getIssueData();
+        this.error(_message_1, _source_3, _feature_3, _code_3, _issueData_1);
+      } else {
+        boolean _and_5 = false;
+        boolean _and_6 = false;
+        EStructuralFeature _feature_4 = it.getFeature();
+        boolean _notEquals_7 = (!Objects.equal(_feature_4, null));
+        if (!_notEquals_7) {
+          _and_6 = false;
         } else {
-          if ((((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null))) && (it.getIndex() != (-1)))) {
-            String _message_3 = it.getMessage();
-            EObject _source_2 = it.getSource();
-            EStructuralFeature _feature_3 = it.getFeature();
-            int _index_2 = it.getIndex();
-            this.error(_message_3, _source_2, _feature_3, _index_2);
+          int _index_2 = it.getIndex();
+          boolean _notEquals_8 = (_index_2 != (-1));
+          _and_6 = _notEquals_8;
+        }
+        if (!_and_6) {
+          _and_5 = false;
+        } else {
+          String _code_4 = it.getCode();
+          boolean _notEquals_9 = (!Objects.equal(_code_4, null));
+          _and_5 = _notEquals_9;
+        }
+        if (_and_5) {
+          String _message_2 = it.getMessage();
+          EStructuralFeature _feature_5 = it.getFeature();
+          int _index_3 = it.getIndex();
+          String _code_5 = it.getCode();
+          String[] _issueData_2 = it.getIssueData();
+          this.error(_message_2, _feature_5, _index_3, _code_5, _issueData_2);
+        } else {
+          boolean _and_7 = false;
+          boolean _and_8 = false;
+          EObject _source_4 = it.getSource();
+          boolean _notEquals_10 = (!Objects.equal(_source_4, null));
+          if (!_notEquals_10) {
+            _and_8 = false;
           } else {
-            if (((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null)))) {
-              String _message_4 = it.getMessage();
-              EObject _source_3 = it.getSource();
-              EStructuralFeature _feature_4 = it.getFeature();
-              this.error(_message_4, _source_3, _feature_4);
+            EStructuralFeature _feature_6 = it.getFeature();
+            boolean _notEquals_11 = (!Objects.equal(_feature_6, null));
+            _and_8 = _notEquals_11;
+          }
+          if (!_and_8) {
+            _and_7 = false;
+          } else {
+            int _index_4 = it.getIndex();
+            boolean _notEquals_12 = (_index_4 != (-1));
+            _and_7 = _notEquals_12;
+          }
+          if (_and_7) {
+            String _message_3 = it.getMessage();
+            EObject _source_5 = it.getSource();
+            EStructuralFeature _feature_7 = it.getFeature();
+            int _index_5 = it.getIndex();
+            this.error(_message_3, _source_5, _feature_7, _index_5);
+          } else {
+            boolean _and_9 = false;
+            EObject _source_6 = it.getSource();
+            boolean _notEquals_13 = (!Objects.equal(_source_6, null));
+            if (!_notEquals_13) {
+              _and_9 = false;
             } else {
-              if (((!Objects.equal(it.getFeature(), null)) && (!Objects.equal(it.getCode(), null)))) {
-                String _message_5 = it.getMessage();
-                EStructuralFeature _feature_5 = it.getFeature();
-                String _code_3 = it.getCode();
-                String[] _issueData_3 = it.getIssueData();
-                this.error(_message_5, _feature_5, _code_3, _issueData_3);
+              EStructuralFeature _feature_8 = it.getFeature();
+              boolean _notEquals_14 = (!Objects.equal(_feature_8, null));
+              _and_9 = _notEquals_14;
+            }
+            if (_and_9) {
+              String _message_4 = it.getMessage();
+              EObject _source_7 = it.getSource();
+              EStructuralFeature _feature_9 = it.getFeature();
+              this.error(_message_4, _source_7, _feature_9);
+            } else {
+              boolean _and_10 = false;
+              EStructuralFeature _feature_10 = it.getFeature();
+              boolean _notEquals_15 = (!Objects.equal(_feature_10, null));
+              if (!_notEquals_15) {
+                _and_10 = false;
               } else {
-                if (((!Objects.equal(it.getFeature(), null)) && (it.getIndex() != (-1)))) {
-                  String _message_6 = it.getMessage();
-                  EStructuralFeature _feature_6 = it.getFeature();
-                  int _index_3 = it.getIndex();
-                  this.error(_message_6, _feature_6, _index_3);
+                String _code_6 = it.getCode();
+                boolean _notEquals_16 = (!Objects.equal(_code_6, null));
+                _and_10 = _notEquals_16;
+              }
+              if (_and_10) {
+                String _message_5 = it.getMessage();
+                EStructuralFeature _feature_11 = it.getFeature();
+                String _code_7 = it.getCode();
+                String[] _issueData_3 = it.getIssueData();
+                this.error(_message_5, _feature_11, _code_7, _issueData_3);
+              } else {
+                boolean _and_11 = false;
+                EStructuralFeature _feature_12 = it.getFeature();
+                boolean _notEquals_17 = (!Objects.equal(_feature_12, null));
+                if (!_notEquals_17) {
+                  _and_11 = false;
                 } else {
-                  if (((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null)))) {
+                  int _index_6 = it.getIndex();
+                  boolean _notEquals_18 = (_index_6 != (-1));
+                  _and_11 = _notEquals_18;
+                }
+                if (_and_11) {
+                  String _message_6 = it.getMessage();
+                  EStructuralFeature _feature_13 = it.getFeature();
+                  int _index_7 = it.getIndex();
+                  this.error(_message_6, _feature_13, _index_7);
+                } else {
+                  boolean _and_12 = false;
+                  EObject _source_8 = it.getSource();
+                  boolean _notEquals_19 = (!Objects.equal(_source_8, null));
+                  if (!_notEquals_19) {
+                    _and_12 = false;
+                  } else {
+                    EStructuralFeature _feature_14 = it.getFeature();
+                    boolean _notEquals_20 = (!Objects.equal(_feature_14, null));
+                    _and_12 = _notEquals_20;
+                  }
+                  if (_and_12) {
                     String _message_7 = it.getMessage();
-                    EStructuralFeature _feature_7 = it.getFeature();
-                    this.error(_message_7, _feature_7);
+                    EStructuralFeature _feature_15 = it.getFeature();
+                    this.error(_message_7, _feature_15);
                   }
                 }
               }
@@ -358,61 +486,181 @@ public class OntoLValidator extends AbstractOntoLValidator {
   
   private void _runIssue(final ValidationWarning issue) {
     final ValidationWarning it = issue;
-    if (((((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null))) && (it.getIndex() != (-1))) && (!Objects.equal(it.getCode(), null)))) {
-      String _message = it.getMessage();
-      EObject _source = it.getSource();
-      EStructuralFeature _feature = it.getFeature();
-      int _index = it.getIndex();
-      String _code = it.getCode();
-      String[] _issueData = it.getIssueData();
-      this.warning(_message, _source, _feature, _index, _code, _issueData);
+    boolean _and = false;
+    boolean _and_1 = false;
+    boolean _and_2 = false;
+    EObject _source = it.getSource();
+    boolean _notEquals = (!Objects.equal(_source, null));
+    if (!_notEquals) {
+      _and_2 = false;
     } else {
-      if ((((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null))) && (!Objects.equal(it.getCode(), null)))) {
-        String _message_1 = it.getMessage();
-        EObject _source_1 = it.getSource();
-        EStructuralFeature _feature_1 = it.getFeature();
-        String _code_1 = it.getCode();
-        String[] _issueData_1 = it.getIssueData();
-        this.warning(_message_1, _source_1, _feature_1, _code_1, _issueData_1);
+      EStructuralFeature _feature = it.getFeature();
+      boolean _notEquals_1 = (!Objects.equal(_feature, null));
+      _and_2 = _notEquals_1;
+    }
+    if (!_and_2) {
+      _and_1 = false;
+    } else {
+      int _index = it.getIndex();
+      boolean _notEquals_2 = (_index != (-1));
+      _and_1 = _notEquals_2;
+    }
+    if (!_and_1) {
+      _and = false;
+    } else {
+      String _code = it.getCode();
+      boolean _notEquals_3 = (!Objects.equal(_code, null));
+      _and = _notEquals_3;
+    }
+    if (_and) {
+      String _message = it.getMessage();
+      EObject _source_1 = it.getSource();
+      EStructuralFeature _feature_1 = it.getFeature();
+      int _index_1 = it.getIndex();
+      String _code_1 = it.getCode();
+      String[] _issueData = it.getIssueData();
+      this.warning(_message, _source_1, _feature_1, _index_1, _code_1, _issueData);
+    } else {
+      boolean _and_3 = false;
+      boolean _and_4 = false;
+      EObject _source_2 = it.getSource();
+      boolean _notEquals_4 = (!Objects.equal(_source_2, null));
+      if (!_notEquals_4) {
+        _and_4 = false;
       } else {
-        if ((((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null))) && (it.getIndex() != (-1)))) {
-          String _message_2 = it.getMessage();
-          EObject _source_2 = it.getSource();
-          EStructuralFeature _feature_2 = it.getFeature();
-          int _index_1 = it.getIndex();
-          this.warning(_message_2, _source_2, _feature_2, _index_1);
+        EStructuralFeature _feature_2 = it.getFeature();
+        boolean _notEquals_5 = (!Objects.equal(_feature_2, null));
+        _and_4 = _notEquals_5;
+      }
+      if (!_and_4) {
+        _and_3 = false;
+      } else {
+        String _code_2 = it.getCode();
+        boolean _notEquals_6 = (!Objects.equal(_code_2, null));
+        _and_3 = _notEquals_6;
+      }
+      if (_and_3) {
+        String _message_1 = it.getMessage();
+        EObject _source_3 = it.getSource();
+        EStructuralFeature _feature_3 = it.getFeature();
+        String _code_3 = it.getCode();
+        String[] _issueData_1 = it.getIssueData();
+        this.warning(_message_1, _source_3, _feature_3, _code_3, _issueData_1);
+      } else {
+        boolean _and_5 = false;
+        boolean _and_6 = false;
+        EObject _source_4 = it.getSource();
+        boolean _notEquals_7 = (!Objects.equal(_source_4, null));
+        if (!_notEquals_7) {
+          _and_6 = false;
         } else {
-          if (((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null)))) {
-            String _message_3 = it.getMessage();
-            EObject _source_3 = it.getSource();
-            EStructuralFeature _feature_3 = it.getFeature();
-            this.warning(_message_3, _source_3, _feature_3);
+          EStructuralFeature _feature_4 = it.getFeature();
+          boolean _notEquals_8 = (!Objects.equal(_feature_4, null));
+          _and_6 = _notEquals_8;
+        }
+        if (!_and_6) {
+          _and_5 = false;
+        } else {
+          int _index_2 = it.getIndex();
+          boolean _notEquals_9 = (_index_2 != (-1));
+          _and_5 = _notEquals_9;
+        }
+        if (_and_5) {
+          String _message_2 = it.getMessage();
+          EObject _source_5 = it.getSource();
+          EStructuralFeature _feature_5 = it.getFeature();
+          int _index_3 = it.getIndex();
+          this.warning(_message_2, _source_5, _feature_5, _index_3);
+        } else {
+          boolean _and_7 = false;
+          EObject _source_6 = it.getSource();
+          boolean _notEquals_10 = (!Objects.equal(_source_6, null));
+          if (!_notEquals_10) {
+            _and_7 = false;
           } else {
-            if ((((!Objects.equal(it.getFeature(), null)) && (it.getIndex() != (-1))) && (!Objects.equal(it.getCode(), null)))) {
-              String _message_4 = it.getMessage();
-              EStructuralFeature _feature_4 = it.getFeature();
-              int _index_2 = it.getIndex();
-              String _code_2 = it.getCode();
-              String[] _issueData_2 = it.getIssueData();
-              this.warning(_message_4, _feature_4, _index_2, _code_2, _issueData_2);
+            EStructuralFeature _feature_6 = it.getFeature();
+            boolean _notEquals_11 = (!Objects.equal(_feature_6, null));
+            _and_7 = _notEquals_11;
+          }
+          if (_and_7) {
+            String _message_3 = it.getMessage();
+            EObject _source_7 = it.getSource();
+            EStructuralFeature _feature_7 = it.getFeature();
+            this.warning(_message_3, _source_7, _feature_7);
+          } else {
+            boolean _and_8 = false;
+            boolean _and_9 = false;
+            EStructuralFeature _feature_8 = it.getFeature();
+            boolean _notEquals_12 = (!Objects.equal(_feature_8, null));
+            if (!_notEquals_12) {
+              _and_9 = false;
             } else {
-              if (((!Objects.equal(it.getFeature(), null)) && (!Objects.equal(it.getCode(), null)))) {
-                String _message_5 = it.getMessage();
-                EStructuralFeature _feature_5 = it.getFeature();
-                String _code_3 = it.getCode();
-                String[] _issueData_3 = it.getIssueData();
-                this.warning(_message_5, _feature_5, _code_3, _issueData_3);
+              int _index_4 = it.getIndex();
+              boolean _notEquals_13 = (_index_4 != (-1));
+              _and_9 = _notEquals_13;
+            }
+            if (!_and_9) {
+              _and_8 = false;
+            } else {
+              String _code_4 = it.getCode();
+              boolean _notEquals_14 = (!Objects.equal(_code_4, null));
+              _and_8 = _notEquals_14;
+            }
+            if (_and_8) {
+              String _message_4 = it.getMessage();
+              EStructuralFeature _feature_9 = it.getFeature();
+              int _index_5 = it.getIndex();
+              String _code_5 = it.getCode();
+              String[] _issueData_2 = it.getIssueData();
+              this.warning(_message_4, _feature_9, _index_5, _code_5, _issueData_2);
+            } else {
+              boolean _and_10 = false;
+              EStructuralFeature _feature_10 = it.getFeature();
+              boolean _notEquals_15 = (!Objects.equal(_feature_10, null));
+              if (!_notEquals_15) {
+                _and_10 = false;
               } else {
-                if (((!Objects.equal(it.getFeature(), null)) && (it.getIndex() != (-1)))) {
-                  String _message_6 = it.getMessage();
-                  EStructuralFeature _feature_6 = it.getFeature();
-                  int _index_3 = it.getIndex();
-                  this.warning(_message_6, _feature_6, _index_3);
+                String _code_6 = it.getCode();
+                boolean _notEquals_16 = (!Objects.equal(_code_6, null));
+                _and_10 = _notEquals_16;
+              }
+              if (_and_10) {
+                String _message_5 = it.getMessage();
+                EStructuralFeature _feature_11 = it.getFeature();
+                String _code_7 = it.getCode();
+                String[] _issueData_3 = it.getIssueData();
+                this.warning(_message_5, _feature_11, _code_7, _issueData_3);
+              } else {
+                boolean _and_11 = false;
+                EStructuralFeature _feature_12 = it.getFeature();
+                boolean _notEquals_17 = (!Objects.equal(_feature_12, null));
+                if (!_notEquals_17) {
+                  _and_11 = false;
                 } else {
-                  if (((!Objects.equal(it.getSource(), null)) && (!Objects.equal(it.getFeature(), null)))) {
+                  int _index_6 = it.getIndex();
+                  boolean _notEquals_18 = (_index_6 != (-1));
+                  _and_11 = _notEquals_18;
+                }
+                if (_and_11) {
+                  String _message_6 = it.getMessage();
+                  EStructuralFeature _feature_13 = it.getFeature();
+                  int _index_7 = it.getIndex();
+                  this.warning(_message_6, _feature_13, _index_7);
+                } else {
+                  boolean _and_12 = false;
+                  EObject _source_8 = it.getSource();
+                  boolean _notEquals_19 = (!Objects.equal(_source_8, null));
+                  if (!_notEquals_19) {
+                    _and_12 = false;
+                  } else {
+                    EStructuralFeature _feature_14 = it.getFeature();
+                    boolean _notEquals_20 = (!Objects.equal(_feature_14, null));
+                    _and_12 = _notEquals_20;
+                  }
+                  if (_and_12) {
                     String _message_7 = it.getMessage();
-                    EStructuralFeature _feature_7 = it.getFeature();
-                    this.warning(_message_7, _feature_7);
+                    EStructuralFeature _feature_15 = it.getFeature();
+                    this.warning(_message_7, _feature_15);
                   }
                 }
               }

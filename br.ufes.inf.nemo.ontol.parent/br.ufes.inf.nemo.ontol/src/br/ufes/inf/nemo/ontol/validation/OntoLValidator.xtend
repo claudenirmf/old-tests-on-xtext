@@ -108,6 +108,7 @@ class OntoLValidator extends AbstractOntoLValidator {
 	@Check(CheckType.FAST)
 	def void fastChecksOnProperty(Property p){
 		p.checkSubsettedMultiplicity?.runIssue
+		p.checkRegularityAndContainer?.runIssue
 	}
 	
 	@Check(CheckType.FAST)
@@ -141,18 +142,21 @@ class OntoLValidator extends AbstractOntoLValidator {
 			error('''«c.name» is in a subordination cycle.''', ModelPackage.eINSTANCE.ontoLClass_Subordinators,
 				LinguisticRules.SIMPLE_SUBORDINATION_CYCLE)
 		c.isSpecializingDisjointClasses(ch)?.runIssue
+		c.checkInstantiatedRegularities?.runIssue
 	}
 	
 	@Check(CheckType.EXPENSIVE)
 	def void expensiveChecksOnFOClass(FOClass c) {
+		// TODO Insert a check for UFO models
+		
 		val ch = (c as OntoLClass).classHierarchy
 		val iof = (c as OntoLClass).allInstantiatedClasses
 		val endurant = c.UFOEndurant
 		
 		val mustInstantiate = c.UFOMustInstantiateClasses
-		val mixinclass = c.getLibClass(OntoLLib.UFO_A_MIXIN_CLASS)
-		val rigidclass = c.getLibClass(OntoLLib.UFO_A_RIGID_CLASS)
-		val semirigidclass = c.getLibClass(OntoLLib.UFO_A_SEMI_RIGID_CLASS)
+		val mixinclass = c.getLibClass(OntoLLib.UFO_MIXIN_CLASS)
+		val rigidclass = c.getLibClass(OntoLLib.UFO_RIGID_CLASS)
+		val semirigidclass = c.getLibClass(OntoLLib.UFO_SEMI_RIGID_CLASS)
 
 		c.mustInstantiateUFOMetaproperties(ch,iof,endurant,mustInstantiate)?.runIssue
 		c.checkSpecializationAndSortality(ch,iof,mixinclass)?.runIssue
