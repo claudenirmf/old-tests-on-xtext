@@ -1071,22 +1071,40 @@ public interface ModelPackage extends EPackage {
 	int PROPERTY__UPPER_BOUND = MODEL_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Property Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__PROPERTY_TYPE = MODEL_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Regularity</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__REGULARITY = MODEL_ELEMENT_FEATURE_COUNT + 3;
+	int PROPERTY__REGULARITY = MODEL_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Property Class</b></em>' reference.
+	 * The feature id for the '<em><b>Regularity Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__PROPERTY_CLASS = MODEL_ELEMENT_FEATURE_COUNT + 4;
+	int PROPERTY__REGULARITY_TYPE = MODEL_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Regulated Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__REGULATED_PROPERTY = MODEL_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Property</em>' class.
@@ -1095,7 +1113,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 5;
+	int PROPERTY_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of operations of the '<em>Property</em>' class.
@@ -1144,6 +1162,15 @@ public interface ModelPackage extends EPackage {
 	int ATTRIBUTE__UPPER_BOUND = PROPERTY__UPPER_BOUND;
 
 	/**
+	 * The feature id for the '<em><b>Property Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__PROPERTY_TYPE = PROPERTY__PROPERTY_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Regularity</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1153,13 +1180,22 @@ public interface ModelPackage extends EPackage {
 	int ATTRIBUTE__REGULARITY = PROPERTY__REGULARITY;
 
 	/**
-	 * The feature id for the '<em><b>Property Class</b></em>' reference.
+	 * The feature id for the '<em><b>Regularity Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE__PROPERTY_CLASS = PROPERTY__PROPERTY_CLASS;
+	int ATTRIBUTE__REGULARITY_TYPE = PROPERTY__REGULARITY_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Regulated Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__REGULATED_PROPERTY = PROPERTY__REGULATED_PROPERTY;
 
 	/**
 	 * The feature id for the '<em><b>Subset Of</b></em>' reference list.
@@ -1226,6 +1262,15 @@ public interface ModelPackage extends EPackage {
 	int REFERENCE__UPPER_BOUND = PROPERTY__UPPER_BOUND;
 
 	/**
+	 * The feature id for the '<em><b>Property Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__PROPERTY_TYPE = PROPERTY__PROPERTY_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Regularity</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1235,13 +1280,22 @@ public interface ModelPackage extends EPackage {
 	int REFERENCE__REGULARITY = PROPERTY__REGULARITY;
 
 	/**
-	 * The feature id for the '<em><b>Property Class</b></em>' reference.
+	 * The feature id for the '<em><b>Regularity Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE__PROPERTY_CLASS = PROPERTY__PROPERTY_CLASS;
+	int REFERENCE__REGULARITY_TYPE = PROPERTY__REGULARITY_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Regulated Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__REGULATED_PROPERTY = PROPERTY__REGULATED_PROPERTY;
 
 	/**
 	 * The feature id for the '<em><b>Subset Of</b></em>' reference list.
@@ -1373,7 +1427,7 @@ public interface ModelPackage extends EPackage {
 	int REFERENCE_ASSIGNMENT__REFERENCE = PROPERTY_ASSIGNMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Assignments</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Assignments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1400,71 +1454,6 @@ public interface ModelPackage extends EPackage {
 	int REFERENCE_ASSIGNMENT_OPERATION_COUNT = PROPERTY_ASSIGNMENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.ValueImpl <em>Value</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see br.ufes.inf.nemo.ontol.model.impl.ValueImpl
-	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getValue()
-	 * @generated
-	 */
-	int VALUE = 17;
-
-	/**
-	 * The number of structural features of the '<em>Value</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VALUE_FEATURE_COUNT = MODEL_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Value</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VALUE_OPERATION_COUNT = MODEL_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.ReferenceValueImpl <em>Reference Value</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see br.ufes.inf.nemo.ontol.model.impl.ReferenceValueImpl
-	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getReferenceValue()
-	 * @generated
-	 */
-	int REFERENCE_VALUE = 18;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFERENCE_VALUE__VALUE = VALUE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Reference Value</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFERENCE_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Reference Value</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFERENCE_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.DataValueImpl <em>Data Value</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1472,7 +1461,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getDataValue()
 	 * @generated
 	 */
-	int DATA_VALUE = 19;
+	int DATA_VALUE = 17;
 
 	/**
 	 * The number of structural features of the '<em>Data Value</em>' class.
@@ -1481,7 +1470,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
+	int DATA_VALUE_FEATURE_COUNT = 0;
 
 	/**
 	 * The number of operations of the '<em>Data Value</em>' class.
@@ -1490,7 +1479,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_VALUE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+	int DATA_VALUE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.impl.StringValueImpl <em>String Value</em>}' class.
@@ -1500,7 +1489,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getStringValue()
 	 * @generated
 	 */
-	int STRING_VALUE = 20;
+	int STRING_VALUE = 18;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1537,7 +1526,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getNumberValue()
 	 * @generated
 	 */
-	int NUMBER_VALUE = 21;
+	int NUMBER_VALUE = 19;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1574,7 +1563,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getBooleanValue()
 	 * @generated
 	 */
-	int BOOLEAN_VALUE = 22;
+	int BOOLEAN_VALUE = 20;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1611,7 +1600,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getNoneValue()
 	 * @generated
 	 */
-	int NONE_VALUE = 23;
+	int NONE_VALUE = 21;
 
 	/**
 	 * The number of structural features of the '<em>None Value</em>' class.
@@ -1648,7 +1637,7 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getComplexDataValue()
 	 * @generated
 	 */
-	int COMPLEX_DATA_VALUE = 24;
+	int COMPLEX_DATA_VALUE = 22;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' reference.
@@ -1694,7 +1683,17 @@ public interface ModelPackage extends EPackage {
 	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getCategorizationType()
 	 * @generated
 	 */
-	int CATEGORIZATION_TYPE = 25;
+	int CATEGORIZATION_TYPE = 23;
+
+	/**
+	 * The meta object id for the '{@link br.ufes.inf.nemo.ontol.model.RegularityPropertyType <em>Regularity Property Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see br.ufes.inf.nemo.ontol.model.RegularityPropertyType
+	 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getRegularityPropertyType()
+	 * @generated
+	 */
+	int REGULARITY_PROPERTY_TYPE = 24;
 
 
 	/**
@@ -2093,6 +2092,17 @@ public interface ModelPackage extends EPackage {
 	EAttribute getProperty_UpperBound();
 
 	/**
+	 * Returns the meta object for the reference '{@link br.ufes.inf.nemo.ontol.model.Property#getPropertyType <em>Property Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Property Type</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.Property#getPropertyType()
+	 * @see #getProperty()
+	 * @generated
+	 */
+	EReference getProperty_PropertyType();
+
+	/**
 	 * Returns the meta object for the attribute '{@link br.ufes.inf.nemo.ontol.model.Property#getRegularity <em>Regularity</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2104,15 +2114,26 @@ public interface ModelPackage extends EPackage {
 	EAttribute getProperty_Regularity();
 
 	/**
-	 * Returns the meta object for the reference '{@link br.ufes.inf.nemo.ontol.model.Property#getPropertyClass <em>Property Class</em>}'.
+	 * Returns the meta object for the attribute '{@link br.ufes.inf.nemo.ontol.model.Property#getRegularityType <em>Regularity Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Property Class</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.Property#getPropertyClass()
+	 * @return the meta object for the attribute '<em>Regularity Type</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.Property#getRegularityType()
 	 * @see #getProperty()
 	 * @generated
 	 */
-	EReference getProperty_PropertyClass();
+	EAttribute getProperty_RegularityType();
+
+	/**
+	 * Returns the meta object for the reference '{@link br.ufes.inf.nemo.ontol.model.Property#getRegulatedProperty <em>Regulated Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Regulated Property</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.Property#getRegulatedProperty()
+	 * @see #getProperty()
+	 * @generated
+	 */
+	EReference getProperty_RegulatedProperty();
 
 	/**
 	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.Attribute <em>Attribute</em>}'.
@@ -2231,46 +2252,15 @@ public interface ModelPackage extends EPackage {
 	EReference getReferenceAssignment_Reference();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link br.ufes.inf.nemo.ontol.model.ReferenceAssignment#getAssignments <em>Assignments</em>}'.
+	 * Returns the meta object for the reference list '{@link br.ufes.inf.nemo.ontol.model.ReferenceAssignment#getAssignments <em>Assignments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Assignments</em>'.
+	 * @return the meta object for the reference list '<em>Assignments</em>'.
 	 * @see br.ufes.inf.nemo.ontol.model.ReferenceAssignment#getAssignments()
 	 * @see #getReferenceAssignment()
 	 * @generated
 	 */
 	EReference getReferenceAssignment_Assignments();
-
-	/**
-	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.Value <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Value</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.Value
-	 * @generated
-	 */
-	EClass getValue();
-
-	/**
-	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.ReferenceValue <em>Reference Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Reference Value</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.ReferenceValue
-	 * @generated
-	 */
-	EClass getReferenceValue();
-
-	/**
-	 * Returns the meta object for the reference '{@link br.ufes.inf.nemo.ontol.model.ReferenceValue#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Value</em>'.
-	 * @see br.ufes.inf.nemo.ontol.model.ReferenceValue#getValue()
-	 * @see #getReferenceValue()
-	 * @generated
-	 */
-	EReference getReferenceValue_Value();
 
 	/**
 	 * Returns the meta object for class '{@link br.ufes.inf.nemo.ontol.model.DataValue <em>Data Value</em>}'.
@@ -2406,6 +2396,16 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getCategorizationType();
+
+	/**
+	 * Returns the meta object for enum '{@link br.ufes.inf.nemo.ontol.model.RegularityPropertyType <em>Regularity Property Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Regularity Property Type</em>'.
+	 * @see br.ufes.inf.nemo.ontol.model.RegularityPropertyType
+	 * @generated
+	 */
+	EEnum getRegularityPropertyType();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -2751,6 +2751,14 @@ public interface ModelPackage extends EPackage {
 		EAttribute PROPERTY__UPPER_BOUND = eINSTANCE.getProperty_UpperBound();
 
 		/**
+		 * The meta object literal for the '<em><b>Property Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY__PROPERTY_TYPE = eINSTANCE.getProperty_PropertyType();
+
+		/**
 		 * The meta object literal for the '<em><b>Regularity</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2759,12 +2767,20 @@ public interface ModelPackage extends EPackage {
 		EAttribute PROPERTY__REGULARITY = eINSTANCE.getProperty_Regularity();
 
 		/**
-		 * The meta object literal for the '<em><b>Property Class</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Regularity Type</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROPERTY__PROPERTY_CLASS = eINSTANCE.getProperty_PropertyClass();
+		EAttribute PROPERTY__REGULARITY_TYPE = eINSTANCE.getProperty_RegularityType();
+
+		/**
+		 * The meta object literal for the '<em><b>Regulated Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY__REGULATED_PROPERTY = eINSTANCE.getProperty_RegulatedProperty();
 
 		/**
 		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.AttributeImpl <em>Attribute</em>}' class.
@@ -2865,40 +2881,12 @@ public interface ModelPackage extends EPackage {
 		EReference REFERENCE_ASSIGNMENT__REFERENCE = eINSTANCE.getReferenceAssignment_Reference();
 
 		/**
-		 * The meta object literal for the '<em><b>Assignments</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Assignments</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference REFERENCE_ASSIGNMENT__ASSIGNMENTS = eINSTANCE.getReferenceAssignment_Assignments();
-
-		/**
-		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.ValueImpl <em>Value</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see br.ufes.inf.nemo.ontol.model.impl.ValueImpl
-		 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getValue()
-		 * @generated
-		 */
-		EClass VALUE = eINSTANCE.getValue();
-
-		/**
-		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.ReferenceValueImpl <em>Reference Value</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see br.ufes.inf.nemo.ontol.model.impl.ReferenceValueImpl
-		 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getReferenceValue()
-		 * @generated
-		 */
-		EClass REFERENCE_VALUE = eINSTANCE.getReferenceValue();
-
-		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference REFERENCE_VALUE__VALUE = eINSTANCE.getReferenceValue_Value();
 
 		/**
 		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.impl.DataValueImpl <em>Data Value</em>}' class.
@@ -3017,6 +3005,16 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum CATEGORIZATION_TYPE = eINSTANCE.getCategorizationType();
+
+		/**
+		 * The meta object literal for the '{@link br.ufes.inf.nemo.ontol.model.RegularityPropertyType <em>Regularity Property Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see br.ufes.inf.nemo.ontol.model.RegularityPropertyType
+		 * @see br.ufes.inf.nemo.ontol.model.impl.ModelPackageImpl#getRegularityPropertyType()
+		 * @generated
+		 */
+		EEnum REGULARITY_PROPERTY_TYPE = eINSTANCE.getRegularityPropertyType();
 
 	}
 

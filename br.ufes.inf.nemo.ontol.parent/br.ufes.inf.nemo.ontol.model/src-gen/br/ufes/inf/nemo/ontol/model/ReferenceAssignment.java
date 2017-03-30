@@ -49,19 +49,19 @@ public interface ReferenceAssignment extends PropertyAssignment {
 	void setReference(Reference value);
 
 	/**
-	 * Returns the value of the '<em><b>Assignments</b></em>' containment reference list.
-	 * The list contents are of type {@link br.ufes.inf.nemo.ontol.model.ReferenceValue}.
+	 * Returns the value of the '<em><b>Assignments</b></em>' reference list.
+	 * The list contents are of type {@link br.ufes.inf.nemo.ontol.model.EntityDeclaration}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Assignments</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Assignments</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Assignments</em>' containment reference list.
+	 * @return the value of the '<em>Assignments</em>' reference list.
 	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getReferenceAssignment_Assignments()
-	 * @model containment="true"
+	 * @model
 	 * @generated
 	 */
-	EList<ReferenceValue> getAssignments();
+	EList<EntityDeclaration> getAssignments();
 
 } // ReferenceAssignment

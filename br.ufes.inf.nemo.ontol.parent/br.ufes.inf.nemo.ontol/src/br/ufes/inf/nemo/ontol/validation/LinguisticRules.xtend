@@ -1,5 +1,8 @@
 package br.ufes.inf.nemo.ontol.validation
 
+import br.ufes.inf.nemo.ontol.model.Attribute
+import br.ufes.inf.nemo.ontol.model.AttributeAssignment
+import br.ufes.inf.nemo.ontol.model.ComplexDataValue
 import br.ufes.inf.nemo.ontol.model.EntityDeclaration
 import br.ufes.inf.nemo.ontol.model.FOClass
 import br.ufes.inf.nemo.ontol.model.GeneralizationSet
@@ -9,6 +12,9 @@ import br.ufes.inf.nemo.ontol.model.ModelPackage
 import br.ufes.inf.nemo.ontol.model.OntoLClass
 import br.ufes.inf.nemo.ontol.model.OrderedClass
 import br.ufes.inf.nemo.ontol.model.OrderlessClass
+import br.ufes.inf.nemo.ontol.model.Property
+import br.ufes.inf.nemo.ontol.model.Reference
+import br.ufes.inf.nemo.ontol.model.ReferenceAssignment
 import br.ufes.inf.nemo.ontol.util.OntoLIndex
 import br.ufes.inf.nemo.ontol.util.OntoLUtils
 import com.google.common.collect.Sets
@@ -16,17 +22,8 @@ import com.google.inject.Inject
 import java.util.Collections
 import java.util.LinkedHashSet
 import java.util.Set
-import br.ufes.inf.nemo.ontol.model.Property
-import br.ufes.inf.nemo.ontol.model.ReferenceAssignment
-import br.ufes.inf.nemo.ontol.model.AttributeAssignment
-import br.ufes.inf.nemo.ontol.model.Reference
-import br.ufes.inf.nemo.ontol.model.Attribute
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.resource.IEObjectDescription
-import br.ufes.inf.nemo.ontol.model.Value
-import br.ufes.inf.nemo.ontol.model.ComplexDataValue
-import org.eclipse.xtext.EcoreUtil2
-import java.util.HashSet
-import br.ufes.inf.nemo.ontol.model.PropertyAssignment
 
 class LinguisticRules {
 	
@@ -182,8 +179,8 @@ class LinguisticRules {
 			if (gs.isDisjoint && Sets.intersection(ch, gs.specifics.toSet).size > 1){
 				val issue = new ValidationWarning
 				issue.message = 
-					'''«c.name» is specializing disjoint classes.
-					«FOR disjoint : Sets.intersection(ch, gs.specifics.toSet)» «(disjoint.eContainer as Model).name».«disjoint.name»; «ENDFOR»).'''
+					'''Â«c.nameÂ» is specializing disjoint classes.
+					Â«FOR disjoint : Sets.intersection(ch, gs.specifics.toSet)Â» Â«(disjoint.eContainer as Model).nameÂ».Â«disjoint.nameÂ»; Â«ENDFORÂ»).'''
 				issue.feature = ModelPackage.eINSTANCE.entityDeclaration_Name
 				issue.source = c
 				issue.code = SPECILIZATION_OF_DISJOINT_CLASSES
@@ -201,8 +198,8 @@ class LinguisticRules {
 			if (gs.isDisjoint && Sets.intersection(iof, gs.specifics.toSet).size > 1){
 				val issue = new ValidationWarning
 				issue.message = 
-					'''«e.name» is instance disjoint classes.
-					«FOR disjoint : Sets.intersection(iof, gs.specifics.toSet)» «(disjoint.eContainer as Model).name».«disjoint.name»; «ENDFOR»).'''
+					'''Â«e.nameÂ» is instance disjoint classes.
+					Â«FOR disjoint : Sets.intersection(iof, gs.specifics.toSet)Â» Â«(disjoint.eContainer as Model).nameÂ».Â«disjoint.nameÂ»; Â«ENDFORÂ»).'''
 				issue.feature = ModelPackage.eINSTANCE.entityDeclaration_Name
 				issue.source = e
 				issue.code = INSTANCE_OF_DISJOINT_CLASSES
@@ -221,7 +218,7 @@ class LinguisticRules {
 				val issue = new ValidationWarning
 				issue.message = 
 					'''Missing instantions due to completeness of generalization sets.
-					«FOR mustiof : gs.specifics» «(mustiof.eContainer as Model).name».«mustiof.name»; «ENDFOR»).'''
+					Â«FOR mustiof : gs.specificsÂ» Â«(mustiof.eContainer as Model).nameÂ».Â«mustiof.nameÂ»; Â«ENDFORÂ»).'''
 				issue.feature = ModelPackage.eINSTANCE.entityDeclaration_Name
 				issue.source = e
 				issue.code = MISSING_INSTANTIATION_OF_COMPLETE_GENERALIZATION_SET
@@ -240,16 +237,16 @@ class LinguisticRules {
 			if(ref.lowerBound < superRef.lowerBound){
 				issue.feature = ModelPackage.eINSTANCE.property_LowerBound
 				issue.message = 
-					'''The cardinality must be as restrictive as the the subsetted one («superRef.name»).'''
+					'''The cardinality must be as restrictive as the the subsetted one (Â«superRef.nameÂ»).'''
 				return issue
 			} else if(ref.upperBound > superRef.upperBound && superRef.upperBound > 0){
 				issue.message = 
-					'''The cardinality must be as restrictive as the the subsetted one («superRef.name»).'''
+					'''The cardinality must be as restrictive as the the subsetted one (Â«superRef.nameÂ»).'''
 				issue.feature = ModelPackage.eINSTANCE.property_UpperBound
 				return issue
 			} else if(ref.upperBound==-1 && ref.upperBound!=superRef.upperBound){
 				issue.message = 
-					'''The cardinality must be as restrictive as the the subsetted one («superRef.name»).'''
+					'''The cardinality must be as restrictive as the the subsetted one (Â«superRef.nameÂ»).'''
 				issue.feature = ModelPackage.eINSTANCE.property_UpperBound
 				return issue
 			}
@@ -266,16 +263,16 @@ class LinguisticRules {
 			if(att.lowerBound < superAtt.lowerBound){
 				issue.feature = ModelPackage.eINSTANCE.property_LowerBound
 				issue.message = 
-					'''The cardinality must be as restrictive as the the subsetted one («superAtt.name»).'''
+					'''The cardinality must be as restrictive as the the subsetted one (Â«superAtt.nameÂ»).'''
 				return issue
 			} else if(att.upperBound > superAtt.upperBound && superAtt.upperBound > 0){
 				issue.message = 
-					'''The cardinality must be as restrictive as the the subsetted one («superAtt.name»).'''
+					'''The cardinality must be as restrictive as the the subsetted one (Â«superAtt.nameÂ»).'''
 				issue.feature = ModelPackage.eINSTANCE.property_UpperBound
 				return issue
 			} else if(att.upperBound==-1 && att.upperBound!=superAtt.upperBound){
 				issue.message = 
-					'''The cardinality must be as restrictive as the the subsetted one («superAtt.name»).'''
+					'''The cardinality must be as restrictive as the the subsetted one (Â«superAtt.nameÂ»).'''
 				issue.feature = ModelPackage.eINSTANCE.property_UpperBound
 				return issue
 			}
@@ -288,7 +285,7 @@ class LinguisticRules {
 		val ref = ra.reference
 		if(nAssgns < ref.lowerBound){
 			val issue = new ValidationWarning()
-			issue.message = '''Number of assignments must equal or greater than «ref.lowerBound».'''
+			issue.message = '''Number of assignments must equal or greater than Â«ref.lowerBoundÂ».'''
 			issue.source = ra
 			issue.feature = ModelPackage.eINSTANCE.referenceAssignment_Assignments
 			issue.code = LinguisticRules.INVALID_MULTIPLICITY
@@ -296,7 +293,7 @@ class LinguisticRules {
 		}
 		else if(nAssgns > ref.upperBound && ref.upperBound > 0){
 			val issue = new ValidationWarning()
-			issue.message = '''Number of assignments must equal or less than «ref.upperBound».'''
+			issue.message = '''Number of assignments must equal or less than Â«ref.upperBoundÂ».'''
 			issue.source = ra
 			issue.feature = ModelPackage.eINSTANCE.referenceAssignment_Assignments
 			issue.code = LinguisticRules.INVALID_MULTIPLICITY
@@ -316,11 +313,11 @@ class LinguisticRules {
 		issue.code = LinguisticRules.INVALID_MULTIPLICITY
 
 		if(nAssgns < att.lowerBound){
-			issue.message = '''Number of assignments must equal or greater than «att.lowerBound».'''
+			issue.message = '''Number of assignments must equal or greater than Â«att.lowerBoundÂ».'''
 			return issue
 		}
 		else if(nAssgns > att.upperBound && att.upperBound > 0){
-			issue.message = '''Number of assignments must equal or less than «att.upperBound».'''
+			issue.message = '''Number of assignments must equal or less than Â«att.upperBoundÂ».'''
 			return issue
 		}
 		else
@@ -329,16 +326,16 @@ class LinguisticRules {
 	
 	def dispatch ValidationIssue checkPropertyAssignmentType(ReferenceAssignment ra){
 		val ref = ra.reference
-		val assigType = ref.propertyClass
+		val assigType = ref.propertyType
 		
 		val issue = new ValidationError
 		issue.source = ra
 		issue.feature = ModelPackage.eINSTANCE.referenceAssignment_Assignments
 		
-		for(Value v : ra.assignments){
-			if(!v.isConformantTo(assigType)){
-				issue.message = '''All assignments must be instances of «assigType.name».'''
-				issue.index = ra.assignments.indexOf(v)
+		for(EObject obj : ra.assignments){
+			if(!obj.isConformantTo(assigType)){
+				issue.message = '''All assignments must be instances of Â«assigType.nameÂ».'''
+				issue.index = ra.assignments.indexOf(obj)
 				issue.code = NON_CONFORMANT_ASSIGNMENT
 				return issue
 			}
@@ -348,16 +345,16 @@ class LinguisticRules {
 	
 	def dispatch ValidationIssue checkPropertyAssignmentType(AttributeAssignment aa){
 		val att = aa.attribute
-		val assigType = att.propertyClass
+		val assigType = att.propertyType
 		
 		val issue = new ValidationError
 		issue.source = aa
 		issue.feature = ModelPackage.eINSTANCE.attributeAssignment_Assignments
 		
-		for(Value v : aa.assignments){
-			if(!v.isConformantTo(assigType)){
-				issue.message = '''All assignments must be instances of «assigType.name».'''
-				issue.index = aa.assignments.indexOf(v)
+		for(EObject obj : aa.assignments){
+			if(!obj.isConformantTo(assigType)){
+				issue.message = '''All assignments must be instances of Â«assigType.nameÂ».'''
+				issue.index = aa.assignments.indexOf(obj)
 				issue.code = NON_CONFORMANT_ASSIGNMENT
 				return issue
 			}
@@ -387,7 +384,7 @@ class LinguisticRules {
 		val issue = new ValidationWarning
 		issue.source = c
 		issue.feature = ModelPackage.eINSTANCE.entityDeclaration_Name
-		issue.message = '''The regularity property «props.head.name» should hava an assigned value.'''
+		issue.message = '''The regularity property Â«props.head.nameÂ» should hava an assigned value.'''
 		issue.code = MISSING_ASSIGNMENT_BY_REGULARITY
 		return issue
 	}

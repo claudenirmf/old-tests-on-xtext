@@ -41,62 +41,30 @@ public class OntoLScopeProvider extends AbstractOntoLScopeProvider {
   
   @Override
   public IScope getScope(final EObject context, final EReference reference) {
-    boolean _and = false;
-    if (!(context instanceof AttributeAssignment)) {
-      _and = false;
-    } else {
-      EReference _attributeAssignment_Attribute = ModelPackage.eINSTANCE.getAttributeAssignment_Attribute();
-      boolean _equals = Objects.equal(reference, _attributeAssignment_Attribute);
-      _and = _equals;
-    }
-    if (_and) {
+    if (((context instanceof AttributeAssignment) && Objects.equal(reference, ModelPackage.eINSTANCE.getAttributeAssignment_Attribute()))) {
       return this.getScopeForAttributeAssignmentOnAttributeAssignment_Attribute(context, reference);
     } else {
-      boolean _and_1 = false;
-      if (!(context instanceof ReferenceAssignment)) {
-        _and_1 = false;
-      } else {
-        EReference _referenceAssignment_Reference = ModelPackage.eINSTANCE.getReferenceAssignment_Reference();
-        boolean _equals_1 = Objects.equal(reference, _referenceAssignment_Reference);
-        _and_1 = _equals_1;
-      }
-      if (_and_1) {
+      if (((context instanceof ReferenceAssignment) && Objects.equal(reference, ModelPackage.eINSTANCE.getReferenceAssignment_Reference()))) {
         return this.getScopeForReferenceAssignmentOnReferenceAssignment_Reference(context, reference);
       } else {
-        boolean _and_2 = false;
-        if (!(context instanceof Attribute)) {
-          _and_2 = false;
-        } else {
-          EReference _attribute_SubsetOf = ModelPackage.eINSTANCE.getAttribute_SubsetOf();
-          boolean _equals_2 = Objects.equal(reference, _attribute_SubsetOf);
-          _and_2 = _equals_2;
-        }
-        if (_and_2) {
+        if (((context instanceof Attribute) && Objects.equal(reference, ModelPackage.eINSTANCE.getAttribute_SubsetOf()))) {
           return this.getScopeForAttributeOnAttribute_SubsetOf(context, reference);
         } else {
-          boolean _and_3 = false;
-          if (!(context instanceof Reference)) {
-            _and_3 = false;
-          } else {
-            EReference _reference_SubsetOf = ModelPackage.eINSTANCE.getReference_SubsetOf();
-            boolean _equals_3 = Objects.equal(reference, _reference_SubsetOf);
-            _and_3 = _equals_3;
-          }
-          if (_and_3) {
+          if (((context instanceof Reference) && Objects.equal(reference, ModelPackage.eINSTANCE.getReference_SubsetOf()))) {
             return this.getScopeForReferenceOnReference_SubsetOf(context, reference);
           } else {
-            boolean _and_4 = false;
-            if (!(context instanceof Reference)) {
-              _and_4 = false;
-            } else {
-              EReference _reference_OppositeTo = ModelPackage.eINSTANCE.getReference_OppositeTo();
-              boolean _equals_4 = Objects.equal(reference, _reference_OppositeTo);
-              _and_4 = _equals_4;
-            }
-            if (_and_4) {
+            if (((context instanceof Reference) && Objects.equal(reference, ModelPackage.eINSTANCE.getReference_OppositeTo()))) {
               return this.getScopeForReferenceOnReference_OppositeTo(context, reference);
             } else {
-              return super.getScope(context, reference);
+              if (((context instanceof Attribute) && Objects.equal(reference, ModelPackage.eINSTANCE.getProperty_RegulatedProperty()))) {
+                return this.getScopeForAttributeOnProperty_ReguletedProperty(context, reference);
+              } else {
+                if (((context instanceof Reference) && Objects.equal(reference, ModelPackage.eINSTANCE.getProperty_RegulatedProperty()))) {
+                  return this.getScopeForReferenceOnProperty_ReguletedProperty(context, reference);
+                } else {
+                  return super.getScope(context, reference);
+                }
+              }
             }
           }
         }
@@ -110,17 +78,7 @@ public class OntoLScopeProvider extends AbstractOntoLScopeProvider {
     final LinkedHashSet<Attribute> attributes = this._ontoLUtils.getAllAttributes(entity);
     final Function<Attribute, QualifiedName> _function = (Attribute att) -> {
       final Function1<Attribute, Boolean> _function_1 = (Attribute it) -> {
-        boolean _and = false;
-        String _name = it.getName();
-        String _name_1 = att.getName();
-        boolean _equals = _name.equals(_name_1);
-        if (!_equals) {
-          _and = false;
-        } else {
-          boolean _notEquals = (!Objects.equal(it, att));
-          _and = _notEquals;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf((it.getName().equals(att.getName()) && (!Objects.equal(it, att))));
       };
       boolean _exists = IterableExtensions.<Attribute>exists(attributes, _function_1);
       if (_exists) {
@@ -144,17 +102,7 @@ public class OntoLScopeProvider extends AbstractOntoLScopeProvider {
     final LinkedHashSet<Reference> references = this._ontoLUtils.getAllReferences(entity);
     final Function<Reference, QualifiedName> _function = (Reference ref) -> {
       final Function1<Reference, Boolean> _function_1 = (Reference it) -> {
-        boolean _and = false;
-        String _name = it.getName();
-        String _name_1 = ref.getName();
-        boolean _equals = _name.equals(_name_1);
-        if (!_equals) {
-          _and = false;
-        } else {
-          boolean _notEquals = (!Objects.equal(it, ref));
-          _and = _notEquals;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf((it.getName().equals(ref.getName()) && (!Objects.equal(it, ref))));
       };
       boolean _exists = IterableExtensions.<Reference>exists(references, _function_1);
       if (_exists) {
@@ -178,17 +126,7 @@ public class OntoLScopeProvider extends AbstractOntoLScopeProvider {
     final Set<Attribute> inheritedAtts = this._ontoLUtils.getAllInheritedAttributes(c);
     final Function<Attribute, QualifiedName> _function = (Attribute att) -> {
       final Function1<Attribute, Boolean> _function_1 = (Attribute it) -> {
-        boolean _and = false;
-        String _name = it.getName();
-        String _name_1 = att.getName();
-        boolean _equals = _name.equals(_name_1);
-        if (!_equals) {
-          _and = false;
-        } else {
-          boolean _notEquals = (!Objects.equal(it, att));
-          _and = _notEquals;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf((it.getName().equals(att.getName()) && (!Objects.equal(it, att))));
       };
       boolean _exists = IterableExtensions.<Attribute>exists(inheritedAtts, _function_1);
       if (_exists) {
@@ -212,17 +150,7 @@ public class OntoLScopeProvider extends AbstractOntoLScopeProvider {
     final Set<Reference> inheritedRefs = this._ontoLUtils.getAllInheritedReferences(c);
     final Function<Reference, QualifiedName> _function = (Reference ref) -> {
       final Function1<Reference, Boolean> _function_1 = (Reference it) -> {
-        boolean _and = false;
-        String _name = it.getName();
-        String _name_1 = ref.getName();
-        boolean _equals = _name.equals(_name_1);
-        if (!_equals) {
-          _and = false;
-        } else {
-          boolean _notEquals = (!Objects.equal(it, ref));
-          _and = _notEquals;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf((it.getName().equals(ref.getName()) && (!Objects.equal(it, ref))));
       };
       boolean _exists = IterableExtensions.<Reference>exists(inheritedRefs, _function_1);
       if (_exists) {
@@ -240,15 +168,15 @@ public class OntoLScopeProvider extends AbstractOntoLScopeProvider {
     return Scopes.<Reference>scopeFor(inheritedRefs, _function, _scopeFor);
   }
   
-  public IScope getScopeForReferenceOnReference_OppositeTo(final EObject context, final EReference reference) {
+  private IScope getScopeForReferenceOnReference_OppositeTo(final EObject context, final EReference reference) {
     EObject _eContainer = context.eContainer();
     final OntoLClass c = ((OntoLClass) _eContainer);
     final Reference ref = ((Reference) context);
-    OntoLClass _propertyClass = ref.getPropertyClass();
-    EList<Reference> _references = _propertyClass.getReferences();
+    OntoLClass _propertyType = ref.getPropertyType();
+    EList<Reference> _references = _propertyType.getReferences();
     final Function1<Reference, Boolean> _function = (Reference it) -> {
-      OntoLClass _propertyClass_1 = it.getPropertyClass();
-      return Boolean.valueOf(Objects.equal(_propertyClass_1, c));
+      OntoLClass _propertyType_1 = it.getPropertyType();
+      return Boolean.valueOf(Objects.equal(_propertyType_1, c));
     };
     Iterable<Reference> _filter = IterableExtensions.<Reference>filter(_references, _function);
     final Function<Reference, QualifiedName> _function_1 = (Reference it) -> {
@@ -258,5 +186,35 @@ public class OntoLScopeProvider extends AbstractOntoLScopeProvider {
     EList<Reference> _references_1 = c.getReferences();
     IScope _scopeFor = Scopes.scopeFor(_references_1);
     return Scopes.<Reference>scopeFor(_filter, _function_1, _scopeFor);
+  }
+  
+  private IScope getScopeForAttributeOnProperty_ReguletedProperty(final EObject context, final EReference reference) {
+    EObject _eContainer = context.eContainer();
+    final OntoLClass c = ((OntoLClass) _eContainer);
+    OntoLClass _basetype = null;
+    if (c!=null) {
+      _basetype=c.getBasetype();
+    }
+    final EList<Attribute> elements = _basetype.getAttributes();
+    final Function<Attribute, QualifiedName> _function = (Attribute it) -> {
+      String _name = it.getName();
+      return QualifiedName.create(_name);
+    };
+    return Scopes.<Attribute>scopeFor(elements, _function, IScope.NULLSCOPE);
+  }
+  
+  private IScope getScopeForReferenceOnProperty_ReguletedProperty(final EObject context, final EReference reference) {
+    EObject _eContainer = context.eContainer();
+    final OntoLClass c = ((OntoLClass) _eContainer);
+    OntoLClass _basetype = null;
+    if (c!=null) {
+      _basetype=c.getBasetype();
+    }
+    final EList<Reference> elements = _basetype.getReferences();
+    final Function<Reference, QualifiedName> _function = (Reference it) -> {
+      String _name = it.getName();
+      return QualifiedName.create(_name);
+    };
+    return Scopes.<Reference>scopeFor(elements, _function, IScope.NULLSCOPE);
   }
 }

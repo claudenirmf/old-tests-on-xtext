@@ -199,26 +199,9 @@ public class ModelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.VALUE: {
-				Value value = (Value)theEObject;
-				T result = caseValue(value);
-				if (result == null) result = caseModelElement(value);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.REFERENCE_VALUE: {
-				ReferenceValue referenceValue = (ReferenceValue)theEObject;
-				T result = caseReferenceValue(referenceValue);
-				if (result == null) result = caseValue(referenceValue);
-				if (result == null) result = caseModelElement(referenceValue);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case ModelPackage.DATA_VALUE: {
 				DataValue dataValue = (DataValue)theEObject;
 				T result = caseDataValue(dataValue);
-				if (result == null) result = caseValue(dataValue);
-				if (result == null) result = caseModelElement(dataValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -226,8 +209,6 @@ public class ModelSwitch<T> extends Switch<T> {
 				StringValue stringValue = (StringValue)theEObject;
 				T result = caseStringValue(stringValue);
 				if (result == null) result = caseDataValue(stringValue);
-				if (result == null) result = caseValue(stringValue);
-				if (result == null) result = caseModelElement(stringValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -235,8 +216,6 @@ public class ModelSwitch<T> extends Switch<T> {
 				NumberValue numberValue = (NumberValue)theEObject;
 				T result = caseNumberValue(numberValue);
 				if (result == null) result = caseDataValue(numberValue);
-				if (result == null) result = caseValue(numberValue);
-				if (result == null) result = caseModelElement(numberValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -244,8 +223,6 @@ public class ModelSwitch<T> extends Switch<T> {
 				BooleanValue booleanValue = (BooleanValue)theEObject;
 				T result = caseBooleanValue(booleanValue);
 				if (result == null) result = caseDataValue(booleanValue);
-				if (result == null) result = caseValue(booleanValue);
-				if (result == null) result = caseModelElement(booleanValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -253,8 +230,6 @@ public class ModelSwitch<T> extends Switch<T> {
 				NoneValue noneValue = (NoneValue)theEObject;
 				T result = caseNoneValue(noneValue);
 				if (result == null) result = caseDataValue(noneValue);
-				if (result == null) result = caseValue(noneValue);
-				if (result == null) result = caseModelElement(noneValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -262,8 +237,6 @@ public class ModelSwitch<T> extends Switch<T> {
 				ComplexDataValue complexDataValue = (ComplexDataValue)theEObject;
 				T result = caseComplexDataValue(complexDataValue);
 				if (result == null) result = caseDataValue(complexDataValue);
-				if (result == null) result = caseValue(complexDataValue);
-				if (result == null) result = caseModelElement(complexDataValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -523,36 +496,6 @@ public class ModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseReferenceAssignment(ReferenceAssignment object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseValue(Value object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Reference Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Reference Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseReferenceValue(ReferenceValue object) {
 		return null;
 	}
 

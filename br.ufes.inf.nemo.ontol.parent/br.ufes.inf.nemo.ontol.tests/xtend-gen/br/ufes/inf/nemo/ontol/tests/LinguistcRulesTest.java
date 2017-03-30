@@ -177,17 +177,17 @@ public class LinguistcRulesTest {
   public void testHasValidPowertypeRelation() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("module t { order 2 class A ispowertypeof B; orderless class B; }");
+      _builder.append("module t { order 2 class A isPowertypeOf B; orderless class B; }");
       final Model incorrectModelA = this._parseHelper.parse(_builder);
       EClass _ontoLClass = ModelPackage.eINSTANCE.getOntoLClass();
       this._validationTestHelper.assertError(incorrectModelA, _ontoLClass, LinguisticRules.INVALID_POWERTYPE_RELATION);
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("module t { order 2 class A ispowertypeof B; order 2 class B; }");
+      _builder_1.append("module t { order 2 class A isPowertypeOf B; order 2 class B; }");
       final Model incorrectModelB = this._parseHelper.parse(_builder_1);
       EClass _ontoLClass_1 = ModelPackage.eINSTANCE.getOntoLClass();
       this._validationTestHelper.assertError(incorrectModelB, _ontoLClass_1, LinguisticRules.INVALID_POWERTYPE_RELATION);
       StringConcatenation _builder_2 = new StringConcatenation();
-      _builder_2.append("module t { order 3 class A ispowertypeof B; order 3 class B; }");
+      _builder_2.append("module t { order 3 class A isPowertypeOf B; order 3 class B; }");
       final Model incorrectModelC = this._parseHelper.parse(_builder_2);
       EClass _ontoLClass_2 = ModelPackage.eINSTANCE.getOntoLClass();
       this._validationTestHelper.assertError(incorrectModelC, _ontoLClass_2, LinguisticRules.INVALID_POWERTYPE_RELATION);
@@ -195,10 +195,10 @@ public class LinguistcRulesTest {
       _builder_3.append("module t {");
       _builder_3.newLine();
       _builder_3.append("\t\t\t\t");
-      _builder_3.append("order 2 class A ispowertypeof B; class B;");
+      _builder_3.append("order 2 class A isPowertypeOf B; class B;");
       _builder_3.newLine();
       _builder_3.append("\t\t\t\t");
-      _builder_3.append("order 3 class C ispowertypeof D; order 2 class D;");
+      _builder_3.append("order 3 class C isPowertypeOf D; order 2 class D;");
       _builder_3.newLine();
       _builder_3.append("\t\t\t");
       _builder_3.append("}");
@@ -213,22 +213,22 @@ public class LinguistcRulesTest {
   public void testHasValidSubordinators() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("module t { order 2 class A subordinatedto A; }");
+      _builder.append("module t { order 2 class A subordinatedTo A; }");
       final Model incorrectModelA = this._parseHelper.parse(_builder);
       EClass _ontoLClass = ModelPackage.eINSTANCE.getOntoLClass();
       this._validationTestHelper.assertError(incorrectModelA, _ontoLClass, LinguisticRules.INVALID_SUBORDINATOR);
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("module t { order 2 class A subordinatedto B; class B; }");
+      _builder_1.append("module t { order 2 class A subordinatedTo B; class B; }");
       final Model incorrectModelB = this._parseHelper.parse(_builder_1);
       EClass _ontoLClass_1 = ModelPackage.eINSTANCE.getOntoLClass();
       this._validationTestHelper.assertError(incorrectModelB, _ontoLClass_1, LinguisticRules.INVALID_SUBORDINATOR);
       StringConcatenation _builder_2 = new StringConcatenation();
-      _builder_2.append("module t { order 2 class A subordinatedto B; order 3 class B; }");
+      _builder_2.append("module t { order 2 class A subordinatedTo B; order 3 class B; }");
       final Model incorrectModelC = this._parseHelper.parse(_builder_2);
       EClass _ontoLClass_2 = ModelPackage.eINSTANCE.getOntoLClass();
       this._validationTestHelper.assertError(incorrectModelC, _ontoLClass_2, LinguisticRules.INVALID_SUBORDINATOR);
       StringConcatenation _builder_3 = new StringConcatenation();
-      _builder_3.append("module t { order 2 class A subordinatedto B; order 2 class B; }");
+      _builder_3.append("module t { order 2 class A subordinatedTo B; order 2 class B; }");
       final Model correctModel = this._parseHelper.parse(_builder_3);
       this._validationTestHelper.assertNoErrors(correctModel);
     } catch (Throwable _e) {
@@ -362,7 +362,7 @@ public class LinguistcRulesTest {
       _builder.append("order 2 class XA; ");
       _builder.newLine();
       _builder.append("\t\t\t\t");
-      _builder.append("order 2 class XB subordinatedto XA;");
+      _builder.append("order 2 class XB subordinatedTo XA;");
       _builder.newLine();
       _builder.append("\t\t\t\t");
       _builder.append("class YA:XA; class YB:XB;");
@@ -377,7 +377,7 @@ public class LinguistcRulesTest {
       _builder_1.append("module t{");
       _builder_1.newLine();
       _builder_1.append("\t\t\t\t");
-      _builder_1.append("order 2 class XA; order 2 class XB subordinatedto XA;");
+      _builder_1.append("order 2 class XA; order 2 class XB subordinatedTo XA;");
       _builder_1.newLine();
       _builder_1.append("\t\t\t\t");
       _builder_1.append("class YA:XA; class YB:XB specializes YA;");
@@ -395,7 +395,7 @@ public class LinguistcRulesTest {
   public void testHasSimpleSubordinationCycle() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("module t{ orderless class A subordinatedto A; }");
+      _builder.append("module t{ orderless class A subordinatedTo A; }");
       final Model incorrectModelA = this._parseHelper.parse(_builder);
       EClass _ontoLClass = ModelPackage.eINSTANCE.getOntoLClass();
       this._validationTestHelper.assertError(incorrectModelA, _ontoLClass, 
@@ -404,10 +404,10 @@ public class LinguistcRulesTest {
       _builder_1.append("module t{");
       _builder_1.newLine();
       _builder_1.append("\t\t\t\t");
-      _builder_1.append("orderless class A subordinatedto B;");
+      _builder_1.append("orderless class A subordinatedTo B;");
       _builder_1.newLine();
       _builder_1.append("\t\t\t\t");
-      _builder_1.append("orderless class B subordinatedto A;");
+      _builder_1.append("orderless class B subordinatedTo A;");
       _builder_1.newLine();
       _builder_1.append("\t\t\t");
       _builder_1.append("}");
@@ -419,7 +419,7 @@ public class LinguistcRulesTest {
       _builder_2.append("module t{");
       _builder_2.newLine();
       _builder_2.append("\t\t\t\t");
-      _builder_2.append("orderless class A subordinatedto B;");
+      _builder_2.append("orderless class A subordinatedTo B;");
       _builder_2.newLine();
       _builder_2.append("\t\t\t\t");
       _builder_2.append("orderless class B specializes A;");
@@ -437,7 +437,7 @@ public class LinguistcRulesTest {
       _builder_3.append("orderless class A;");
       _builder_3.newLine();
       _builder_3.append("\t\t\t\t");
-      _builder_3.append("orderless class B specializes A subordinatedto A;");
+      _builder_3.append("orderless class B specializes A subordinatedTo A;");
       _builder_3.newLine();
       _builder_3.append("\t\t\t");
       _builder_3.append("}");
@@ -874,25 +874,37 @@ public class LinguistcRulesTest {
       _builder.append("module t {");
       _builder.newLine();
       _builder.append("\t\t\t\t");
-      _builder.append("include br.ufes.inf.nemo.ontol.lib.datatypes; import br.ufes.inf.nemo.ontol.lib.datatypes.*;");
-      _builder.newLine();
+      _builder.append("include ");
+      _builder.append(OntoLLib.DATATYPES_LIB, "\t\t\t\t");
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t\t");
-      _builder.append("class Color specializes DataType {");
-      _builder.newLine();
+      _builder.append("import ");
+      _builder.append(OntoLLib.DATATYPES_LIB, "\t\t\t\t");
+      _builder.append(".*;");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t\t\t");
+      _builder.append("class Color specializes ");
+      _builder.append(OntoLLib.DATATYPES_DATATYPE, "\t\t\t\t");
+      _builder.append(" {");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t\t\t");
-      _builder.append("att red : Number");
-      _builder.newLine();
+      _builder.append("att red : ");
+      _builder.append(OntoLLib.DATATYPES_NUMBER, "\t\t\t\t\t");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t\t\t");
-      _builder.append("att blue : Number");
-      _builder.newLine();
+      _builder.append("att blue : ");
+      _builder.append(OntoLLib.DATATYPES_NUMBER, "\t\t\t\t\t");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t\t\t");
-      _builder.append("att green : Number");
-      _builder.newLine();
+      _builder.append("att green : ");
+      _builder.append(OntoLLib.DATATYPES_NUMBER, "\t\t\t\t\t");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t\t");
       _builder.append("};");
       _builder.newLine();
       _builder.append("\t\t\t\t");
-      _builder.append("individual Black : Color { att red=0\tatt green=0\tatt blue=0 };");
+      _builder.append("individual Black : Color { att red=0 att green=0 att blue=0 };");
       _builder.newLine();
       _builder.append("\t\t\t\t");
       _builder.append("class ColoredObject { att color : [1..2] Color };");

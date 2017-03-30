@@ -17,7 +17,7 @@ module ontol.core.base
 	
 	orderless class Thing : OrderlessClass, Category;
 	
-	orderless class Class : OrderlessClass, Category specializes Thing, ontol.core.endurant.Endurant;
+	orderless class Class : OrderlessClass, Category specializes Thing, Endurant;
 	class Individual : FirstOrderClass, Category specializes Thing;
 	
 	disjoint complete genset has_instances
@@ -32,7 +32,7 @@ module ontol.core.base
 		specifics OrderedClass, OrderlessClass;
 	
 	order 2 class FirstOrderClass : HighOrderClass, Category
-		specializes OrderedClass ispowertypeof Individual;
+		specializes OrderedClass isPowertypeOf Individual;
 	orderless class HighOrderClass : OrderlessClass, Category
 			specializes OrderedClass;
 	

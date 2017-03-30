@@ -9,12 +9,6 @@ module ontol.core.meta
 	include ontol.core.base;
 	include ontol.core.endurant;
 	
-	/*
-	 * 	requires br.ufes.inf.nemo.ontol.lib.datatypes;
-	 *	requires ontol.core.base;
-	 *	requires ontol.core.ontology;
-	 */
-	
 	/**		 					RIGIDITY		 					*/
 	
 	orderless class RigidClass : OrderlessClass, Category specializes Class;
@@ -39,30 +33,30 @@ module ontol.core.meta
 	orderless class RigidSortalClass : OrderlessClass, Category
 		specializes RigidClass, SortalClass;
 	orderless class Kind : OrderlessClass, Category
-		specializes RigidSortalClass partitions ontol.core.endurant.Endurant;
+		specializes RigidSortalClass partitions Endurant;
 	orderless class Subkind : OrderlessClass, Category
-		specializes RigidSortalClass subordinatedto Kind;
+		specializes RigidSortalClass subordinatedTo Kind;
 	
 	disjoint complete genset identity_principle_suply
 		general RigidSortalClass
 		specifics Kind, Subkind;
 	
 	orderless class Sortal : OrderlessClass, Category
-		specializes SemiRigidClass, SortalClass subordinatedto Kind;
+		specializes SemiRigidClass, SortalClass subordinatedTo Kind;
 	
 	/**		 					ANTI-RIGID SORTALS		 					*/
 	
 	orderless class AntiRigidSortalClass : OrderlessClass, Category
 		specializes AntiRigidClass, SortalClass;
 	orderless class Role : OrderlessClass, Category
-		specializes AntiRigidSortalClass subordinatedto Kind
+		specializes AntiRigidSortalClass subordinatedTo Kind
 	{
-		regularity ref isInvolvedIn : ontol.core.endurant.Relator
+		regularity ref isInvolvedIn : Relator
 	};
 	orderless class Phase : OrderlessClass, Category
-		specializes AntiRigidSortalClass subordinatedto Kind
+		specializes AntiRigidSortalClass subordinatedTo Kind
 	{
-		regularity ref classifiedOver : [1..*] ontol.core.endurant.IntrinsicMoment
+		regularity ref classifiedOver : [1..*] IntrinsicMoment
 	};
 	
 	disjoint complete genset contingent_classification
@@ -76,14 +70,14 @@ module ontol.core.meta
 	orderless class Category : OrderlessClass, Category specializes RigidClass, MixinClass;
 	
 	orderless class Mixin : OrderlessClass, Category
-		specializes SemiRigidClass, MixinClass subordinatedto Category;
+		specializes SemiRigidClass, MixinClass subordinatedTo Category;
 	
 	/**		 					ANTI-RIGID MIXINS		 					*/
 	
 	orderless class AntiRigidMixinClass : OrderlessClass, Category
-		specializes AntiRigidClass, MixinClass subordinatedto Category;
+		specializes AntiRigidClass, MixinClass subordinatedTo Category;
 	orderless class RoleMixin : OrderlessClass, Category
-		specializes AntiRigidMixinClass subordinatedto Category;
+		specializes AntiRigidMixinClass subordinatedTo Category;
 	orderless class PhaseMixin : OrderlessClass, Category
 		specializes AntiRigidMixinClass;
 	

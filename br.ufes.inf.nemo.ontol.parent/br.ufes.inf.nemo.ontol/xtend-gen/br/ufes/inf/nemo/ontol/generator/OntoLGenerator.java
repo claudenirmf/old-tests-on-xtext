@@ -68,16 +68,7 @@ public class OntoLGenerator extends AbstractGenerator {
       final EList<Model> includes = model.getIncludes();
       EList<EObject> _contents_2 = xmiResource.getContents();
       _contents_2.add(model);
-      boolean _and = false;
-      boolean _notEquals = (!Objects.equal(includes, null));
-      if (!_notEquals) {
-        _and = false;
-      } else {
-        int _size = includes.size();
-        boolean _greaterThan = (_size > 0);
-        _and = _greaterThan;
-      }
-      if (_and) {
+      if (((!Objects.equal(includes, null)) && (includes.size() > 0))) {
         EList<EObject> _contents_3 = xmiResource.getContents();
         EList<Model> _includes = model.getIncludes();
         _contents_3.addAll(_includes);

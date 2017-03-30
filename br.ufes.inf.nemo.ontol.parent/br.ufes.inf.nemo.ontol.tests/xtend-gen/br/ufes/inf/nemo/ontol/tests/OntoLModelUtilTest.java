@@ -8,13 +8,11 @@ import br.ufes.inf.nemo.ontol.tests.OntoLInjectorProvider;
 import br.ufes.inf.nemo.ontol.util.OntoLUtils;
 import br.ufes.inf.nemo.ontol.validation.LinguisticRules;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -41,9 +39,6 @@ public class OntoLModelUtilTest {
   @Inject
   @Extension
   private OntoLUtils _ontoLUtils;
-  
-  @Inject
-  private Provider<ResourceSet> rsp;
   
   @Test
   public void testClassHierarchyGetter() {
@@ -78,33 +73,8 @@ public class OntoLModelUtilTest {
       _elements.forEach(_function);
       OntoLClass _get = classes.get(3);
       Set<OntoLClass> list = this._ontoLUtils.classHierarchy(_get);
-      boolean _and = false;
-      boolean _and_1 = false;
-      boolean _and_2 = false;
-      OntoLClass _get_1 = classes.get(0);
-      boolean _contains = list.contains(_get_1);
-      if (!_contains) {
-        _and_2 = false;
-      } else {
-        OntoLClass _get_2 = classes.get(1);
-        boolean _contains_1 = list.contains(_get_2);
-        _and_2 = _contains_1;
-      }
-      if (!_and_2) {
-        _and_1 = false;
-      } else {
-        OntoLClass _get_3 = classes.get(2);
-        boolean _contains_2 = list.contains(_get_3);
-        _and_1 = _contains_2;
-      }
-      if (!_and_1) {
-        _and = false;
-      } else {
-        int _size = list.size();
-        boolean _equals = (_size == 3);
-        _and = _equals;
-      }
-      Assert.assertTrue(_and);
+      Assert.assertTrue(
+        (((list.contains(classes.get(0)) && list.contains(classes.get(1))) && list.contains(classes.get(2))) && (list.size() == 3)));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -151,7 +121,7 @@ public class OntoLModelUtilTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final Model model = this._parseHelper.parse(_builder);
+      this._parseHelper.parse(_builder);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

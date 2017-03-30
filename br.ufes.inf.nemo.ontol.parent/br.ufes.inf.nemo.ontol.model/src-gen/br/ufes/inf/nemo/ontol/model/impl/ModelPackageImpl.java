@@ -27,9 +27,8 @@ import br.ufes.inf.nemo.ontol.model.Property;
 import br.ufes.inf.nemo.ontol.model.PropertyAssignment;
 import br.ufes.inf.nemo.ontol.model.Reference;
 import br.ufes.inf.nemo.ontol.model.ReferenceAssignment;
-import br.ufes.inf.nemo.ontol.model.ReferenceValue;
+import br.ufes.inf.nemo.ontol.model.RegularityPropertyType;
 import br.ufes.inf.nemo.ontol.model.StringValue;
-import br.ufes.inf.nemo.ontol.model.Value;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -172,20 +171,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass valueEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass referenceValueEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass dataValueEClass = null;
 
 	/**
@@ -229,6 +214,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EEnum categorizationTypeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum regularityPropertyTypeEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -632,8 +624,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getProperty_Regularity() {
-		return (EAttribute)propertyEClass.getEStructuralFeatures().get(3);
+	public EReference getProperty_PropertyType() {
+		return (EReference)propertyEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -641,8 +633,26 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getProperty_PropertyClass() {
-		return (EReference)propertyEClass.getEStructuralFeatures().get(4);
+	public EAttribute getProperty_Regularity() {
+		return (EAttribute)propertyEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getProperty_RegularityType() {
+		return (EAttribute)propertyEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getProperty_RegulatedProperty() {
+		return (EReference)propertyEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -751,33 +761,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public EReference getReferenceAssignment_Assignments() {
 		return (EReference)referenceAssignmentEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getValue() {
-		return valueEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getReferenceValue() {
-		return referenceValueEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getReferenceValue_Value() {
-		return (EReference)referenceValueEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -902,6 +885,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getRegularityPropertyType() {
+		return regularityPropertyTypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ModelFactory getModelFactory() {
 		return (ModelFactory)getEFactoryInstance();
 	}
@@ -973,8 +965,10 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(propertyEClass, PROPERTY__NAME);
 		createEAttribute(propertyEClass, PROPERTY__LOWER_BOUND);
 		createEAttribute(propertyEClass, PROPERTY__UPPER_BOUND);
+		createEReference(propertyEClass, PROPERTY__PROPERTY_TYPE);
 		createEAttribute(propertyEClass, PROPERTY__REGULARITY);
-		createEReference(propertyEClass, PROPERTY__PROPERTY_CLASS);
+		createEAttribute(propertyEClass, PROPERTY__REGULARITY_TYPE);
+		createEReference(propertyEClass, PROPERTY__REGULATED_PROPERTY);
 
 		attributeEClass = createEClass(ATTRIBUTE);
 		createEReference(attributeEClass, ATTRIBUTE__SUBSET_OF);
@@ -992,11 +986,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		referenceAssignmentEClass = createEClass(REFERENCE_ASSIGNMENT);
 		createEReference(referenceAssignmentEClass, REFERENCE_ASSIGNMENT__REFERENCE);
 		createEReference(referenceAssignmentEClass, REFERENCE_ASSIGNMENT__ASSIGNMENTS);
-
-		valueEClass = createEClass(VALUE);
-
-		referenceValueEClass = createEClass(REFERENCE_VALUE);
-		createEReference(referenceValueEClass, REFERENCE_VALUE__VALUE);
 
 		dataValueEClass = createEClass(DATA_VALUE);
 
@@ -1018,6 +1007,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		// Create enums
 		categorizationTypeEEnum = createEEnum(CATEGORIZATION_TYPE);
+		regularityPropertyTypeEEnum = createEEnum(REGULARITY_PROPERTY_TYPE);
 	}
 
 	/**
@@ -1066,9 +1056,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		propertyAssignmentEClass.getESuperTypes().add(this.getModelElement());
 		attributeAssignmentEClass.getESuperTypes().add(this.getPropertyAssignment());
 		referenceAssignmentEClass.getESuperTypes().add(this.getPropertyAssignment());
-		valueEClass.getESuperTypes().add(this.getModelElement());
-		referenceValueEClass.getESuperTypes().add(this.getValue());
-		dataValueEClass.getESuperTypes().add(this.getValue());
 		stringValueEClass.getESuperTypes().add(this.getDataValue());
 		numberValueEClass.getESuperTypes().add(this.getDataValue());
 		booleanValueEClass.getESuperTypes().add(this.getDataValue());
@@ -1101,7 +1088,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getOntoLClass_Subordinators(), this.getOntoLClass(), null, "subordinators", null, 0, -1, OntoLClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOntoLClass_Attributes(), this.getAttribute(), null, "attributes", null, 0, -1, OntoLClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOntoLClass_References(), this.getReference(), null, "references", null, 0, -1, OntoLClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getOntoLClass_CategorizationType(), this.getCategorizationType(), "categorizationType", "none", 0, 1, OntoLClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOntoLClass_CategorizationType(), this.getCategorizationType(), "categorizationType", null, 0, 1, OntoLClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(orderlessClassEClass, OrderlessClass.class, "OrderlessClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1124,8 +1111,10 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getProperty_Name(), theEcorePackage.getEString(), "name", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getProperty_LowerBound(), theEcorePackage.getEIntegerObject(), "lowerBound", "1", 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getProperty_UpperBound(), theEcorePackage.getEIntegerObject(), "upperBound", "1", 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProperty_PropertyType(), this.getOntoLClass(), null, "propertyType", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getProperty_Regularity(), theEcorePackage.getEBooleanObject(), "regularity", "false", 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getProperty_PropertyClass(), this.getOntoLClass(), null, "propertyClass", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProperty_RegularityType(), this.getRegularityPropertyType(), "regularityType", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProperty_RegulatedProperty(), this.getProperty(), null, "regulatedProperty", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAttribute_SubsetOf(), this.getAttribute(), null, "subsetOf", null, 0, -1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1142,12 +1131,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(referenceAssignmentEClass, ReferenceAssignment.class, "ReferenceAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getReferenceAssignment_Reference(), this.getReference(), null, "reference", null, 0, 1, ReferenceAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getReferenceAssignment_Assignments(), this.getReferenceValue(), null, "assignments", null, 0, -1, ReferenceAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(valueEClass, Value.class, "Value", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(referenceValueEClass, ReferenceValue.class, "ReferenceValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getReferenceValue_Value(), this.getEntityDeclaration(), null, "value", null, 0, 1, ReferenceValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getReferenceAssignment_Assignments(), this.getEntityDeclaration(), null, "assignments", null, 0, -1, ReferenceAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dataValueEClass, DataValue.class, "DataValue", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1170,11 +1154,18 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		// Initialize enums and add enum literals
 		initEEnum(categorizationTypeEEnum, CategorizationType.class, "CategorizationType");
-		addEEnumLiteral(categorizationTypeEEnum, CategorizationType.NONE);
 		addEEnumLiteral(categorizationTypeEEnum, CategorizationType.CATEGORIZER);
 		addEEnumLiteral(categorizationTypeEEnum, CategorizationType.DISJOINT_CATEGORIZER);
 		addEEnumLiteral(categorizationTypeEEnum, CategorizationType.COMPLETE_CATEGORIZER);
 		addEEnumLiteral(categorizationTypeEEnum, CategorizationType.PARTITIONER);
+
+		initEEnum(regularityPropertyTypeEEnum, RegularityPropertyType.class, "RegularityPropertyType");
+		addEEnumLiteral(regularityPropertyTypeEEnum, RegularityPropertyType.DETERMINES_MAX_VALUE);
+		addEEnumLiteral(regularityPropertyTypeEEnum, RegularityPropertyType.DETERMINES_MIN_VALUE);
+		addEEnumLiteral(regularityPropertyTypeEEnum, RegularityPropertyType.DETERMINES_VALUE);
+		addEEnumLiteral(regularityPropertyTypeEEnum, RegularityPropertyType.DETERMINES_POSSIBLE_VALUES);
+		addEEnumLiteral(regularityPropertyTypeEEnum, RegularityPropertyType.DETERMINES_TYPE);
+		addEEnumLiteral(regularityPropertyTypeEEnum, RegularityPropertyType.DETERMINES_POSSIBLE_TYPES);
 
 		// Create resource
 		createResource(eNS_URI);

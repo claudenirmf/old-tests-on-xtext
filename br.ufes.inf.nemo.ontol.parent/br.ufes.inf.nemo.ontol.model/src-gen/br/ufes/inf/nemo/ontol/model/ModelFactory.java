@@ -139,15 +139,6 @@ public interface ModelFactory extends EFactory {
 	ReferenceAssignment createReferenceAssignment();
 
 	/**
-	 * Returns a new object of class '<em>Reference Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Reference Value</em>'.
-	 * @generated
-	 */
-	ReferenceValue createReferenceValue();
-
-	/**
 	 * Returns a new object of class '<em>String Value</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

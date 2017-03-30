@@ -2,6 +2,7 @@
  */
 package br.ufes.inf.nemo.ontol.model;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -13,5 +14,5 @@ package br.ufes.inf.nemo.ontol.model;
  * @model abstract="true"
  * @generated
  */
-public interface DataValue extends Value {
+public interface DataValue extends EObject {
 } // DataValue

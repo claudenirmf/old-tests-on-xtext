@@ -14,8 +14,6 @@ import br.ufes.inf.nemo.ontol.model.Property
 import br.ufes.inf.nemo.ontol.model.Reference
 import java.util.LinkedHashSet
 import java.util.Set
-import br.ufes.inf.nemo.ontol.model.Value
-import br.ufes.inf.nemo.ontol.model.ReferenceValue
 import br.ufes.inf.nemo.ontol.model.StringValue
 import br.ufes.inf.nemo.ontol.model.NumberValue
 import br.ufes.inf.nemo.ontol.model.BooleanValue
@@ -25,6 +23,7 @@ import br.ufes.inf.nemo.ontol.lib.OntoLLib
 import com.google.inject.Inject
 import br.ufes.inf.nemo.ontol.model.ComplexDataValue
 import br.ufes.inf.nemo.ontol.model.AttributeAssignment
+import org.eclipse.emf.ecore.EObject
 
 class OntoLUtils {
 	
@@ -69,7 +68,7 @@ class OntoLUtils {
 	def getBasicInstantiatedClasses(EntityDeclaration e) {
 		if(e.eContainer instanceof ComplexDataValue){
 			val attAssign = (e.eContainer.eContainer as AttributeAssignment)
-			val propClass = attAssign.attribute.propertyClass
+			val propClass = attAssign.attribute.propertyType
 			val basicInstantiatedClasses = new LinkedHashSet<OntoLClass>()
 			basicInstantiatedClasses.add(propClass)
 			return basicInstantiatedClasses
@@ -161,7 +160,7 @@ class OntoLUtils {
 	 * 
 	 * @author Claudenir Fonseca
 	 */
-	def boolean isConformantTo(Value assignment, OntoLClass assigType) {
+	def boolean isConformantTo(EObject assignment, OntoLClass assigType) {
 		if(assignment instanceof StringValue){
 			return true
 		} else if(assignment instanceof NumberValue){
@@ -170,40 +169,20 @@ class OntoLUtils {
 			return true
 		} else if(assignment instanceof NoneValue){
 			return true;
-		} else if(assignment instanceof ReferenceValue){
-			val actualValue = assignment.value
-			if(actualValue.allInstantiatedClasses.contains(assigType))
+		} else if(assignment instanceof EntityDeclaration){
+			if(assignment.allInstantiatedClasses.contains(assigType))
 				 return true
 		} else if(assignment instanceof ComplexDataValue){
 			val actualValue = if(assignment.value!=null) assignment.value	else assignment.unnamedValue
 			if(actualValue.allInstantiatedClasses.contains(assigType))
 				return true
-//			val datatype = assigType.getLibClass(OntoLLib.DATATYPES_DATATYPE)
-//			if(!assigType.classHierarchy.contains(datatype))
-//				return false
-//			else
-//				return true
+			val datatype = assigType.getLibClass(OntoLLib.DATATYPES_DATATYPE)
+			if(!assigType.classHierarchy.contains(datatype))
+				return false
+			else
+				return true
 		}
 		return false
-//		if (assignment instanceof ReferenceValue) {
-//			if (assignment.value == null || !assignment.value.allFixedTypesList.contains(type)) {
-//				return false
-//			} else {
-//				return true
-//			}
-//		} else if (assignment instanceof ListValue) {
-//			return !assignment.value.exists[!it.isConformantTo(type)]
-//		} else if (assignment instanceof StringValue && type.getTypeFromIndex(OntoLLib.DATATYPES_STRING) == type) {
-//			return true
-//		} else if (assignment instanceof NumberValue && type.getTypeFromIndex(OntoLLib.DATATYPES_INTEGER) == type) {
-//			return true
-//		} else if (assignment instanceof BooleanValue && type.getTypeFromIndex(OntoLLib.DATATYPES_BOOLEAN) == type) {
-//			return true
-//		} else if (assignment instanceof NoneValue) {
-//			return true
-//		} else {
-//			return false
-//		}
 	}
 
 }

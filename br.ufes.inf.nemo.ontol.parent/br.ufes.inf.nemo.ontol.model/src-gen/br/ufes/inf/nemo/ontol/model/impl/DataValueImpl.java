@@ -7,6 +7,8 @@ import br.ufes.inf.nemo.ontol.model.ModelPackage;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Data Value</b></em>'.
@@ -14,7 +16,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public abstract class DataValueImpl extends ValueImpl implements DataValue {
+public abstract class DataValueImpl extends MinimalEObjectImpl.Container implements DataValue {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

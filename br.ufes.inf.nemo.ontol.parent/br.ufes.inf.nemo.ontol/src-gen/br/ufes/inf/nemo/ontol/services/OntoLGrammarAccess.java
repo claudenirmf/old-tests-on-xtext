@@ -326,23 +326,30 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives_1_1 = (Alternatives)cGroup_1.eContents().get(1);
 		private final Assignment cAttributesAssignment_1_1_0 = (Assignment)cAlternatives_1_1.eContents().get(0);
 		private final RuleCall cAttributesAttributeParserRuleCall_1_1_0_0 = (RuleCall)cAttributesAssignment_1_1_0.eContents().get(0);
-		private final Assignment cAttAssignmentsAssignment_1_1_1 = (Assignment)cAlternatives_1_1.eContents().get(1);
-		private final RuleCall cAttAssignmentsAttributeAssignmentParserRuleCall_1_1_1_0 = (RuleCall)cAttAssignmentsAssignment_1_1_1.eContents().get(0);
-		private final Assignment cReferencesAssignment_1_1_2 = (Assignment)cAlternatives_1_1.eContents().get(2);
-		private final RuleCall cReferencesReferenceParserRuleCall_1_1_2_0 = (RuleCall)cReferencesAssignment_1_1_2.eContents().get(0);
-		private final Assignment cRefAssignmentsAssignment_1_1_3 = (Assignment)cAlternatives_1_1.eContents().get(3);
-		private final RuleCall cRefAssignmentsReferenceAssignmentParserRuleCall_1_1_3_0 = (RuleCall)cRefAssignmentsAssignment_1_1_3.eContents().get(0);
+		private final Assignment cAttributesAssignment_1_1_1 = (Assignment)cAlternatives_1_1.eContents().get(1);
+		private final RuleCall cAttributesRegularityAttributeParserRuleCall_1_1_1_0 = (RuleCall)cAttributesAssignment_1_1_1.eContents().get(0);
+		private final Assignment cAttAssignmentsAssignment_1_1_2 = (Assignment)cAlternatives_1_1.eContents().get(2);
+		private final RuleCall cAttAssignmentsAttributeAssignmentParserRuleCall_1_1_2_0 = (RuleCall)cAttAssignmentsAssignment_1_1_2.eContents().get(0);
+		private final Assignment cReferencesAssignment_1_1_3 = (Assignment)cAlternatives_1_1.eContents().get(3);
+		private final RuleCall cReferencesReferenceParserRuleCall_1_1_3_0 = (RuleCall)cReferencesAssignment_1_1_3.eContents().get(0);
+		private final Assignment cReferencesAssignment_1_1_4 = (Assignment)cAlternatives_1_1.eContents().get(4);
+		private final RuleCall cReferencesRegularityReferenceParserRuleCall_1_1_4_0 = (RuleCall)cReferencesAssignment_1_1_4.eContents().get(0);
+		private final Assignment cRefAssignmentsAssignment_1_1_5 = (Assignment)cAlternatives_1_1.eContents().get(5);
+		private final RuleCall cRefAssignmentsReferenceAssignmentParserRuleCall_1_1_5_0 = (RuleCall)cRefAssignmentsAssignment_1_1_5.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
 		
 		//OntoLClass:
 		//	(OrderlessClass | HOClass | FOClass) ('{' (attributes+=Attribute
+		//	| attributes+=RegularityAttribute
 		//	| attAssignments+=AttributeAssignment
 		//	| references+=Reference
+		//	| references+=RegularityReference
 		//	| refAssignments+=ReferenceAssignment)* '}')?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//(OrderlessClass | HOClass | FOClass) ('{' (attributes+=Attribute | attAssignments+=AttributeAssignment |
-		//references+=Reference | refAssignments+=ReferenceAssignment)* '}')?
+		//(OrderlessClass | HOClass | FOClass) ('{' (attributes+=Attribute | attributes+=RegularityAttribute |
+		//attAssignments+=AttributeAssignment | references+=Reference | references+=RegularityReference |
+		//refAssignments+=ReferenceAssignment)* '}')?
 		public Group getGroup() { return cGroup; }
 		
 		//(OrderlessClass | HOClass | FOClass)
@@ -357,15 +364,15 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		//FOClass
 		public RuleCall getFOClassParserRuleCall_0_2() { return cFOClassParserRuleCall_0_2; }
 		
-		//('{' (attributes+=Attribute | attAssignments+=AttributeAssignment | references+=Reference |
-		//refAssignments+=ReferenceAssignment)* '}')?
+		//('{' (attributes+=Attribute | attributes+=RegularityAttribute | attAssignments+=AttributeAssignment |
+		//references+=Reference | references+=RegularityReference | refAssignments+=ReferenceAssignment)* '}')?
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1_0() { return cLeftCurlyBracketKeyword_1_0; }
 		
-		//(attributes+=Attribute | attAssignments+=AttributeAssignment | references+=Reference |
-		//refAssignments+=ReferenceAssignment)*
+		//(attributes+=Attribute | attributes+=RegularityAttribute | attAssignments+=AttributeAssignment | references+=Reference |
+		//references+=RegularityReference | refAssignments+=ReferenceAssignment)*
 		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
 		
 		//attributes+=Attribute
@@ -374,23 +381,35 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		//Attribute
 		public RuleCall getAttributesAttributeParserRuleCall_1_1_0_0() { return cAttributesAttributeParserRuleCall_1_1_0_0; }
 		
+		//attributes+=RegularityAttribute
+		public Assignment getAttributesAssignment_1_1_1() { return cAttributesAssignment_1_1_1; }
+		
+		//RegularityAttribute
+		public RuleCall getAttributesRegularityAttributeParserRuleCall_1_1_1_0() { return cAttributesRegularityAttributeParserRuleCall_1_1_1_0; }
+		
 		//attAssignments+=AttributeAssignment
-		public Assignment getAttAssignmentsAssignment_1_1_1() { return cAttAssignmentsAssignment_1_1_1; }
+		public Assignment getAttAssignmentsAssignment_1_1_2() { return cAttAssignmentsAssignment_1_1_2; }
 		
 		//AttributeAssignment
-		public RuleCall getAttAssignmentsAttributeAssignmentParserRuleCall_1_1_1_0() { return cAttAssignmentsAttributeAssignmentParserRuleCall_1_1_1_0; }
+		public RuleCall getAttAssignmentsAttributeAssignmentParserRuleCall_1_1_2_0() { return cAttAssignmentsAttributeAssignmentParserRuleCall_1_1_2_0; }
 		
 		//references+=Reference
-		public Assignment getReferencesAssignment_1_1_2() { return cReferencesAssignment_1_1_2; }
+		public Assignment getReferencesAssignment_1_1_3() { return cReferencesAssignment_1_1_3; }
 		
 		//Reference
-		public RuleCall getReferencesReferenceParserRuleCall_1_1_2_0() { return cReferencesReferenceParserRuleCall_1_1_2_0; }
+		public RuleCall getReferencesReferenceParserRuleCall_1_1_3_0() { return cReferencesReferenceParserRuleCall_1_1_3_0; }
+		
+		//references+=RegularityReference
+		public Assignment getReferencesAssignment_1_1_4() { return cReferencesAssignment_1_1_4; }
+		
+		//RegularityReference
+		public RuleCall getReferencesRegularityReferenceParserRuleCall_1_1_4_0() { return cReferencesRegularityReferenceParserRuleCall_1_1_4_0; }
 		
 		//refAssignments+=ReferenceAssignment
-		public Assignment getRefAssignmentsAssignment_1_1_3() { return cRefAssignmentsAssignment_1_1_3; }
+		public Assignment getRefAssignmentsAssignment_1_1_5() { return cRefAssignmentsAssignment_1_1_5; }
 		
 		//ReferenceAssignment
-		public RuleCall getRefAssignmentsReferenceAssignmentParserRuleCall_1_1_3_0() { return cRefAssignmentsReferenceAssignmentParserRuleCall_1_1_3_0; }
+		public RuleCall getRefAssignmentsReferenceAssignmentParserRuleCall_1_1_5_0() { return cRefAssignmentsReferenceAssignmentParserRuleCall_1_1_5_0; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_1_2() { return cRightCurlyBracketKeyword_1_2; }
@@ -423,7 +442,7 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cSuperClassesOntoLClassCrossReference_4_2_1_0 = (CrossReference)cSuperClassesAssignment_4_2_1.eContents().get(0);
 		private final RuleCall cSuperClassesOntoLClassQualifiedNameParserRuleCall_4_2_1_0_1 = (RuleCall)cSuperClassesOntoLClassCrossReference_4_2_1_0.eContents().get(1);
 		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
-		private final Keyword cSubordinatedtoKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Keyword cSubordinatedToKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
 		private final Assignment cSubordinatorsAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
 		private final CrossReference cSubordinatorsOntoLClassCrossReference_5_1_0 = (CrossReference)cSubordinatorsAssignment_5_1.eContents().get(0);
 		private final RuleCall cSubordinatorsOntoLClassQualifiedNameParserRuleCall_5_1_0_1 = (RuleCall)cSubordinatorsOntoLClassCrossReference_5_1_0.eContents().get(1);
@@ -440,7 +459,7 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cBasetypeOntoLClassCrossReference_6_0_1_0 = (CrossReference)cBasetypeAssignment_6_0_1.eContents().get(0);
 		private final RuleCall cBasetypeOntoLClassQualifiedNameParserRuleCall_6_0_1_0_1 = (RuleCall)cBasetypeOntoLClassCrossReference_6_0_1_0.eContents().get(1);
 		private final Group cGroup_6_1 = (Group)cAlternatives_6.eContents().get(1);
-		private final Keyword cIspowertypeofKeyword_6_1_0 = (Keyword)cGroup_6_1.eContents().get(0);
+		private final Keyword cIsPowertypeOfKeyword_6_1_0 = (Keyword)cGroup_6_1.eContents().get(0);
 		private final Assignment cPowertypeOfAssignment_6_1_1 = (Assignment)cGroup_6_1.eContents().get(1);
 		private final CrossReference cPowertypeOfOntoLClassCrossReference_6_1_1_0 = (CrossReference)cPowertypeOfAssignment_6_1_1.eContents().get(0);
 		private final RuleCall cPowertypeOfOntoLClassQualifiedNameParserRuleCall_6_1_1_0_1 = (RuleCall)cPowertypeOfOntoLClassCrossReference_6_1_1_0.eContents().get(1);
@@ -448,16 +467,16 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		//OrderlessClass:
 		//	'orderless' 'class' name=ID (':' instantiatedClasses+=[OntoLClass|QualifiedName] (','
 		//	instantiatedClasses+=[OntoLClass|QualifiedName])*)? ('specializes' superClasses+=[OntoLClass|QualifiedName] (','
-		//	superClasses+=[OntoLClass|QualifiedName])*)? ('subordinatedto' subordinators+=[OntoLClass|QualifiedName] (','
+		//	superClasses+=[OntoLClass|QualifiedName])*)? ('subordinatedTo' subordinators+=[OntoLClass|QualifiedName] (','
 		//	subordinators+=[OntoLClass|QualifiedName])*)? (categorizationType=CategorizationType
-		//	basetype=[OntoLClass|QualifiedName] | 'ispowertypeof' powertypeOf=[OntoLClass|QualifiedName])?;
+		//	basetype=[OntoLClass|QualifiedName] | 'isPowertypeOf' powertypeOf=[OntoLClass|QualifiedName])?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'orderless' 'class' name=ID (':' instantiatedClasses+=[OntoLClass|QualifiedName] (','
 		//instantiatedClasses+=[OntoLClass|QualifiedName])*)? ('specializes' superClasses+=[OntoLClass|QualifiedName] (','
-		//superClasses+=[OntoLClass|QualifiedName])*)? ('subordinatedto' subordinators+=[OntoLClass|QualifiedName] (','
+		//superClasses+=[OntoLClass|QualifiedName])*)? ('subordinatedTo' subordinators+=[OntoLClass|QualifiedName] (','
 		//subordinators+=[OntoLClass|QualifiedName])*)? (categorizationType=CategorizationType
-		//basetype=[OntoLClass|QualifiedName] | 'ispowertypeof' powertypeOf=[OntoLClass|QualifiedName])?
+		//basetype=[OntoLClass|QualifiedName] | 'isPowertypeOf' powertypeOf=[OntoLClass|QualifiedName])?
 		public Group getGroup() { return cGroup; }
 		
 		//'orderless'
@@ -532,11 +551,11 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		//QualifiedName
 		public RuleCall getSuperClassesOntoLClassQualifiedNameParserRuleCall_4_2_1_0_1() { return cSuperClassesOntoLClassQualifiedNameParserRuleCall_4_2_1_0_1; }
 		
-		//('subordinatedto' subordinators+=[OntoLClass|QualifiedName] (',' subordinators+=[OntoLClass|QualifiedName])*)?
+		//('subordinatedTo' subordinators+=[OntoLClass|QualifiedName] (',' subordinators+=[OntoLClass|QualifiedName])*)?
 		public Group getGroup_5() { return cGroup_5; }
 		
-		//'subordinatedto'
-		public Keyword getSubordinatedtoKeyword_5_0() { return cSubordinatedtoKeyword_5_0; }
+		//'subordinatedTo'
+		public Keyword getSubordinatedToKeyword_5_0() { return cSubordinatedToKeyword_5_0; }
 		
 		//subordinators+=[OntoLClass|QualifiedName]
 		public Assignment getSubordinatorsAssignment_5_1() { return cSubordinatorsAssignment_5_1; }
@@ -562,7 +581,7 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		//QualifiedName
 		public RuleCall getSubordinatorsOntoLClassQualifiedNameParserRuleCall_5_2_1_0_1() { return cSubordinatorsOntoLClassQualifiedNameParserRuleCall_5_2_1_0_1; }
 		
-		//(categorizationType=CategorizationType basetype=[OntoLClass|QualifiedName] | 'ispowertypeof'
+		//(categorizationType=CategorizationType basetype=[OntoLClass|QualifiedName] | 'isPowertypeOf'
 		//powertypeOf=[OntoLClass|QualifiedName])?
 		public Alternatives getAlternatives_6() { return cAlternatives_6; }
 		
@@ -584,11 +603,11 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		//QualifiedName
 		public RuleCall getBasetypeOntoLClassQualifiedNameParserRuleCall_6_0_1_0_1() { return cBasetypeOntoLClassQualifiedNameParserRuleCall_6_0_1_0_1; }
 		
-		//'ispowertypeof' powertypeOf=[OntoLClass|QualifiedName]
+		//'isPowertypeOf' powertypeOf=[OntoLClass|QualifiedName]
 		public Group getGroup_6_1() { return cGroup_6_1; }
 		
-		//'ispowertypeof'
-		public Keyword getIspowertypeofKeyword_6_1_0() { return cIspowertypeofKeyword_6_1_0; }
+		//'isPowertypeOf'
+		public Keyword getIsPowertypeOfKeyword_6_1_0() { return cIsPowertypeOfKeyword_6_1_0; }
 		
 		//powertypeOf=[OntoLClass|QualifiedName]
 		public Assignment getPowertypeOfAssignment_6_1_1() { return cPowertypeOfAssignment_6_1_1; }
@@ -740,7 +759,7 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cSuperClassesOntoLClassCrossReference_5_2_1_0 = (CrossReference)cSuperClassesAssignment_5_2_1.eContents().get(0);
 		private final RuleCall cSuperClassesOntoLClassQualifiedNameParserRuleCall_5_2_1_0_1 = (RuleCall)cSuperClassesOntoLClassCrossReference_5_2_1_0.eContents().get(1);
 		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
-		private final Keyword cSubordinatedtoKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Keyword cSubordinatedToKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
 		private final Assignment cSubordinatorsAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
 		private final CrossReference cSubordinatorsOntoLClassCrossReference_6_1_0 = (CrossReference)cSubordinatorsAssignment_6_1.eContents().get(0);
 		private final RuleCall cSubordinatorsOntoLClassQualifiedNameParserRuleCall_6_1_0_1 = (RuleCall)cSubordinatorsOntoLClassCrossReference_6_1_0.eContents().get(1);
@@ -757,7 +776,7 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cBasetypeOntoLClassCrossReference_7_0_1_0 = (CrossReference)cBasetypeAssignment_7_0_1.eContents().get(0);
 		private final RuleCall cBasetypeOntoLClassQualifiedNameParserRuleCall_7_0_1_0_1 = (RuleCall)cBasetypeOntoLClassCrossReference_7_0_1_0.eContents().get(1);
 		private final Group cGroup_7_1 = (Group)cAlternatives_7.eContents().get(1);
-		private final Keyword cIspowertypeofKeyword_7_1_0 = (Keyword)cGroup_7_1.eContents().get(0);
+		private final Keyword cIsPowertypeOfKeyword_7_1_0 = (Keyword)cGroup_7_1.eContents().get(0);
 		private final Assignment cPowertypeOfAssignment_7_1_1 = (Assignment)cGroup_7_1.eContents().get(1);
 		private final CrossReference cPowertypeOfOntoLClassCrossReference_7_1_1_0 = (CrossReference)cPowertypeOfAssignment_7_1_1.eContents().get(0);
 		private final RuleCall cPowertypeOfOntoLClassQualifiedNameParserRuleCall_7_1_1_0_1 = (RuleCall)cPowertypeOfOntoLClassCrossReference_7_1_1_0.eContents().get(1);
@@ -765,16 +784,16 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		//HOClass:
 		//	'order' order=INT 'class' name=ID (':' instantiatedClasses+=[OntoLClass|QualifiedName] (','
 		//	instantiatedClasses+=[OntoLClass|QualifiedName])*)? ('specializes' superClasses+=[OntoLClass|QualifiedName] (','
-		//	superClasses+=[OntoLClass|QualifiedName])*)? ('subordinatedto' subordinators+=[OntoLClass|QualifiedName] (','
+		//	superClasses+=[OntoLClass|QualifiedName])*)? ('subordinatedTo' subordinators+=[OntoLClass|QualifiedName] (','
 		//	subordinators+=[OntoLClass|QualifiedName])*)? (categorizationType=CategorizationType
-		//	basetype=[OntoLClass|QualifiedName] | 'ispowertypeof' powertypeOf=[OntoLClass|QualifiedName])?;
+		//	basetype=[OntoLClass|QualifiedName] | 'isPowertypeOf' powertypeOf=[OntoLClass|QualifiedName])?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'order' order=INT 'class' name=ID (':' instantiatedClasses+=[OntoLClass|QualifiedName] (','
 		//instantiatedClasses+=[OntoLClass|QualifiedName])*)? ('specializes' superClasses+=[OntoLClass|QualifiedName] (','
-		//superClasses+=[OntoLClass|QualifiedName])*)? ('subordinatedto' subordinators+=[OntoLClass|QualifiedName] (','
+		//superClasses+=[OntoLClass|QualifiedName])*)? ('subordinatedTo' subordinators+=[OntoLClass|QualifiedName] (','
 		//subordinators+=[OntoLClass|QualifiedName])*)? (categorizationType=CategorizationType
-		//basetype=[OntoLClass|QualifiedName] | 'ispowertypeof' powertypeOf=[OntoLClass|QualifiedName])?
+		//basetype=[OntoLClass|QualifiedName] | 'isPowertypeOf' powertypeOf=[OntoLClass|QualifiedName])?
 		public Group getGroup() { return cGroup; }
 		
 		//'order'
@@ -855,11 +874,11 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		//QualifiedName
 		public RuleCall getSuperClassesOntoLClassQualifiedNameParserRuleCall_5_2_1_0_1() { return cSuperClassesOntoLClassQualifiedNameParserRuleCall_5_2_1_0_1; }
 		
-		//('subordinatedto' subordinators+=[OntoLClass|QualifiedName] (',' subordinators+=[OntoLClass|QualifiedName])*)?
+		//('subordinatedTo' subordinators+=[OntoLClass|QualifiedName] (',' subordinators+=[OntoLClass|QualifiedName])*)?
 		public Group getGroup_6() { return cGroup_6; }
 		
-		//'subordinatedto'
-		public Keyword getSubordinatedtoKeyword_6_0() { return cSubordinatedtoKeyword_6_0; }
+		//'subordinatedTo'
+		public Keyword getSubordinatedToKeyword_6_0() { return cSubordinatedToKeyword_6_0; }
 		
 		//subordinators+=[OntoLClass|QualifiedName]
 		public Assignment getSubordinatorsAssignment_6_1() { return cSubordinatorsAssignment_6_1; }
@@ -885,7 +904,7 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		//QualifiedName
 		public RuleCall getSubordinatorsOntoLClassQualifiedNameParserRuleCall_6_2_1_0_1() { return cSubordinatorsOntoLClassQualifiedNameParserRuleCall_6_2_1_0_1; }
 		
-		//(categorizationType=CategorizationType basetype=[OntoLClass|QualifiedName] | 'ispowertypeof'
+		//(categorizationType=CategorizationType basetype=[OntoLClass|QualifiedName] | 'isPowertypeOf'
 		//powertypeOf=[OntoLClass|QualifiedName])?
 		public Alternatives getAlternatives_7() { return cAlternatives_7; }
 		
@@ -907,11 +926,11 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		//QualifiedName
 		public RuleCall getBasetypeOntoLClassQualifiedNameParserRuleCall_7_0_1_0_1() { return cBasetypeOntoLClassQualifiedNameParserRuleCall_7_0_1_0_1; }
 		
-		//'ispowertypeof' powertypeOf=[OntoLClass|QualifiedName]
+		//'isPowertypeOf' powertypeOf=[OntoLClass|QualifiedName]
 		public Group getGroup_7_1() { return cGroup_7_1; }
 		
-		//'ispowertypeof'
-		public Keyword getIspowertypeofKeyword_7_1_0() { return cIspowertypeofKeyword_7_1_0; }
+		//'isPowertypeOf'
+		public Keyword getIsPowertypeOfKeyword_7_1_0() { return cIsPowertypeOfKeyword_7_1_0; }
 		
 		//powertypeOf=[OntoLClass|QualifiedName]
 		public Assignment getPowertypeOfAssignment_7_1_1() { return cPowertypeOfAssignment_7_1_1; }
@@ -924,6 +943,121 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	public class AttributeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "br.ufes.inf.nemo.ontol.OntoL.Attribute");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cAttKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cLeftSquareBracketKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cLowerBoundAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cLowerBoundELEMENTBOUNDParserRuleCall_3_1_0 = (RuleCall)cLowerBoundAssignment_3_1.eContents().get(0);
+		private final Keyword cFullStopFullStopKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
+		private final Assignment cUpperBoundAssignment_3_3 = (Assignment)cGroup_3.eContents().get(3);
+		private final RuleCall cUpperBoundELEMENTBOUNDParserRuleCall_3_3_0 = (RuleCall)cUpperBoundAssignment_3_3.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_3_4 = (Keyword)cGroup_3.eContents().get(4);
+		private final Assignment cPropertyTypeAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final CrossReference cPropertyTypeOntoLClassCrossReference_4_0 = (CrossReference)cPropertyTypeAssignment_4.eContents().get(0);
+		private final RuleCall cPropertyTypeOntoLClassQualifiedNameParserRuleCall_4_0_1 = (RuleCall)cPropertyTypeOntoLClassCrossReference_4_0.eContents().get(1);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cSubsetsKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cSubsetOfAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final CrossReference cSubsetOfAttributeCrossReference_5_1_0 = (CrossReference)cSubsetOfAssignment_5_1.eContents().get(0);
+		private final RuleCall cSubsetOfAttributeQualifiedNameParserRuleCall_5_1_0_1 = (RuleCall)cSubsetOfAttributeCrossReference_5_1_0.eContents().get(1);
+		private final Group cGroup_5_2 = (Group)cGroup_5.eContents().get(2);
+		private final Keyword cCommaKeyword_5_2_0 = (Keyword)cGroup_5_2.eContents().get(0);
+		private final Assignment cSubsetOfAssignment_5_2_1 = (Assignment)cGroup_5_2.eContents().get(1);
+		private final CrossReference cSubsetOfAttributeCrossReference_5_2_1_0 = (CrossReference)cSubsetOfAssignment_5_2_1.eContents().get(0);
+		private final RuleCall cSubsetOfAttributeQualifiedNameParserRuleCall_5_2_1_0_1 = (RuleCall)cSubsetOfAttributeCrossReference_5_2_1_0.eContents().get(1);
+		
+		//Attribute:
+		//	'att' name=ID ':' ('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
+		//	propertyType=[OntoLClass|QualifiedName] ('subsets' subsetOf+=[Attribute|QualifiedName] (','
+		//	subsetOf+=[Attribute|QualifiedName])*)?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'att' name=ID ':' ('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
+		//propertyType=[OntoLClass|QualifiedName] ('subsets' subsetOf+=[Attribute|QualifiedName] (','
+		//subsetOf+=[Attribute|QualifiedName])*)?
+		public Group getGroup() { return cGroup; }
+		
+		//'att'
+		public Keyword getAttKeyword_0() { return cAttKeyword_0; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//':'
+		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
+		
+		//('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//'['
+		public Keyword getLeftSquareBracketKeyword_3_0() { return cLeftSquareBracketKeyword_3_0; }
+		
+		//lowerBound=ELEMENTBOUND
+		public Assignment getLowerBoundAssignment_3_1() { return cLowerBoundAssignment_3_1; }
+		
+		//ELEMENTBOUND
+		public RuleCall getLowerBoundELEMENTBOUNDParserRuleCall_3_1_0() { return cLowerBoundELEMENTBOUNDParserRuleCall_3_1_0; }
+		
+		//'..'
+		public Keyword getFullStopFullStopKeyword_3_2() { return cFullStopFullStopKeyword_3_2; }
+		
+		//upperBound=ELEMENTBOUND
+		public Assignment getUpperBoundAssignment_3_3() { return cUpperBoundAssignment_3_3; }
+		
+		//ELEMENTBOUND
+		public RuleCall getUpperBoundELEMENTBOUNDParserRuleCall_3_3_0() { return cUpperBoundELEMENTBOUNDParserRuleCall_3_3_0; }
+		
+		//']'
+		public Keyword getRightSquareBracketKeyword_3_4() { return cRightSquareBracketKeyword_3_4; }
+		
+		//propertyType=[OntoLClass|QualifiedName]
+		public Assignment getPropertyTypeAssignment_4() { return cPropertyTypeAssignment_4; }
+		
+		//[OntoLClass|QualifiedName]
+		public CrossReference getPropertyTypeOntoLClassCrossReference_4_0() { return cPropertyTypeOntoLClassCrossReference_4_0; }
+		
+		//QualifiedName
+		public RuleCall getPropertyTypeOntoLClassQualifiedNameParserRuleCall_4_0_1() { return cPropertyTypeOntoLClassQualifiedNameParserRuleCall_4_0_1; }
+		
+		//('subsets' subsetOf+=[Attribute|QualifiedName] (',' subsetOf+=[Attribute|QualifiedName])*)?
+		public Group getGroup_5() { return cGroup_5; }
+		
+		//'subsets'
+		public Keyword getSubsetsKeyword_5_0() { return cSubsetsKeyword_5_0; }
+		
+		//subsetOf+=[Attribute|QualifiedName]
+		public Assignment getSubsetOfAssignment_5_1() { return cSubsetOfAssignment_5_1; }
+		
+		//[Attribute|QualifiedName]
+		public CrossReference getSubsetOfAttributeCrossReference_5_1_0() { return cSubsetOfAttributeCrossReference_5_1_0; }
+		
+		//QualifiedName
+		public RuleCall getSubsetOfAttributeQualifiedNameParserRuleCall_5_1_0_1() { return cSubsetOfAttributeQualifiedNameParserRuleCall_5_1_0_1; }
+		
+		//(',' subsetOf+=[Attribute|QualifiedName])*
+		public Group getGroup_5_2() { return cGroup_5_2; }
+		
+		//','
+		public Keyword getCommaKeyword_5_2_0() { return cCommaKeyword_5_2_0; }
+		
+		//subsetOf+=[Attribute|QualifiedName]
+		public Assignment getSubsetOfAssignment_5_2_1() { return cSubsetOfAssignment_5_2_1; }
+		
+		//[Attribute|QualifiedName]
+		public CrossReference getSubsetOfAttributeCrossReference_5_2_1_0() { return cSubsetOfAttributeCrossReference_5_2_1_0; }
+		
+		//QualifiedName
+		public RuleCall getSubsetOfAttributeQualifiedNameParserRuleCall_5_2_1_0_1() { return cSubsetOfAttributeQualifiedNameParserRuleCall_5_2_1_0_1; }
+	}
+	public class RegularityAttributeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "br.ufes.inf.nemo.ontol.OntoL.RegularityAttribute");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cRegularityAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final Keyword cRegularityRegularityKeyword_0_0 = (Keyword)cRegularityAssignment_0.eContents().get(0);
@@ -939,9 +1073,9 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cUpperBoundAssignment_4_3 = (Assignment)cGroup_4.eContents().get(3);
 		private final RuleCall cUpperBoundELEMENTBOUNDParserRuleCall_4_3_0 = (RuleCall)cUpperBoundAssignment_4_3.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_4_4 = (Keyword)cGroup_4.eContents().get(4);
-		private final Assignment cPropertyClassAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final CrossReference cPropertyClassOntoLClassCrossReference_5_0 = (CrossReference)cPropertyClassAssignment_5.eContents().get(0);
-		private final RuleCall cPropertyClassOntoLClassQualifiedNameParserRuleCall_5_0_1 = (RuleCall)cPropertyClassOntoLClassCrossReference_5_0.eContents().get(1);
+		private final Assignment cPropertyTypeAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final CrossReference cPropertyTypeOntoLClassCrossReference_5_0 = (CrossReference)cPropertyTypeAssignment_5.eContents().get(0);
+		private final RuleCall cPropertyTypeOntoLClassQualifiedNameParserRuleCall_5_0_1 = (RuleCall)cPropertyTypeOntoLClassCrossReference_5_0.eContents().get(1);
 		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
 		private final Keyword cSubsetsKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
 		private final Assignment cSubsetOfAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
@@ -952,20 +1086,28 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cSubsetOfAssignment_6_2_1 = (Assignment)cGroup_6_2.eContents().get(1);
 		private final CrossReference cSubsetOfAttributeCrossReference_6_2_1_0 = (CrossReference)cSubsetOfAssignment_6_2_1.eContents().get(0);
 		private final RuleCall cSubsetOfAttributeQualifiedNameParserRuleCall_6_2_1_0_1 = (RuleCall)cSubsetOfAttributeCrossReference_6_2_1_0.eContents().get(1);
+		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
+		private final Assignment cRegularityTypeAssignment_7_0 = (Assignment)cGroup_7.eContents().get(0);
+		private final RuleCall cRegularityTypeRegularityAttributeTypeEnumRuleCall_7_0_0 = (RuleCall)cRegularityTypeAssignment_7_0.eContents().get(0);
+		private final Assignment cRegulatedPropertyAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
+		private final CrossReference cRegulatedPropertyAttributeCrossReference_7_1_0 = (CrossReference)cRegulatedPropertyAssignment_7_1.eContents().get(0);
+		private final RuleCall cRegulatedPropertyAttributeQualifiedNameParserRuleCall_7_1_0_1 = (RuleCall)cRegulatedPropertyAttributeCrossReference_7_1_0.eContents().get(1);
 		
-		//Attribute:
-		//	regularity?='regularity'?
+		//RegularityAttribute Attribute:
+		//	regularity?='regularity'
 		//	'att' name=ID ':' ('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
-		//	propertyClass=[OntoLClass|QualifiedName] ('subsets' subsetOf+=[Attribute|QualifiedName] (','
-		//	subsetOf+=[Attribute|QualifiedName])*)?;
+		//	propertyType=[OntoLClass|QualifiedName] ('subsets' subsetOf+=[Attribute|QualifiedName] (','
+		//	subsetOf+=[Attribute|QualifiedName])*)? (regularityType=RegularityAttributeType
+		//	regulatedProperty=[Attribute|QualifiedName])?
 		@Override public ParserRule getRule() { return rule; }
 		
-		//regularity?='regularity'? 'att' name=ID ':' ('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
-		//propertyClass=[OntoLClass|QualifiedName] ('subsets' subsetOf+=[Attribute|QualifiedName] (','
-		//subsetOf+=[Attribute|QualifiedName])*)?
+		//regularity?='regularity' 'att' name=ID ':' ('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
+		//propertyType=[OntoLClass|QualifiedName] ('subsets' subsetOf+=[Attribute|QualifiedName] (','
+		//subsetOf+=[Attribute|QualifiedName])*)? (regularityType=RegularityAttributeType
+		//regulatedProperty=[Attribute|QualifiedName])?
 		public Group getGroup() { return cGroup; }
 		
-		//regularity?='regularity'?
+		//regularity?='regularity'
 		public Assignment getRegularityAssignment_0() { return cRegularityAssignment_0; }
 		
 		//'regularity'
@@ -1007,14 +1149,14 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		//']'
 		public Keyword getRightSquareBracketKeyword_4_4() { return cRightSquareBracketKeyword_4_4; }
 		
-		//propertyClass=[OntoLClass|QualifiedName]
-		public Assignment getPropertyClassAssignment_5() { return cPropertyClassAssignment_5; }
+		//propertyType=[OntoLClass|QualifiedName]
+		public Assignment getPropertyTypeAssignment_5() { return cPropertyTypeAssignment_5; }
 		
 		//[OntoLClass|QualifiedName]
-		public CrossReference getPropertyClassOntoLClassCrossReference_5_0() { return cPropertyClassOntoLClassCrossReference_5_0; }
+		public CrossReference getPropertyTypeOntoLClassCrossReference_5_0() { return cPropertyTypeOntoLClassCrossReference_5_0; }
 		
 		//QualifiedName
-		public RuleCall getPropertyClassOntoLClassQualifiedNameParserRuleCall_5_0_1() { return cPropertyClassOntoLClassQualifiedNameParserRuleCall_5_0_1; }
+		public RuleCall getPropertyTypeOntoLClassQualifiedNameParserRuleCall_5_0_1() { return cPropertyTypeOntoLClassQualifiedNameParserRuleCall_5_0_1; }
 		
 		//('subsets' subsetOf+=[Attribute|QualifiedName] (',' subsetOf+=[Attribute|QualifiedName])*)?
 		public Group getGroup_6() { return cGroup_6; }
@@ -1045,9 +1187,162 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//QualifiedName
 		public RuleCall getSubsetOfAttributeQualifiedNameParserRuleCall_6_2_1_0_1() { return cSubsetOfAttributeQualifiedNameParserRuleCall_6_2_1_0_1; }
+		
+		//(regularityType=RegularityAttributeType regulatedProperty=[Attribute|QualifiedName])?
+		public Group getGroup_7() { return cGroup_7; }
+		
+		//regularityType=RegularityAttributeType
+		public Assignment getRegularityTypeAssignment_7_0() { return cRegularityTypeAssignment_7_0; }
+		
+		//RegularityAttributeType
+		public RuleCall getRegularityTypeRegularityAttributeTypeEnumRuleCall_7_0_0() { return cRegularityTypeRegularityAttributeTypeEnumRuleCall_7_0_0; }
+		
+		//regulatedProperty=[Attribute|QualifiedName]
+		public Assignment getRegulatedPropertyAssignment_7_1() { return cRegulatedPropertyAssignment_7_1; }
+		
+		//[Attribute|QualifiedName]
+		public CrossReference getRegulatedPropertyAttributeCrossReference_7_1_0() { return cRegulatedPropertyAttributeCrossReference_7_1_0; }
+		
+		//QualifiedName
+		public RuleCall getRegulatedPropertyAttributeQualifiedNameParserRuleCall_7_1_0_1() { return cRegulatedPropertyAttributeQualifiedNameParserRuleCall_7_1_0_1; }
 	}
 	public class ReferenceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "br.ufes.inf.nemo.ontol.OntoL.Reference");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cRefKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cLeftSquareBracketKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cLowerBoundAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cLowerBoundELEMENTBOUNDParserRuleCall_3_1_0 = (RuleCall)cLowerBoundAssignment_3_1.eContents().get(0);
+		private final Keyword cFullStopFullStopKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
+		private final Assignment cUpperBoundAssignment_3_3 = (Assignment)cGroup_3.eContents().get(3);
+		private final RuleCall cUpperBoundELEMENTBOUNDParserRuleCall_3_3_0 = (RuleCall)cUpperBoundAssignment_3_3.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_3_4 = (Keyword)cGroup_3.eContents().get(4);
+		private final Assignment cPropertyTypeAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final CrossReference cPropertyTypeOntoLClassCrossReference_4_0 = (CrossReference)cPropertyTypeAssignment_4.eContents().get(0);
+		private final RuleCall cPropertyTypeOntoLClassQualifiedNameParserRuleCall_4_0_1 = (RuleCall)cPropertyTypeOntoLClassCrossReference_4_0.eContents().get(1);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cSubsetsKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cSubsetOfAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final CrossReference cSubsetOfReferenceCrossReference_5_1_0 = (CrossReference)cSubsetOfAssignment_5_1.eContents().get(0);
+		private final RuleCall cSubsetOfReferenceQualifiedNameParserRuleCall_5_1_0_1 = (RuleCall)cSubsetOfReferenceCrossReference_5_1_0.eContents().get(1);
+		private final Group cGroup_5_2 = (Group)cGroup_5.eContents().get(2);
+		private final Keyword cCommaKeyword_5_2_0 = (Keyword)cGroup_5_2.eContents().get(0);
+		private final Assignment cSubsetOfAssignment_5_2_1 = (Assignment)cGroup_5_2.eContents().get(1);
+		private final CrossReference cSubsetOfReferenceCrossReference_5_2_1_0 = (CrossReference)cSubsetOfAssignment_5_2_1.eContents().get(0);
+		private final RuleCall cSubsetOfReferenceQualifiedNameParserRuleCall_5_2_1_0_1 = (RuleCall)cSubsetOfReferenceCrossReference_5_2_1_0.eContents().get(1);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cIsOppositeToKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Assignment cOppositeToAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
+		private final CrossReference cOppositeToReferenceCrossReference_6_1_0 = (CrossReference)cOppositeToAssignment_6_1.eContents().get(0);
+		private final RuleCall cOppositeToReferenceQualifiedNameParserRuleCall_6_1_0_1 = (RuleCall)cOppositeToReferenceCrossReference_6_1_0.eContents().get(1);
+		
+		//Reference:
+		//	'ref' name=ID ':' ('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
+		//	propertyType=[OntoLClass|QualifiedName] ('subsets' subsetOf+=[Reference|QualifiedName] (','
+		//	subsetOf+=[Reference|QualifiedName])*)? ('isOppositeTo' oppositeTo=[Reference|QualifiedName])?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'ref' name=ID ':' ('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
+		//propertyType=[OntoLClass|QualifiedName] ('subsets' subsetOf+=[Reference|QualifiedName] (','
+		//subsetOf+=[Reference|QualifiedName])*)? ('isOppositeTo' oppositeTo=[Reference|QualifiedName])?
+		public Group getGroup() { return cGroup; }
+		
+		//'ref'
+		public Keyword getRefKeyword_0() { return cRefKeyword_0; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//':'
+		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
+		
+		//('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//'['
+		public Keyword getLeftSquareBracketKeyword_3_0() { return cLeftSquareBracketKeyword_3_0; }
+		
+		//lowerBound=ELEMENTBOUND
+		public Assignment getLowerBoundAssignment_3_1() { return cLowerBoundAssignment_3_1; }
+		
+		//ELEMENTBOUND
+		public RuleCall getLowerBoundELEMENTBOUNDParserRuleCall_3_1_0() { return cLowerBoundELEMENTBOUNDParserRuleCall_3_1_0; }
+		
+		//'..'
+		public Keyword getFullStopFullStopKeyword_3_2() { return cFullStopFullStopKeyword_3_2; }
+		
+		//upperBound=ELEMENTBOUND
+		public Assignment getUpperBoundAssignment_3_3() { return cUpperBoundAssignment_3_3; }
+		
+		//ELEMENTBOUND
+		public RuleCall getUpperBoundELEMENTBOUNDParserRuleCall_3_3_0() { return cUpperBoundELEMENTBOUNDParserRuleCall_3_3_0; }
+		
+		//']'
+		public Keyword getRightSquareBracketKeyword_3_4() { return cRightSquareBracketKeyword_3_4; }
+		
+		//propertyType=[OntoLClass|QualifiedName]
+		public Assignment getPropertyTypeAssignment_4() { return cPropertyTypeAssignment_4; }
+		
+		//[OntoLClass|QualifiedName]
+		public CrossReference getPropertyTypeOntoLClassCrossReference_4_0() { return cPropertyTypeOntoLClassCrossReference_4_0; }
+		
+		//QualifiedName
+		public RuleCall getPropertyTypeOntoLClassQualifiedNameParserRuleCall_4_0_1() { return cPropertyTypeOntoLClassQualifiedNameParserRuleCall_4_0_1; }
+		
+		//('subsets' subsetOf+=[Reference|QualifiedName] (',' subsetOf+=[Reference|QualifiedName])*)?
+		public Group getGroup_5() { return cGroup_5; }
+		
+		//'subsets'
+		public Keyword getSubsetsKeyword_5_0() { return cSubsetsKeyword_5_0; }
+		
+		//subsetOf+=[Reference|QualifiedName]
+		public Assignment getSubsetOfAssignment_5_1() { return cSubsetOfAssignment_5_1; }
+		
+		//[Reference|QualifiedName]
+		public CrossReference getSubsetOfReferenceCrossReference_5_1_0() { return cSubsetOfReferenceCrossReference_5_1_0; }
+		
+		//QualifiedName
+		public RuleCall getSubsetOfReferenceQualifiedNameParserRuleCall_5_1_0_1() { return cSubsetOfReferenceQualifiedNameParserRuleCall_5_1_0_1; }
+		
+		//(',' subsetOf+=[Reference|QualifiedName])*
+		public Group getGroup_5_2() { return cGroup_5_2; }
+		
+		//','
+		public Keyword getCommaKeyword_5_2_0() { return cCommaKeyword_5_2_0; }
+		
+		//subsetOf+=[Reference|QualifiedName]
+		public Assignment getSubsetOfAssignment_5_2_1() { return cSubsetOfAssignment_5_2_1; }
+		
+		//[Reference|QualifiedName]
+		public CrossReference getSubsetOfReferenceCrossReference_5_2_1_0() { return cSubsetOfReferenceCrossReference_5_2_1_0; }
+		
+		//QualifiedName
+		public RuleCall getSubsetOfReferenceQualifiedNameParserRuleCall_5_2_1_0_1() { return cSubsetOfReferenceQualifiedNameParserRuleCall_5_2_1_0_1; }
+		
+		//('isOppositeTo' oppositeTo=[Reference|QualifiedName])?
+		public Group getGroup_6() { return cGroup_6; }
+		
+		//'isOppositeTo'
+		public Keyword getIsOppositeToKeyword_6_0() { return cIsOppositeToKeyword_6_0; }
+		
+		//oppositeTo=[Reference|QualifiedName]
+		public Assignment getOppositeToAssignment_6_1() { return cOppositeToAssignment_6_1; }
+		
+		//[Reference|QualifiedName]
+		public CrossReference getOppositeToReferenceCrossReference_6_1_0() { return cOppositeToReferenceCrossReference_6_1_0; }
+		
+		//QualifiedName
+		public RuleCall getOppositeToReferenceQualifiedNameParserRuleCall_6_1_0_1() { return cOppositeToReferenceQualifiedNameParserRuleCall_6_1_0_1; }
+	}
+	public class RegularityReferenceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "br.ufes.inf.nemo.ontol.OntoL.RegularityReference");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cRegularityAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final Keyword cRegularityRegularityKeyword_0_0 = (Keyword)cRegularityAssignment_0.eContents().get(0);
@@ -1063,9 +1358,9 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cUpperBoundAssignment_4_3 = (Assignment)cGroup_4.eContents().get(3);
 		private final RuleCall cUpperBoundELEMENTBOUNDParserRuleCall_4_3_0 = (RuleCall)cUpperBoundAssignment_4_3.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_4_4 = (Keyword)cGroup_4.eContents().get(4);
-		private final Assignment cPropertyClassAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final CrossReference cPropertyClassOntoLClassCrossReference_5_0 = (CrossReference)cPropertyClassAssignment_5.eContents().get(0);
-		private final RuleCall cPropertyClassOntoLClassQualifiedNameParserRuleCall_5_0_1 = (RuleCall)cPropertyClassOntoLClassCrossReference_5_0.eContents().get(1);
+		private final Assignment cPropertyTypeAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final CrossReference cPropertyTypeOntoLClassCrossReference_5_0 = (CrossReference)cPropertyTypeAssignment_5.eContents().get(0);
+		private final RuleCall cPropertyTypeOntoLClassQualifiedNameParserRuleCall_5_0_1 = (RuleCall)cPropertyTypeOntoLClassCrossReference_5_0.eContents().get(1);
 		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
 		private final Keyword cSubsetsKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
 		private final Assignment cSubsetOfAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
@@ -1077,24 +1372,32 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cSubsetOfReferenceCrossReference_6_2_1_0 = (CrossReference)cSubsetOfAssignment_6_2_1.eContents().get(0);
 		private final RuleCall cSubsetOfReferenceQualifiedNameParserRuleCall_6_2_1_0_1 = (RuleCall)cSubsetOfReferenceCrossReference_6_2_1_0.eContents().get(1);
 		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
-		private final Keyword cIsoppositetoKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
+		private final Keyword cIsOppositeToKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
 		private final Assignment cOppositeToAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
 		private final CrossReference cOppositeToReferenceCrossReference_7_1_0 = (CrossReference)cOppositeToAssignment_7_1.eContents().get(0);
 		private final RuleCall cOppositeToReferenceQualifiedNameParserRuleCall_7_1_0_1 = (RuleCall)cOppositeToReferenceCrossReference_7_1_0.eContents().get(1);
+		private final Group cGroup_8 = (Group)cGroup.eContents().get(8);
+		private final Assignment cRegularityTypeAssignment_8_0 = (Assignment)cGroup_8.eContents().get(0);
+		private final RuleCall cRegularityTypeRegularityReferenceTypeEnumRuleCall_8_0_0 = (RuleCall)cRegularityTypeAssignment_8_0.eContents().get(0);
+		private final Assignment cRegulatedPropertyAssignment_8_1 = (Assignment)cGroup_8.eContents().get(1);
+		private final CrossReference cRegulatedPropertyReferenceCrossReference_8_1_0 = (CrossReference)cRegulatedPropertyAssignment_8_1.eContents().get(0);
+		private final RuleCall cRegulatedPropertyReferenceQualifiedNameParserRuleCall_8_1_0_1 = (RuleCall)cRegulatedPropertyReferenceCrossReference_8_1_0.eContents().get(1);
 		
-		//Reference:
-		//	regularity?='regularity'?
+		//RegularityReference Reference:
+		//	regularity?='regularity'
 		//	'ref' name=ID ':' ('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
-		//	propertyClass=[OntoLClass|QualifiedName] ('subsets' subsetOf+=[Reference|QualifiedName] (','
-		//	subsetOf+=[Reference|QualifiedName])*)? ('isoppositeto' oppositeTo=[Reference|QualifiedName])?;
+		//	propertyType=[OntoLClass|QualifiedName] ('subsets' subsetOf+=[Reference|QualifiedName] (','
+		//	subsetOf+=[Reference|QualifiedName])*)? ('isOppositeTo' oppositeTo=[Reference|QualifiedName])?
+		//	(regularityType=RegularityReferenceType regulatedProperty=[Reference|QualifiedName])?
 		@Override public ParserRule getRule() { return rule; }
 		
-		//regularity?='regularity'? 'ref' name=ID ':' ('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
-		//propertyClass=[OntoLClass|QualifiedName] ('subsets' subsetOf+=[Reference|QualifiedName] (','
-		//subsetOf+=[Reference|QualifiedName])*)? ('isoppositeto' oppositeTo=[Reference|QualifiedName])?
+		//regularity?='regularity' 'ref' name=ID ':' ('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
+		//propertyType=[OntoLClass|QualifiedName] ('subsets' subsetOf+=[Reference|QualifiedName] (','
+		//subsetOf+=[Reference|QualifiedName])*)? ('isOppositeTo' oppositeTo=[Reference|QualifiedName])?
+		//(regularityType=RegularityReferenceType regulatedProperty=[Reference|QualifiedName])?
 		public Group getGroup() { return cGroup; }
 		
-		//regularity?='regularity'?
+		//regularity?='regularity'
 		public Assignment getRegularityAssignment_0() { return cRegularityAssignment_0; }
 		
 		//'regularity'
@@ -1136,14 +1439,14 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		//']'
 		public Keyword getRightSquareBracketKeyword_4_4() { return cRightSquareBracketKeyword_4_4; }
 		
-		//propertyClass=[OntoLClass|QualifiedName]
-		public Assignment getPropertyClassAssignment_5() { return cPropertyClassAssignment_5; }
+		//propertyType=[OntoLClass|QualifiedName]
+		public Assignment getPropertyTypeAssignment_5() { return cPropertyTypeAssignment_5; }
 		
 		//[OntoLClass|QualifiedName]
-		public CrossReference getPropertyClassOntoLClassCrossReference_5_0() { return cPropertyClassOntoLClassCrossReference_5_0; }
+		public CrossReference getPropertyTypeOntoLClassCrossReference_5_0() { return cPropertyTypeOntoLClassCrossReference_5_0; }
 		
 		//QualifiedName
-		public RuleCall getPropertyClassOntoLClassQualifiedNameParserRuleCall_5_0_1() { return cPropertyClassOntoLClassQualifiedNameParserRuleCall_5_0_1; }
+		public RuleCall getPropertyTypeOntoLClassQualifiedNameParserRuleCall_5_0_1() { return cPropertyTypeOntoLClassQualifiedNameParserRuleCall_5_0_1; }
 		
 		//('subsets' subsetOf+=[Reference|QualifiedName] (',' subsetOf+=[Reference|QualifiedName])*)?
 		public Group getGroup_6() { return cGroup_6; }
@@ -1175,11 +1478,11 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		//QualifiedName
 		public RuleCall getSubsetOfReferenceQualifiedNameParserRuleCall_6_2_1_0_1() { return cSubsetOfReferenceQualifiedNameParserRuleCall_6_2_1_0_1; }
 		
-		//('isoppositeto' oppositeTo=[Reference|QualifiedName])?
+		//('isOppositeTo' oppositeTo=[Reference|QualifiedName])?
 		public Group getGroup_7() { return cGroup_7; }
 		
-		//'isoppositeto'
-		public Keyword getIsoppositetoKeyword_7_0() { return cIsoppositetoKeyword_7_0; }
+		//'isOppositeTo'
+		public Keyword getIsOppositeToKeyword_7_0() { return cIsOppositeToKeyword_7_0; }
 		
 		//oppositeTo=[Reference|QualifiedName]
 		public Assignment getOppositeToAssignment_7_1() { return cOppositeToAssignment_7_1; }
@@ -1189,6 +1492,24 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//QualifiedName
 		public RuleCall getOppositeToReferenceQualifiedNameParserRuleCall_7_1_0_1() { return cOppositeToReferenceQualifiedNameParserRuleCall_7_1_0_1; }
+		
+		//(regularityType=RegularityReferenceType regulatedProperty=[Reference|QualifiedName])?
+		public Group getGroup_8() { return cGroup_8; }
+		
+		//regularityType=RegularityReferenceType
+		public Assignment getRegularityTypeAssignment_8_0() { return cRegularityTypeAssignment_8_0; }
+		
+		//RegularityReferenceType
+		public RuleCall getRegularityTypeRegularityReferenceTypeEnumRuleCall_8_0_0() { return cRegularityTypeRegularityReferenceTypeEnumRuleCall_8_0_0; }
+		
+		//regulatedProperty=[Reference|QualifiedName]
+		public Assignment getRegulatedPropertyAssignment_8_1() { return cRegulatedPropertyAssignment_8_1; }
+		
+		//[Reference|QualifiedName]
+		public CrossReference getRegulatedPropertyReferenceCrossReference_8_1_0() { return cRegulatedPropertyReferenceCrossReference_8_1_0; }
+		
+		//QualifiedName
+		public RuleCall getRegulatedPropertyReferenceQualifiedNameParserRuleCall_8_1_0_1() { return cRegulatedPropertyReferenceQualifiedNameParserRuleCall_8_1_0_1; }
 	}
 	public class ELEMENTBOUNDElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "br.ufes.inf.nemo.ontol.OntoL.ELEMENTBOUND");
@@ -1377,24 +1698,27 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cEqualsSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
 		private final Assignment cAssignmentsAssignment_3_0 = (Assignment)cAlternatives_3.eContents().get(0);
-		private final RuleCall cAssignmentsReferenceValueParserRuleCall_3_0_0 = (RuleCall)cAssignmentsAssignment_3_0.eContents().get(0);
+		private final CrossReference cAssignmentsEntityDeclarationCrossReference_3_0_0 = (CrossReference)cAssignmentsAssignment_3_0.eContents().get(0);
+		private final RuleCall cAssignmentsEntityDeclarationQualifiedNameParserRuleCall_3_0_0_1 = (RuleCall)cAssignmentsEntityDeclarationCrossReference_3_0_0.eContents().get(1);
 		private final Group cGroup_3_1 = (Group)cAlternatives_3.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
 		private final Assignment cAssignmentsAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
-		private final RuleCall cAssignmentsReferenceValueParserRuleCall_3_1_1_0 = (RuleCall)cAssignmentsAssignment_3_1_1.eContents().get(0);
+		private final CrossReference cAssignmentsEntityDeclarationCrossReference_3_1_1_0 = (CrossReference)cAssignmentsAssignment_3_1_1.eContents().get(0);
+		private final RuleCall cAssignmentsEntityDeclarationQualifiedNameParserRuleCall_3_1_1_0_1 = (RuleCall)cAssignmentsEntityDeclarationCrossReference_3_1_1_0.eContents().get(1);
 		private final Group cGroup_3_1_2 = (Group)cGroup_3_1.eContents().get(2);
 		private final Keyword cCommaKeyword_3_1_2_0 = (Keyword)cGroup_3_1_2.eContents().get(0);
 		private final Assignment cAssignmentsAssignment_3_1_2_1 = (Assignment)cGroup_3_1_2.eContents().get(1);
-		private final RuleCall cAssignmentsReferenceValueParserRuleCall_3_1_2_1_0 = (RuleCall)cAssignmentsAssignment_3_1_2_1.eContents().get(0);
+		private final CrossReference cAssignmentsEntityDeclarationCrossReference_3_1_2_1_0 = (CrossReference)cAssignmentsAssignment_3_1_2_1.eContents().get(0);
+		private final RuleCall cAssignmentsEntityDeclarationQualifiedNameParserRuleCall_3_1_2_1_0_1 = (RuleCall)cAssignmentsEntityDeclarationCrossReference_3_1_2_1_0.eContents().get(1);
 		private final Keyword cRightCurlyBracketKeyword_3_1_3 = (Keyword)cGroup_3_1.eContents().get(3);
 		
 		//ReferenceAssignment:
-		//	'ref' reference=[Reference|QualifiedName] '=' (assignments+=ReferenceValue
-		//	| '{' assignments+=ReferenceValue (',' assignments+=ReferenceValue)* '}');
+		//	'ref' reference=[Reference|QualifiedName] '=' (assignments+=[EntityDeclaration|QualifiedName] | '{'
+		//	assignments+=[EntityDeclaration|QualifiedName] (',' assignments+=[EntityDeclaration|QualifiedName])* '}');
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'ref' reference=[Reference|QualifiedName] '=' (assignments+=ReferenceValue | '{' assignments+=ReferenceValue (','
-		//assignments+=ReferenceValue)* '}')
+		//'ref' reference=[Reference|QualifiedName] '=' (assignments+=[EntityDeclaration|QualifiedName] | '{'
+		//assignments+=[EntityDeclaration|QualifiedName] (',' assignments+=[EntityDeclaration|QualifiedName])* '}')
 		public Group getGroup() { return cGroup; }
 		
 		//'ref'
@@ -1412,38 +1736,48 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		//'='
 		public Keyword getEqualsSignKeyword_2() { return cEqualsSignKeyword_2; }
 		
-		//(assignments+=ReferenceValue | '{' assignments+=ReferenceValue (',' assignments+=ReferenceValue)* '}')
+		//(assignments+=[EntityDeclaration|QualifiedName] | '{' assignments+=[EntityDeclaration|QualifiedName] (','
+		//assignments+=[EntityDeclaration|QualifiedName])* '}')
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 		
-		//assignments+=ReferenceValue
+		//assignments+=[EntityDeclaration|QualifiedName]
 		public Assignment getAssignmentsAssignment_3_0() { return cAssignmentsAssignment_3_0; }
 		
-		//ReferenceValue
-		public RuleCall getAssignmentsReferenceValueParserRuleCall_3_0_0() { return cAssignmentsReferenceValueParserRuleCall_3_0_0; }
+		//[EntityDeclaration|QualifiedName]
+		public CrossReference getAssignmentsEntityDeclarationCrossReference_3_0_0() { return cAssignmentsEntityDeclarationCrossReference_3_0_0; }
 		
-		//'{' assignments+=ReferenceValue (',' assignments+=ReferenceValue)* '}'
+		//QualifiedName
+		public RuleCall getAssignmentsEntityDeclarationQualifiedNameParserRuleCall_3_0_0_1() { return cAssignmentsEntityDeclarationQualifiedNameParserRuleCall_3_0_0_1; }
+		
+		//'{' assignments+=[EntityDeclaration|QualifiedName] (',' assignments+=[EntityDeclaration|QualifiedName])* '}'
 		public Group getGroup_3_1() { return cGroup_3_1; }
 		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3_1_0() { return cLeftCurlyBracketKeyword_3_1_0; }
 		
-		//assignments+=ReferenceValue
+		//assignments+=[EntityDeclaration|QualifiedName]
 		public Assignment getAssignmentsAssignment_3_1_1() { return cAssignmentsAssignment_3_1_1; }
 		
-		//ReferenceValue
-		public RuleCall getAssignmentsReferenceValueParserRuleCall_3_1_1_0() { return cAssignmentsReferenceValueParserRuleCall_3_1_1_0; }
+		//[EntityDeclaration|QualifiedName]
+		public CrossReference getAssignmentsEntityDeclarationCrossReference_3_1_1_0() { return cAssignmentsEntityDeclarationCrossReference_3_1_1_0; }
 		
-		//(',' assignments+=ReferenceValue)*
+		//QualifiedName
+		public RuleCall getAssignmentsEntityDeclarationQualifiedNameParserRuleCall_3_1_1_0_1() { return cAssignmentsEntityDeclarationQualifiedNameParserRuleCall_3_1_1_0_1; }
+		
+		//(',' assignments+=[EntityDeclaration|QualifiedName])*
 		public Group getGroup_3_1_2() { return cGroup_3_1_2; }
 		
 		//','
 		public Keyword getCommaKeyword_3_1_2_0() { return cCommaKeyword_3_1_2_0; }
 		
-		//assignments+=ReferenceValue
+		//assignments+=[EntityDeclaration|QualifiedName]
 		public Assignment getAssignmentsAssignment_3_1_2_1() { return cAssignmentsAssignment_3_1_2_1; }
 		
-		//ReferenceValue
-		public RuleCall getAssignmentsReferenceValueParserRuleCall_3_1_2_1_0() { return cAssignmentsReferenceValueParserRuleCall_3_1_2_1_0; }
+		//[EntityDeclaration|QualifiedName]
+		public CrossReference getAssignmentsEntityDeclarationCrossReference_3_1_2_1_0() { return cAssignmentsEntityDeclarationCrossReference_3_1_2_1_0; }
+		
+		//QualifiedName
+		public RuleCall getAssignmentsEntityDeclarationQualifiedNameParserRuleCall_3_1_2_1_0_1() { return cAssignmentsEntityDeclarationQualifiedNameParserRuleCall_3_1_2_1_0_1; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_3_1_3() { return cRightCurlyBracketKeyword_3_1_3; }
@@ -1478,25 +1812,6 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//ComplexDataValue
 		public RuleCall getComplexDataValueParserRuleCall_4() { return cComplexDataValueParserRuleCall_4; }
-	}
-	public class ReferenceValueElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "br.ufes.inf.nemo.ontol.OntoL.ReferenceValue");
-		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
-		private final CrossReference cValueEntityDeclarationCrossReference_0 = (CrossReference)cValueAssignment.eContents().get(0);
-		private final RuleCall cValueEntityDeclarationQualifiedNameParserRuleCall_0_1 = (RuleCall)cValueEntityDeclarationCrossReference_0.eContents().get(1);
-		
-		//ReferenceValue:
-		//	value=[EntityDeclaration|QualifiedName];
-		@Override public ParserRule getRule() { return rule; }
-		
-		//value=[EntityDeclaration|QualifiedName]
-		public Assignment getValueAssignment() { return cValueAssignment; }
-		
-		//[EntityDeclaration|QualifiedName]
-		public CrossReference getValueEntityDeclarationCrossReference_0() { return cValueEntityDeclarationCrossReference_0; }
-		
-		//QualifiedName
-		public RuleCall getValueEntityDeclarationQualifiedNameParserRuleCall_0_1() { return cValueEntityDeclarationQualifiedNameParserRuleCall_0_1; }
 	}
 	public class StringValueElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "br.ufes.inf.nemo.ontol.OntoL.StringValue");
@@ -1859,18 +2174,18 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		private final EnumLiteralDeclaration cCATEGORIZEREnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
 		private final Keyword cCATEGORIZERCategorizesKeyword_0_0 = (Keyword)cCATEGORIZEREnumLiteralDeclaration_0.eContents().get(0);
 		private final EnumLiteralDeclaration cCOMPLETE_CATEGORIZEREnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
-		private final Keyword cCOMPLETE_CATEGORIZERCompletecategorizesKeyword_1_0 = (Keyword)cCOMPLETE_CATEGORIZEREnumLiteralDeclaration_1.eContents().get(0);
+		private final Keyword cCOMPLETE_CATEGORIZERCompleteCategorizesKeyword_1_0 = (Keyword)cCOMPLETE_CATEGORIZEREnumLiteralDeclaration_1.eContents().get(0);
 		private final EnumLiteralDeclaration cDISJOINT_CATEGORIZEREnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
-		private final Keyword cDISJOINT_CATEGORIZERDisjointcategorizesKeyword_2_0 = (Keyword)cDISJOINT_CATEGORIZEREnumLiteralDeclaration_2.eContents().get(0);
+		private final Keyword cDISJOINT_CATEGORIZERDisjointCategorizesKeyword_2_0 = (Keyword)cDISJOINT_CATEGORIZEREnumLiteralDeclaration_2.eContents().get(0);
 		private final EnumLiteralDeclaration cPARTITIONEREnumLiteralDeclaration_3 = (EnumLiteralDeclaration)cAlternatives.eContents().get(3);
 		private final Keyword cPARTITIONERPartitionsKeyword_3_0 = (Keyword)cPARTITIONEREnumLiteralDeclaration_3.eContents().get(0);
 		
 		//enum CategorizationType:
-		//	CATEGORIZER="categorizes" | COMPLETE_CATEGORIZER="completecategorizes" | DISJOINT_CATEGORIZER="disjointcategorizes" |
+		//	CATEGORIZER="categorizes" | COMPLETE_CATEGORIZER="completeCategorizes" | DISJOINT_CATEGORIZER="disjointCategorizes" |
 		//	PARTITIONER="partitions";
 		public EnumRule getRule() { return rule; }
 		
-		//CATEGORIZER="categorizes" | COMPLETE_CATEGORIZER="completecategorizes" | DISJOINT_CATEGORIZER="disjointcategorizes" |
+		//CATEGORIZER="categorizes" | COMPLETE_CATEGORIZER="completeCategorizes" | DISJOINT_CATEGORIZER="disjointCategorizes" |
 		//PARTITIONER="partitions"
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
@@ -1880,23 +2195,131 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		//"categorizes"
 		public Keyword getCATEGORIZERCategorizesKeyword_0_0() { return cCATEGORIZERCategorizesKeyword_0_0; }
 		
-		//COMPLETE_CATEGORIZER="completecategorizes"
+		//COMPLETE_CATEGORIZER="completeCategorizes"
 		public EnumLiteralDeclaration getCOMPLETE_CATEGORIZEREnumLiteralDeclaration_1() { return cCOMPLETE_CATEGORIZEREnumLiteralDeclaration_1; }
 		
-		//"completecategorizes"
-		public Keyword getCOMPLETE_CATEGORIZERCompletecategorizesKeyword_1_0() { return cCOMPLETE_CATEGORIZERCompletecategorizesKeyword_1_0; }
+		//"completeCategorizes"
+		public Keyword getCOMPLETE_CATEGORIZERCompleteCategorizesKeyword_1_0() { return cCOMPLETE_CATEGORIZERCompleteCategorizesKeyword_1_0; }
 		
-		//DISJOINT_CATEGORIZER="disjointcategorizes"
+		//DISJOINT_CATEGORIZER="disjointCategorizes"
 		public EnumLiteralDeclaration getDISJOINT_CATEGORIZEREnumLiteralDeclaration_2() { return cDISJOINT_CATEGORIZEREnumLiteralDeclaration_2; }
 		
-		//"disjointcategorizes"
-		public Keyword getDISJOINT_CATEGORIZERDisjointcategorizesKeyword_2_0() { return cDISJOINT_CATEGORIZERDisjointcategorizesKeyword_2_0; }
+		//"disjointCategorizes"
+		public Keyword getDISJOINT_CATEGORIZERDisjointCategorizesKeyword_2_0() { return cDISJOINT_CATEGORIZERDisjointCategorizesKeyword_2_0; }
 		
 		//PARTITIONER="partitions"
 		public EnumLiteralDeclaration getPARTITIONEREnumLiteralDeclaration_3() { return cPARTITIONEREnumLiteralDeclaration_3; }
 		
 		//"partitions"
 		public Keyword getPARTITIONERPartitionsKeyword_3_0() { return cPARTITIONERPartitionsKeyword_3_0; }
+	}
+	public class RegularityAttributeTypeElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "br.ufes.inf.nemo.ontol.OntoL.RegularityAttributeType");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cDETERMINES_MAX_VALUEEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cDETERMINES_MAX_VALUEDeterminesMaxValueKeyword_0_0 = (Keyword)cDETERMINES_MAX_VALUEEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cDETERMINES_MIN_VALUEEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cDETERMINES_MIN_VALUEDeterminesMinValueKeyword_1_0 = (Keyword)cDETERMINES_MIN_VALUEEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cDETERMINES_VALUEEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cDETERMINES_VALUEDeterminesValueKeyword_2_0 = (Keyword)cDETERMINES_VALUEEnumLiteralDeclaration_2.eContents().get(0);
+		private final EnumLiteralDeclaration cDETERMINES_POSSIBLE_VALUESEnumLiteralDeclaration_3 = (EnumLiteralDeclaration)cAlternatives.eContents().get(3);
+		private final Keyword cDETERMINES_POSSIBLE_VALUESDeterminesPossibleValuesKeyword_3_0 = (Keyword)cDETERMINES_POSSIBLE_VALUESEnumLiteralDeclaration_3.eContents().get(0);
+		private final EnumLiteralDeclaration cDETERMINES_TYPEEnumLiteralDeclaration_4 = (EnumLiteralDeclaration)cAlternatives.eContents().get(4);
+		private final Keyword cDETERMINES_TYPEDeterminesTypeKeyword_4_0 = (Keyword)cDETERMINES_TYPEEnumLiteralDeclaration_4.eContents().get(0);
+		private final EnumLiteralDeclaration cDETERMINES_POSSIBLE_TYPESEnumLiteralDeclaration_5 = (EnumLiteralDeclaration)cAlternatives.eContents().get(5);
+		private final Keyword cDETERMINES_POSSIBLE_TYPESDeterminesPossibleTypesKeyword_5_0 = (Keyword)cDETERMINES_POSSIBLE_TYPESEnumLiteralDeclaration_5.eContents().get(0);
+		
+		//enum RegularityAttributeType returns RegularityPropertyType:
+		//	DETERMINES_MAX_VALUE="determinesMaxValue" | DETERMINES_MIN_VALUE="determinesMinValue" |
+		//	DETERMINES_VALUE="determinesValue" | DETERMINES_POSSIBLE_VALUES="determinesPossibleValues" |
+		//	DETERMINES_TYPE="determinesType" | DETERMINES_POSSIBLE_TYPES="determinesPossibleTypes";
+		public EnumRule getRule() { return rule; }
+		
+		//DETERMINES_MAX_VALUE="determinesMaxValue" | DETERMINES_MIN_VALUE="determinesMinValue" |
+		//DETERMINES_VALUE="determinesValue" | DETERMINES_POSSIBLE_VALUES="determinesPossibleValues" |
+		//DETERMINES_TYPE="determinesType" | DETERMINES_POSSIBLE_TYPES="determinesPossibleTypes"
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//DETERMINES_MAX_VALUE="determinesMaxValue"
+		public EnumLiteralDeclaration getDETERMINES_MAX_VALUEEnumLiteralDeclaration_0() { return cDETERMINES_MAX_VALUEEnumLiteralDeclaration_0; }
+		
+		//"determinesMaxValue"
+		public Keyword getDETERMINES_MAX_VALUEDeterminesMaxValueKeyword_0_0() { return cDETERMINES_MAX_VALUEDeterminesMaxValueKeyword_0_0; }
+		
+		//DETERMINES_MIN_VALUE="determinesMinValue"
+		public EnumLiteralDeclaration getDETERMINES_MIN_VALUEEnumLiteralDeclaration_1() { return cDETERMINES_MIN_VALUEEnumLiteralDeclaration_1; }
+		
+		//"determinesMinValue"
+		public Keyword getDETERMINES_MIN_VALUEDeterminesMinValueKeyword_1_0() { return cDETERMINES_MIN_VALUEDeterminesMinValueKeyword_1_0; }
+		
+		//DETERMINES_VALUE="determinesValue"
+		public EnumLiteralDeclaration getDETERMINES_VALUEEnumLiteralDeclaration_2() { return cDETERMINES_VALUEEnumLiteralDeclaration_2; }
+		
+		//"determinesValue"
+		public Keyword getDETERMINES_VALUEDeterminesValueKeyword_2_0() { return cDETERMINES_VALUEDeterminesValueKeyword_2_0; }
+		
+		//DETERMINES_POSSIBLE_VALUES="determinesPossibleValues"
+		public EnumLiteralDeclaration getDETERMINES_POSSIBLE_VALUESEnumLiteralDeclaration_3() { return cDETERMINES_POSSIBLE_VALUESEnumLiteralDeclaration_3; }
+		
+		//"determinesPossibleValues"
+		public Keyword getDETERMINES_POSSIBLE_VALUESDeterminesPossibleValuesKeyword_3_0() { return cDETERMINES_POSSIBLE_VALUESDeterminesPossibleValuesKeyword_3_0; }
+		
+		//DETERMINES_TYPE="determinesType"
+		public EnumLiteralDeclaration getDETERMINES_TYPEEnumLiteralDeclaration_4() { return cDETERMINES_TYPEEnumLiteralDeclaration_4; }
+		
+		//"determinesType"
+		public Keyword getDETERMINES_TYPEDeterminesTypeKeyword_4_0() { return cDETERMINES_TYPEDeterminesTypeKeyword_4_0; }
+		
+		//DETERMINES_POSSIBLE_TYPES="determinesPossibleTypes"
+		public EnumLiteralDeclaration getDETERMINES_POSSIBLE_TYPESEnumLiteralDeclaration_5() { return cDETERMINES_POSSIBLE_TYPESEnumLiteralDeclaration_5; }
+		
+		//"determinesPossibleTypes"
+		public Keyword getDETERMINES_POSSIBLE_TYPESDeterminesPossibleTypesKeyword_5_0() { return cDETERMINES_POSSIBLE_TYPESDeterminesPossibleTypesKeyword_5_0; }
+	}
+	public class RegularityReferenceTypeElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "br.ufes.inf.nemo.ontol.OntoL.RegularityReferenceType");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cDETERMINES_VALUEEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cDETERMINES_VALUEDeterminesValueKeyword_0_0 = (Keyword)cDETERMINES_VALUEEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cDETERMINES_POSSIBLE_VALUESEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cDETERMINES_POSSIBLE_VALUESDeterminesPossibleValuesKeyword_1_0 = (Keyword)cDETERMINES_POSSIBLE_VALUESEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cDETERMINES_TYPEEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cDETERMINES_TYPEDeterminesTypeKeyword_2_0 = (Keyword)cDETERMINES_TYPEEnumLiteralDeclaration_2.eContents().get(0);
+		private final EnumLiteralDeclaration cDETERMINES_POSSIBLE_TYPESEnumLiteralDeclaration_3 = (EnumLiteralDeclaration)cAlternatives.eContents().get(3);
+		private final Keyword cDETERMINES_POSSIBLE_TYPESDeterminesPossibleTypesKeyword_3_0 = (Keyword)cDETERMINES_POSSIBLE_TYPESEnumLiteralDeclaration_3.eContents().get(0);
+		
+		//enum RegularityReferenceType returns RegularityPropertyType:
+		//	DETERMINES_VALUE="determinesValue" | DETERMINES_POSSIBLE_VALUES="determinesPossibleValues" |
+		//	DETERMINES_TYPE="determinesType" | DETERMINES_POSSIBLE_TYPES="determinesPossibleTypes";
+		public EnumRule getRule() { return rule; }
+		
+		//DETERMINES_VALUE="determinesValue" | DETERMINES_POSSIBLE_VALUES="determinesPossibleValues" |
+		//DETERMINES_TYPE="determinesType" | DETERMINES_POSSIBLE_TYPES="determinesPossibleTypes"
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//DETERMINES_VALUE="determinesValue"
+		public EnumLiteralDeclaration getDETERMINES_VALUEEnumLiteralDeclaration_0() { return cDETERMINES_VALUEEnumLiteralDeclaration_0; }
+		
+		//"determinesValue"
+		public Keyword getDETERMINES_VALUEDeterminesValueKeyword_0_0() { return cDETERMINES_VALUEDeterminesValueKeyword_0_0; }
+		
+		//DETERMINES_POSSIBLE_VALUES="determinesPossibleValues"
+		public EnumLiteralDeclaration getDETERMINES_POSSIBLE_VALUESEnumLiteralDeclaration_1() { return cDETERMINES_POSSIBLE_VALUESEnumLiteralDeclaration_1; }
+		
+		//"determinesPossibleValues"
+		public Keyword getDETERMINES_POSSIBLE_VALUESDeterminesPossibleValuesKeyword_1_0() { return cDETERMINES_POSSIBLE_VALUESDeterminesPossibleValuesKeyword_1_0; }
+		
+		//DETERMINES_TYPE="determinesType"
+		public EnumLiteralDeclaration getDETERMINES_TYPEEnumLiteralDeclaration_2() { return cDETERMINES_TYPEEnumLiteralDeclaration_2; }
+		
+		//"determinesType"
+		public Keyword getDETERMINES_TYPEDeterminesTypeKeyword_2_0() { return cDETERMINES_TYPEDeterminesTypeKeyword_2_0; }
+		
+		//DETERMINES_POSSIBLE_TYPES="determinesPossibleTypes"
+		public EnumLiteralDeclaration getDETERMINES_POSSIBLE_TYPESEnumLiteralDeclaration_3() { return cDETERMINES_POSSIBLE_TYPESEnumLiteralDeclaration_3; }
+		
+		//"determinesPossibleTypes"
+		public Keyword getDETERMINES_POSSIBLE_TYPESDeterminesPossibleTypesKeyword_3_0() { return cDETERMINES_POSSIBLE_TYPESDeterminesPossibleTypesKeyword_3_0; }
 	}
 	
 	private final ModelElements pModel;
@@ -1912,13 +2335,16 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 	private final HOClassElements pHOClass;
 	private final CategorizationTypeElements eCategorizationType;
 	private final AttributeElements pAttribute;
+	private final RegularityAttributeElements pRegularityAttribute;
+	private final RegularityAttributeTypeElements eRegularityAttributeType;
 	private final ReferenceElements pReference;
+	private final RegularityReferenceElements pRegularityReference;
+	private final RegularityReferenceTypeElements eRegularityReferenceType;
 	private final ELEMENTBOUNDElements pELEMENTBOUND;
 	private final AttributeAssignmentElements pAttributeAssignment;
 	private final SimpleAttributeAssignmentElements pSimpleAttributeAssignment;
 	private final ReferenceAssignmentElements pReferenceAssignment;
 	private final DataValueElements pDataValue;
-	private final ReferenceValueElements pReferenceValue;
 	private final StringValueElements pStringValue;
 	private final NumberValueElements pNumberValue;
 	private final NUMBERElements pNUMBER;
@@ -1951,13 +2377,16 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		this.pHOClass = new HOClassElements();
 		this.eCategorizationType = new CategorizationTypeElements();
 		this.pAttribute = new AttributeElements();
+		this.pRegularityAttribute = new RegularityAttributeElements();
+		this.eRegularityAttributeType = new RegularityAttributeTypeElements();
 		this.pReference = new ReferenceElements();
+		this.pRegularityReference = new RegularityReferenceElements();
+		this.eRegularityReferenceType = new RegularityReferenceTypeElements();
 		this.pELEMENTBOUND = new ELEMENTBOUNDElements();
 		this.pAttributeAssignment = new AttributeAssignmentElements();
 		this.pSimpleAttributeAssignment = new SimpleAttributeAssignmentElements();
 		this.pReferenceAssignment = new ReferenceAssignmentElements();
 		this.pDataValue = new DataValueElements();
-		this.pReferenceValue = new ReferenceValueElements();
 		this.pStringValue = new StringValueElements();
 		this.pNumberValue = new NumberValueElements();
 		this.pNUMBER = new NUMBERElements();
@@ -2072,8 +2501,10 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//OntoLClass:
 	//	(OrderlessClass | HOClass | FOClass) ('{' (attributes+=Attribute
+	//	| attributes+=RegularityAttribute
 	//	| attAssignments+=AttributeAssignment
 	//	| references+=Reference
+	//	| references+=RegularityReference
 	//	| refAssignments+=ReferenceAssignment)* '}')?;
 	public OntoLClassElements getOntoLClassAccess() {
 		return pOntoLClass;
@@ -2086,9 +2517,9 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 	//OrderlessClass:
 	//	'orderless' 'class' name=ID (':' instantiatedClasses+=[OntoLClass|QualifiedName] (','
 	//	instantiatedClasses+=[OntoLClass|QualifiedName])*)? ('specializes' superClasses+=[OntoLClass|QualifiedName] (','
-	//	superClasses+=[OntoLClass|QualifiedName])*)? ('subordinatedto' subordinators+=[OntoLClass|QualifiedName] (','
+	//	superClasses+=[OntoLClass|QualifiedName])*)? ('subordinatedTo' subordinators+=[OntoLClass|QualifiedName] (','
 	//	subordinators+=[OntoLClass|QualifiedName])*)? (categorizationType=CategorizationType
-	//	basetype=[OntoLClass|QualifiedName] | 'ispowertypeof' powertypeOf=[OntoLClass|QualifiedName])?;
+	//	basetype=[OntoLClass|QualifiedName] | 'isPowertypeOf' powertypeOf=[OntoLClass|QualifiedName])?;
 	public OrderlessClassElements getOrderlessClassAccess() {
 		return pOrderlessClass;
 	}
@@ -2112,9 +2543,9 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 	//HOClass:
 	//	'order' order=INT 'class' name=ID (':' instantiatedClasses+=[OntoLClass|QualifiedName] (','
 	//	instantiatedClasses+=[OntoLClass|QualifiedName])*)? ('specializes' superClasses+=[OntoLClass|QualifiedName] (','
-	//	superClasses+=[OntoLClass|QualifiedName])*)? ('subordinatedto' subordinators+=[OntoLClass|QualifiedName] (','
+	//	superClasses+=[OntoLClass|QualifiedName])*)? ('subordinatedTo' subordinators+=[OntoLClass|QualifiedName] (','
 	//	subordinators+=[OntoLClass|QualifiedName])*)? (categorizationType=CategorizationType
-	//	basetype=[OntoLClass|QualifiedName] | 'ispowertypeof' powertypeOf=[OntoLClass|QualifiedName])?;
+	//	basetype=[OntoLClass|QualifiedName] | 'isPowertypeOf' powertypeOf=[OntoLClass|QualifiedName])?;
 	public HOClassElements getHOClassAccess() {
 		return pHOClass;
 	}
@@ -2124,7 +2555,7 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//enum CategorizationType:
-	//	CATEGORIZER="categorizes" | COMPLETE_CATEGORIZER="completecategorizes" | DISJOINT_CATEGORIZER="disjointcategorizes" |
+	//	CATEGORIZER="categorizes" | COMPLETE_CATEGORIZER="completeCategorizes" | DISJOINT_CATEGORIZER="disjointCategorizes" |
 	//	PARTITIONER="partitions";
 	public CategorizationTypeElements getCategorizationTypeAccess() {
 		return eCategorizationType;
@@ -2135,9 +2566,8 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Attribute:
-	//	regularity?='regularity'?
 	//	'att' name=ID ':' ('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
-	//	propertyClass=[OntoLClass|QualifiedName] ('subsets' subsetOf+=[Attribute|QualifiedName] (','
+	//	propertyType=[OntoLClass|QualifiedName] ('subsets' subsetOf+=[Attribute|QualifiedName] (','
 	//	subsetOf+=[Attribute|QualifiedName])*)?;
 	public AttributeElements getAttributeAccess() {
 		return pAttribute;
@@ -2147,17 +2577,67 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 		return getAttributeAccess().getRule();
 	}
 	
+	//RegularityAttribute Attribute:
+	//	regularity?='regularity'
+	//	'att' name=ID ':' ('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
+	//	propertyType=[OntoLClass|QualifiedName] ('subsets' subsetOf+=[Attribute|QualifiedName] (','
+	//	subsetOf+=[Attribute|QualifiedName])*)? (regularityType=RegularityAttributeType
+	//	regulatedProperty=[Attribute|QualifiedName])?
+	public RegularityAttributeElements getRegularityAttributeAccess() {
+		return pRegularityAttribute;
+	}
+	
+	public ParserRule getRegularityAttributeRule() {
+		return getRegularityAttributeAccess().getRule();
+	}
+	
+	//enum RegularityAttributeType returns RegularityPropertyType:
+	//	DETERMINES_MAX_VALUE="determinesMaxValue" | DETERMINES_MIN_VALUE="determinesMinValue" |
+	//	DETERMINES_VALUE="determinesValue" | DETERMINES_POSSIBLE_VALUES="determinesPossibleValues" |
+	//	DETERMINES_TYPE="determinesType" | DETERMINES_POSSIBLE_TYPES="determinesPossibleTypes";
+	public RegularityAttributeTypeElements getRegularityAttributeTypeAccess() {
+		return eRegularityAttributeType;
+	}
+	
+	public EnumRule getRegularityAttributeTypeRule() {
+		return getRegularityAttributeTypeAccess().getRule();
+	}
+	
 	//Reference:
-	//	regularity?='regularity'?
 	//	'ref' name=ID ':' ('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
-	//	propertyClass=[OntoLClass|QualifiedName] ('subsets' subsetOf+=[Reference|QualifiedName] (','
-	//	subsetOf+=[Reference|QualifiedName])*)? ('isoppositeto' oppositeTo=[Reference|QualifiedName])?;
+	//	propertyType=[OntoLClass|QualifiedName] ('subsets' subsetOf+=[Reference|QualifiedName] (','
+	//	subsetOf+=[Reference|QualifiedName])*)? ('isOppositeTo' oppositeTo=[Reference|QualifiedName])?;
 	public ReferenceElements getReferenceAccess() {
 		return pReference;
 	}
 	
 	public ParserRule getReferenceRule() {
 		return getReferenceAccess().getRule();
+	}
+	
+	//RegularityReference Reference:
+	//	regularity?='regularity'
+	//	'ref' name=ID ':' ('[' lowerBound=ELEMENTBOUND '..' upperBound=ELEMENTBOUND ']')?
+	//	propertyType=[OntoLClass|QualifiedName] ('subsets' subsetOf+=[Reference|QualifiedName] (','
+	//	subsetOf+=[Reference|QualifiedName])*)? ('isOppositeTo' oppositeTo=[Reference|QualifiedName])?
+	//	(regularityType=RegularityReferenceType regulatedProperty=[Reference|QualifiedName])?
+	public RegularityReferenceElements getRegularityReferenceAccess() {
+		return pRegularityReference;
+	}
+	
+	public ParserRule getRegularityReferenceRule() {
+		return getRegularityReferenceAccess().getRule();
+	}
+	
+	//enum RegularityReferenceType returns RegularityPropertyType:
+	//	DETERMINES_VALUE="determinesValue" | DETERMINES_POSSIBLE_VALUES="determinesPossibleValues" |
+	//	DETERMINES_TYPE="determinesType" | DETERMINES_POSSIBLE_TYPES="determinesPossibleTypes";
+	public RegularityReferenceTypeElements getRegularityReferenceTypeAccess() {
+		return eRegularityReferenceType;
+	}
+	
+	public EnumRule getRegularityReferenceTypeRule() {
+		return getRegularityReferenceTypeAccess().getRule();
 	}
 	
 	//ELEMENTBOUND ecore::EIntegerObject:
@@ -2193,8 +2673,8 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ReferenceAssignment:
-	//	'ref' reference=[Reference|QualifiedName] '=' (assignments+=ReferenceValue
-	//	| '{' assignments+=ReferenceValue (',' assignments+=ReferenceValue)* '}');
+	//	'ref' reference=[Reference|QualifiedName] '=' (assignments+=[EntityDeclaration|QualifiedName] | '{'
+	//	assignments+=[EntityDeclaration|QualifiedName] (',' assignments+=[EntityDeclaration|QualifiedName])* '}');
 	public ReferenceAssignmentElements getReferenceAssignmentAccess() {
 		return pReferenceAssignment;
 	}
@@ -2211,16 +2691,6 @@ public class OntoLGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getDataValueRule() {
 		return getDataValueAccess().getRule();
-	}
-	
-	//ReferenceValue:
-	//	value=[EntityDeclaration|QualifiedName];
-	public ReferenceValueElements getReferenceValueAccess() {
-		return pReferenceValue;
-	}
-	
-	public ParserRule getReferenceValueRule() {
-		return getReferenceValueAccess().getRule();
 	}
 	
 	//StringValue:

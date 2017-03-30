@@ -5,6 +5,7 @@ package br.ufes.inf.nemo.ontol.model.impl;
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
 import br.ufes.inf.nemo.ontol.model.OntoLClass;
 import br.ufes.inf.nemo.ontol.model.Property;
+import br.ufes.inf.nemo.ontol.model.RegularityPropertyType;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -24,8 +25,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.PropertyImpl#getName <em>Name</em>}</li>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.PropertyImpl#getLowerBound <em>Lower Bound</em>}</li>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.PropertyImpl#getUpperBound <em>Upper Bound</em>}</li>
+ *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.PropertyImpl#getPropertyType <em>Property Type</em>}</li>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.PropertyImpl#getRegularity <em>Regularity</em>}</li>
- *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.PropertyImpl#getPropertyClass <em>Property Class</em>}</li>
+ *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.PropertyImpl#getRegularityType <em>Regularity Type</em>}</li>
+ *   <li>{@link br.ufes.inf.nemo.ontol.model.impl.PropertyImpl#getRegulatedProperty <em>Regulated Property</em>}</li>
  * </ul>
  *
  * @generated
@@ -92,6 +95,16 @@ public class PropertyImpl extends ModelElementImpl implements Property {
 	protected Integer upperBound = UPPER_BOUND_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getPropertyType() <em>Property Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPropertyType()
+	 * @generated
+	 * @ordered
+	 */
+	protected OntoLClass propertyType;
+
+	/**
 	 * The default value of the '{@link #getRegularity() <em>Regularity</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -112,14 +125,34 @@ public class PropertyImpl extends ModelElementImpl implements Property {
 	protected Boolean regularity = REGULARITY_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getPropertyClass() <em>Property Class</em>}' reference.
+	 * The default value of the '{@link #getRegularityType() <em>Regularity Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPropertyClass()
+	 * @see #getRegularityType()
 	 * @generated
 	 * @ordered
 	 */
-	protected OntoLClass propertyClass;
+	protected static final RegularityPropertyType REGULARITY_TYPE_EDEFAULT = RegularityPropertyType.DETERMINES_MAX_VALUE;
+
+	/**
+	 * The cached value of the '{@link #getRegularityType() <em>Regularity Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRegularityType()
+	 * @generated
+	 * @ordered
+	 */
+	protected RegularityPropertyType regularityType = REGULARITY_TYPE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getRegulatedProperty() <em>Regulated Property</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRegulatedProperty()
+	 * @generated
+	 * @ordered
+	 */
+	protected Property regulatedProperty;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -208,6 +241,44 @@ public class PropertyImpl extends ModelElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public OntoLClass getPropertyType() {
+		if (propertyType != null && propertyType.eIsProxy()) {
+			InternalEObject oldPropertyType = (InternalEObject)propertyType;
+			propertyType = (OntoLClass)eResolveProxy(oldPropertyType);
+			if (propertyType != oldPropertyType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.PROPERTY__PROPERTY_TYPE, oldPropertyType, propertyType));
+			}
+		}
+		return propertyType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OntoLClass basicGetPropertyType() {
+		return propertyType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPropertyType(OntoLClass newPropertyType) {
+		OntoLClass oldPropertyType = propertyType;
+		propertyType = newPropertyType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PROPERTY__PROPERTY_TYPE, oldPropertyType, propertyType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Boolean getRegularity() {
 		return regularity;
 	}
@@ -229,16 +300,37 @@ public class PropertyImpl extends ModelElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OntoLClass getPropertyClass() {
-		if (propertyClass != null && propertyClass.eIsProxy()) {
-			InternalEObject oldPropertyClass = (InternalEObject)propertyClass;
-			propertyClass = (OntoLClass)eResolveProxy(oldPropertyClass);
-			if (propertyClass != oldPropertyClass) {
+	public RegularityPropertyType getRegularityType() {
+		return regularityType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRegularityType(RegularityPropertyType newRegularityType) {
+		RegularityPropertyType oldRegularityType = regularityType;
+		regularityType = newRegularityType == null ? REGULARITY_TYPE_EDEFAULT : newRegularityType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PROPERTY__REGULARITY_TYPE, oldRegularityType, regularityType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Property getRegulatedProperty() {
+		if (regulatedProperty != null && regulatedProperty.eIsProxy()) {
+			InternalEObject oldRegulatedProperty = (InternalEObject)regulatedProperty;
+			regulatedProperty = (Property)eResolveProxy(oldRegulatedProperty);
+			if (regulatedProperty != oldRegulatedProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.PROPERTY__PROPERTY_CLASS, oldPropertyClass, propertyClass));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.PROPERTY__REGULATED_PROPERTY, oldRegulatedProperty, regulatedProperty));
 			}
 		}
-		return propertyClass;
+		return regulatedProperty;
 	}
 
 	/**
@@ -246,8 +338,8 @@ public class PropertyImpl extends ModelElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OntoLClass basicGetPropertyClass() {
-		return propertyClass;
+	public Property basicGetRegulatedProperty() {
+		return regulatedProperty;
 	}
 
 	/**
@@ -255,11 +347,11 @@ public class PropertyImpl extends ModelElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPropertyClass(OntoLClass newPropertyClass) {
-		OntoLClass oldPropertyClass = propertyClass;
-		propertyClass = newPropertyClass;
+	public void setRegulatedProperty(Property newRegulatedProperty) {
+		Property oldRegulatedProperty = regulatedProperty;
+		regulatedProperty = newRegulatedProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PROPERTY__PROPERTY_CLASS, oldPropertyClass, propertyClass));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PROPERTY__REGULATED_PROPERTY, oldRegulatedProperty, regulatedProperty));
 	}
 
 	/**
@@ -276,11 +368,16 @@ public class PropertyImpl extends ModelElementImpl implements Property {
 				return getLowerBound();
 			case ModelPackage.PROPERTY__UPPER_BOUND:
 				return getUpperBound();
+			case ModelPackage.PROPERTY__PROPERTY_TYPE:
+				if (resolve) return getPropertyType();
+				return basicGetPropertyType();
 			case ModelPackage.PROPERTY__REGULARITY:
 				return getRegularity();
-			case ModelPackage.PROPERTY__PROPERTY_CLASS:
-				if (resolve) return getPropertyClass();
-				return basicGetPropertyClass();
+			case ModelPackage.PROPERTY__REGULARITY_TYPE:
+				return getRegularityType();
+			case ModelPackage.PROPERTY__REGULATED_PROPERTY:
+				if (resolve) return getRegulatedProperty();
+				return basicGetRegulatedProperty();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -302,11 +399,17 @@ public class PropertyImpl extends ModelElementImpl implements Property {
 			case ModelPackage.PROPERTY__UPPER_BOUND:
 				setUpperBound((Integer)newValue);
 				return;
+			case ModelPackage.PROPERTY__PROPERTY_TYPE:
+				setPropertyType((OntoLClass)newValue);
+				return;
 			case ModelPackage.PROPERTY__REGULARITY:
 				setRegularity((Boolean)newValue);
 				return;
-			case ModelPackage.PROPERTY__PROPERTY_CLASS:
-				setPropertyClass((OntoLClass)newValue);
+			case ModelPackage.PROPERTY__REGULARITY_TYPE:
+				setRegularityType((RegularityPropertyType)newValue);
+				return;
+			case ModelPackage.PROPERTY__REGULATED_PROPERTY:
+				setRegulatedProperty((Property)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -329,11 +432,17 @@ public class PropertyImpl extends ModelElementImpl implements Property {
 			case ModelPackage.PROPERTY__UPPER_BOUND:
 				setUpperBound(UPPER_BOUND_EDEFAULT);
 				return;
+			case ModelPackage.PROPERTY__PROPERTY_TYPE:
+				setPropertyType((OntoLClass)null);
+				return;
 			case ModelPackage.PROPERTY__REGULARITY:
 				setRegularity(REGULARITY_EDEFAULT);
 				return;
-			case ModelPackage.PROPERTY__PROPERTY_CLASS:
-				setPropertyClass((OntoLClass)null);
+			case ModelPackage.PROPERTY__REGULARITY_TYPE:
+				setRegularityType(REGULARITY_TYPE_EDEFAULT);
+				return;
+			case ModelPackage.PROPERTY__REGULATED_PROPERTY:
+				setRegulatedProperty((Property)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -353,10 +462,14 @@ public class PropertyImpl extends ModelElementImpl implements Property {
 				return LOWER_BOUND_EDEFAULT == null ? lowerBound != null : !LOWER_BOUND_EDEFAULT.equals(lowerBound);
 			case ModelPackage.PROPERTY__UPPER_BOUND:
 				return UPPER_BOUND_EDEFAULT == null ? upperBound != null : !UPPER_BOUND_EDEFAULT.equals(upperBound);
+			case ModelPackage.PROPERTY__PROPERTY_TYPE:
+				return propertyType != null;
 			case ModelPackage.PROPERTY__REGULARITY:
 				return REGULARITY_EDEFAULT == null ? regularity != null : !REGULARITY_EDEFAULT.equals(regularity);
-			case ModelPackage.PROPERTY__PROPERTY_CLASS:
-				return propertyClass != null;
+			case ModelPackage.PROPERTY__REGULARITY_TYPE:
+				return regularityType != REGULARITY_TYPE_EDEFAULT;
+			case ModelPackage.PROPERTY__REGULATED_PROPERTY:
+				return regulatedProperty != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -379,6 +492,8 @@ public class PropertyImpl extends ModelElementImpl implements Property {
 		result.append(upperBound);
 		result.append(", regularity: ");
 		result.append(regularity);
+		result.append(", regularityType: ");
+		result.append(regularityType);
 		result.append(')');
 		return result.toString();
 	}

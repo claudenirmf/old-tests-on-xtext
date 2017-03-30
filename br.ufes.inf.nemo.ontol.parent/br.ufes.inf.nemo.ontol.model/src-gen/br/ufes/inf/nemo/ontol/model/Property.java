@@ -15,8 +15,10 @@ package br.ufes.inf.nemo.ontol.model;
  *   <li>{@link br.ufes.inf.nemo.ontol.model.Property#getName <em>Name</em>}</li>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.Property#getLowerBound <em>Lower Bound</em>}</li>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.Property#getUpperBound <em>Upper Bound</em>}</li>
+ *   <li>{@link br.ufes.inf.nemo.ontol.model.Property#getPropertyType <em>Property Type</em>}</li>
  *   <li>{@link br.ufes.inf.nemo.ontol.model.Property#getRegularity <em>Regularity</em>}</li>
- *   <li>{@link br.ufes.inf.nemo.ontol.model.Property#getPropertyClass <em>Property Class</em>}</li>
+ *   <li>{@link br.ufes.inf.nemo.ontol.model.Property#getRegularityType <em>Regularity Type</em>}</li>
+ *   <li>{@link br.ufes.inf.nemo.ontol.model.Property#getRegulatedProperty <em>Regulated Property</em>}</li>
  * </ul>
  *
  * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getProperty()
@@ -105,6 +107,32 @@ public interface Property extends ModelElement {
 	void setUpperBound(Integer value);
 
 	/**
+	 * Returns the value of the '<em><b>Property Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Property Type</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Property Type</em>' reference.
+	 * @see #setPropertyType(OntoLClass)
+	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getProperty_PropertyType()
+	 * @model
+	 * @generated
+	 */
+	OntoLClass getPropertyType();
+
+	/**
+	 * Sets the value of the '{@link br.ufes.inf.nemo.ontol.model.Property#getPropertyType <em>Property Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Property Type</em>' reference.
+	 * @see #getPropertyType()
+	 * @generated
+	 */
+	void setPropertyType(OntoLClass value);
+
+	/**
 	 * Returns the value of the '<em><b>Regularity</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
@@ -132,29 +160,58 @@ public interface Property extends ModelElement {
 	void setRegularity(Boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Property Class</b></em>' reference.
+	 * Returns the value of the '<em><b>Regularity Type</b></em>' attribute.
+	 * The literals are from the enumeration {@link br.ufes.inf.nemo.ontol.model.RegularityPropertyType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Property Class</em>' reference isn't clear,
+	 * If the meaning of the '<em>Regularity Type</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Property Class</em>' reference.
-	 * @see #setPropertyClass(OntoLClass)
-	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getProperty_PropertyClass()
+	 * @return the value of the '<em>Regularity Type</em>' attribute.
+	 * @see br.ufes.inf.nemo.ontol.model.RegularityPropertyType
+	 * @see #setRegularityType(RegularityPropertyType)
+	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getProperty_RegularityType()
+	 * @model unique="false"
+	 * @generated
+	 */
+	RegularityPropertyType getRegularityType();
+
+	/**
+	 * Sets the value of the '{@link br.ufes.inf.nemo.ontol.model.Property#getRegularityType <em>Regularity Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Regularity Type</em>' attribute.
+	 * @see br.ufes.inf.nemo.ontol.model.RegularityPropertyType
+	 * @see #getRegularityType()
+	 * @generated
+	 */
+	void setRegularityType(RegularityPropertyType value);
+
+	/**
+	 * Returns the value of the '<em><b>Regulated Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Regulated Property</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Regulated Property</em>' reference.
+	 * @see #setRegulatedProperty(Property)
+	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getProperty_RegulatedProperty()
 	 * @model
 	 * @generated
 	 */
-	OntoLClass getPropertyClass();
+	Property getRegulatedProperty();
 
 	/**
-	 * Sets the value of the '{@link br.ufes.inf.nemo.ontol.model.Property#getPropertyClass <em>Property Class</em>}' reference.
+	 * Sets the value of the '{@link br.ufes.inf.nemo.ontol.model.Property#getRegulatedProperty <em>Regulated Property</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Property Class</em>' reference.
-	 * @see #getPropertyClass()
+	 * @param value the new value of the '<em>Regulated Property</em>' reference.
+	 * @see #getRegulatedProperty()
 	 * @generated
 	 */
-	void setPropertyClass(OntoLClass value);
+	void setRegulatedProperty(Property value);
 
 } // Property

@@ -34,16 +34,15 @@ abstract class OntoLClass extends EntityDeclaration
 	refers OntoLClass[] subordinators
 	contains Attribute[] attributes
 	contains Reference[] references
-	CategorizationType categorizationType = "none"
+	CategorizationType categorizationType
 }
 
 enum CategorizationType 
 {
-	NONE as "none" = 0
-	CATEGORIZER as "categorizes" = 1
-	DISJOINT_CATEGORIZER as "disjointcategorizes" = 2
-	COMPLETE_CATEGORIZER as "completecategorizes" = 3
-	PARTITIONER as "partitions" = 4
+	CATEGORIZER as "categorizes"
+	DISJOINT_CATEGORIZER as "disjointCategorizes"
+	COMPLETE_CATEGORIZER as "completeCategorizes"
+	PARTITIONER as "partitions"
 }
 
 class OrderlessClass extends OntoLClass {}
@@ -72,8 +71,21 @@ class Property extends ModelElement
 	String name
 	Integer lowerBound = "1"
 	Integer upperBound = "1"
+	refers OntoLClass propertyType
+	
 	Boolean regularity = "false"
-	refers OntoLClass propertyClass
+	RegularityPropertyType regularityType
+	refers Property regulatedProperty
+}
+
+enum RegularityPropertyType 
+{
+	DETERMINES_MAX_VALUE as "determinesMaxValue"
+	DETERMINES_MIN_VALUE as "determinesMinValue"
+	DETERMINES_VALUE as "determinesValue"
+	DETERMINES_POSSIBLE_VALUES as "determinesPossibleValues"
+	DETERMINES_TYPE as "determinesType"
+	DETERMINES_POSSIBLE_TYPES as "determinesPossibleTypes"
 }
 
 class Attribute extends Property 
@@ -98,17 +110,10 @@ class AttributeAssignment extends PropertyAssignment
 class ReferenceAssignment extends PropertyAssignment
 {
 	refers Reference reference
-	contains ReferenceValue[] assignments
+	refers EntityDeclaration[] assignments
 }
 
-abstract class Value extends ModelElement {}
-
-class ReferenceValue extends Value 
-{
-	refers EntityDeclaration value
-}
-
-abstract class DataValue extends Value {}
+abstract class DataValue {}
 
 class StringValue extends DataValue 
 {

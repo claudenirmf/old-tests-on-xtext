@@ -85,34 +85,34 @@ class LinguistcRulesTest {
 	
 	@Test def testHasValidPowertypeRelation(){
 		// TODO Add tests for WClass scenarios
-		val incorrectModelA = '''module t { order 2 class A ispowertypeof B; orderless class B; }'''.parse
+		val incorrectModelA = '''module t { order 2 class A isPowertypeOf B; orderless class B; }'''.parse
 		incorrectModelA.assertError(ModelPackage.eINSTANCE.ontoLClass,LinguisticRules.INVALID_POWERTYPE_RELATION)
 		
-		val incorrectModelB = '''module t { order 2 class A ispowertypeof B; order 2 class B; }'''.parse
+		val incorrectModelB = '''module t { order 2 class A isPowertypeOf B; order 2 class B; }'''.parse
 		incorrectModelB.assertError(ModelPackage.eINSTANCE.ontoLClass,LinguisticRules.INVALID_POWERTYPE_RELATION)
 		
-		val incorrectModelC = '''module t { order 3 class A ispowertypeof B; order 3 class B; }'''.parse
+		val incorrectModelC = '''module t { order 3 class A isPowertypeOf B; order 3 class B; }'''.parse
 		incorrectModelC.assertError(ModelPackage.eINSTANCE.ontoLClass,LinguisticRules.INVALID_POWERTYPE_RELATION)
 		
 		val correctModel = '''module t {
-				order 2 class A ispowertypeof B; class B;
-				order 3 class C ispowertypeof D; order 2 class D;
+				order 2 class A isPowertypeOf B; class B;
+				order 3 class C isPowertypeOf D; order 2 class D;
 			}'''.parse
 		correctModel.assertNoErrors
 	}
 	
 	@Test def testHasValidSubordinators(){
 		// TODO Add tests for WClass scenarios
-		val incorrectModelA = '''module t { order 2 class A subordinatedto A; }'''.parse
+		val incorrectModelA = '''module t { order 2 class A subordinatedTo A; }'''.parse
 		incorrectModelA.assertError(ModelPackage.eINSTANCE.ontoLClass,LinguisticRules.INVALID_SUBORDINATOR)
 		
-		val incorrectModelB = '''module t { order 2 class A subordinatedto B; class B; }'''.parse
+		val incorrectModelB = '''module t { order 2 class A subordinatedTo B; class B; }'''.parse
 		incorrectModelB.assertError(ModelPackage.eINSTANCE.ontoLClass,LinguisticRules.INVALID_SUBORDINATOR)
 		
-		val incorrectModelC = '''module t { order 2 class A subordinatedto B; order 3 class B; }'''.parse
+		val incorrectModelC = '''module t { order 2 class A subordinatedTo B; order 3 class B; }'''.parse
 		incorrectModelC.assertError(ModelPackage.eINSTANCE.ontoLClass,LinguisticRules.INVALID_SUBORDINATOR)
 		
-		val correctModel = '''module t { order 2 class A subordinatedto B; order 2 class B; }'''.parse
+		val correctModel = '''module t { order 2 class A subordinatedTo B; order 2 class B; }'''.parse
 		correctModel.assertNoErrors
 	}
 	
@@ -167,33 +167,33 @@ class LinguistcRulesTest {
 	@Test def testObeysSubordination(){
 		val incorrectModel = '''module t{
 				order 2 class XA; 
-				order 2 class XB subordinatedto XA;
+				order 2 class XB subordinatedTo XA;
 				class YA:XA; class YB:XB;
 			}'''.parse
 		incorrectModel.assertError(ModelPackage.eINSTANCE.ontoLClass,
 			LinguisticRules.MISSING_SPECIALIZATION_THROUGH_SUBODINATION)
 		
 		val correctModel = '''module t{
-				order 2 class XA; order 2 class XB subordinatedto XA;
+				order 2 class XA; order 2 class XB subordinatedTo XA;
 				class YA:XA; class YB:XB specializes YA;
 			}'''.parse
 		correctModel.assertNoErrors
 	}
 	
 	@Test def testHasSimpleSubordinationCycle(){
-		val incorrectModelA = '''module t{ orderless class A subordinatedto A; }'''.parse
+		val incorrectModelA = '''module t{ orderless class A subordinatedTo A; }'''.parse
 		incorrectModelA.assertError(ModelPackage.eINSTANCE.ontoLClass,
 			LinguisticRules.SIMPLE_SUBORDINATION_CYCLE)
 		
 		val incorrectModelB = '''module t{
-				orderless class A subordinatedto B;
-				orderless class B subordinatedto A;
+				orderless class A subordinatedTo B;
+				orderless class B subordinatedTo A;
 			}'''.parse
 		incorrectModelB.assertError(ModelPackage.eINSTANCE.ontoLClass,
 			LinguisticRules.SIMPLE_SUBORDINATION_CYCLE)
 		
 		val incorrectModelC = '''module t{
-				orderless class A subordinatedto B;
+				orderless class A subordinatedTo B;
 				orderless class B specializes A;
 			}'''.parse
 		incorrectModelC.assertError(ModelPackage.eINSTANCE.ontoLClass,
@@ -201,7 +201,7 @@ class LinguistcRulesTest {
 		
 		val correctModel = '''module t{
 				orderless class A;
-				orderless class B specializes A subordinatedto A;
+				orderless class B specializes A subordinatedTo A;
 			}'''.parse
 		correctModel.assertNoErrors
 	}
@@ -376,38 +376,17 @@ class LinguistcRulesTest {
 	}
 	
 	@Test def testCheckPropertyAssignmentType(){
-//		val incorrectModelA = '''module t {
-//				class A { 
-//					ref refToA : [1..3] A
-//				};
-//				individual X : A { 
-//					ref refToA = {X, X, A}
-//				};
-//			}'''.parse
-//		incorrectModelA.assertError(ModelPackage.eINSTANCE.referenceAssignment,
-//			LinguisticRules.NON_CONFORMANT_ASSIGNMENT)
-//		
-//		val correctModelA = '''module t {
-//				class A { 
-//					ref refToA : [1..3] A
-//				};
-//				individual X : A { 
-//					ref refToA = {X,X}
-//				};
-//			}'''.parse
-//		correctModelA.assertNoErrors(ModelPackage.eINSTANCE.referenceAssignment,
-//			LinguisticRules.NON_CONFORMANT_ASSIGNMENT)
-		
 		val rs = resourceSetProvider.get
 		rs.loadDatatypeLib
 		val correctModelB = '''module t {
-				include br.ufes.inf.nemo.ontol.lib.datatypes; import br.ufes.inf.nemo.ontol.lib.datatypes.*;
-				class Color specializes DataType {
-					att red : Number
-					att blue : Number
-					att green : Number
+				include «OntoLLib.DATATYPES_LIB»;
+				import «OntoLLib.DATATYPES_LIB».*;
+				class Color specializes «OntoLLib.DATATYPES_DATATYPE» {
+					att red : «OntoLLib.DATATYPES_NUMBER»
+					att blue : «OntoLLib.DATATYPES_NUMBER»
+					att green : «OntoLLib.DATATYPES_NUMBER»
 				};
-				individual Black : Color { att red=0	att green=0	att blue=0 };
+				individual Black : Color { att red=0 att green=0 att blue=0 };
 				class ColoredObject { att color : [1..2] Color };
 				individual SomeCube : ColoredObject { att color = {[ red=255, green=255, blue=255 ]} };
 				individual OtherCube : ColoredObject { att color = Black };

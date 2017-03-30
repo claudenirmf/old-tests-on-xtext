@@ -17,7 +17,7 @@ class OntoLLib {
 	public val static MODEL_DATATYPES = "br/ufes/inf/nemo/ontol/lib/datatype.ontol"
 	public static val DATATYPES_LIB = "ontol.core.datatype"
 	
-	public static val DATATYPES_DATATYPE = DATATYPES_LIB+".Datatype"
+	public static val DATATYPES_DATATYPE = DATATYPES_LIB+".DataType"
 	public static val DATATYPES_STRING = DATATYPES_LIB+".String"
 	public static val DATATYPES_NUMBER = DATATYPES_LIB+".Number"
 	public static val DATATYPES_BOOLEAN = DATATYPES_LIB+".Boolean"

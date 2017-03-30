@@ -2,15 +2,14 @@
  */
 package br.ufes.inf.nemo.ontol.model.impl;
 
+import br.ufes.inf.nemo.ontol.model.EntityDeclaration;
 import br.ufes.inf.nemo.ontol.model.ModelPackage;
 import br.ufes.inf.nemo.ontol.model.Reference;
 import br.ufes.inf.nemo.ontol.model.ReferenceAssignment;
-import br.ufes.inf.nemo.ontol.model.ReferenceValue;
 
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -19,8 +18,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -48,14 +46,14 @@ public class ReferenceAssignmentImpl extends PropertyAssignmentImpl implements R
 	protected Reference reference;
 
 	/**
-	 * The cached value of the '{@link #getAssignments() <em>Assignments</em>}' containment reference list.
+	 * The cached value of the '{@link #getAssignments() <em>Assignments</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getAssignments()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ReferenceValue> assignments;
+	protected EList<EntityDeclaration> assignments;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -119,25 +117,11 @@ public class ReferenceAssignmentImpl extends PropertyAssignmentImpl implements R
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ReferenceValue> getAssignments() {
+	public EList<EntityDeclaration> getAssignments() {
 		if (assignments == null) {
-			assignments = new EObjectContainmentEList<ReferenceValue>(ReferenceValue.class, this, ModelPackage.REFERENCE_ASSIGNMENT__ASSIGNMENTS);
+			assignments = new EObjectResolvingEList<EntityDeclaration>(EntityDeclaration.class, this, ModelPackage.REFERENCE_ASSIGNMENT__ASSIGNMENTS);
 		}
 		return assignments;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ModelPackage.REFERENCE_ASSIGNMENT__ASSIGNMENTS:
-				return ((InternalEList<?>)getAssignments()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -171,7 +155,7 @@ public class ReferenceAssignmentImpl extends PropertyAssignmentImpl implements R
 				return;
 			case ModelPackage.REFERENCE_ASSIGNMENT__ASSIGNMENTS:
 				getAssignments().clear();
-				getAssignments().addAll((Collection<? extends ReferenceValue>)newValue);
+				getAssignments().addAll((Collection<? extends EntityDeclaration>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

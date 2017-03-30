@@ -145,7 +145,6 @@ public interface OntoLClass extends EntityDeclaration {
 
 	/**
 	 * Returns the value of the '<em><b>Categorization Type</b></em>' attribute.
-	 * The default value is <code>"none"</code>.
 	 * The literals are from the enumeration {@link br.ufes.inf.nemo.ontol.model.CategorizationType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -157,7 +156,7 @@ public interface OntoLClass extends EntityDeclaration {
 	 * @see br.ufes.inf.nemo.ontol.model.CategorizationType
 	 * @see #setCategorizationType(CategorizationType)
 	 * @see br.ufes.inf.nemo.ontol.model.ModelPackage#getOntoLClass_CategorizationType()
-	 * @model default="none" unique="false"
+	 * @model unique="false"
 	 * @generated
 	 */
 	CategorizationType getCategorizationType();

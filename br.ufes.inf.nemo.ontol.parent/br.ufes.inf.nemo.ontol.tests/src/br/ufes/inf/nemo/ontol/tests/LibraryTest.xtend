@@ -30,7 +30,7 @@ class LibraryTest {
 		rs.loadUFOLib
 	}
 	
-	def includeStatements()'''
+	def static includeStatements()'''
 		include «OntoLLib.UFO_BASE_LIB»;
 		include «OntoLLib.UFO_ENDURANT_LIB»;
 		include «OntoLLib.UFO_META_LIB»;

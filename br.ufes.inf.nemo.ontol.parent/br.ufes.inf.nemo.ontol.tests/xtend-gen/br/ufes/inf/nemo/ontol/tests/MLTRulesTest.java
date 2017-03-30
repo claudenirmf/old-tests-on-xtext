@@ -36,7 +36,7 @@ public class MLTRulesTest {
       _builder.append("module t{");
       _builder.newLine();
       _builder.append("\t\t\t\t");
-      _builder.append("order 2 class HA ispowertypeof FA;");
+      _builder.append("order 2 class HA isPowertypeOf FA;");
       _builder.newLine();
       _builder.append("\t\t\t\t");
       _builder.append("class FA;\tclass FB : HA;");
@@ -51,7 +51,7 @@ public class MLTRulesTest {
       _builder_1.append("module t{");
       _builder_1.newLine();
       _builder_1.append("\t\t\t\t");
-      _builder_1.append("order 2 class HA ispowertypeof FA;");
+      _builder_1.append("order 2 class HA isPowertypeOf FA;");
       _builder_1.newLine();
       _builder_1.append("\t\t\t\t");
       _builder_1.append("class FA;\t\tclass FB : HA specializes FA;");

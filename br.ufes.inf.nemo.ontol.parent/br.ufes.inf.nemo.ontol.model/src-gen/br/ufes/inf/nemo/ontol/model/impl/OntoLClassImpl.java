@@ -112,7 +112,7 @@ public abstract class OntoLClassImpl extends EntityDeclarationImpl implements On
 	 * @generated
 	 * @ordered
 	 */
-	protected static final CategorizationType CATEGORIZATION_TYPE_EDEFAULT = CategorizationType.NONE;
+	protected static final CategorizationType CATEGORIZATION_TYPE_EDEFAULT = CategorizationType.CATEGORIZER;
 
 	/**
 	 * The cached value of the '{@link #getCategorizationType() <em>Categorization Type</em>}' attribute.

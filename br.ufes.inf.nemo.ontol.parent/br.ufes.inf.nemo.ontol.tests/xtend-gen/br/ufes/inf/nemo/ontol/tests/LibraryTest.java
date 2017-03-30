@@ -51,7 +51,7 @@ public class LibraryTest {
     return _xblockexpression;
   }
   
-  public CharSequence includeStatements() {
+  public static CharSequence includeStatements() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("include ");
     _builder.append(OntoLLib.UFO_BASE_LIB, "");
@@ -91,7 +91,7 @@ public class LibraryTest {
       _builder.append("module t {");
       _builder.newLine();
       _builder.append("\t\t\t\t");
-      CharSequence _includeStatements = this.includeStatements();
+      CharSequence _includeStatements = LibraryTest.includeStatements();
       _builder.append(_includeStatements, "\t\t\t\t");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t\t");
@@ -108,7 +108,7 @@ public class LibraryTest {
       _builder_1.append("module t {");
       _builder_1.newLine();
       _builder_1.append("\t\t\t\t");
-      CharSequence _includeStatements_1 = this.includeStatements();
+      CharSequence _includeStatements_1 = LibraryTest.includeStatements();
       _builder_1.append(_includeStatements_1, "\t\t\t\t");
       _builder_1.newLineIfNotEmpty();
       _builder_1.append("\t\t\t\t");
@@ -135,7 +135,7 @@ public class LibraryTest {
       _builder.append("module t {");
       _builder.newLine();
       _builder.append("\t\t\t\t");
-      CharSequence _includeStatements = this.includeStatements();
+      CharSequence _includeStatements = LibraryTest.includeStatements();
       _builder.append(_includeStatements, "\t\t\t\t");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t\t");
@@ -157,7 +157,7 @@ public class LibraryTest {
       _builder_1.append("module t {");
       _builder_1.newLine();
       _builder_1.append("\t\t\t\t");
-      CharSequence _includeStatements_1 = this.includeStatements();
+      CharSequence _includeStatements_1 = LibraryTest.includeStatements();
       _builder_1.append(_includeStatements_1, "\t\t\t\t");
       _builder_1.newLineIfNotEmpty();
       _builder_1.append("\t\t\t\t");
@@ -187,7 +187,7 @@ public class LibraryTest {
       _builder.append("module t {");
       _builder.newLine();
       _builder.append("\t\t\t\t");
-      CharSequence _includeStatements = this.includeStatements();
+      CharSequence _includeStatements = LibraryTest.includeStatements();
       _builder.append(_includeStatements, "\t\t\t\t");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t\t\t");
@@ -209,7 +209,7 @@ public class LibraryTest {
       _builder_1.append("module t {");
       _builder_1.newLine();
       _builder_1.append("\t\t\t\t");
-      CharSequence _includeStatements_1 = this.includeStatements();
+      CharSequence _includeStatements_1 = LibraryTest.includeStatements();
       _builder_1.append(_includeStatements_1, "\t\t\t\t");
       _builder_1.newLineIfNotEmpty();
       _builder_1.append("\t\t\t\t");
@@ -231,7 +231,7 @@ public class LibraryTest {
       _builder_2.append("module t {");
       _builder_2.newLine();
       _builder_2.append("\t\t\t\t");
-      CharSequence _includeStatements_2 = this.includeStatements();
+      CharSequence _includeStatements_2 = LibraryTest.includeStatements();
       _builder_2.append(_includeStatements_2, "\t\t\t\t");
       _builder_2.newLineIfNotEmpty();
       _builder_2.append("\t\t\t\t");

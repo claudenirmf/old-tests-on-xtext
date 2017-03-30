@@ -19,7 +19,6 @@ import br.ufes.inf.nemo.ontol.model.NumberValue;
 import br.ufes.inf.nemo.ontol.model.OrderlessClass;
 import br.ufes.inf.nemo.ontol.model.Reference;
 import br.ufes.inf.nemo.ontol.model.ReferenceAssignment;
-import br.ufes.inf.nemo.ontol.model.ReferenceValue;
 import br.ufes.inf.nemo.ontol.model.StringValue;
 import br.ufes.inf.nemo.ontol.services.OntoLGrammarAccess;
 import com.google.inject.Inject;
@@ -49,8 +48,15 @@ public class OntoLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		if (epackage == ModelPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
 			case ModelPackage.ATTRIBUTE:
-				sequence_Attribute(context, (Attribute) semanticObject); 
-				return; 
+				if (rule == grammarAccess.getAttributeRule()) {
+					sequence_Attribute(context, (Attribute) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getRegularityAttributeRule()) {
+					sequence_RegularityAttribute(context, (Attribute) semanticObject); 
+					return; 
+				}
+				else break;
 			case ModelPackage.ATTRIBUTE_ASSIGNMENT:
 				if (rule == grammarAccess.getAttributeAssignmentRule()) {
 					sequence_AttributeAssignment(context, (AttributeAssignment) semanticObject); 
@@ -131,13 +137,17 @@ public class OntoLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				}
 				else break;
 			case ModelPackage.REFERENCE:
-				sequence_Reference(context, (Reference) semanticObject); 
-				return; 
+				if (rule == grammarAccess.getReferenceRule()) {
+					sequence_Reference(context, (Reference) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getRegularityReferenceRule()) {
+					sequence_RegularityReference(context, (Reference) semanticObject); 
+					return; 
+				}
+				else break;
 			case ModelPackage.REFERENCE_ASSIGNMENT:
 				sequence_ReferenceAssignment(context, (ReferenceAssignment) semanticObject); 
-				return; 
-			case ModelPackage.REFERENCE_VALUE:
-				sequence_ReferenceValue(context, (ReferenceValue) semanticObject); 
 				return; 
 			case ModelPackage.STRING_VALUE:
 				sequence_StringValue(context, (StringValue) semanticObject); 
@@ -165,10 +175,9 @@ public class OntoLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *
 	 * Constraint:
 	 *     (
-	 *         regularity?='regularity'? 
 	 *         name=ID 
 	 *         (lowerBound=ELEMENTBOUND upperBound=ELEMENTBOUND)? 
-	 *         propertyClass=[OntoLClass|QualifiedName] 
+	 *         propertyType=[OntoLClass|QualifiedName] 
 	 *         (subsetOf+=[Attribute|QualifiedName] subsetOf+=[Attribute|QualifiedName]*)?
 	 *     )
 	 */
@@ -236,7 +245,14 @@ public class OntoLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *         name=ID 
 	 *         (instantiatedClasses+=[OntoLClass|QualifiedName] instantiatedClasses+=[OntoLClass|QualifiedName]*)? 
 	 *         (superClasses+=[OntoLClass|QualifiedName] superClasses+=[OntoLClass|QualifiedName]*)? 
-	 *         (attributes+=Attribute | attAssignments+=AttributeAssignment | references+=Reference | refAssignments+=ReferenceAssignment)*
+	 *         (
+	 *             attributes+=Attribute | 
+	 *             attributes+=RegularityAttribute | 
+	 *             attAssignments+=AttributeAssignment | 
+	 *             references+=Reference | 
+	 *             references+=RegularityReference | 
+	 *             refAssignments+=ReferenceAssignment
+	 *         )*
 	 *     )
 	 */
 	protected void sequence_FOClass_OntoLClass(ISerializationContext context, FOClass semanticObject) {
@@ -297,7 +313,14 @@ public class OntoLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *         (superClasses+=[OntoLClass|QualifiedName] superClasses+=[OntoLClass|QualifiedName]*)? 
 	 *         (subordinators+=[OntoLClass|QualifiedName] subordinators+=[OntoLClass|QualifiedName]*)? 
 	 *         ((categorizationType=CategorizationType basetype=[OntoLClass|QualifiedName]) | powertypeOf=[OntoLClass|QualifiedName])? 
-	 *         (attributes+=Attribute | attAssignments+=AttributeAssignment | references+=Reference | refAssignments+=ReferenceAssignment)*
+	 *         (
+	 *             attributes+=Attribute | 
+	 *             attributes+=RegularityAttribute | 
+	 *             attAssignments+=AttributeAssignment | 
+	 *             references+=Reference | 
+	 *             references+=RegularityReference | 
+	 *             refAssignments+=ReferenceAssignment
+	 *         )*
 	 *     )
 	 */
 	protected void sequence_HOClass_OntoLClass(ISerializationContext context, HOClass semanticObject) {
@@ -399,7 +422,14 @@ public class OntoLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *         (superClasses+=[OntoLClass|QualifiedName] superClasses+=[OntoLClass|QualifiedName]*)? 
 	 *         (subordinators+=[OntoLClass|QualifiedName] subordinators+=[OntoLClass|QualifiedName]*)? 
 	 *         ((categorizationType=CategorizationType basetype=[OntoLClass|QualifiedName]) | powertypeOf=[OntoLClass|QualifiedName])? 
-	 *         (attributes+=Attribute | attAssignments+=AttributeAssignment | references+=Reference | refAssignments+=ReferenceAssignment)*
+	 *         (
+	 *             attributes+=Attribute | 
+	 *             attributes+=RegularityAttribute | 
+	 *             attAssignments+=AttributeAssignment | 
+	 *             references+=Reference | 
+	 *             references+=RegularityReference | 
+	 *             refAssignments+=ReferenceAssignment
+	 *         )*
 	 *     )
 	 */
 	protected void sequence_OntoLClass_OrderlessClass(ISerializationContext context, OrderlessClass semanticObject) {
@@ -430,28 +460,16 @@ public class OntoLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     ReferenceAssignment returns ReferenceAssignment
 	 *
 	 * Constraint:
-	 *     (reference=[Reference|QualifiedName] (assignments+=ReferenceValue | (assignments+=ReferenceValue assignments+=ReferenceValue*)))
+	 *     (
+	 *         reference=[Reference|QualifiedName] 
+	 *         (
+	 *             assignments+=[EntityDeclaration|QualifiedName] | 
+	 *             (assignments+=[EntityDeclaration|QualifiedName] assignments+=[EntityDeclaration|QualifiedName]*)
+	 *         )
+	 *     )
 	 */
 	protected void sequence_ReferenceAssignment(ISerializationContext context, ReferenceAssignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     ReferenceValue returns ReferenceValue
-	 *
-	 * Constraint:
-	 *     value=[EntityDeclaration|QualifiedName]
-	 */
-	protected void sequence_ReferenceValue(ISerializationContext context, ReferenceValue semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, ModelPackage.Literals.REFERENCE_VALUE__VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ModelPackage.Literals.REFERENCE_VALUE__VALUE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getReferenceValueAccess().getValueEntityDeclarationQualifiedNameParserRuleCall_0_1(), semanticObject.getValue());
-		feeder.finish();
 	}
 	
 	
@@ -461,15 +479,53 @@ public class OntoLSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *
 	 * Constraint:
 	 *     (
-	 *         regularity?='regularity'? 
 	 *         name=ID 
 	 *         (lowerBound=ELEMENTBOUND upperBound=ELEMENTBOUND)? 
-	 *         propertyClass=[OntoLClass|QualifiedName] 
+	 *         propertyType=[OntoLClass|QualifiedName] 
 	 *         (subsetOf+=[Reference|QualifiedName] subsetOf+=[Reference|QualifiedName]*)? 
 	 *         oppositeTo=[Reference|QualifiedName]?
 	 *     )
 	 */
 	protected void sequence_Reference(ISerializationContext context, Reference semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     RegularityAttribute returns Attribute
+	 *
+	 * Constraint:
+	 *     (
+	 *         regularity?='regularity' 
+	 *         name=ID 
+	 *         (lowerBound=ELEMENTBOUND upperBound=ELEMENTBOUND)? 
+	 *         propertyType=[OntoLClass|QualifiedName] 
+	 *         (subsetOf+=[Attribute|QualifiedName] subsetOf+=[Attribute|QualifiedName]*)? 
+	 *         (regularityType=RegularityAttributeType regulatedProperty=[Attribute|QualifiedName])?
+	 *     )
+	 */
+	protected void sequence_RegularityAttribute(ISerializationContext context, Attribute semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     RegularityReference returns Reference
+	 *
+	 * Constraint:
+	 *     (
+	 *         regularity?='regularity' 
+	 *         name=ID 
+	 *         (lowerBound=ELEMENTBOUND upperBound=ELEMENTBOUND)? 
+	 *         propertyType=[OntoLClass|QualifiedName] 
+	 *         (subsetOf+=[Reference|QualifiedName] subsetOf+=[Reference|QualifiedName]*)? 
+	 *         oppositeTo=[Reference|QualifiedName]? 
+	 *         (regularityType=RegularityReferenceType regulatedProperty=[Reference|QualifiedName])?
+	 *     )
+	 */
+	protected void sequence_RegularityReference(ISerializationContext context, Reference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

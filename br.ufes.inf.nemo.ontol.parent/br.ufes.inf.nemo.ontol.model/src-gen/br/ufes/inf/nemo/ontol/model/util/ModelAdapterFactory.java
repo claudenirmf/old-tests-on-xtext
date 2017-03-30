@@ -136,14 +136,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createReferenceAssignmentAdapter();
 			}
 			@Override
-			public Adapter caseValue(Value object) {
-				return createValueAdapter();
-			}
-			@Override
-			public Adapter caseReferenceValue(ReferenceValue object) {
-				return createReferenceValueAdapter();
-			}
-			@Override
 			public Adapter caseDataValue(DataValue object) {
 				return createDataValueAdapter();
 			}
@@ -422,34 +414,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createReferenceAssignmentAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link br.ufes.inf.nemo.ontol.model.Value <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see br.ufes.inf.nemo.ontol.model.Value
-	 * @generated
-	 */
-	public Adapter createValueAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link br.ufes.inf.nemo.ontol.model.ReferenceValue <em>Reference Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see br.ufes.inf.nemo.ontol.model.ReferenceValue
-	 * @generated
-	 */
-	public Adapter createReferenceValueAdapter() {
 		return null;
 	}
 

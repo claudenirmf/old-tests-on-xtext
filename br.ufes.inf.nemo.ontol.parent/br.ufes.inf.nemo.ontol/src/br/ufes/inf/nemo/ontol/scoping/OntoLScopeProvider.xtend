@@ -44,6 +44,12 @@ class OntoLScopeProvider extends AbstractOntoLScopeProvider {
 		else if(context instanceof Reference && reference==ModelPackage.eINSTANCE.reference_OppositeTo){
 			return getScopeForReferenceOnReference_OppositeTo(context,reference)
 		}
+		else if(context instanceof Attribute && reference==ModelPackage.eINSTANCE.property_RegulatedProperty){
+			return getScopeForAttributeOnProperty_ReguletedProperty(context,reference)
+		}
+		else if(context instanceof Reference && reference==ModelPackage.eINSTANCE.property_RegulatedProperty){
+			return getScopeForReferenceOnProperty_ReguletedProperty(context,reference)
+		}
 		else return super.getScope(context, reference)
 	}
 	
@@ -93,11 +99,23 @@ class OntoLScopeProvider extends AbstractOntoLScopeProvider {
 		], Scopes.scopeFor(c.references))
 	}
 	
-	def getScopeForReferenceOnReference_OppositeTo(EObject context, EReference reference) {
+	def private getScopeForReferenceOnReference_OppositeTo(EObject context, EReference reference) {
 		val c = context.eContainer as OntoLClass
 		val ref = context as Reference
-		return Scopes.scopeFor(ref.propertyClass.references.filter[it.propertyClass==c],
+		return Scopes.scopeFor(ref.propertyType.references.filter[it.propertyType==c],
 			[ QualifiedName.create(it.name) ], Scopes.scopeFor(c.references))
+	}
+	
+	def private getScopeForAttributeOnProperty_ReguletedProperty(EObject context, EReference reference) {
+		val c = context.eContainer as OntoLClass
+		val elements = c?.basetype.attributes
+		return Scopes.scopeFor(elements, [ QualifiedName.create(it.name) ], IScope.NULLSCOPE)
+	}
+	
+	def private getScopeForReferenceOnProperty_ReguletedProperty(EObject context, EReference reference) {
+		val c = context.eContainer as OntoLClass
+		val elements = c?.basetype.references
+		return Scopes.scopeFor(elements, [ QualifiedName.create(it.name) ], IScope.NULLSCOPE)
 	}
 	
 }

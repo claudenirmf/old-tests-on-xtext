@@ -19,16 +19,6 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum CategorizationType implements Enumerator {
 	/**
-	 * The '<em><b>NONE</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #NONE_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	NONE(0, "NONE", "none"),
-
-	/**
 	 * The '<em><b>CATEGORIZER</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -36,7 +26,7 @@ public enum CategorizationType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	CATEGORIZER(1, "CATEGORIZER", "categorizes"),
+	CATEGORIZER(0, "CATEGORIZER", "categorizes"),
 
 	/**
 	 * The '<em><b>DISJOINT CATEGORIZER</b></em>' literal object.
@@ -46,7 +36,7 @@ public enum CategorizationType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	DISJOINT_CATEGORIZER(2, "DISJOINT_CATEGORIZER", "disjointcategorizes"),
+	DISJOINT_CATEGORIZER(0, "DISJOINT_CATEGORIZER", "disjointCategorizes"),
 
 	/**
 	 * The '<em><b>COMPLETE CATEGORIZER</b></em>' literal object.
@@ -56,7 +46,7 @@ public enum CategorizationType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	COMPLETE_CATEGORIZER(3, "COMPLETE_CATEGORIZER", "completecategorizes"),
+	COMPLETE_CATEGORIZER(0, "COMPLETE_CATEGORIZER", "completeCategorizes"),
 
 	/**
 	 * The '<em><b>PARTITIONER</b></em>' literal object.
@@ -66,22 +56,7 @@ public enum CategorizationType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	PARTITIONER(4, "PARTITIONER", "partitions");
-
-	/**
-	 * The '<em><b>NONE</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>NONE</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @see #NONE
-	 * @model literal="none"
-	 * @generated
-	 * @ordered
-	 */
-	public static final int NONE_VALUE = 0;
+	PARTITIONER(0, "PARTITIONER", "partitions");
 
 	/**
 	 * The '<em><b>CATEGORIZER</b></em>' literal value.
@@ -96,7 +71,7 @@ public enum CategorizationType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int CATEGORIZER_VALUE = 1;
+	public static final int CATEGORIZER_VALUE = 0;
 
 	/**
 	 * The '<em><b>DISJOINT CATEGORIZER</b></em>' literal value.
@@ -107,11 +82,11 @@ public enum CategorizationType implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #DISJOINT_CATEGORIZER
-	 * @model literal="disjointcategorizes"
+	 * @model literal="disjointCategorizes"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int DISJOINT_CATEGORIZER_VALUE = 2;
+	public static final int DISJOINT_CATEGORIZER_VALUE = 0;
 
 	/**
 	 * The '<em><b>COMPLETE CATEGORIZER</b></em>' literal value.
@@ -122,11 +97,11 @@ public enum CategorizationType implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #COMPLETE_CATEGORIZER
-	 * @model literal="completecategorizes"
+	 * @model literal="completeCategorizes"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int COMPLETE_CATEGORIZER_VALUE = 3;
+	public static final int COMPLETE_CATEGORIZER_VALUE = 0;
 
 	/**
 	 * The '<em><b>PARTITIONER</b></em>' literal value.
@@ -141,7 +116,7 @@ public enum CategorizationType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PARTITIONER_VALUE = 4;
+	public static final int PARTITIONER_VALUE = 0;
 
 	/**
 	 * An array of all the '<em><b>Categorization Type</b></em>' enumerators.
@@ -151,7 +126,6 @@ public enum CategorizationType implements Enumerator {
 	 */
 	private static final CategorizationType[] VALUES_ARRAY =
 		new CategorizationType[] {
-			NONE,
 			CATEGORIZER,
 			DISJOINT_CATEGORIZER,
 			COMPLETE_CATEGORIZER,
@@ -212,11 +186,7 @@ public enum CategorizationType implements Enumerator {
 	 */
 	public static CategorizationType get(int value) {
 		switch (value) {
-			case NONE_VALUE: return NONE;
 			case CATEGORIZER_VALUE: return CATEGORIZER;
-			case DISJOINT_CATEGORIZER_VALUE: return DISJOINT_CATEGORIZER;
-			case COMPLETE_CATEGORIZER_VALUE: return COMPLETE_CATEGORIZER;
-			case PARTITIONER_VALUE: return PARTITIONER;
 		}
 		return null;
 	}

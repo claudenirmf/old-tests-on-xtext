@@ -44,12 +44,12 @@ class OntoLScopeProviderTest {
 		val model = '''
 			module t {
 				class A { 
-					ref a1:A isoppositeto a2
-					ref a2:A isoppositeto a1
-					ref c:C isoppositeto a
+					ref a1:A isOppositeTo a2
+					ref a2:A isOppositeTo a1
+					ref c:C isOppositeTo a
 				};
 				class B { ref c:C };
-				class C { ref a:A isoppositeto c };
+				class C { ref a:A isOppositeTo c };
 			}'''.parse
 		model.assertNoErrors
 	}

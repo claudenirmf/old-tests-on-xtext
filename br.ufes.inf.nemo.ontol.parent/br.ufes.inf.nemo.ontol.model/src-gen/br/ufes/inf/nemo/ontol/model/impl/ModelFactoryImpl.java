@@ -70,7 +70,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.PROPERTY_ASSIGNMENT: return createPropertyAssignment();
 			case ModelPackage.ATTRIBUTE_ASSIGNMENT: return createAttributeAssignment();
 			case ModelPackage.REFERENCE_ASSIGNMENT: return createReferenceAssignment();
-			case ModelPackage.REFERENCE_VALUE: return createReferenceValue();
 			case ModelPackage.STRING_VALUE: return createStringValue();
 			case ModelPackage.NUMBER_VALUE: return createNumberValue();
 			case ModelPackage.BOOLEAN_VALUE: return createBooleanValue();
@@ -91,6 +90,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 		switch (eDataType.getClassifierID()) {
 			case ModelPackage.CATEGORIZATION_TYPE:
 				return createCategorizationTypeFromString(eDataType, initialValue);
+			case ModelPackage.REGULARITY_PROPERTY_TYPE:
+				return createRegularityPropertyTypeFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -106,6 +107,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 		switch (eDataType.getClassifierID()) {
 			case ModelPackage.CATEGORIZATION_TYPE:
 				return convertCategorizationTypeToString(eDataType, instanceValue);
+			case ModelPackage.REGULARITY_PROPERTY_TYPE:
+				return convertRegularityPropertyTypeToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -246,16 +249,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ReferenceValue createReferenceValue() {
-		ReferenceValueImpl referenceValue = new ReferenceValueImpl();
-		return referenceValue;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public StringValue createStringValue() {
 		StringValueImpl stringValue = new StringValueImpl();
 		return stringValue;
@@ -318,6 +311,26 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * @generated
 	 */
 	public String convertCategorizationTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RegularityPropertyType createRegularityPropertyTypeFromString(EDataType eDataType, String initialValue) {
+		RegularityPropertyType result = RegularityPropertyType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertRegularityPropertyTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

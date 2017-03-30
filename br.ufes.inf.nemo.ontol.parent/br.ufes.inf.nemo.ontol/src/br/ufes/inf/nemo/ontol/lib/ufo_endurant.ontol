@@ -54,7 +54,7 @@ module ontol.core.endurant
 		specifics Relator, IntrinsicMoment;
 	
 	order 2 class ConcreteRelatorType : HighOrderClass, Endurant, Category 
-		specializes Thing completecategorizes Relator
+		specializes Thing completeCategorizes Relator
 	{
 		regularity ref involvedRoles : [1..*] Role
 	};

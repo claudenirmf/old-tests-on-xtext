@@ -93,13 +93,13 @@ public class OntoLScopeProviderTest {
       _builder.append("class A { ");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("ref a1:A isoppositeto a2");
+      _builder.append("ref a1:A isOppositeTo a2");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("ref a2:A isoppositeto a1");
+      _builder.append("ref a2:A isOppositeTo a1");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("ref c:C isoppositeto a");
+      _builder.append("ref c:C isOppositeTo a");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("};");
@@ -108,7 +108,7 @@ public class OntoLScopeProviderTest {
       _builder.append("class B { ref c:C };");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("class C { ref a:A isoppositeto c };");
+      _builder.append("class C { ref a:A isOppositeTo c };");
       _builder.newLine();
       _builder.append("}");
       final Model model = this._parseHelper.parse(_builder);

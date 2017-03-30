@@ -35,7 +35,7 @@ public class OntoLLib {
   
   public final static String DATATYPES_LIB = "ontol.core.datatype";
   
-  public final static String DATATYPES_DATATYPE = (OntoLLib.DATATYPES_LIB + ".Datatype");
+  public final static String DATATYPES_DATATYPE = (OntoLLib.DATATYPES_LIB + ".DataType");
   
   public final static String DATATYPES_STRING = (OntoLLib.DATATYPES_LIB + ".String");
   
@@ -197,57 +197,9 @@ public class OntoLLib {
     final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
       QualifiedName _qualifiedName = it.getQualifiedName();
       final String fqn = _qualifiedName.toString();
-      boolean _or = false;
-      boolean _or_1 = false;
-      boolean _or_2 = false;
-      boolean _or_3 = false;
-      boolean _or_4 = false;
-      boolean _or_5 = false;
-      boolean _or_6 = false;
-      boolean _equals = fqn.equals(OntoLLib.UFO_KIND);
-      if (_equals) {
-        _or_6 = true;
-      } else {
-        boolean _equals_1 = fqn.equals(OntoLLib.UFO_SUBKIND);
-        _or_6 = _equals_1;
-      }
-      if (_or_6) {
-        _or_5 = true;
-      } else {
-        boolean _equals_2 = fqn.equals(OntoLLib.UFO_PHASE);
-        _or_5 = _equals_2;
-      }
-      if (_or_5) {
-        _or_4 = true;
-      } else {
-        boolean _equals_3 = fqn.equals(OntoLLib.UFO_ROLE);
-        _or_4 = _equals_3;
-      }
-      if (_or_4) {
-        _or_3 = true;
-      } else {
-        boolean _equals_4 = fqn.equals(OntoLLib.UFO_CATEGORY);
-        _or_3 = _equals_4;
-      }
-      if (_or_3) {
-        _or_2 = true;
-      } else {
-        boolean _equals_5 = fqn.equals(OntoLLib.UFO_MIXIN);
-        _or_2 = _equals_5;
-      }
-      if (_or_2) {
-        _or_1 = true;
-      } else {
-        boolean _equals_6 = fqn.equals(OntoLLib.UFO_PHASE_MIXIN);
-        _or_1 = _equals_6;
-      }
-      if (_or_1) {
-        _or = true;
-      } else {
-        boolean _equals_7 = fqn.equals(OntoLLib.UFO_ROLE_MIXIN);
-        _or = _equals_7;
-      }
-      return Boolean.valueOf(_or);
+      return Boolean.valueOf((((((((fqn.equals(OntoLLib.UFO_KIND) || fqn.equals(OntoLLib.UFO_SUBKIND)) || fqn.equals(OntoLLib.UFO_PHASE)) || 
+        fqn.equals(OntoLLib.UFO_ROLE)) || fqn.equals(OntoLLib.UFO_CATEGORY)) || fqn.equals(OntoLLib.UFO_MIXIN)) || 
+        fqn.equals(OntoLLib.UFO_PHASE_MIXIN)) || fqn.equals(OntoLLib.UFO_ROLE_MIXIN)));
     };
     final Iterable<IEObjectDescription> descs = IterableExtensions.<IEObjectDescription>filter(_visibleEObjectDescriptions, _function);
     final Function1<IEObjectDescription, OntoLClass> _function_1 = (IEObjectDescription it) -> {

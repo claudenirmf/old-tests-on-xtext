@@ -41,18 +41,7 @@ public class MLTRules {
       OntoLClass _powertypeOf = ho.getPowertypeOf();
       boolean _notEquals = (!Objects.equal(_powertypeOf, null));
       if (_notEquals) {
-        boolean _and = false;
-        OntoLClass _powertypeOf_1 = ho.getPowertypeOf();
-        boolean _contains = cHierarchy.contains(_powertypeOf_1);
-        boolean _not = (!_contains);
-        if (!_not) {
-          _and = false;
-        } else {
-          OntoLClass _powertypeOf_2 = ho.getPowertypeOf();
-          boolean _notEquals_1 = (!Objects.equal(_powertypeOf_2, c));
-          _and = _notEquals_1;
-        }
-        if (_and) {
+        if (((!cHierarchy.contains(ho.getPowertypeOf())) && (!Objects.equal(ho.getPowertypeOf(), c)))) {
           return Boolean.valueOf(true);
         }
       }

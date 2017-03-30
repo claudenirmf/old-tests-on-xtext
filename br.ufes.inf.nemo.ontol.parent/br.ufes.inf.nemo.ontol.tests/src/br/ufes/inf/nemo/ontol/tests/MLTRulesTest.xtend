@@ -20,13 +20,13 @@ class MLTRulesTest {
 	
 	@Test def testIsMissingSpecializationThroughPowertype(){
 		val incorrectModel = ''' module t{
-				order 2 class HA ispowertypeof FA;
+				order 2 class HA isPowertypeOf FA;
 				class FA;	class FB : HA;
 			}'''.parse
 		incorrectModel.assertError(ModelPackage.eINSTANCE.ontoLClass,MLTRules.MISSING_SPECIALIZATION_THROUGH_POWERTYPE)
 		
 		val correctModel = ''' module t{
-				order 2 class HA ispowertypeof FA;
+				order 2 class HA isPowertypeOf FA;
 				class FA;		class FB : HA specializes FA;
 			}'''.parse
 		correctModel.assertNoErrors
