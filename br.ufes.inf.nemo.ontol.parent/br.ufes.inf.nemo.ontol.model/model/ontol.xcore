@@ -34,7 +34,7 @@ abstract class OntoLClass extends EntityDeclaration
 	refers OntoLClass[] subordinators
 	contains Attribute[] attributes
 	contains Reference[] references
-	CategorizationType categorizationType
+	CategorizationType[0..1] categorizationType
 }
 
 enum CategorizationType 
